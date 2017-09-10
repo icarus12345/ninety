@@ -1,0 +1,263 @@
+md-bottom-sheet{border-top:0;}
+md-bottom-sheet .md-subheader{
+    line-height: 40px;
+}
+md-bottom-sheet .md-subheader .md-subheader-inner{
+    padding: 0
+}
+md-bottom-sheet .md-button{
+    margin: 0;
+}
+md-bottom-sheet md-list{
+    padding: 0
+}
+md-bottom-sheet.md-list md-list-item{
+    height: 40px;
+}
+md-bottom-sheet md-divider{
+    margin: 5px 0;
+}
+md-bottom-sheet md-list-item, 
+md-bottom-sheet md-list-item .md-list-item-inner{
+    min-height: 40px;
+}
+md-toast{
+    bottom: auto
+}
+.mb-risk-item h3,
+.mb-risk-item p{
+    padding-left: 10px;
+}
+.mb-shared-item,
+.mb-risk-item{
+    border-top:1px solid rgba(0,0,0,.1);
+    background: #fff;
+    color: #111
+    /*margin-top: 1px*/
+}
+md-input-container{
+    margin: 15px 0;
+}
+md-content.md-default-theme, md-content{
+    background: transparent;
+}
+label{
+    font-weight: normal;
+    margin-bottom: 0;
+}
+.md-button.md-raised{
+    margin-left: 0;
+    margin-right: 0;
+}
+.md-button.md-default-theme:not([disabled]).md-focused, 
+.md-button:not([disabled]).md-focused{
+    background: transparent;
+}
+md-input-container .md-errors-spacer{
+    min-height: 0
+}
+md-dialog .md-actions, 
+md-dialog md-dialog-actions{
+        -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+md-bottom-sheet.md-default-theme.md-list md-list-item.disabled, 
+md-bottom-sheet.md-list md-list-item.disabled{
+    color: #888;
+}
+.md-dialog-container{
+    z-index: 1111;
+}
+.flex-50, 
+.layout-row>.flex-50{
+    float: left;
+}
+md-autocomplete > md-autocomplete-wrap > button{
+    border:0;
+    background: none;
+}
+md-list-item.mb-risk-item>div.md-button:first-child{
+    padding-right: 0px;
+}
+md-list-item.mb-risk-item>div.md-button .md-secondary-container{
+    position: relative;z-index: 2
+}
+md-list-item.mb-risk-item>div.md-button .md-secondary-container .md-button.md-icon-button{
+    height: 48px;padding: 12px 8px;
+}
+form md-input-container .md-input{
+    background: rgba(153, 153, 153, 0.3);
+    border-radius: 22px;
+    height: 44px;
+    line-height: 24px;
+    padding: 10px 10px 10px 10px;
+    text-align: center;
+    border: 0;
+    color: #fff;
+}
+form md-input-container .md-input{
+    /*line-height: 26px;*/
+}
+md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused label, 
+md-input-container:not(.md-input-invalid).md-input-focused label{
+    color: rgba(255,255,255,.8);
+}
+md-input-container.md-default-theme.md-input-invalid label, 
+md-input-container.md-input-invalid label{
+    color: rgba(255,255,255,.8);
+}
+md-input-container.md-default-theme:not(.md-input-invalid).md-input-has-value label, 
+md-input-container:not(.md-input-invalid).md-input-has-value label{
+    color: rgba(255,255,255,.8);
+}
+md-input-container .md-placeholder, md-input-container label:not(.md-no-float):not(.md-container-ignore){
+    -webkit-transform: translate3d(0,36px,0) scale(1);
+    transform: translate3d(0,36px,0) scale(1);
+        -webkit-transform-origin: center top;
+    transform-origin: center top;
+}
+md-input-container.md-input-focused label:not(.md-no-float), md-input-container.md-input-has-placeholder label:not(.md-no-float), md-input-container.md-input-has-value label:not(.md-no-float){
+        -webkit-transform: translate3d(0,6px,0) scale(.75);
+    transform: translate3d(0,6px,0) scale(.75);
+    
+}
+md-input-container.md-default-theme label, 
+md-input-container label, 
+md-input-container.md-default-theme .md-placeholder, 
+md-input-container .md-placeholder{
+    color: rgba(255,255,255,.8);
+    text-align: center;
+}
+.white-bg md-input-container.md-default-theme:not(.md-input-invalid).md-input-focused label, 
+.white-bg md-input-container:not(.md-input-invalid).md-input-focused label,
+.white-bg md-input-container.md-default-theme.md-input-invalid label, 
+.white-bg md-input-container.md-input-invalid label,
+.white-bg md-input-container.md-default-theme:not(.md-input-invalid).md-input-has-value label, 
+.white-bg md-input-container:not(.md-input-invalid).md-input-has-value label,
+.white-bg form md-input-container .md-input, 
+.white-bg md-input-container.md-default-theme label, 
+.white-bg md-input-container label, 
+.white-bg md-input-container.md-default-theme .md-placeholder, 
+.white-bg md-input-container .md-placeholder{
+    color: #111;
+}
+md-input-container.md-input-focused .md-input, md-input-container.md-input-resized .md-input, md-input-container .md-input.ng-invalid.ng-dirty{
+    border: 0;
+}
+md-checkbox.md-default-theme:not(.md-checked) .md-icon, md-checkbox:not(.md-checked) .md-icon{
+    border-color: rgba(180, 30, 63, 0.4);
+}
+md-input-container.md-default-theme.md-input-invalid label, 
+md-input-container.md-input-invalid label, 
+md-input-container.md-default-theme.md-input-invalid .md-input-message-animation, 
+md-input-container.md-input-invalid .md-input-message-animation, 
+md-input-container.md-default-theme.md-input-invalid .md-char-counter, 
+md-input-container.md-input-invalid .md-char-counter
+{
+    color: #fff;text-align: center;
+}
+md-input-container.md-default-theme .md-input-messages-animation, 
+md-input-container .md-input-messages-animation, 
+md-input-container.md-default-theme .md-input-message-animation, 
+md-input-container .md-input-message-animation{
+    color: #fff;
+}
+md-radio-button.md-default-theme .md-off, md-radio-button .md-off{
+        border-color: rgba(180, 30, 63, 0.4);
+}
+.white-bg md-input-container.md-default-theme.md-input-invalid label, 
+.white-bg md-input-container.md-input-invalid label, 
+.white-bg md-input-container.md-default-theme.md-input-invalid .md-input-message-animation, 
+.white-bg md-input-container.md-input-invalid .md-input-message-animation, 
+.white-bg md-input-container.md-default-theme.md-input-invalid .md-char-counter, 
+.white-bg md-input-container.md-input-invalid .md-char-counter
+{
+    color: #111;
+}
+.white-bg md-input-container.md-default-theme .md-input-messages-animation, 
+.white-bg md-input-container .md-input-messages-animation, 
+.white-bg md-input-container.md-default-theme .md-input-message-animation, 
+.white-bg md-input-container .md-input-message-animation{
+    color: #111;
+}
+.md-button.md-default-theme.md-primary, .md-button.md-primary{
+    color: #111
+}
+.button-radio{margin-bottom: 15px}
+.button-radio::after{content: '';display: block;clear: both;}
+.button-radio md-radio-button{
+    height: 44px;
+    margin-bottom: 0;
+
+}
+.button-radio md-radio-button .md-container{
+    
+    
+    height: 44px;
+    width: 100%;
+}
+.button-radio md-radio-button .md-container[aria-checked="true"]{
+
+}
+.button-radio md-radio-button .md-off, .button-radio md-radio-button .md-on{
+    background: rgba(153, 153, 153, 0.3);
+    border-radius: 22px;
+    line-height: 24px;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+    height: 44px;
+    border: 0;
+}
+.button-radio md-radio-button .md-on{
+    background: rgba(180, 30, 63, 0.82);
+}
+.button-radio md-radio-button.md-checked .md-on{
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+.button-radio md-radio-button .md-label{
+    margin-left: 0;line-height: 44px;
+    width: 100%;
+    text-align: center;
+}
+.button-radio div[layout="row"] div[flex="50"]:first-child{
+    padding-right: 5px;
+}
+.button-radio div[layout="row"] div[flex="50"]:last-child{
+    padding-left: 5px;
+}
+md-input-container.md-input-focused .md-input, 
+md-input-container.md-input-resized .md-input, 
+md-input-container .md-input.ng-invalid.ng-dirty{
+    padding-bottom: 10px;
+}
+
+.btn-circle{border-radius: 20px;line-height: 20px;padding: 10px;margin: auto;}
+.md-btn-danger,
+.md-focused.md-btn-danger,
+.md-button.md-btn-danger:not([disabled]).md-focused{
+    background: #ae304b;color: #fff;
+}
+.md-btn-default,
+.md-focused.md-btn-default,
+.md-focused.md-button.md-btn-default:not([disabled]){
+    background: #fff;color: #111;
+}
+
+.shared-list md-list-item{background: #ebebeb;margin-top:1px;padding: 0 10px}
+.shared-list md-list-item .md-list-item-inner>md-icon:first-child:not(.md-avatar-icon), 
+.shared-list md-list-item>md-icon:first-child:not(.md-avatar-icon){
+    margin-right: 10px;text-align: center;margin-top: 12px;
+}
+.shared-list md-list-item>md-icon i {line-height: 24px;}
+.mode-edit,
+.mode-readonly{
+    border-radius: 10px;text-transform: none;padding: 0 10px;
+    text-align: center;min-width: 60px;display: inline-block;line-height: 22px;
+        font-weight: normal;
+}
+.mode-edit{border:1px solid #ae304b;color: #ae304b;}
+.mode-readonly{border:1px solid #3cb878;color: #3cb878;}
+.h3-tit{text-align: center;color: #ae304b;text-transform: uppercase;font-weight: bold;font-size: 16px;margin-top: 20px}
