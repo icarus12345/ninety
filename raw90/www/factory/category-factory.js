@@ -1,12 +1,21 @@
 
 var NUM_SERIES = 1;
 var hsl_colors = [
-    [0,100,50],
-    [330,100,40],
-    [300,100,30],
+    [187,100,30],
+    [187,100,40],
+    [187,100,48],
+    [187,100,48],
+    [187,100,48],
+    [187,100,48],
+    [187,100,48],
+    [187,100,48],
 ];
 function Category(opt){
     var SCORE_LEVEL = [1.5,2.5,4];
+    // var SCORE_LEVEL = [2.5,-1,5];
+    var SCORE_DATA = [1.5,2.5,4];
+    // var SCORE_DATA = [0,1,2,3,4,5];
+    var NODATACOMMENT = "This section don't have comment.";
     var me = this;
     this.id = opt.id || 0;
     this.title = opt.title || '';
@@ -14,7 +23,7 @@ function Category(opt){
     this.lower = opt.lower || '';
     this.medium = opt.medium || '';
     this.higher = opt.higher || '';
-    this.pid = opt.pid || undefined;
+    this.parent_id = opt.parent_id || undefined;
 
     var arrayColors = [
         "153, 204, 51",
@@ -74,10 +83,10 @@ function Category(opt){
                 fillColor:[
                     // "rgba(0, 0, 0, 0)",
                     "rgba(0, 0, 0, 0)",
-                    '#c5e0b4',
-                    '#fff2cc',
-                    '#ff7269',
-                    '#ff7269',
+                    '#d5e5c6',
+                    '#f5f0e2',
+                    '#f2cac8',
+                    '#f2cac8',
                     ],
                 drawOnChartArea: true,
                 color: [
@@ -146,7 +155,7 @@ function Category(opt){
         this.count_answereds = [];
         this.process=0;
         this.level = this.level || 0;
-        this.comment = 'No data to display';
+        this.comment = NODATACOMMENT;
         var _series = [];
         var _series_data = [];
         var _dataset_override = [];
@@ -168,21 +177,20 @@ function Category(opt){
             // Sum GlobalScore
             this.sum_global_score = this.questions.reduce(function(sum, q) {
                     var score = 0;
-                    if(q.global == 0) score = SCORE_LEVEL[0];
-                    if(q.global == 1) score = SCORE_LEVEL[1];
-                    if(q.global == 2) score = SCORE_LEVEL[2];
+                    // if(q.global == 0) score = SCORE_DATA[0];
+                    // if(q.global == 1) score = SCORE_DATA[1];
+                    // if(q.global == 2) score = SCORE_DATA[2];
+                    // if(q.global == 3) score = SCORE_DATA[3];
+                    // if(q.global == 4) score = SCORE_DATA[4];
+                    if(+q.global>=0){
+                        score = SCORE_DATA[+q.global];
+                    }
                 return sum + score; 
             }, 0);
             if(this.count_question>0)
                 this.global_score = this.sum_global_score/this.count_question;
-            this.comment = 'You have not completed this section';
-            if(this.score < SCORE_LEVEL[0]){
-                this.comment = this.lower || 'No data to display';
-            } else if(this.score < SCORE_LEVEL[1]){
-                this.comment = this.medium || 'No data to display';
-            } else {
-                this.comment = this.higher || 'No data to display';
-            }
+
+
             
             for(var I = 0;I<NUM_SERIES; I++){
                 // Count Answereds
@@ -196,17 +204,35 @@ function Category(opt){
                     this.questions.reduce(function(sum, q) {
                             var score = 0;
                             q.comment = 'You have not completed this section';
-                            if(q.answered[I] == 0){
-                                score = SCORE_LEVEL[0];
-                                q.comment = q.lower || 'No data to display';
+                            // if(q.answered[I] == 0){
+                            //     score = SCORE_LEVEL[0];
+                            //     q.comment = q.lower || NODATACOMMENT;
+                            // }
+                            // if(q.answered[I] == 1){
+                            //     score = SCORE_LEVEL[1];
+                            //     q.comment = q.medium || NODATACOMMENT;
+                            // }
+                            // if(q.answered[I] == 2){
+                            //     score = SCORE_LEVEL[2];
+                            //     q.comment = q.higher || NODATACOMMENT;
+                            // }
+                            if(+q.answered[I]>=0){
+                                score = SCORE_DATA[+q.answered[I]]
                             }
-                            if(q.answered[I] == 1){
-                                score = SCORE_LEVEL[1];
-                                q.comment = q.medium || 'No data to display';
-                            }
-                            if(q.answered[I] == 2){
-                                score = SCORE_LEVEL[2];
-                                q.comment = q.higher || 'No data to display';
+                            q.score = score;
+                            q.comment = 'You have not completed this section';
+                            q.comment_class = 'comment-none';
+                            if(q.score>0){
+                                if(q.score < SCORE_LEVEL[0]){
+                                    q.comment = q.lower || NODATACOMMENT;
+                                    q.comment_class = 'comment-lower';
+                                } else if(q.score < SCORE_LEVEL[1]){
+                                    q.comment = q.medium || NODATACOMMENT;
+                                    q.comment_class = 'comment-medium';
+                                } else {
+                                    q.comment = q.higher || NODATACOMMENT;
+                                    q.comment_class = 'comment-higher';
+                                }
                             }
                         return sum + score; 
                     }, 0)
@@ -221,6 +247,20 @@ function Category(opt){
             
             this.score = this.scores[0];
 
+            this.comment = 'You have not completed this section';
+            this.comment_class = 'comment-none';
+            if(this.count_answered == this.count_question){
+                if(this.score < SCORE_LEVEL[0]){
+                    this.comment = this.lower || NODATACOMMENT;
+                    this.comment_class = 'comment-lower'
+                } else if(this.score < SCORE_LEVEL[1]){
+                    this.comment = this.medium || NODATACOMMENT;
+                    this.comment_class = 'comment-medium'
+                } else {
+                    this.comment = this.higher || NODATACOMMENT;
+                    this.comment_class = 'comment-higher'
+                }
+            }
             
             // Chart Data
             var _goalData = [];
@@ -229,19 +269,30 @@ function Category(opt){
             for(var J in this.questions){
                 var q = this.questions[J];
                 
-                var global_score = SCORE_LEVEL[1];
-                if(q.global == 0) global_score = SCORE_LEVEL[0];
-                if(q.global == 1) global_score = SCORE_LEVEL[1];
-                if(q.global == 2) global_score = SCORE_LEVEL[2];
+                var global_score = 0;
+
+                // if(q.global == 0) global_score = SCORE_LEVEL[0];
+                // if(q.global == 1) global_score = SCORE_LEVEL[1];
+                // if(q.global == 2) global_score = SCORE_LEVEL[2];
+                // if(q.global == 3) global_score = SCORE_LEVEL[3];
+                // if(q.global == 4) global_score = SCORE_LEVEL[4];
+                if(+q.global>=0){
+                    global_score = SCORE_DATA[+q.global];
+                }
                 _labels.push(+J+1);
                 _goalData.push(score);
                 _globalData.push(global_score);
                 if(SHOW_GLOBAL)  _series_data[0].push(global_score);
                 for(var I = 0;I<NUM_SERIES; I++){
                     var score = 0;
-                    if(q.answered[I] == 0) score = SCORE_LEVEL[0];
-                    if(q.answered[I] == 1) score = SCORE_LEVEL[1];
-                    if(q.answered[I] == 2) score = SCORE_LEVEL[2];
+                    // if(q.answered[I] == 0) score = SCORE_LEVEL[0];
+                    // if(q.answered[I] == 1) score = SCORE_LEVEL[1];
+                    // if(q.answered[I] == 2) score = SCORE_LEVEL[2];
+                    // if(q.answered[I] == 3) score = SCORE_LEVEL[3];
+                    // if(q.answered[I] == 4) score = SCORE_LEVEL[4];
+                    if(+q.answered[I]>=0){
+                        score = SCORE_DATA[+q.answered[I]];
+                    }
                     if(SHOW_GLOBAL) _series_data[I + 1].push(score);
                     else _series_data[I].push(score);
                 }
@@ -298,14 +349,7 @@ function Category(opt){
             }, 0);
             if(this.count_question>0)
                 this.global_score = this.sum_global_score/this.count_question;
-            this.comment = 'You have not completed this section';
-            if(this.score < SCORE_LEVEL[0]){
-                this.comment = this.lower || 'No data to display';
-            } else if(this.score < SCORE_LEVEL[1]){
-                this.comment = this.medium || 'No data to display';
-            } else {
-                this.comment = this.higher || 'No data to display';
-            }
+            
 
             for(var I = 0;I<NUM_SERIES; I++){
                 // Count Answereds
@@ -329,6 +373,20 @@ function Category(opt){
             this.sum_score = this.sum_scores[0];
             this.score = this.scores[0];
 
+            this.comment = 'You have not completed this section';
+            this.comment_class = 'comment-none';
+            if(this.count_answered == this.count_question){
+                if(this.score < SCORE_LEVEL[0]){
+                    this.comment = this.lower || NODATACOMMENT;
+                    this.comment_class = 'comment-lower';
+                } else if(this.score < SCORE_LEVEL[1]){
+                    this.comment = this.medium || NODATACOMMENT;
+                    this.comment_class = 'comment-medium';
+                } else {
+                    this.comment = this.higher || NODATACOMMENT;
+                    this.comment_class = 'comment-higher';
+                }
+            }
             
             // Chart Data
             var items = this.items;
@@ -534,10 +592,10 @@ function CategoryFactory(API,StorageService, $mdDialog, Dialog) {
         })
     }
     this.build = function(data){
-        this._categories = {
-            0: new Category({})
-        };
         var items = data.items;
+        this.rootId = items[0].id;
+        this._categories = {
+        };
         var questions = data.questions;
         this.questions = {}
         for(var i = 0; i<items.length;i++){
@@ -546,14 +604,14 @@ function CategoryFactory(API,StorageService, $mdDialog, Dialog) {
         for(var i = 0; i<questions.length;i++){
             var q = questions[i];
             this.questions[q.id] = q;
-            var c = q.category;
+            var c = q.category_id;
             var cat = this._categories[c];
             if(!cat.questions) cat.questions = [];
                 cat.questions.push(q);
         }
         for(var c in this._categories){
             var cat = this._categories[c];
-            var pcat = this._categories[cat.pid];
+            var pcat = this._categories[cat.parent_id];
             if(pcat){
                 cat.parent = pcat;
                 if(!pcat.items) pcat.items = [];
@@ -587,8 +645,8 @@ function CategoryFactory(API,StorageService, $mdDialog, Dialog) {
                 }
                 // this.questions[qid].answers[answered].answered = true;
             }
-            this._categories[0].init();
-            if(this._categories[0]) this._categories[0].items.map(function(c, i){
+            this._categories[this.rootId].init();
+            if(this._categories[this.rootId]) this._categories[this.rootId].items.map(function(c, i){
                 c._set_color(hsl_colors[i]);
             });
         }
@@ -599,16 +657,18 @@ function CategoryFactory(API,StorageService, $mdDialog, Dialog) {
     this.get = function(id, callback){
         if(!this._categories){
             this.get_list_category(function(){
+                if(id==0) id = me.rootId;
                 var data = me._categories[id];
                 if(typeof callback == 'function') callback(data);
             })
         } else {
+            if(id==0) id = this.rootId;
             var data = this._categories[id];
             if(typeof callback == 'function') callback(data);
         }
     }
     this.export = function(opt, callback){
-        var items = this._categories[0].get_infos(opt.setting);
+        var items = this._categories[this.rootId].get_infos(opt.setting);
         if(items.length>0){
             items[0].title = opt.project_info.title;
             items[0].desc = opt.project_info.desc;

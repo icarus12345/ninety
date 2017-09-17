@@ -1,11 +1,11 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-if($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-  header('Access-Control-Allow-Origin: *');
-  header('Access-Control-Allow-Headers: X-Requested-With');
-  header("HTTP/1.1 200 OK");
-  die();
-}
+// if($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+//   header('Access-Control-Allow-Origin: *');
+//   header('Access-Control-Allow-Headers: X-Requested-With');
+//   header("HTTP/1.1 200 OK");
+//   die();
+// }
 class Api_Controller extends CI_Controller {
     public $assigns;
     public function __construct($_model = null) {
@@ -23,8 +23,8 @@ class Api_Controller extends CI_Controller {
         $this->CI =& get_instance();
         $this->assigns = array();
         $this->load->model('api/Token_Model');
-        $this->load->model('api/Device_Model');
-        $this->load->model('api/Member_Model');
+        $this->load->model('api/Client_Model');
+        $this->load->model('api/Account_Model');
         if($_model){
             $this->load->model("api/{$_model}_Model");
             $model = $_model.'_Model';
@@ -36,56 +36,35 @@ class Api_Controller extends CI_Controller {
             'message' => 'Bad request.',
             'code' => -1,
         );
+        $this->valid_method();
         $this->form_validation->set_error_delimiters('', '');
-        $this->_params = $this->input->get();
-        // $this->_searchs = $this->input->get_post('searchs');
-        $this->_page = (int)$this->input->get('page');
-        $this->_perpage = (int) $this->input->get('perpage');
-        if($this->_perpage <= 0) $this->_perpage = 10;
-        if($this->_page <= 0) $this->_page = null; 
-        $this->_id = $this->input->get('id');
-        $this->_debug = $this->input->get('debug');
-
-        // $this->valid_device();
-        $this->valid_token();
+        $this->_filters = $this->input->get_post('filters');
+        $this->_searchs = $this->input->get_post('searchs');
+        $this->_page = $this->input->get_post('page');
+        $this->_limit = $this->input->get_post('limit');
+        $this->_id = $this->input->get_post('id');
+        $this->client_id = $this->input->get_post('client_id');
+        $this->client_name = $this->input->get_post('client_name');
+        $this->client_secret = $this->input->get_post('client_secret');
+        $this->valid_device();
+        // $this->valid_token();
     }
 
     function index(){
         echo 'Welcome API';
     }
     function run(){
-        if($this->_page) {
-            $this->db->select('SQL_CALC_FOUND_ROWS id',false);
-            $this->API_Model
-                ->limit($this->_page,$this->_perpage);
-        }
         if(!empty($this->_id)) {
             $row = $this->API_Model->get($this->_id);
             $this->_output['data'] = $row;
-        } elseif(!empty($this->_params)) {
-            if(!empty($this->_filter_allows)) foreach ($this->_filter_allows as $column) {
-                $value = $this->_params[$column];
-                $filters[$column] = $value;
-            }
-            if($filters) $this->API_Model->filter($filters);
-            $data = $this->API_Model->gets();
-            $this->_output['data'] = $data;
         } else {
             $data = $this->API_Model->gets();
             $this->_output['data'] = $data;
         }
-        if($this->_debug) $this->_output['query'][] = $this->db->last_query();
-        if($this->_page){
-            $query = $this->db->query('SELECT FOUND_ROWS() AS `total_rows`;');
-            $tmp = $query->row_array();
-            $total_rows = (int)$tmp['total_rows'];
-            $this->_output['hit'] = $total_rows;
-            $this->_output['page'] = $this->_page;
-            $this->_output['perpage'] = $this->_perpage;
-        }
-        $this->_output['code'] = 0;
+        $this->_output['code'] = 1;
         $this->_output['text'] = 'ok';
         $this->_output['message'] = 'success';
+        $this->display();
     }
 
     
@@ -99,8 +78,8 @@ class Api_Controller extends CI_Controller {
             die;
     }
     function valid_device(){
-        $uuid = $this->input->post('uuid');
-        $device = $this->Client_Model->get_device($uuid);
+        $uuid = $this->input->get_post('uuid');
+        if($uuid) $device = $this->Client_Model->get_device($uuid);
         $valid = false;
         if($device) {
             $user = $this->Account_Model->get_by_id($device->uid);
@@ -111,26 +90,72 @@ class Api_Controller extends CI_Controller {
             }
         }
         if(!$valid){
-            $this->_code = 403;
+            $this->_code = -1;
             $this->_output['message'] = 'Permission denied.';
             $this->display();
-            die;
+        }
+    }
+    function valid_method(){
+        if($_SERVER['REQUEST_METHOD'] == "OPTIONS"){
+            $this->display();
         }
     }
     function valid_token() {
+        $app_id = $this->input->get_post('app_id');
         // $token = $_SERVER['HTTP_X_CSRF_TOKEN'];
-        $stoken = $this->input->get_post('token');
-        $token = $this->Token_Model->get_by_token($stoken);
+        $token = $this->input->get_post('token');
+        $tok = $this->Token_Model->get_by_token($token);
         $valid = false;
-        if($token){
-            $this->Token_Model->update($token->token);
-            $member = $this->Member_Model->get_by_id($token->member_id);
-            $this->member = $member;
+        if($tok){
+            $this->Token_Model->update($tok->token_id);
+            $valid = true;
+            $user = $this->session->userdata('api_user');
+            if(!$user){
 
+                $user = $this->Account_Model->get_by_id($tok->token_app_id);
+                $this->session->set_userdata('api_user', $user);
+            }
+            $this->user = $user;
+
+        }
+        if(!$valid){
+            $this->_output['message'] = 'Permission denied.';
+            $this->display();
         }
     }
 
-    
+    function get_by_cid(){
+        $this->_output['code'] = -1;
+        $this->_output['text'] = 'fail';
+        $this->_output['message'] = 'Bad Request !';
+        $cid=$this->input->get_post('cid');
+        $c = $this->Cate_Model
+            ->select('value')
+            ->get($cid);
+        if($c){
+            $data = [];
+            $cates = $this->Cate_Model
+                ->search(array('value'=>$c->value))
+                ->get_by_type('mega');
+            foreach ($cates as $key => $value) {
+                $cids[] = $value->id;
+            }
+            if($cids){
+                $data = $this->API_Model
+                ->filter_in(array('category'=>$cids))
+                ->get_by_type('mega');
+            }
+            $this->_output['data'] = $data;
+            $this->_output['code'] = 1;
+            $this->_output['text'] = 'ok';
+            $this->_output['message'] = 'success';
+        }else{
+            $this->_output['message'] = 'Category not exists !';
+        }
+
+        
+        $this->display();
+    }
 
     function get(){
         $this->_output['code'] = -1;
@@ -139,7 +164,7 @@ class Api_Controller extends CI_Controller {
         $id=$this->input->get_post('id');
         $data = $this->API_Model->get($id);
         $this->_output['data'] = $data;
-        $this->_output['code'] = 0;
+        $this->_output['code'] = 1;
         $this->_output['text'] = 'ok';
         $this->_output['message'] = 'success';
         

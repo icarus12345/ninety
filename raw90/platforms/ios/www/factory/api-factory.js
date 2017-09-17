@@ -52,6 +52,7 @@ function APIFactory(
         var retie = 0;
         var _run = function(){
             opt.data.uuid = device.uuid || 'unknown';
+            opt.data.client_id = APP_ID || '';
             $http({
                 // method: 'JSONP',
                 url: opt.url,

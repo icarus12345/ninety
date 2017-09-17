@@ -17,8 +17,8 @@ class Account_Model extends CI_Model {
     
     function create($params){
         $this->db->set('created', 'NOW()', FALSE);
-        $this->db->set('status', 1);
-        @$this->db->insert('auth_account',$params);
+        $this->db->set('status', 'true');
+        @$this->db->insert('ninety_account',$params);
         @$count = $this->db->affected_rows(); //should return the number of rows affected by the last query
         if ($count == 1)
             return true;
@@ -28,9 +28,9 @@ class Account_Model extends CI_Model {
         $query = $this->db
             ->where(array(
                 'username' => $username,
-                'status' => 1
+                'status' => 'true'
                 ))
-            ->get('auth_account');
+            ->get('ninety_account');
         $row = $query->row();
         return $row;
     }
@@ -38,9 +38,9 @@ class Account_Model extends CI_Model {
         $query = $this->db
             ->where(array(
                 'email' => $email,
-                'status' => 1
+                'status' => 'true'
                 ))
-            ->get('auth_account');
+            ->get('ninety_account');
         $row = $query->row();
         return $row;
     }
@@ -48,16 +48,16 @@ class Account_Model extends CI_Model {
         $query = $this->db
             ->where(array(
                 'id' => $id,
-                'status' => 1
+                'status' => 'true'
                 ))
-            ->get('auth_account');
+            ->get('ninety_account');
         $row = $query->row();
         return $row;
     }
     function update($id,$params){
         @$this->db
             ->where('id',$id)
-            ->update('auth_account',$params);
+            ->update('ninety_account',$params);
         @$count = $this->db->affected_rows(); //should return the number of rows affected by the last query
         if ($count == 1)
             return true;

@@ -86,11 +86,10 @@ class Auth extends CI_Controller {
             die;
     }
     function device_info(){
-        
         // $app_id = $this->input->post('app_id');
         // $app_secret = $this->input->post('app_secret');
-        $uuid = $this->input->post('uuid');
-        $device_info = $this->input->post('device_info');
+        $uuid = $this->input->get_post('uuid');
+        $device_info = $this->input->get_post('device_info');
         // $this->form_validation->set_rules($this->rules['get_token']);
         // if ($this->form_validation->run() == FALSE) {
             // $output['validation'] = validation_errors_array();
@@ -110,8 +109,8 @@ class Auth extends CI_Controller {
                     $this->_output['message'] = 'Success';
                     $this->user = $user;
                 } else {
-                    $this->_output['code'] = -403;
-                    $this->_output['message'] = 'Fail to generator token.';
+                    $this->_output['code'] = -1;
+                    $this->_output['message'] = 'User not exist.';
                 }
             } else {
                 $params = array(
@@ -204,7 +203,7 @@ class Auth extends CI_Controller {
     }
 
     function login(){
-        $code = 403;
+        $code = 200;
         $output = array(
             'text' => 'fail',
             'message' => 'Access Denied.',
@@ -217,7 +216,6 @@ class Auth extends CI_Controller {
         $this->form_validation->set_rules($this->rules['login']);
         if ($this->form_validation->run() == FALSE) {
             $code = 200;
-            $output['text'] = 'Fail.';
             $output['validation'] = validation_errors_array();
             $output['message'] = validation_errors();
         } else {
@@ -228,12 +226,13 @@ class Auth extends CI_Controller {
                     $user = $this->Account_Model->get_by_username($username);
                     if($user){
                         if($user->password == md5($password)){
-                            if($user->status==1){
+                            if($user->status=='true'){
                                 unset($user->password);
                                 // $output['code'] = 1;
                                 // $output['text'] = 'Success.';
                                 $output['code'] = 1;
-                                $output['text'] = 'Success';
+                                $output['text'] = 'ok';
+                                $output['message'] = 'Success';
                                 
                                 $output['data'] = array(
                                     'user_info' => $user

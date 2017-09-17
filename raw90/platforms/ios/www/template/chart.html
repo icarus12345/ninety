@@ -88,7 +88,7 @@
                         </div>
 
                         
-                        <div ng-class="{'comment-none': item.answered==undefined, 'comment-lower': item.answered == 0, 'comment-medium': item.answered == 1, 'comment-higher': item.answered == 2, 'comment-none':item.answered==undefined}">
+                        <div ng-class="item.comment_class">
                             <p class="word-wrap">{{item.comment}}</p>
                         </div>
                     </div> 
@@ -147,7 +147,7 @@
                         </div>
 
                         
-                        <div ng-class="{'comment-none': item.answered==undefined, 'comment-lower': item.answered == 0, 'comment-medium': item.answered == 1, 'comment-higher': item.answered == 2, 'comment-none':item.answered==undefined}">
+                        <div ng-class="item.comment_class">
                             <p class="word-wrap">{{item.comment}}</p>
                         </div>
                     </div> 

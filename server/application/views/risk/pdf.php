@@ -165,5 +165,8 @@
         <?php
         }
         ?>
+        <div style="text-align:center">
+            &copy; 2017 90&deg; Ready
+        </div>
     </body>
 </html>

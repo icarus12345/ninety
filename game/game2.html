@@ -21,8 +21,19 @@
 
                 app.stage.interactive = true;
 
-                var bg = PIXI.Sprite.fromImage('images/bkg.jpg');
-
+                var earth_size = {
+                    width: 1800,
+                    height: 1800,
+                }
+                // var bg = PIXI.Sprite.fromImage('images/240f71d274cf97dfa3c3ea002754d297.jpg');
+                // var bg = PIXI.Sprite.fromImage('images/LowPolyPlanet01.jpgfbd1eb03-f733-4a6f-bd44-2b46d94b87d9Original.jpg');
+                var bg = PIXI.Sprite.fromImage('images/3823f816185437.572b4534eb502.jpg');
+                bg.width = earth_size.width;
+                bg.height = earth_size.height;
+                bg.anchor.set(0.5);
+                bg.position.set(app.screen.width/2,app.screen.height + earth_size.height*12/100)
+                // bg.position.set(-200,app.screen.height/2 - earth_size.height/2 + app.screen.height/2)
+                app._bg = bg;
                 app.stage.addChild(bg);
 
                 // var cells = PIXI.Sprite.fromImage('images/cells.png');
@@ -59,7 +70,7 @@
 
                 var dudeArray = [];
 
-                var totaldudes = 5;
+                var totaldudes = 1;
 
                 for (var i = 0; i < totaldudes; i++) {
 
@@ -73,6 +84,7 @@
 
                     // finally let's set the dude to be at a random position...
                     dude.x = Math.floor(Math.random() * app.renderer.width);
+                    dude.x = app.renderer.width;
                     dude.y = Math.floor(Math.random() * app.renderer.height);
 
                     // The important bit of this example, this is how you change the default blend mode of the sprite
@@ -100,8 +112,16 @@
                     app.renderer.width + dudeBoundsPadding * 2,
                     app.renderer.height + dudeBoundsPadding * 2
                 );
-
+                bg.direction = 0;
+                bg.turning_speed = 0.1;
+                bg.blendMode = PIXI.BLEND_MODES.ADD;
+                dudeArray[0].direction = 4.5
+                dudeArray[0].min_direction = 4 - 0.5;
+                dudeArray[0].max_direction = 5 + 0.5;
+                dudeArray[0].turning_speed = 0.003;
                 app.ticker.add(function() {
+                    bg.direction += bg.turning_speed * 0.1;
+                    bg.rotation = -bg.direction - Math.PI / 2;
 
                     plane.x += (target.x - plane.x) * 0.1;
                     plane.y += (target.y - plane.y) * 0.1;
@@ -117,8 +137,21 @@
                     for (var i = 0; i < dudeArray.length; i++) {
 
                         var dude = dudeArray[i];
-                        dude.direction += dude.turningSpeed * 0.01;
-
+                        // dude.direction += dude.turningSpeed * 0.01;
+                        
+                        if(dude.direction >= dude.max_direction){
+                            dude.turning_speed *=-1;
+                        }
+                        if(dude.direction <= dude.min_direction){
+                            dude.turning_speed *=-1;
+                        }
+                        dude.direction += dude.turning_speed;
+                        // if(dude.y < app.screen.height - 40){
+                        //     dude.turning_speed = 0.01;
+                        // }
+                        // if(dude.y > app.screen.height - 100){
+                        //     dude.turning_speed = -0.01;
+                        // }
                         dude.x += Math.sin(dude.direction) * dude.speed;
                         dude.y += Math.cos(dude.direction) * dude.speed;
                         dude.rotation = -dude.direction - Math.PI / 2;

@@ -39,63 +39,88 @@ class Welcome extends CI_Controller {
                     ))
                 );
             // $rs = $this->db->insert('ninety_category',$params);
-            $c = $this->db->where(array(
-                'company_id'=>1006,
-                'author'=> 10030,
-                'type'=> 'raw',
-                'title'=>$item['name'],
-                ))->get('ninety_category')->row();
-            $this->db
-                ->where(array(
-                'company_id'=>1006,
-                'author'=> 10030,
-                'type'=> 'raw',
-                'title'=>$item['name'],
-                ))
-                ->where('id',$c->id)
-                ->update('ninety_category',$params);
-            print_r($c);
+            // $c = $this->db->where(array(
+            //     'company_id'=>1006,
+            //     'author'=> 10030,
+            //     'type'=> 'raw',
+            //     'title'=>$item['name'],
+            //     ))->get('ninety_category')->row();
+            // $this->db
+            //     ->where(array(
+            //     'company_id'=>1006,
+            //     'author'=> 10030,
+            //     'type'=> 'raw',
+            //     'title'=>$item['name'],
+            //     ))
+            //     ->where('id',$c->id)
+            //     ->update('ninety_category',$params);
+            // print_r($c);
             // if($rs){
                 // $cid = $this->db->insert_id();
                 if(!empty($item['items'])) {
                     $this->run($item['items'], $cid);
                 } elseif(!empty($item['questions'])){
-                    // foreach ($item['questions'] as $quest) {
-                    //     $answers = array();
-                    //     if(!empty($quest['label_1'])){
-                    //         $answers[] = array('title'=> $quest['label_1'], 'score'=>1);
-                    //     }
-                    //     if(!empty($quest['label_2'])){
-                    //         $answers[] = array('title'=> $quest['label_2'], 'score'=>2);
-                    //     }
-                    //     if(!empty($quest['label_3'])){
-                    //         $answers[] = array('title'=> $quest['label_3'], 'score'=>3);
-                    //     }
-                    //     if(!empty($quest['label_4'])){
-                    //         $answers[] = array('title'=> $quest['label_4'], 'score'=>4);
-                    //     }
-                    //     if(!empty($quest['label_5'])){
-                    //         $answers[] = array('title'=> $quest['label_5'], 'score'=>5);
-                    //     }
+                    foreach ($item['questions'] as $qid=>$quest) {
+                        $answers = array();
+                        if(!empty($quest['label_1'])){
+                            $answers[] = array('title'=> $quest['label_1'], 'score'=>1);
+                        }
+                        if(!empty($quest['label_2'])){
+                            $answers[] = array('title'=> $quest['label_2'], 'score'=>2);
+                        }
+                        if(!empty($quest['label_3'])){
+                            $answers[] = array('title'=> $quest['label_3'], 'score'=>3);
+                        }
+                        if(!empty($quest['label_4'])){
+                            $answers[] = array('title'=> $quest['label_4'], 'score'=>4);
+                        }
+                        if(!empty($quest['label_5'])){
+                            $answers[] = array('title'=> $quest['label_5'], 'score'=>5);
+                        }
 
-                    //     $params = array(
-                    //         'company_id'=>1006,
-                    //         'author'=> 10030,
-                    //         'type'=> 'raw',
-                    //         'status'=> 'true',
-                    //         'created'=>date('Y-m-d H:i:s'),
-                    //         'sorting'=> 1,
-                    //         'category_id'=>$cid,
-                    //         'title'=>$quest['title'],
-                    //         'data' => serialize(array(
-                    //             'question' => $quest['question_body'],
-                    //             'lower' => $quest['lowcomment'],
-                    //             'higher' => $quest['hightcomment'],
-                    //             'answers' => $answers
-                    //             ))
-                    //     );
+                        $params = array(
+                            // 'company_id'=>1006,
+                            // 'author'=> 10030,
+                            // 'type'=> 'raw',
+                            // 'status'=> 'true',
+                            // // 'created'=>date('Y-m-d H:i:s'),
+                            // 'sorting'=> 1,
+                            // // 'category_id'=>$cid,
+                            // 'title'=>$quest['title'],
+                            'data' => serialize(array(
+                                'question' => $quest['question_body'],
+                                'lower' => $quest['lowcomment'],
+                                'higher' => $quest['hightcomment'],
+                                'answers' => $answers,
+                                'global' => (int) $item['sub_charts'][$qid]['average_base_score']
+                                ))
+                        );
+                        $q = $this->db->where(array(
+                            'company_id'=>1006,
+                            'author'=> 10030,
+                            'type'=> 'raw',
+                            // 'category_id'=>$cid,
+                            'title'=>$quest['title'],
+                            ))->get('ninety_question')->row();
+                        $q->data = unserialize($q->data);
+                        // $rs = $this->db
+                        //     // ->where(array(
+                        //     //     'company_id'=>1006,
+                        //     //     'author'=> 10030,
+                        //     //     'type'=> 'raw',
+                        //     //     'status'=> 'true',
+                        //     //     // 'created'=>date('Y-m-d H:i:s'),
+                        //     //     // 'sorting'=> 1,
+                        //     //     // 'category_id'=>$cid,
+                        //     //     'title'=>$quest['title'],
+                        //     // ))
+                        //     ->where('id',$q->id)
+                        //     ->update('ninety_question',$params);
+                        // print_r($params);
+                        print_r($q);
+                        // print_r($rs);
                     //     $rs = $this->db->insert('ninety_question',$params);
-                    // }
+                    }
                 }
             // }
             // insert
