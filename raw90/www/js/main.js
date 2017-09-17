@@ -1,4 +1,4 @@
-var BASE_URL = 'http://local.ninety.com/';
+var BASE_URL = 'http://risk90.com.au/';
 // var BASE_URL = 'http://local.risk.com/';
 var APP_ID = 'risk';
 // var APP_ID = 'raw';
