@@ -1,20 +1,20 @@
 
 var NUM_SERIES = 1;
 var hsl_colors = [
-    [187,100,30],
-    [187,100,40],
-    [187,100,48],
-    [187,100,48],
+    [193, 52 , 48 ],
+    [175, 49 , 45 ],
+    [21 , 61 , 55 ],
+    [348, 32 , 52 ],
     [187,100,48],
     [187,100,48],
     [187,100,48],
     [187,100,48],
 ];
 function Category(opt){
-    var SCORE_LEVEL = [1.5,2.5,4];
-    // var SCORE_LEVEL = [2.5,-1,5];
-    var SCORE_DATA = [1.5,2.5,4];
-    // var SCORE_DATA = [0,1,2,3,4,5];
+    // var SCORE_LEVEL = [1.5,2.5,4];
+    var SCORE_LEVEL = [2.5,-1,5];
+    // var SCORE_DATA = [1.5,2.5,4];
+    var SCORE_DATA = [0,1,2,3,4,5];
     var NODATACOMMENT = "This section don't have comment.";
     var me = this;
     this.id = opt.id || 0;
@@ -78,25 +78,25 @@ function Category(opt){
             },
             gridLines: {
                 display:true,
-                circular: true,
+                // circular: true,
                 fill:true,
-                fillColor:[
-                    // "rgba(0, 0, 0, 0)",
-                    "rgba(0, 0, 0, 0)",
-                    '#d5e5c6',
-                    '#f5f0e2',
-                    '#f2cac8',
-                    '#f2cac8',
-                    ],
+                // fillColor:[
+                //     // "rgba(0, 0, 0, 0)",
+                //     "rgba(0, 0, 0, 0)",
+                //     '#d5e5c6',
+                //     '#f5f0e2',
+                //     '#f2cac8',
+                //     '#f2cac8',
+                //     ],
                 drawOnChartArea: true,
-                color: [
-                    // "rgba(0, 0, 0, 0)",
-                    "rgba(0, 0, 0, 0)",
-                    "rgba(0, 0, 0, 0)",
-                    "rgba(0, 0, 0, 0)",
-                    "rgba(0, 0, 0, 0)",
-                    "rgba(0, 0, 0, 0)",
-                    ],
+                // color: [
+                //     // "rgba(0, 0, 0, 0)",
+                //     "rgba(0, 0, 0, 0)",
+                //     "rgba(0, 0, 0, 0)",
+                //     "rgba(0, 0, 0, 0)",
+                //     "rgba(0, 0, 0, 0)",
+                //     "rgba(0, 0, 0, 0)",
+                //     ],
             },  
             
             scaleLabel:{
@@ -321,16 +321,16 @@ function Category(opt){
             // this.chart_info.options.scale.gridLines.color[3] = "rgba(0, 0, 0, .1)";
             // this.chart_info.options.scale.gridLines.color[4] = "rgba(0, 0, 0, 0)";
             // this.chart_info.options.scale.gridLines.color[5] = "rgba(0, 0, 0, .1)";
-            this.chart_info.options.scale.gridLines.fillColor[1] = "rgba(0, 0, 0, 0)";
-            this.chart_info.options.scale.gridLines.fillColor[2] = "rgba(0, 0, 0, 0)";
-            this.chart_info.options.scale.gridLines.fillColor[3] = "rgba(0, 0, 0, 0)";
-            this.chart_info.options.scale.gridLines.fillColor[4] = "rgba(0, 0, 0, 0)";
+            // this.chart_info.options.scale.gridLines.fillColor[1] = "rgba(0, 0, 0, 0)";
+            // this.chart_info.options.scale.gridLines.fillColor[2] = "rgba(0, 0, 0, 0)";
+            // this.chart_info.options.scale.gridLines.fillColor[3] = "rgba(0, 0, 0, 0)";
+            // this.chart_info.options.scale.gridLines.fillColor[4] = "rgba(0, 0, 0, 0)";
+            // // this.chart_info.options.scale.gridLines.color[0] = "rgba(0, 0, 0, 0)";
             // this.chart_info.options.scale.gridLines.color[0] = "rgba(0, 0, 0, 0)";
-            this.chart_info.options.scale.gridLines.color[0] = "rgba(0, 0, 0, 0)";
-            this.chart_info.options.scale.gridLines.color[1] = "rgba(0, 0, 0, .1)";
-            this.chart_info.options.scale.gridLines.color[2] = "rgba(0, 0, 0, .1)";
-            this.chart_info.options.scale.gridLines.color[3] = "rgba(0, 0, 0, 0)";
-            this.chart_info.options.scale.gridLines.color[4] = "rgba(0, 0, 0, .1)";
+            // this.chart_info.options.scale.gridLines.color[1] = "rgba(0, 0, 0, .1)";
+            // this.chart_info.options.scale.gridLines.color[2] = "rgba(0, 0, 0, .1)";
+            // this.chart_info.options.scale.gridLines.color[3] = "rgba(0, 0, 0, 0)";
+            // this.chart_info.options.scale.gridLines.color[4] = "rgba(0, 0, 0, .1)";
         }else if(this.items){
             // Build Data
             for(var c in this.items){
@@ -530,7 +530,7 @@ function Category(opt){
         }
     }
     this.color = function(){
-        return 'hsla(' + this._color[0] + ',' + this._color[1] + '%,' + this._color[2] + '%,.9)'
+        return 'hsla(' + this._color[0] + ',' + this._color[1] + '%,' + this._color[2] + '%,1)'
     }
 }
 function CategoryFactory(API,StorageService, $mdDialog, Dialog) {

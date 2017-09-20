@@ -367,7 +367,7 @@ textarea.form-control.ng-invalid.ng-touched{
     border: 1px solid #ccc;
 }
 .answers md-radio-button .md-on{
-    background: #005f6b
+    background: #32889f
 }
 .answers md-radio-button[aria-checked="true"] .md-label{
     color: #fff;
@@ -431,7 +431,7 @@ small .switch.active .switch-handle{
     background: #ebebeb
 }
 .risk-list-item .list-group-item{
-    padding: 0px;
+    padding: 17px 0px;
     border:0;
 }
 .risk-list-item .item .list-group-item>div{
@@ -441,7 +441,7 @@ small .switch.active .switch-handle{
 .risk-list-item .item{
     position: relative;
     background: #fff;
-    padding: 13px;
+    padding: 0 15px;
     /*border-radius: 5px;*/;
     z-index: 0;
     text-align: left;
@@ -623,28 +623,26 @@ small .switch.active .switch-handle{
     position: absolute;right: 0;top: 50%;
     -webkit-transform: translateY(-50%);
     transform: translateY(-50%);
-    color: #fff;
-    font-size: 14px;
-    background: #ccc;
     width: 24px;
     height: 24px;
-    text-align: center;
-    line-height: 24px;
-    border-radius: 12px;
     -webkit-transition: 0.4s ease-in-out ;
     -moz-transition: 0.4s ease-in-out ;
     -o-transition: 0.4s ease-in-out ;
     transition: 0.4s ease-in-out ;
+    background: url(../img/up.png);
+    background-size: 24px 24px;
+    -webkit-background-size: 24px 24px;
 }
 .open .chart-item-head>i{
     transform: rotate(180deg) translateY(50%);
+    -webkit-transform: rotate(180deg) translateY(50%);
 }
 .chart-title.over-all{border-top:0;}
 .chart-title{
     padding: 20px 15px;
     text-transform: uppercase;
     line-height: 20px;
-    background:#00b4cc;
+    background:#33cc99;
     color: #fff;
     text-transform: uppercase;
 }
@@ -968,8 +966,8 @@ button.btn-add-project.md-button{
 }
 .head-title>.graph-icon{
     background: url(../img/graph.png) no-repeat center;
-    -webkit-background-size: 28px 28px;
-    background-size: 28px 28px;
+    -webkit-background-size: 32px 32px;
+    background-size: 32px 32px;
 }
 .project-desc,
 .list-group-item.project-desc,
@@ -997,7 +995,7 @@ a.list-group-item.project-desc{
     padding: 16px 10px 16px 45px;
     line-height: 22px;
     color: #fff;
-    background: #00b4cc;
+    background: #ed2044;
     position: relative;
 }
 .the-question{position: relative;}
@@ -1083,7 +1081,7 @@ a.list-group-item.project-desc{
 }
 .finish-btn{
     padding: 5px 0;
-    background: #000;
+    background: #117bc0;
     color: #fff;
     text-align: center;
 }

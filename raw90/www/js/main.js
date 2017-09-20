@@ -1,9 +1,9 @@
 var BASE_URL = 'http://risk90.com.au/';
 // var BASE_URL = 'http://local.risk.com/';
-var APP_ID = 'risk';
+var APP_ID = 'raw';
 // var APP_ID = 'raw';
 var APP_SECRET = '6789';
-var SHOW_GLOBAL = false;
+var SHOW_GLOBAL = true;
 var _CONS = {};
 var APP ;
 document.addEventListener("deviceready",function(){

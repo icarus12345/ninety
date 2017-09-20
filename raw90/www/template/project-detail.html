@@ -28,10 +28,12 @@
             <span ng-tap="view_chart(category_info)" class="graph-icon head-icon"></span>
         </div>
         <div class="list-group">
+            <!--
             <div class="list-group-item text-justify project-desc" 
                 style="min-height: {{desc_height}}px;">
                 <p >{{category_info.desc||projectData.desc}}</p>
             </div>
+            -->
             <a 
                 ng-repeat="(i,foo) in category_info.items"
                 class="list-group-item list-group-item-risk" 

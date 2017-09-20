@@ -33,84 +33,95 @@
             <div class="panel-group">
                 <div 
                     class="panel" 
-                    ng-repeat="(i, foo) in accordions"
-                    ng-class="{'actived':foo.status}"
+                    ng-repeat="(i, accordion) in accordions"
+                    ng-class="{'actived':accordion.status}"
                     >
-                    <div class="panel-heading" ng-tap="foo.status=!foo.status">
-                        <div class="panel-title">{{foo.title}}</div>
+                    <div class="panel-heading" ng-tap="accordion.status=!accordion.status">
+                        <div class="panel-title">{{accordion.title}}</div>
                     </div>
-                    <div ng-show="foo.status">
+                    <div ng-show="accordion.status">
                         <div class="panel-body">
-                            <div class="list-group text-center" ng-show="i==1">
+                            <div class="list-group text-center">
                                 <div class="risk-list-item list-group">
                                     
                                   <div 
-                                    ng-repeat="foo in listProject" 
+                                    ng-repeat="project in listProject" 
                                     ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" 
                                     class="item"
-                                    ng-class="Ui.active('dropdown' + foo.id)?'active':''"
+                                    ng-class="(i==0 && Ui.active('dropdown' + project.id))?'active':''"
                                     >
-                                        <div ng-tap="showListBottomSheet(foo,true)" class="list-group-item" >
+                                        <a 
+                                            ng-if="i==0"
+                                            ng-href="#/project/{{project.id}}/cat/0"
+                                            class="list-group-item" >
                                             <div class="item-title">
-                                                {{foo.title}}
+                                                {{project.title}}
+                                            </div>
+                                        </a>
+                                        <div 
+                                            ng-if="i==1"
+                                            ng-tap="showListBottomSheet(project,true)" 
+                                            class="list-group-item" >
+                                            <div class="item-title">
+                                                {{project.title}}
                                             </div>
                                         </div>
-                                        <div class="dropdown" ng-show="0">
+                                        <div class="dropdown" ng-if="i==0">
                                             <button 
-                                                ui-turn-on='dropdown{{foo.id}}' 
+                                                ui-turn-on='dropdown{{project.id}}' 
                                                 class='btn'>
                                                 <i class="icon-options-vertical"></i>
                                             </button>
                                             <ul
-                                            ui-state="dropdown{{foo.id}}"
+                                            ui-state="dropdown{{project.id}}"
                                             class="dropdown-menu"
-                                            ui-outer-click="Ui.turnOff('dropdown' + foo.id)"
-                                            ui-outer-click-if="Ui.active('dropdown' + foo.id)"
+                                            ui-outer-click="Ui.turnOff('dropdown' + project.id)"
+                                            ui-outer-click-if="Ui.active('dropdown' + project.id)"
                                             role="menu"
-                                            ui-show="dropdown{{foo.id}}"
-                                            ui-turn-off="dropdown{{foo.id}}"
+                                            ui-show="dropdown{{project.id}}"
+                                            ui-turn-off="dropdown{{project.id}}"
                                             >
-                                                <li ng-class="{disabled:foo.mode!=2}">
-                                                    <a ng-tap="show_edit(foo)"><span class="icon-note"></span> Edit</a>
+                                                <li ng-show="project.mode==2">
+                                                    <a ng-tap="show_edit(project)"><span class="icon-note"></span> Edit</a>
                                                 </li>
                                                 <li>
-                                                    <a ng-tap="showListBottomSheet(foo,true)"><span class="icon-book-open"></span> Export</a>
+                                                    <a ng-tap="showListBottomSheet(project,true)"><span class="icon-book-open"></span> Export</a>
                                                 </li>
-                                                <li class="divider"></li>
-                                                <li ng-class="{disabled:foo.mode!=2}">
-                                                    <a ng-tap="do_share(foo)"><span class="icon-share"></span> Share</a>
+                                                <li ng-show="project.mode==2" class="divider"></li>
+                                                <li ng-class="project.mode==2">
+                                                    <a ng-tap="do_share(project)"><span class="icon-share"></span> Share</a>
                                                 </li>
                                                 <li>
-                                                    <a href="#/send/{{foo.id}}"><span class="icon-envelope-letter"></span> Email</a>
+                                                    <a href="#/send/{{project.id}}"><span class="icon-envelope-letter"></span> Email</a>
                                                 </li>
-                                                <li class="divider"></li>
-                                                <li ng-class="{disabled:foo.mode!=2}">
-                                                    <a ng-tap="do_remove(foo)"><span class="icon-trash"></span> Delete</a>
+                                                <li ng-show="project.mode==2" class="divider"></li>
+                                                <li ng-show="project.mode==2">
+                                                    <a ng-tap="do_remove(project)"><span class="icon-trash"></span> Delete</a>
                                                 </li>
                                             </ul>
                                         </div>
                                   </div>
                                 </div>
                             </div>
-                            <md-content ng-show="i==0">
+                            <md-content ng-show="i==2">
                                 <md-list flex>
                                     <md-list-item 
                                         class="md-1-line mb-risk-item" 
-                                        ng-repeat="foo in listProject" 
-                                        ng-href="#/project/{{foo.id}}/cat/0"
+                                        ng-repeat="project in listProject" 
+                                        ng-href="#/project/{{project.id}}/cat/0"
                                         >
                                         <div 
                                             class="md-list-item-text" 
                                             layout="column"
                                             
                                             >
-                                            <div class="item-title">{{ foo.title }}</div>
-                                            <!-- <p>{{foo.created}}</p> -->
+                                            <div class="item-title">{{ project.title }}</div>
+                                            <!-- <p>{{project.created}}</p> -->
                                         </div>
                                         <md-button  
                                             class="md-icon-button md-secondary" 
-                                            aria-label="showListBottomSheet(foo)"
-                                            ng-click="showListBottomSheet(foo)">
+                                            aria-label="showListBottomSheet(project)"
+                                            ng-click="showListBottomSheet(project)">
                                             <i class="icon-options-vertical"></i>
                                         </md-button >
                                     </md-list-item>

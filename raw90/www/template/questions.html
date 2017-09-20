@@ -28,18 +28,20 @@
             <!-- <span ng-tap="goBack()" class="close-icon head-icon"></span> -->
         </div>
         <div class="list-group ">
+            <!--
             <div class="list-group-item text-justify project-desc">
                 <p >{{category_info.desc||projectData.desc}}</p>
             </div>
+            -->
             <div class="graph-box">
                 <div class="list-group">
                   <div class="the-question" ng-repeat="(i,foo) in category_info.questions">
                     <div class="question-name">
                         <span class="question-number">{{i + 1}}</span>
-                        {{foo.question}}
+                        {{foo.title}}
                     </div>
                     <div class="question">
-                        <!-- <div class="question-content">{{foo.question}}</div> -->
+                        <div class="question-content">{{foo.question}}</div>
                         <div class="answers">
 
                             <md-radio-group ng-model="foo.answered[0]" class="button-radio" ng-change="answer_the_question(foo)">
