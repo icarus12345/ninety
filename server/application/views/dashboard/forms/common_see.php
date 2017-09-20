@@ -122,6 +122,7 @@ $user = $CI->session->userdata('dasbboard_user');
             </div>
         <?php 
         elseif (
+            $column['type'] == 'treedropdown' ||
             $column['type'] == 'server-dropdown' ||
             $column['type'] == 'group-server-dropdown'
             ): 
