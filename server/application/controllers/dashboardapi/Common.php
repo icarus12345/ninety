@@ -168,6 +168,7 @@ class Common extends DApi_Controller {
                         $cate_data = $this->Category_Model->get_by_type($cat_type);
                         $entry_setting->data['columns'][$key]['categories'] = $cate_data;
                     } else if(
+                        $column['type'] == 'treedropdown' ||
                         $column['type'] == 'server-dropdown' ||
                         $column['type'] == 'group-server-dropdown' ||
                         $column['type'] == 'server-multidropdown' ||
@@ -320,6 +321,7 @@ class Common extends DApi_Controller {
                         $cate_data = $this->Category_Model->get_by_type($cat_type);
                         $entry_setting->data['columns'][$key]['categories'] = $cate_data;
                     } else if(
+                        $column['type'] == 'treedropdown' ||
                         $column['type'] == 'server-dropdown' ||
                         $column['type'] == 'server-multidropdown'
                         ){
@@ -352,6 +354,10 @@ class Common extends DApi_Controller {
                         // if($sub_storage == '__trademark'){
                         //     print_r($sub_entrys);;die;
                         // }
+                        if($column['type'] == 'treedropdown'){
+                            $sub_entrys = $sub_model
+                                ->_buildTreeArray($sub_entrys);
+                        }
                         $entry_setting->data['columns'][$key]['sub_data'] = $sub_entrys;
 
                     } else if(

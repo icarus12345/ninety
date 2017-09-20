@@ -98,6 +98,36 @@ $user = $CI->session->userdata('dasbboard_user');
             </div>
             <input type="hidden" name="<?php echo $latname; ?>" value="<?php echo $lat; ?>">
             <input type="hidden" name="<?php echo $lonname; ?>" value="<?php echo $lon; ?>">
+        <?php elseif ($column['type'] == 'treedropdown'): ?>
+            <div class="col-xs-<?php echo $column['col']; ?> half">
+                <div class="pull-bottom">
+                    <div><?php echo $column['title']; ?> :</div>
+                    <div class="control-group">
+                        <div>
+                            <select 
+                                name="<?php echo $name; ?>" 
+                                class="form-control selectpicker "
+                                data-putto="#frm-err-data-<?php echo $column['name']; ?>"
+                                data-live-search="true"
+                                data-size="10"
+                                data-server-dropdown="1"
+                                onchange="<?php echo $column['onchange']; ?>"
+                                >
+                                <option value="">Nothing Selected</option>
+                                <?php if(is_array($column['sub_data'])) foreach($column['sub_data'] as $c): ?>
+                                    <option 
+                                        data-content="<span style='padding-left: <?php echo $c->level*20; ?>px;'><?php echo $c->title; ?></span>"
+                                        
+                                        value="<?php echo $c->id; ?>"
+                                        <?php if ($c->id == $value){echo 'selected="1"';} ?>
+                                        ><?php echo $c->title; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                        <div id="frm-err-data-<?php echo $column['name']; ?>"></div>
+                    </div>
+                </div>
+            </div>
         <?php elseif ($column['type'] == 'server-dropdown'): ?>
             <div class="col-xs-<?php echo $column['col']; ?> half">
                 <div class="pull-bottom">
