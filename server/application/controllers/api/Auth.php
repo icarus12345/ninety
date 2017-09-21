@@ -225,7 +225,7 @@ class Auth extends CI_Controller {
                     $code = 200;
                     $user = $this->Account_Model->get_by_username($username);
                     if($user){
-                        if(user_check_password($password,$user->password){
+                        if(user_check_password($password,$user->password)){
                             if($user->status=='true'){
                                 unset($user->password);
                                 // $output['code'] = 1;
