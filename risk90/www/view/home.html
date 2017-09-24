@@ -41,9 +41,9 @@
                     </div>
                     <div ng-show="accordion.status">
                         <div class="panel-body">
+                            <div class="no-data" ng-show="!listProject">No data to display !</div>
                             <div class="list-group text-center" ng-show="i==1">
                                 <div class="risk-list-item list-group">
-                                    
                                   <div 
                                     ng-repeat="project in listProject" 
                                     ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" 

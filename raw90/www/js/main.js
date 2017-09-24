@@ -1,10 +1,11 @@
 var BASE_URL = 'http://risk90.com.au/';
-var BASE_URL = 'http://local.ninety.com/';
+// var BASE_URL = 'http://local.ninety.com/';
 var APP_ID = 'raw';
 // var APP_ID = 'raw';
 var APP_SECRET = '6789';
 var SHOW_GLOBAL = true;
-var _CONS = {};
+var _CONS = {
+};
 var APP ;
 document.addEventListener("deviceready",function(){
     try{

@@ -103,8 +103,8 @@ function Main2Controller(
         },function(res){
             if(res.data.code == 1){
                 SharedState.turnOff('modalAddProject');
-                $rootScope.editing_project.title = $rootScope.editProjectInfo.title.toString();
-                $rootScope.editing_project.desc = $rootScope.editProjectInfo.desc.toString();
+                $rootScope.editing_project.title = $rootScope.editProjectInfo.title || '';
+                $rootScope.editing_project.desc = $rootScope.editProjectInfo.desc || '';
                 
             } else {
                 Dialog.error(res.data.message);

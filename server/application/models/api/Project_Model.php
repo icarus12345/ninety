@@ -37,7 +37,7 @@ class Project_Model extends API_Model {
         $row = $query->row();
         if($row) {
             $data = unserialize($row->data);
-            foreach ($data as $key => $value) {
+            if($data) foreach ($data as $key => $value) {
                 $row->$key = $value;
             }
             unset($row->data);
@@ -70,7 +70,7 @@ class Project_Model extends API_Model {
         $entrys = $query->result();
         if($entrys) foreach ($entrys as $key => $value) {
             $data = unserialize($entrys[$key]->data);
-            foreach ($data as $dkey => $dvalue) {
+            if($data) foreach ($data as $dkey => $dvalue) {
                 $entrys[$key]->$dkey = $dvalue;
             }
             unset($entrys[$key]->data);
@@ -123,6 +123,7 @@ class Project_Model extends API_Model {
                 $result[$key]->mode = 2;
             }
             $data = unserialize($result[$key]->data);
+            if($data)
             foreach ($data as $dkey => $dvalue) {
                 $result[$key]->$dkey = $dvalue;
             }

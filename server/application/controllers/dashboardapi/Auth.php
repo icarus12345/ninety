@@ -56,7 +56,7 @@ class Auth extends CI_Controller {
             if (!$user) {
                 $output['message'] = 'Username or Password don\'t match.';
             } else {
-                if ($user->ause_password != md5($username . $password . $user->ause_secretkey)) {
+                if (!user_check_password($password,$user->ause_password)) {
                     $name = $user->ause_name;
                     $output['code'] = -906;
                     $output['message'] = "Login failed for user '$name'.";

@@ -167,6 +167,7 @@ class Api_Controller extends CI_Controller {
         $this->_output['code'] = 1;
         $this->_output['text'] = 'ok';
         $this->_output['message'] = 'success';
+        $this->_output['query'] = $this->db->last_query();
         
         $this->display();
     }

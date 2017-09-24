@@ -520,7 +520,7 @@ small .switch.active .switch-handle{
 }
 .risk-list-item .item:last-child .dropdown>.dropdown-menu:before,
 .risk-list-item .item:last-child .dropdown>.dropdown-menu::before{
-    top: auto;bottom: 6px;
+    top: auto;bottom: 17px;
      -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     -o-transform: translateY(0);
@@ -528,7 +528,7 @@ small .switch.active .switch-handle{
 }
 .risk-list-item .item:last-child .dropdown>.dropdown-menu:after,
 .risk-list-item .item:last-child .dropdown>.dropdown-menu::after{
-    top: auto;bottom: 7px;
+    top: auto;bottom: 18px;
      -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     -o-transform: translateY(0);

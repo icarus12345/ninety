@@ -90,6 +90,7 @@ class Auth extends CI_Controller {
         // $app_secret = $this->input->post('app_secret');
         $uuid = $this->input->get_post('uuid');
         $device_info = $this->input->get_post('device_info');
+        if($uuid){
         // $this->form_validation->set_rules($this->rules['get_token']);
         // if ($this->form_validation->run() == FALSE) {
             // $output['validation'] = validation_errors_array();
@@ -122,6 +123,7 @@ class Auth extends CI_Controller {
                 $this->_output['message'] = 'Device does\' exists.';
             }
         // }
+        }
         $this->display();
     }
 

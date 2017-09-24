@@ -308,7 +308,7 @@ class Project extends Api_Controller {
                                 'pid' => $pid,
                                 'email' => $email,
                                 'mode' => $mode,
-                                // 'type' => $this->client_id,
+                                'type' => $this->client_id,
                                 );
                             $rs = $this->Share_Model->insert($params);
                         }

@@ -26,29 +26,60 @@ class Welcome extends CI_Controller {
         echo 'Welcome';
     }
     function sync(){
-        $data = json_decode(read_file(APPPATH . '../db/answers.json'),true);
+        echo user_hash_password('shaphia');die;
+        $data = json_decode(read_file(APPPATH . '../db/category.json'),true);
         echo '<pre>';
-        $this->run($data);
+        $this->run($data['data']['items']);
     }
-    function run($items){
+    function run($items,$pid = 95){
         foreach ($items as $key => $row) {
-            if(!empty($row['pid'])){
-                $params = array(
-                    // 'id' => $row['vid'],
-                    'uid' => $row['uid'],
-                    'qid' => $row['qid'],
-                    'pid' => $row['pid'],
-                    'ans' => $row['answer'],
-                    // 'title' => $row['title'],
-                    // 'alias' => convertUrl($row['title']),
-                    // 'status' => $row['status']==1?'true':'false',
-                    'created' => date('Y-m-d H:i:s',(int)$row['created']),
-                    // 'type' => 'raw',
+            $params = array(
+                'id' => $row['tid'],
+                'name' => $row['name']
+                );
+            $rs = $this->db->where(array(
+                        'id'=>$row['tid']
+                        ))
+                        ->get('ninety_category')
+                        ->row();
+                        $rs->parent_id = $pid;
+            // if($rs) $this->db->where(array(
+            //     'id'=>$rs->id
+            //     ))
+            //     ->update('ninety_category',array(
+            //         'parent_id'=>$pid
+            //         ));
+            print_r($rs);
+            if($row['items']){
+                $this->run($row['items'],$row['tid']);
+            }else if($row['questions']){
+                foreach ($row['questions'] as $q) {
+                    $params = array(
+                    'id' => $q['question_id'],
+                    'title' => $q['title'],
+                    'category_id'=>$row['tid']
                     );
-                $rs = $this->db->insert('ninety_answer',$params);
-                print_r($params);
-                // print_r($row);
+                    $rs = $this->db->where(array(
+                        'id'=>$q['question_id'],
+                        'type'=>'raw'
+                        ))
+                        ->get('ninety_question')
+                        ->row();
+                    // if($rs) $this->db->where(array(
+                    //         'id'=>$rs->id
+                    //         ))
+                    //         ->update('ninety_question',array(
+                    //             'category_id'=>$row['tid']
+                    //             ));
+                    // print_r($rs);
+                }
             }
+            // if(!empty($row['pid'])){
+                
+                // $rs = $this->db->insert('ninety_shared',$params);
+                
+                // print_r($row);
+            // }
         }
     }
 

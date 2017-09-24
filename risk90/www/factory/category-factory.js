@@ -219,19 +219,22 @@ function Category(opt){
                             if(+q.answered[I]>=0){
                                 score = SCORE_DATA[+q.answered[I]]
                             }
-                            q.score = score;
-                            q.comment = 'You have not completed this section';
-                            q.comment_class = 'comment-none';
-                            if(q.score>0){
-                                if(q.score < SCORE_LEVEL[0]){
-                                    q.comment = q.lower || NODATACOMMENT;
-                                    q.comment_class = 'comment-lower';
-                                } else if(q.score < SCORE_LEVEL[1]){
-                                    q.comment = q.medium || NODATACOMMENT;
-                                    q.comment_class = 'comment-medium';
-                                } else {
-                                    q.comment = q.higher || NODATACOMMENT;
-                                    q.comment_class = 'comment-higher';
+                            if(I==0){
+                                q.score = score;
+                                console.log(q.score,I,'QQQ')
+                                q.comment = 'You have not completed this section';
+                                q.comment_class = 'comment-none';
+                                if(q.score>0){
+                                    if(q.score < SCORE_LEVEL[0]){
+                                        q.comment = q.lower || NODATACOMMENT;
+                                        q.comment_class = 'comment-lower';
+                                    } else if(q.score < SCORE_LEVEL[1]){
+                                        q.comment = q.medium || NODATACOMMENT;
+                                        q.comment_class = 'comment-medium';
+                                    } else {
+                                        q.comment = q.higher || NODATACOMMENT;
+                                        q.comment_class = 'comment-higher';
+                                    }
                                 }
                             }
                         return sum + score; 

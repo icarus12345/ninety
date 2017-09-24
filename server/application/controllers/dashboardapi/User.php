@@ -171,7 +171,7 @@ class User extends Core_Controller {
             if (!$user) {
                 $output['message'] = 'User does\'t exists !';
             } else {
-                if(!empty($password) && $user->ause_password != md5($username . $oldpassword . $user->ause_secretkey)) {
+                if(!empty($password) && !user_check_password($oldpassword,$user->ause_password)) {
                         $output['message'] = 'Current password does\'t macth !';
                 } else {
                     $params = array(
@@ -181,7 +181,7 @@ class User extends Core_Controller {
                         // 'ause_password'=> md5($username . $password . $user->ause_secretkey),
                         );
                     if(!empty($password)){
-                        $params['ause_password'] = md5($username . $password . $user->ause_secretkey);
+                        $params['ause_password'] = user_hash_password($password);
                     }
                     $rs = $this->Auth_Model->onUpdate($user->ause_id, $params);
                     if ($rs === true) {
@@ -271,7 +271,7 @@ class User extends Core_Controller {
                         $params['ause_authority'] = implode(',', $params['ause_authority']);
                     }
                     if(!empty($params["ause_password"])){
-                        $params["ause_password"] = md5($params["ause_username"].$params["ause_password"].$user_detail->ause_secretkey);
+                        $params["ause_password"] = user_hash_password($params["ause_password"]);
                     } else {
                         unset($params["ause_password"]);
                     }
@@ -340,7 +340,7 @@ class User extends Core_Controller {
             $params["ause_key"] = random_string('alnum', 8);
             $params["ause_salt"] = random_string('alnum', 8);
             $params["ause_secretkey"] = random_string('alnum', 32);
-            $params["ause_password"]=md5($params["ause_username"].$params["ause_password"].$params["ause_secretkey"]);
+            $params["ause_password"]=user_hash_password($params["ause_password"]);
             $params["ause_position"]=$user->ause_position+1;
             $params['ause_status'] = 'true';
 

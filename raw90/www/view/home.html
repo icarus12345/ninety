@@ -26,8 +26,8 @@
                 </form>
             </md-content>
             <a href="" class="fb-link"></a>
-            <a href="#/app-info/42" class="info-link"></a>
-            <a href="#/content/43" class="book-link"></a>
+            <a href="#/app-info/45" class="info-link"></a>
+            <a href="#/content/46" class="book-link"></a>
         </div>
         <div class="accordions">
             <div class="panel-group">
@@ -43,7 +43,7 @@
                         <div class="panel-body">
                             <div class="list-group text-center">
                                 <div class="risk-list-item list-group">
-                                    
+                                    <div class="no-data" ng-show="!listProject">No data to display !</div>
                                   <div 
                                     ng-repeat="project in listProject" 
                                     ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" 
@@ -88,7 +88,7 @@
                                                     <a ng-tap="showListBottomSheet(project,true)"><span class="icon-book-open"></span> Export</a>
                                                 </li>
                                                 <li ng-show="project.mode==2" class="divider"></li>
-                                                <li ng-class="project.mode==2">
+                                                <li ng-show="project.mode==2">
                                                     <a ng-tap="do_share(project)"><span class="icon-share"></span> Share</a>
                                                 </li>
                                                 <li>
@@ -137,7 +137,7 @@
         
         <div class="navbar-app navbar-bottom" >
             <a class="copy-right">&copy; 2017 90&deg; Ready</a>
-            <a class="team-condition" href="#/content/44" class="btn btn-navbar">Teams & Conditions</a>
+            <a class="team-condition" href="#/content/47" class="btn btn-navbar">Teams & Conditions</a>
         </div>
     </div>
 </div>
