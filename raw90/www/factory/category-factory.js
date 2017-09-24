@@ -203,7 +203,7 @@ function Category(opt){
                 this.sum_scores[I] =
                     this.questions.reduce(function(sum, q) {
                             var score = 0;
-                            q.comment = 'You have not completed this section';
+                            // q.comment = 'You have not completed this question';
                             // if(q.answered[I] == 0){
                             //     score = SCORE_LEVEL[0];
                             //     q.comment = q.lower || NODATACOMMENT;
@@ -221,7 +221,7 @@ function Category(opt){
                             }
                             if(I==0){
                                 q.score = score;
-                                q.comment = 'You have not completed this section';
+                                q.comment = 'You have not completed this question';
                                 q.comment_class = 'comment-none';
                                 if(q.score>0){
                                     if(q.score < SCORE_LEVEL[0]){
@@ -235,7 +235,7 @@ function Category(opt){
                                         q.comment_class = 'comment-higher';
                                     }
                                 }
-                                console.log(q.score,q.comment,SCORE_LEVEL,'QQQRRR')
+                                // console.log(q.score,q.comment,SCORE_LEVEL,'QQQRRR')
                             }
                         return sum + score; 
                     }, 0)

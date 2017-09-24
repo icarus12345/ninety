@@ -203,7 +203,7 @@ function Category(opt){
                 this.sum_scores[I] =
                     this.questions.reduce(function(sum, q) {
                             var score = 0;
-                            q.comment = 'You have not completed this section';
+                            // q.comment = 'You have not completed this section';
                             // if(q.answered[I] == 0){
                             //     score = SCORE_LEVEL[0];
                             //     q.comment = q.lower || NODATACOMMENT;
