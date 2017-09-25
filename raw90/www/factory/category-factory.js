@@ -490,7 +490,7 @@ function Category(opt){
         resizedContext.fillStyle = "#ffffff";
         resizedContext.fill();
         resizedContext.drawImage(canvas, 0, 0, 320, 320);
-        var url = resizedCanvas.toDataURL('image/jpeg');
+        var url = resizedCanvas.toDataURL('image/jpeg',.6);
         document.body.removeChild(div);
         return url;
     }

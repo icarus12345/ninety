@@ -486,7 +486,7 @@ function Category(opt){
         resizedContext.fillStyle = "#ffffff";
         resizedContext.fill();
         resizedContext.drawImage(canvas, 0, 0, 320, 320);
-        var url = resizedCanvas.toDataURL('image/jpeg');
+        var url = resizedCanvas.toDataURL('image/jpeg',.6);
         document.body.removeChild(div);
         return url;
     }
@@ -524,7 +524,7 @@ function Category(opt){
     this.get_infos = function(opt){
         var data = [];
         data.push(this._get_info(opt));
-        console.log(this)
+        // console.log(this)
         if(this.items){
             this.items.map(function(c){
                 // if(c.items){
