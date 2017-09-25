@@ -36,6 +36,13 @@ function Category(opt){
     ];
     var colors = [ '#99cc33', '#117bc0', '#f7464a', '#ff7f0e', '#2ca02c', '#949FB1', '#FFD600'];
     var chart_options = {
+        // chartArea: {
+            backgroundColor: '#fff',
+        // },
+        // width:320,
+        // height:320,
+        // maintainAspectRatio: true,
+        // responsive:false,
         layout: {
             padding: {
                 left: 14,
@@ -468,8 +475,22 @@ function Category(opt){
         document.body.appendChild(div)
         var canvas = document.createElement('canvas');
         div.appendChild(canvas)
+        canvas.width=320
+        canvas.style.width='320px'
+        canvas.height=320
+        canvas.style.height='320px'
+
         var radachart = new Chart(canvas, config);
-        var url = canvas.toDataURL();
+        var resizedCanvas = document.createElement("canvas");
+        var resizedContext = resizedCanvas.getContext("2d");
+        resizedCanvas.height = "320";
+        resizedCanvas.width = "320";
+        resizedContext.beginPath();
+        resizedContext.rect(0, 0, 320, 320);
+        resizedContext.fillStyle = "#ffffff";
+        resizedContext.fill();
+        resizedContext.drawImage(canvas, 0, 0, 320, 320);
+        var url = resizedCanvas.toDataURL('image/jpeg');
         document.body.removeChild(div);
         return url;
     }
@@ -507,7 +528,7 @@ function Category(opt){
     this.get_infos = function(opt){
         var data = [];
         data.push(this._get_info(opt));
-        console.log(this)
+        // console.log(this)
         if(this.items){
             this.items.map(function(c){
                 // if(c.items){
