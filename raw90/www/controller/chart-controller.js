@@ -5,41 +5,45 @@ function ChartController(
     $timeout,
     API, CategoryService, ProjectService, StorageService, Auth
     ) {
-    console.log('ChartController',$routeParams);
-    $scope.goBack = function(){
-        var backNum = +($routeParams.backNum || 1);
-        $window.history.go(-backNum);
-    }
-    ProjectService.get($routeParams.projectId,function(data){
-        $scope.projectData = data.info;
-        var shareds = data.shareds;
-        console.log(data)
-        CategoryService.set_answereds(data.answereds);
-        // GET ANSWERS
-        // SET ANSWERS
-        // GET CATEGORY
-        CategoryService.get($routeParams.categoryId,function(data){
-            console.log(shareds)
-            console.log('data')
+    try {
+        console.log('ChartController',$routeParams);
+        $scope.goBack = function(){
+            var backNum = +($routeParams.backNum || 1);
+            $window.history.go(-backNum);
+        }
+        ProjectService.get($routeParams.projectId,function(data){
+            $scope.projectData = data.info;
+            var shareds = data.shareds;
             console.log(data)
-            // return;
-            $scope.category_info = data;
-            $scope.chart_data = data.chart_data;
-            var series = []
-            if(SHOW_GLOBAL) series = ["Goal"]
-            var device_info = StorageService.get('device-info')
-            series.push(device_info.user_info.email);
-            for(var u in shareds){
-                series.push(shareds[u].email)
-            }
-            $scope.series = series;
-            console.log(series)
-            // $scope.$apply(function() {
-            //     $scope.___++;
-            //     console.log($scope.___)
-            // })
+            CategoryService.set_answereds(data.answereds);
+            // GET ANSWERS
+            // SET ANSWERS
+            // GET CATEGORY
+            CategoryService.get($routeParams.categoryId,function(data){
+                console.log(shareds)
+                console.log('data')
+                console.log(data)
+                // return;
+                $scope.category_info = data;
+                $scope.chart_data = data.chart_data;
+                var series = []
+                if(SHOW_GLOBAL) series = ["Goal"]
+                var device_info = StorageService.get('device-info')
+                series.push(device_info.user_info.email);
+                for(var u in shareds){
+                    series.push(shareds[u].email)
+                }
+                $scope.series = series;
+                console.log(series)
+                // $scope.$apply(function() {
+                //     $scope.___++;
+                //     console.log($scope.___)
+                // })
+            })
         })
-    })
+    } catch (e){
+        alert(e.message);
+    }
     // $scope.$on('chart-create', function (event, chart) {
     //     $scope.chartLegend = chart.generateLegend();
     // });
