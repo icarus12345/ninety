@@ -5,7 +5,12 @@
                 <div class="aligner" >
                     <div class="aligner-item"> 
                         <md-content layout-padding>
-                            <form name="loginForm" id="loginForm" ng-submit='doAuthLogin()' autocomplete="off">
+                            <form 
+                                name="loginForm" 
+                                ng-show="!auth_forgot.status"
+                                id="loginForm" 
+                                ng-submit='doAuthLogin()' 
+                                autocomplete="off">
                                 <div class="login-logo"></div>
                                 <div class="login-space"></div>
                                 <md-input-container class="md-block">
@@ -39,6 +44,105 @@
                                 <p style="width: 100%; text-align: center;padding-top:40px;">
                                 Don't have account? <a style="color:#fff;padding:6px 7px;font-weight:bold;" ng-tap="show_register()" ui-turn-on="IsShowRegister" ui-turn-off="IsShowLogin">Register Now!</a>
                                 </p>
+                                <p style="width: 100%; text-align: center;">
+                                    <a style="color:#fff;padding:6px 7px;font-weight:bold;" ng-tap="show_forgot(1)">Forgot Password ?</a>
+                                </p>
+                            </form>
+                            <form 
+                                name="sendCodeForm" 
+                                id="sendCodeForm" 
+                                ng-submit='doAuthSendCode()' 
+                                ng-show="auth_forgot.status && auth_forgot.step == 1"
+                                autocomplete="off">
+                                <div class="login-logo"></div>
+                                <div class="forgot-space">
+                                    
+                                </div>
+                                <md-input-container class="md-block">
+                                    <label>Email</label>
+                                    <input 
+                                        required 
+                                        md-no-asterisk 
+                                        type="email" 
+                                        name="email" 
+                                        ng-model="auth_forgot.email"
+                                        minlength="10" 
+                                        maxlength="100" 
+                                        ng-pattern="/^.+@.+\..+$/" 
+                                        />
+
+                                    <div ng-messages="forgotForm.email.$error" role="alert">
+                                        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                    Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <div layout="row">
+                                    <md-input-container flex="50">
+                                        <md-button 
+                                            md-no-ink 
+                                            class="btn-block btn-circle md-btn-default"  
+                                            type="button"
+                                            ng-tap="show_login()"
+                                            >Back</md-button>
+                                    </md-input-container>
+
+                                    <md-input-container flex="50">
+                                        <md-button class="btn-block btn-circle md-btn-danger" type="submit">Next</md-button>
+                                    </md-input-container>
+                                </div>
+                            </form>
+                            <form 
+                                name="forgotForm" 
+                                id="forgotForm" 
+                                ng-submit='doAuthForgot()' 
+                                ng-show="auth_forgot.status && auth_forgot.step == 2"
+                                autocomplete="off">
+                                <div class="login-logo"></div>
+                                <div class="forgot-space">
+                                    
+                                </div>
+                                <div class="text-center">Please check your email for a password reset code.</div>
+                                <md-input-container class="md-block">
+                                    <label>Code</label>
+                                    <input 
+                                        required md-no-asterisk 
+                                        name="code" 
+                                        maxlength="8" 
+                                        ng-model="auth_forgot.code">
+                                    <div ng-messages="forgotForm.code.$error">
+                                        <div ng-message="required">This is required.</div>
+                                        <div ng-message="md-maxlength">The Code must be less than 8 characters long.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container class="md-block">
+                                    <label>New Password</label>
+                                    <input 
+                                        type="password" 
+                                        required md-no-asterisk 
+                                        name="password" 
+                                        maxlength="30" 
+                                        ng-model="auth_forgot.password">
+                                    <div ng-messages="forgotForm.password.$error">
+                                        <div ng-message="required">This is required.</div>
+                                        <div ng-message="md-maxlength">The Passowrd must be less than 30 characters long.</div>
+                                    </div>
+                                </md-input-container>
+                                <div layout="row">
+                                    <md-input-container flex="50">
+                                        <md-button 
+                                            md-no-ink 
+                                            class="btn-block btn-circle md-btn-default"  
+                                            type="button"
+                                            ng-tap="show_forgot(1)"
+                                            >Back</md-button>
+                                    </md-input-container>
+
+                                    <md-input-container flex="50">
+                                        <md-button class="btn-block btn-circle md-btn-danger" type="submit">Submit</md-button>
+                                    </md-input-container>
+                                </div>
                             </form>
                         </md-content>
                         <div class="keyboard" style="height:{{keyboard_height}}px;"></div>

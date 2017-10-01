@@ -51,9 +51,11 @@
                                 type="password" 
                                 required md-no-asterisk 
                                 name="password" 
+                                maxlength="30" 
                                 ng-model="auth_reg_info.password">
                             <div ng-messages="registerForm.password.$error">
                                 <div ng-message="required">This is required.</div>
+                                <div ng-message="md-maxlength">The Passowrd must be less than 30 characters long.</div>
                             </div>
                         </md-input-container>
 

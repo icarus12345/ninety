@@ -209,13 +209,57 @@ function APIFactory(
             Dialog.error('Login Fail');
         });
     }
+    $rootScope.doAuthSendCode = function(){
+        API.__request({
+            url: BASE_URL + 'api/auth/sendcode',
+            data: $rootScope.auth_forgot,
+        },function(res){
+            if(res.data.code == 1){
+                $rootScope.auth_forgot.step = 2;
+            } else {
+                Dialog.error(res.data.message);
+            }
+        },function(res){
+            Dialog.error('Fail to send  code for a password reset.');
+        });
+    }
+    $rootScope.doAuthForgot = function(){
+        API.__request({
+            url: BASE_URL + 'api/auth/reset_password',
+            data: $rootScope.auth_forgot,
+        },function(res){
+            if(res.data.code == 1){
+                $rootScope.auth_forgot.status = false;
+                $rootScope.auth_forgot.step = 1;
+                $rootScope.auth_forgot.email = '';
+                $rootScope.auth_forgot.code = '';
+                $rootScope.auth_forgot.password = '';
+            } else {
+                Dialog.error(res.data.message);
+            }
+        },function(res){
+            Dialog.error('Reset Password Fail');
+        });
+    }
     $rootScope.show_register = function(){
         SharedState.turnOn('IsShowRegister');
         SharedState.turnOff('IsShowLogin');
     }
     $rootScope.show_login = function(){
+        $rootScope.auth_forgot.status = false;
         SharedState.turnOff('IsShowRegister');
         SharedState.turnOn('IsShowLogin');
+    }
+    $rootScope.auth_forgot = {
+        status: false,
+        step:1,
+        code: '',
+        email: '',
+        password: ''
+    }
+    $rootScope.show_forgot = function(step){
+        $rootScope.auth_forgot.step = step;
+        $rootScope.auth_forgot.status = true;
     }
     $rootScope.auth_singin_info = {
         username:'',
