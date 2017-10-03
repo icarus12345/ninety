@@ -64,6 +64,6 @@ function ProjectController(
             })
         })
     } catch (e){
-        alert(e.message);
+        Dialog.alert('EP67:'+e.message);
     }
 }

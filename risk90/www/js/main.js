@@ -23,7 +23,7 @@ document.addEventListener("deviceready",function(){
             }
         }
     }catch(e){
-        alert(e.message)
+        alert('Error when deviceready.'+e.message)
     }
     var domElement = document.body;
     angular.bootstrap(domElement, ["MobileAngularUiExamples"]);
@@ -116,7 +116,7 @@ document.addEventListener("deviceready",function(){
                     console.log(fullRoute,$rootScope.__frontPage);
                 })
             } catch (e){
-                alert(e.message)
+                alert('Error when init APP run.'+e.message)
             }
             $rootScope.goBack = function(){
                 $window.history.back();
@@ -132,8 +132,36 @@ document.addEventListener("deviceready",function(){
                         _CONS.DIR = cordova.file.externalRootDirectory;
                         // CONS.DIR = cordova.file.externalDataDirectory || cordova.file.dataDirectory;
                     }
+
+                    var exportDirectory = "";
+                    var subdir = APP_ID + '90';
+                    _CONS.STORAGE_DIR
+                    // What directory should we place this in?
+                    if (cordova.file.documentsDirectory !== null) {
+                        // iOS, OSX
+                        exportDirectory = cordova.file.documentsDirectory;
+                    } else if (cordova.file.sharedDirectory !== null) {
+                        // BB10
+                        exportDirectory = cordova.file.sharedDirectory;
+                    } else if (cordova.file.externalRootDirectory !== null) {
+                        // Android, BB10
+                        exportDirectory = cordova.file.externalRootDirectory;
+                    } else {
+                        // iOS, Android, BlackBerry 10, windows
+                        exportDirectory = cordova.file.DataDirectory;
+                    }
+                    function failFun(){
+                        alert('Cant create new directory')
+                    }
+                    window.resolveLocalFileSystemURL(exportDirectory, function (directoryEntry) {
+                        console.log("Got directoryEntry. Attempting to open / create subdirectory:" + subdir);
+                        directoryEntry.getDirectory(subdir, {create: true}, function (subdirEntry) {
+                            _CONS.STORAGE_DIR = subdir;
+                            _CONS.DIR += (subdir + '/')
+                        }, failFun);
+                    }, failFun);
                 }catch(e){
-                    alert(e.message)
+                    alert('Error when create directory.'+e.message)
                 }
                 $rootScope._CONS = _CONS;
                 $rootScope.device = device;
@@ -180,13 +208,13 @@ document.addEventListener("deviceready",function(){
                     alert(e.message)
                 }
             }
-            $mdToast.show(
-                    $mdToast.simple()
-                        .textContent('Notification!')
-                        .position("top right")
-                        .hideDelay(3000)
-                        .theme("success")
-                );
+            // $mdToast.show(
+            //         $mdToast.simple()
+            //             .textContent('Notification!')
+            //             .position("top right")
+            //             .hideDelay(3000)
+            //             .theme("success")
+            //     );
         });
     APP.config(function(
         $routeProvider, $locationProvider, $mdGestureProvider, $httpProvider

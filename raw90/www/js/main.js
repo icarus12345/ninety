@@ -129,10 +129,45 @@ document.addEventListener("deviceready",function(){
                     _CONS.PLATFORM = device.platform;
                     if(device.platform == 'iOS'){
                         _CONS.DIR = cordova.file.dataDirectory;
+                        // window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir){ 
+                        //     dir.getDirectory("myFolder", {create: true}); 
+                        // });
                     }else if(device.platform == 'Android'){
                         _CONS.DIR = cordova.file.externalRootDirectory;
+                        // window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function(dir){ 
+                        //     dir.getDirectory(APP_ID, {create: true}); 
+                        // });
                         // CONS.DIR = cordova.file.externalDataDirectory || cordova.file.dataDirectory;
                     }
+
+                    var exportDirectory = "";
+                    var subdir = APP_ID + '90';
+                    _CONS.STORAGE_DIR
+                    // What directory should we place this in?
+                    if (cordova.file.documentsDirectory !== null) {
+                        // iOS, OSX
+                        exportDirectory = cordova.file.documentsDirectory;
+                    } else if (cordova.file.sharedDirectory !== null) {
+                        // BB10
+                        exportDirectory = cordova.file.sharedDirectory;
+                    } else if (cordova.file.externalRootDirectory !== null) {
+                        // Android, BB10
+                        exportDirectory = cordova.file.externalRootDirectory;
+                    } else {
+                        // iOS, Android, BlackBerry 10, windows
+                        exportDirectory = cordova.file.DataDirectory;
+                    }
+                    function failFun(){
+                        alert('Cant create new directory')
+                    }
+                    window.resolveLocalFileSystemURL(exportDirectory, function (directoryEntry) {
+                        console.log("Got directoryEntry. Attempting to open / create subdirectory:" + subdir);
+                        directoryEntry.getDirectory(subdir, {create: true}, function (subdirEntry) {
+                            _CONS.STORAGE_DIR = subdir;
+                            _CONS.DIR += (subdir + '/')
+                        }, failFun);
+                    }, failFun);
+
                 }catch(e){
                     alert(e.message)
                 }

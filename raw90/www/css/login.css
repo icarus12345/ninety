@@ -159,6 +159,9 @@ md-content,
 .login-space{
     min-height: calc(100vh - 400px);
 }
+.forgot-space{
+    min-height: 100px;
+}
 .md-errors-spacer{
 
 }

@@ -53,6 +53,9 @@ h1,h2,h3,h4,h5,h6{margin: 0}
     text-align: center;color: #fff;
     font-size: 14px;
 }
+body:not(.ng-scope) .loading-text{
+    display: none;
+}
 .list-group{
     margin-bottom: 0;
 }
@@ -677,7 +680,7 @@ small .switch.active .switch-handle{
     word-wrap: break-word; /* Internet Explorer 5.5+ */
 }
 .comment-lower p{
-    border-left: 3px solid #FF5722;
+    border-left: 3px solid #c4e0a9;
     padding-left: 17px;
     text-align: justify;
 }
@@ -686,11 +689,11 @@ small .switch.active .switch-handle{
     border-left: 3px solid #ccc;
 }
 .comment-medium p{
-    border-left: 3px solid #FFEB3B;
+    border-left: 3px solid #ffe8a3;
     padding-left: 17px;text-align: justify;
 }
 .comment-higher p{
-    border-left: 3px solid #4CAF50;
+    border-left: 3px solid #ffafab;
     padding-left: 17px;text-align: justify;
 }
 .dropdown-menu .divider{

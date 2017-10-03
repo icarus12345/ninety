@@ -10,6 +10,7 @@ class Auth extends CI_Controller {
         $this->load->model("api/Token_Model");
         $this->load->model("api/Client_Model");
         $this->load->model("api/Account_Model");
+        $this->load->library('CI_Phpmailer');
         $this->form_validation->set_error_delimiters('', '');
         $this->_code = 200;
     }
@@ -31,12 +32,12 @@ class Auth extends CI_Controller {
                 'username' => array(
                     'field'=>'username',
                     'label'=>'Username',
-                    'rules'=>'trim|required|alpha_numeric|min_length[4]|max_length[50]|is_unique[auth_account.username]'
+                    'rules'=>'trim|required|alpha_numeric|min_length[4]|max_length[50]|is_unique[ninety_account.username]'
                     ),
                 'email' => array(
                     'field'=>'email',
                     'label'=>'Email',
-                    'rules'=>'trim|valid_email|required|is_unique[auth_account.email]',
+                    'rules'=>'trim|valid_email|required|is_unique[ninety_account.email]',
                     'errors' => array (
                         'required' => 'Error Message rule "required" for field email',
                         'trim' => 'Error message for rule "trim" for field email',
@@ -59,6 +60,18 @@ class Auth extends CI_Controller {
                     'rules'=>'trim|required|min_length[4]|max_length[50]'
                     ),
         ),
+        'sendcode' => array(
+                'email' => array(
+                    'field'=>'email',
+                    'label'=>'Email',
+                    'rules'=>'trim|valid_email|required',
+                    'errors' => array (
+                        'required' => 'Error Message rule "required" for field email',
+                        'trim' => 'Error message for rule "trim" for field email',
+                        'valid_email' => 'Error message for rule "valid_email" for field email'
+                    )
+                ),
+        ),
         'get_token' => array(
                 'app_id' => array(
                     'field'=>'app_id',
@@ -69,6 +82,19 @@ class Auth extends CI_Controller {
                 'app_secret' => array(
                     'field'=>'app_secret',
                     'label'=>'App Secret',
+                    'rules'=>'trim|required'
+                )
+        ),
+        'reset_password' => array(
+                'code' => array(
+                    'field'=>'code',
+                    'label'=>'Reset Password Code',
+                    'rules'=>'trim|required'
+                ),
+                        
+                'password' => array(
+                    'field'=>'password',
+                    'label'=>'Password',
                     'rules'=>'trim|required'
                 )
         )
@@ -267,7 +293,91 @@ class Auth extends CI_Controller {
             ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 
-    
+    function sendcode(){
+        $code = 200;
+        $output = array(
+            'text' => 'fail',
+            'message' => 'Fail.',
+            'code' => -1,
+        );
+        $email = $this->input->post('email');
+        // $token = $_SERVER['HTTP_X_CSRF_TOKEN'];
+        $this->form_validation->set_rules($this->rules['sendcode']);
+        if ($this->form_validation->run() == FALSE) {
+            $code = 200;
+            $output['validation'] = validation_errors_array();
+            $output['message'] = validation_errors();
+        } else {
+                    
+            $code = 200;
+            $user = $this->Account_Model->get_by_email($email);
+            if($user){
+                $tok = $this->Token_Model->create($user->id, 60*30, 6);
+                $output['code'] = 1;
+                $output['text'] = 'ok';
+                $output['message'] = 'Success';
+                // $output['tok'] = $tok;
+                $this->load->vars(array(
+                    'tok' => $tok
+                ));
+                $to = $email;
+                $subject = "A password reset code";
+                $message = $this->load->view('risk/send_code',null,true);
+                $this->ci_phpmailer->send_mail($to,$subject, $message);
+            } else {
+                $output['message'] = 'Email does\'t exists.';
+            }
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($code)
+            ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
+    function reset_password(){
+        $code = 200;
+        $output = array(
+            'text' => 'fail',
+            'message' => 'Fail.',
+            'code' => -1,
+        );
+        $reset_code = $this->input->post('code');
+        $password = $this->input->post('password');
+        // $token = $_SERVER['HTTP_X_CSRF_TOKEN'];
+        $this->form_validation->set_rules($this->rules['reset_password']);
+        if ($this->form_validation->run() == FALSE) {
+            $code = 200;
+            $output['validation'] = validation_errors_array();
+            $output['message'] = validation_errors();
+        } else {
+                    
+            $code = 200;
+            $tok = $this->Token_Model->get_by_token($reset_code);
+            if($tok){
+                $user = $this->Account_Model->get_by_id($tok->token_app_id);
+                if($user){
+                    $rs = $this->Account_Model->update($user->id,array(
+                        'password' => user_hash_password($password),
+                        ));
+                    if($rs){
+                        $this->Token_Model->delete_by_token($reset_code);
+                        $output['code'] = 1;
+                        $output['text'] = 'ok';
+                        $output['message'] = 'Success';
+                    } else {
+                        $output['message'] = 'Fail to reset your password.';
+                    }
+                } else {
+                    $output['message'] = 'User does\'t exists.';
+                }
+            } else {
+                $output['message'] = 'Reset Password Code does\'t valid.';
+            }
+        }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($code)
+            ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
     function logout(){
         $code = 200;
         $output = array(

@@ -42,7 +42,7 @@ function ChartController(
             })
         })
     } catch (e){
-        alert(e.message);
+        alert('EC45: '+e.message);
     }
     // $scope.$on('chart-create', function (event, chart) {
     //     $scope.chartLegend = chart.generateLegend();

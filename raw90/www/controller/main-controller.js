@@ -97,7 +97,7 @@ function Main2Controller(
                     console.log('Create Project Fail:',res)
                 });
             } catch (e){
-                alert(e.message);
+                Dialog.alert('EM100: '+e.message);
             }
         }
         $rootScope.onUpdateProject = function(){
@@ -233,7 +233,7 @@ function Main2Controller(
                     });
                 }, 150)
             } catch (e){
-                alert(e.message);
+                Dialog.alert('EM236: '+e.message);
             }
         };
         
@@ -267,7 +267,7 @@ function Main2Controller(
                     
                 })
             } catch (e){
-                alert(e.message);
+                Dialog.alert('EM270 :'+e.message);
             }
         }
         function _export_pdf(){
@@ -290,7 +290,7 @@ function Main2Controller(
                     }, 1000)
                 })
             } catch (e){
-                alert(e.message);
+                Dialog.alert('EM290'+e.message);
             }
         }
         $scope.$watch(function(){
@@ -323,7 +323,7 @@ function Main2Controller(
                     // window.plugins.spinnerDialog.hide();
                     Dialog.alert('Can\'t download PDF file.')
                     $rootScope.loading --;
-                    alert(JSON.stringify(err))
+                    Dialog.alert('EM326'+JSON.stringify(err))
                 }, function (progress) {
                     if(progress.loaded < progress.total){
                         $timeout(function () {
@@ -339,7 +339,7 @@ function Main2Controller(
                 });
             }catch(e){
                 $rootScope.loading --;
-                Dialog.alert(e.message)
+                Dialog.alert('ME342:'+e.message)
             }
         }
         function _open_pdf(){
@@ -355,7 +355,7 @@ function Main2Controller(
                     Dialog.alert('Cant open PDF file !')
                 });
             }catch(e){
-                Dialog.alert(e.message)
+                Dialog.alert('EM358'+e.message)
             }
         }
         function _check_exits_pdf_file(_open_pdf, _export_pdf){
@@ -407,9 +407,10 @@ function Main2Controller(
             });
         // });
         }
+
         __get_list();
         $rootScope.reload_list_project = __get_list;
     } catch (e){
-        alert(e.message);
+        Dialog.alert('EM414:'+e.message);
     }
 }

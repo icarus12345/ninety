@@ -15,9 +15,9 @@ class Token_Model extends CI_Model {
         parent::__construct();
     }
     
-    function create($app_id='',$time = 7200){
+    function create($app_id='',$time = 7200, $count = 32){
         $this->delete_expried_token();
-        $token = random_string('alnum', 32);
+        $token = random_string('alnum', $count);
         $this->db->set('token_app_id', $app_id);
         $this->db->set('token_id', $token);
         $this->db->set('token_created', 'NOW()', FALSE);
@@ -51,6 +51,11 @@ class Token_Model extends CI_Model {
     function delete_expried_token(){
         @$this->db
             ->where('token_expried <','NOW()',FALSE)
+            ->delete('ninety_token');
+    }
+    function delete_by_token($token){
+        @$this->db
+            ->where('token_id',$token)
             ->delete('ninety_token');
     }
     function update($token_id,$time=7200){

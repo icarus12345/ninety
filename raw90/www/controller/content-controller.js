@@ -28,6 +28,6 @@ function ContentController(
             })
         }
     } catch (e){
-        alert(e.message);
+        alert('EC31: '+e.message);
     }
 }
