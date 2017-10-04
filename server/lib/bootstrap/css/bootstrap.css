@@ -4434,11 +4434,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
             box-shadow: none;
   }
   .navbar-collapse.collapse {
-    display: block !important;
-    height: auto !important;
+    display: block ;
+    /*height: auto ;*/
     padding-bottom: 0;
-    overflow: visible !important;
-    visibility: visible !important;
+    overflow: visible ;
+    visibility: visible ;
   }
   .navbar-collapse.in {
     overflow-y: visible;
@@ -4589,15 +4589,14 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 @media (min-width: 768px) {
   .navbar-nav {
-    float: left;
+    /*float: left;*/
     margin: 0;
   }
   .navbar-nav > li {
-    float: left;
+    /*float: left;*/
   }
   .navbar-nav > li > a {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    
   }
 }
 .navbar-form {

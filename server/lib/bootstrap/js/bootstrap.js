@@ -578,6 +578,8 @@ if (typeof jQuery === 'undefined') {
   }
 
   Collapse.prototype.show = function () {
+    var transition_duration = this.$element.data('transitionDuration');
+    if(transition_duration == undefined) transition_duration = Collapse.TRANSITION_DURATION
     if (this.transitioning || this.$element.hasClass('in')) return
 
     var activesData
@@ -601,23 +603,27 @@ if (typeof jQuery === 'undefined') {
 
     this.$element
       .removeClass('collapse')
-      .addClass('collapsing')[dimension](0)
-      .attr('aria-expanded', true)
+      .addClass('collapsing')
+    if(!this.$element.hasClass('navbar-collapse'))
+        this.$element[dimension](0)
+    this.$element.attr('aria-expanded', true)
 
     this.$trigger
       .removeClass('collapsed')
       .attr('aria-expanded', true)
-
+    if(!this.$element.hasClass('navbar-collapse'))
     this.transitioning = 1
 
     var complete = function () {
       this.$element
         .removeClass('collapsing')
-        .addClass('collapse in')[dimension]('')
+        .addClass('collapse in')
+    // if(!this.$element.hasClass('navbar-collapse'))
+        this.$element[dimension]('')
+
       this.transitioning = 0
       this.$element
         .trigger('shown.bs.collapse')
-    console.log(this)
       if($(this.$element).hasClass('navbar-collapse')) $('body').addClass('head-collapsed')
       $('body').addClass('nav-collapsed')
     }
@@ -628,10 +634,12 @@ if (typeof jQuery === 'undefined') {
 
     this.$element
       .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+      .emulateTransitionEnd(transition_duration)[dimension](this.$element[0][scrollSize])
   }
 
   Collapse.prototype.hide = function () {
+    var transition_duration = this.$element.data('transitionDuration');
+    if(transition_duration == undefined) transition_duration = Collapse.TRANSITION_DURATION
     if (this.transitioning || !this.$element.hasClass('in')) return
 
     var startEvent = $.Event('hide.bs.collapse')
@@ -639,8 +647,8 @@ if (typeof jQuery === 'undefined') {
     if (startEvent.isDefaultPrevented()) return
 
     var dimension = this.dimension()
-
-    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+    if(!this.$element.hasClass('navbar-collapse'))
+     this.$element[dimension](this.$element[dimension]())[0].offsetHeight
 
     this.$element
       .addClass('collapsing')
@@ -650,10 +658,11 @@ if (typeof jQuery === 'undefined') {
     this.$trigger
       .addClass('collapsed')
       .attr('aria-expanded', false)
-
+    if(!this.$element.hasClass('navbar-collapse'))
     this.transitioning = 1
 
     var complete = function () {
+        console.log('AAA')
       this.transitioning = 0
       this.$element
         .removeClass('collapsing')
@@ -664,11 +673,12 @@ if (typeof jQuery === 'undefined') {
     }
 
     if (!$.support.transition) return complete.call(this)
-
+    if(!this.$element.hasClass('navbar-collapse'))    
+        this.$element
+          [dimension](0)
     this.$element
-      [dimension](0)
       .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
+      .emulateTransitionEnd(transition_duration)
   }
 
   Collapse.prototype.toggle = function () {
