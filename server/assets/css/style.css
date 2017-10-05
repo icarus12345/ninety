@@ -241,8 +241,21 @@ body.full-page{display: block;height: 100%;overflow: hidden;}
 .full-page header{background: transparent;z-index: 98}
 header{padding: 0px 0}
 body.head-collapsed{overflow:hidden;}
+.logo{
+    position: absolute;left: 50%;top: 20px;
+    width: 78px;height: 78px;
+    margin-left: -39px;
+    background: url(../images/logo.png) no-repeat center;
+}
 .navbar-toggle{
     display: block;
+    position: absolute;left: 60px;top: 60px;
+    margin: 0;background:#000;
+    border-radius: 0;
+    box-shadow: 1px 1px 10px rgba(0,0,0,.5)
+}
+.navbar-brand{
+    position: absolute;;
 }
 .navbar-collapse{
     position: fixed;

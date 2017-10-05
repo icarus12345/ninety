@@ -54,6 +54,7 @@
         </header>
         <nav id="navigation" class="navbar-collapse bs-navbar-collapse collapse" role="navigation" data-transition-duration=0>
             <ul class="nav navbar-nav">
+                <span class="logo"></span>
                 <li class="active"><a href='#'>Home</a></li>
                 <li class=""><a href='#home/1'>About</a></li>
                 <li class=""><a href='#'>Services</a></li>
@@ -77,19 +78,11 @@
                             </div>
                         </div>
                         <div class="item" >
-                            <div class="contain img" style="background-image:url('images/slider-01.png')">
+                            <div class="contain img" style="background-image:url('images/slider-02.jpg')">
                             </div>
                         </div>
                         <div class="item" >
-                            <div class="contain img" style="background-image:url('images/slider-01.png')">
-                            </div>
-                        </div>
-                        <div class="item" >
-                            <div class="contain img" style="background-image:url('images/slider-01.png')">
-                            </div>
-                        </div>
-                        <div class="item" >
-                            <div class="contain img" style="background-image:url('images/slider-01.png')">
+                            <div class="contain img" style="background-image:url('images/slider-03.png')">
                             </div>
                         </div>
                         <div class="item" >
@@ -166,7 +159,7 @@
         if($('#owl-home').length==1){
             var length = $('#owl-thumb .item').length;
             var owlThumb = $("#owl-thumb").owlCarousel({
-                // autoplay: true,
+                autoplay: false,
                 // autoplayTimeout: 6000,
                 animateOut: 'fadeOut',
                 // animateIn: 'fadeOut',
@@ -202,7 +195,7 @@
                 }
             });
             var owl = $("#owl-home").owlCarousel({
-                autoplay: true,
+                autoplay: false,
                 autoplayTimeout: 6000,
                 animateOut: 'fadeOut',
                 // animateIn: 'fadeOut',
