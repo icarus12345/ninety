@@ -8,11 +8,13 @@
 
         <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/bootstrap.css"/>
         <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/hover.css"/>
-        <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/font-awesome.min.css?t=1">
+        <link rel="stylesheet" type="text/css" href="/lib/bootstrap/css/font-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="/lib/owl-carousel/owl.carousel.css">
         
         <link rel="stylesheet" type="text/css" href="/lib/scrollreveal/animate.css"/>
         <link rel="stylesheet" type="text/css" href="/lib/fullpage/jquery.fullPage.css"/>
         <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="/assets/css/slider.css"/>
 
 
 
@@ -66,13 +68,65 @@
         <div id="fullpage">
 
             
-            <div class="section home-section" id="section0">
+            
+            <div class="section active" id="section0">
+                <div class="home-slider">
+                    <div class="owl-carousel" id="owl-home">
+                        <div class="item" >
+                            <div class="contain img" style="background-image:url('images/slider-01.png')">
+                            </div>
+                        </div>
+                        <div class="item" >
+                            <div class="contain img" style="background-image:url('images/slider-01.png')">
+                            </div>
+                        </div>
+                        <div class="item" >
+                            <div class="contain img" style="background-image:url('images/slider-01.png')">
+                            </div>
+                        </div>
+                        <div class="item" >
+                            <div class="contain img" style="background-image:url('images/slider-01.png')">
+                            </div>
+                        </div>
+                        <div class="item" >
+                            <div class="contain img" style="background-image:url('images/slider-01.png')">
+                            </div>
+                        </div>
+                        <div class="item" >
+                            <div class="contain img" style="background-image:url('images/slider-01.png')">
+                            </div>
+                        </div>
+                        <div class="item" >
+                            <div class="contain img" style="background-image:url('images/slider-01.png')">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="thumbs">
+                        <div class="owl-carousel" id="owl-thumb">
+                            <div class="item" >
+                                <div><span>who we are</span></div>
+                            </div>
+                            <div class="item" >
+                                <div><span>our misson</span></div>
+                            </div>
+                            <div class="item" >
+                                <div><span>our conviction</span></div>
+                            </div>
+                            <div class="item" >
+                                <div><span>creative</span></div>
+                            </div>
+                            <div class="item" >
+                                <div><span>our target</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section home-section" id="section1">
                 <div class="home-bg">
                     <div class="slide active">
-                        <div class="intro">
-                            <h1>Create Sliders</h1>
-                            <p>Not only vertical scrolling but also horizontal scrolling. With fullPage.js you will be able to add horizontal sliders in the most simple way ever.</p>
-                            <img data-src="imgs/slider.png" alt="slider" height="132" width="662" id="slidersImg" />
+                        <div class="intro contain" style="background-image:url(images/slider-01.png)">
+                            <div></div>
                         </div>
 
                     </div>
@@ -99,9 +153,6 @@
                     </div>
                 </div>
             </div>
-            <div class="section active" id="section1">
-                
-            </div>
             <div class="section" id="section2">
                 
             </div>
@@ -109,3 +160,97 @@
                 
             </div>
         </div>
+        <script>
+    jQuery(document).ready(function() {
+
+        if($('#owl-home').length==1){
+            var length = $('#owl-thumb .item').length;
+            var owlThumb = $("#owl-thumb").owlCarousel({
+                // autoplay: true,
+                // autoplayTimeout: 6000,
+                animateOut: 'fadeOut',
+                // animateIn: 'fadeOut',
+    
+                items : 5,
+                // autoWidth:true,
+                // center:true,
+                loop:length>5 && false,
+                // lazyLoad: true,
+                nav : false,
+                margin: 0,
+                dots: false,
+                responsive : {
+                    // breakpoint from 0 up
+                    0 : {
+                        items: 5
+                    },
+                    768 : {
+                        items: 5
+                    }
+                },
+                onInitialized: function(event){
+                    // $("#owl-thumb .selected").removeClass('selected')
+                    // $("#owl-thumb .active").addClass('selected')
+                },
+                onChanged: function(event){
+                    // var current = event.item.index;
+                    // var elm = $(event.target).find(".owl-item").eq(current);
+                    // if(elm){
+                        // $("#owl-thumb .selected").removeClass('selected')
+                        // elm.addClass('selected')
+                    // }
+                }
+            });
+            var owl = $("#owl-home").owlCarousel({
+                autoplay: true,
+                autoplayTimeout: 6000,
+                animateOut: 'fadeOut',
+                // animateIn: 'fadeOut',
+    
+                items : 1,
+                // center:true,
+                loop:true,
+                // lazyLoad: true,
+                nav : true,
+                margin: 0,
+                dots: false,
+                navText : ["", ""],
+                onInitialized: function(event){
+                    $("#owl-home .animated").removeClass('animated')
+                    $("#owl-home .active").addClass('animated')
+                    $("#owl-thumb .selected").removeClass('selected')
+                    $("#owl-thumb").find(".owl-item").eq(0).addClass('selected')
+                    
+                },
+                onChanged: function(event){
+                    var current = event.item.index;
+                    var elm = $(event.target).find(".owl-item").eq(current);
+                    if(elm){
+                        $("#owl-home .animated").removeClass('animated')
+                        elm.addClass('animated')
+                    }
+                    if(owlThumb)
+                    var carousel = $('#owl-home').data('owl.carousel');
+                    $("#owl-thumb .selected").removeClass('selected')
+                    if(carousel) {
+                        var index = carousel.relative(current)
+                        // if(length>5) index = current;
+                        $("#owl-thumb").find(".owl-item").eq(index).addClass('selected')
+                        if(!$("#owl-thumb").find(".owl-item").eq(index).hasClass('active')){
+                            $("#owl-thumb").trigger('to.owl.carousel',[index,1,true]);
+                        }
+                    }
+                }
+            });
+            $('#owl-thumb').on('click', '.owl-item', function () {
+                var carousel = $('#owl-thumb').data('owl.carousel');
+                var index = carousel.relative($(this).index());
+                // if(length>5) index = $(this).index();
+                console.log(index)
+                $("#owl-home").trigger('stop.owl.autoplay')
+                $("#owl-home").trigger('to.owl.carousel',[index,1,true]);
+                $("#owl-home").trigger('play.owl.autoplay')
+            });
+        }
+    });
+</script>
