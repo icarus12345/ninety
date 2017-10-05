@@ -283,6 +283,7 @@ body.head-collapsed{overflow:hidden;}
     position: relative;
 }
 .navbar-collapse>ul>li.active>a,
+.navbar-collapse>ul>li>a:focus,
 .navbar-collapse>ul>li>a:hover{
     background: transparent;
     color: #fecc44
