@@ -1,0 +1,174 @@
+
+.home-slider{
+    width: calc(100vw - 80px);
+    height: calc(100vh - 80px);
+    position: relative;
+    left: 40px;
+    background: url(../images/lines.png) no-repeat center #fff;
+    background-position: center;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#owl-home{
+    position: absolute;width: 100%;height: 100%;left: 0;top: 0;
+}
+#owl-home .owl-item{
+  width: 100%;height: calc(100vh - 80px);
+}
+#owl-home .item{position: absolute;top:0;bottom: 0;left: 0px;right: 0px;}
+#owl-home .item:before{
+    position: absolute;top:0;bottom: 0;content: '';display: block;
+    width: 100%;height: 100%;
+    /*background: rgba(0,0,0,.8)*/
+}
+#owl-home .item>div{
+    position: absolute;top:0;bottom: 0;display: block;
+    width: 100%;height: 100%;
+}
+#owl-home .active.center .item:before{display: none;}
+#owl-home .owl-next{
+    position: absolute;
+    width: 100px;
+    right: 0%;
+    margin-right: 0px;
+    top: 50%;height: 50px;margin-top: -25px;
+}
+#owl-home .owl-next:after{
+    content: '';position: absolute;display: block;
+    top: 50%;height: 1px;right: 20px;width: 60px;
+    background: rgba(255,255,255,.5)
+}
+#owl-home .owl-prev:after{
+    content: '';position: absolute;display: block;
+    top: 50%;height: 1px;left: 20px;width: 60px;
+    background: rgba(255,255,255,.5)
+}
+#owl-home .owl-prev{
+    position: absolute;
+    width: 100px;
+    left: 0;
+    margin-left: 0;
+    top: 50%;height: 50px;margin-top: -25px;
+}
+#owl-home .item .cap{
+    position:absolute;
+    top:20px;
+    left:0;
+    right:0;
+    margin:0 auto;
+    z-index: 200;
+    width:40%;
+    text-align: center;
+}
+#owl-home .item p{
+    font-size:1.5rem;
+    font-weight: 300;
+    margin-top:5px;
+    letter-spacing:2px;
+    color:#fff;
+    text-transform: uppercase;
+}
+#owl-home .item h3{
+    font-size:4rem;
+    font-weight: 300;
+    text-shadow: 1px 1px 10px rgba(0,0,0,0.5);  
+    letter-spacing:2px;
+    color:#fff;
+}
+.thumbs{
+    position: absolute;left: 0px;bottom: 10px;
+    text-align: center;z-index: 11;right: 0;
+}
+#owl-thumb{
+    position: relative;text-align: center;margin: auto;max-width: 520px;
+    /*display: inline-block;*/
+    /*border-radius: 40px;*/
+    /*overflow: hidden;*/
+}
+@media (max-width: 1024px){
+    #owl-home .item .cap{width: 60%}
+}
+@media (max-width: 767px) and (orientation : portrait){
+    #owl-thumb{
+        width: 80%;
+    }
+    #owl-home .item h3{font-size: 20px}
+    #owl-home .item p{font-size: 12px}
+    #owl-home .item .cap{width: 96%;padding-top: 100px}
+}
+@media (max-width: 767px) and (orientation : landscape){
+    .thumbs{bottom: 0}
+    #owl-thumb{
+        width: 60%;
+    }
+    #owl-home .item .cap{width: 60%}
+    #owl-home .item h3{font-size: 24px}
+    #owl-home .item p{font-size: 14px}
+}
+#owl-thumb .owl-stage{margin: auto}
+#owl-thumb .owl-item{padding-top: 14px;}
+#owl-thumb .item{
+    /*width: 80px;height: 80px;*/
+    position: relative;
+    height: 50px;
+
+}
+#owl-thumb .item > div:before{
+  content: '';display: block;position: relative;
+  margin: auto;width: 16px;height: 16px;border-radius: 50%;
+  background: #fecc44;z-index: 1;
+}
+#owl-thumb .item > div:after{
+  content: '';display: block;position: absolute;
+  left: 0;right: 0;height: 1px;top: 8px;
+  background: #fecc44
+}
+#owl-thumb .owl-item:first-child .item > div:after{
+  left: 50%;
+}
+#owl-thumb .owl-item:last-child .item > div:after{
+  right: 50%;
+}
+#owl-thumb .selected .item>div{
+    opacity: 1;
+    font-weight: 500
+}
+#owl-thumb .selected .item>div{
+    box-shadow: 0 0 1px rgba(255,255,255,.8)
+}
+/*#owl-thumb:hover .selected:hover .item>div,*/
+/*#owl-thumb .item:hover>div,*/
+#owl-thumb .selected .item>div
+{
+    /*width: 80px;height: 80px;*/
+    width: 100%;height: 100%;position: absolute;
+    left: 0;top:0;opacity: .8;
+
+}
+/*#owl-thumb:hover .selected .item>div,*/
+#owl-thumb .item>div{
+    width: 100%;height: 100%;
+    position: absolute;
+    border-radius: 50%;opacity: .5;
+    transition: all .5s ease-in-out;
+}
+/* Feel free to change duration  */ 
+.animated  {
+  -webkit-animation-duration : 1000 ms  ;
+  animation-duration : 1000 ms  ;
+  -webkit-animation-fill-mode : both  ;
+  animation-fill-mode : both  ;
+}  
+/* .owl-animated-out - only for current item */ 
+/* This is very important class. Use z-index if you want move Out item above In item */ 
+.owl-animated-out {
+  z-index : 1 
+   }
+/* .owl-animated-in - only for upcoming item
+/* This is very important class. Use z-index if you want move In item above Out item */ 
+.owl-animated-in {
+  z-index : 0 
+   }
+/* .fadeOut is style taken from Animation.css and this is how it looks in owl.carousel.css:  */ 
