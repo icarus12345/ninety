@@ -24,7 +24,8 @@
         <script type="text/javascript" src="/lib/jquery.nailthumb.1.1.js"></script>
         <script type="text/javascript" src="/lib/jquery.lazyload.min.js"></script>
         <script type="text/javascript" src="/lib/wow.min.js"></script>
-        <script type="text/javascript" src="/lib/fullpage/jquery.fullPage.min.js"></script>
+        <script type="text/javascript" src="/lib/fullpage/jquery.slimscroll.min.js"></script>
+        <script type="text/javascript" src="/lib/fullpage/jquery.fullPage-slimscroll.min.js"></script>
         <script type="text/javascript" src="/assets/js/main.js"></script>
         <!--[if IE]>
             <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7/html5shiv.js"></script>
@@ -40,7 +41,7 @@
             <!-- Menu [ -->
             <div class="">
                 <div class="navbar-header">
-                    <a href="http://creativedesignvn.com/" class="navbar-brand"></a>
+                    <!-- <a href="http://creativedesignvn.com/" class="navbar-brand"></a> -->
                     <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#navigation">
                         <span>
                             <span class="icon-bar line-1"></span>
@@ -53,24 +54,23 @@
             <!-- Menu ] -->
         </header>
         <nav id="navigation" class="navbar-collapse bs-navbar-collapse collapse" role="navigation" data-transition-duration=0>
-            <ul class="nav navbar-nav">
-                <span class="logo"></span>
-                <li class="active"><a href='#'>Home</a></li>
-                <li class=""><a href='#home/1'>About</a></li>
-                <li class=""><a href='#'>Services</a></li>
-                <li class=""><a href='#'>Our Brands</a></li>
-                <li class=""><a href='#'>Projects</a></li>
-                <li class=""><a href='#'>Blogs</a></li>
-                <li class=""><a href='#'>Job Opportunities</a></li>
-                <li class=""><a href='#'>Contact</a></li>
+            <div>
+                <a href="index.html#home" class="logo" data-toggle="collapse" data-target="#navigation"></a>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href='index.html#home' data-toggle="collapse" data-target="#navigation">Home</a></li>
+                    <li class=""><a href='#about' data-toggle="collapse" data-target="#navigation">About</a></li>
+                    <li class=""><a href='#'>Services</a></li>
+                    <li class=""><a href='index.html#our-brand-contact' data-toggle="collapse" data-target="#navigation">Our Brands</a></li>
+                    <li class=""><a href='#'>Projects</a></li>
+                    <li class=""><a href='#'>Blogs</a></li>
+                    <li class=""><a href='#'>Job Opportunities</a></li>
+                    <li class=""><a href='index.html#our-brand-contact/1' data-toggle="collapse" data-target="#navigation">Contact</a></li>
+                </ul>
                 <span data-toggle="collapse" data-target="#navigation">CLOSE</span>
-            </ul>
+            </div>
         </nav>
         <div id="fullpage">
-
-            
-            
-            <div class="section active" id="section0">
+            <div class="section active" id="section-home">
                 <div class="home-slider">
                     <div class="owl-carousel" id="owl-home">
                         <div class="item" >
@@ -115,42 +115,114 @@
                     </div>
                 </div>
             </div>
-            <div class="section home-section" id="section1">
-                <div class="home-bg">
+            <div class="section home-section" id="section-about-our-brand">
+                <div class="">
                     <div class="slide active">
-                        <div class="intro contain" style="background-image:url(images/slider-01.png)">
-                            <div></div>
+                        <div class="intro our-brand">
+                            <div>
+                                <a href="index.html#home" class="logo"></a>
+                                <div class="list-our-brand">
+                                    <div class="our-title"><span>OUR <b>BRAND</b></span></div>
+                                    <div>
+                                        <div class="our-brand-item">
+                                            <div class="contain" style="background-image: url(images/our-brand-01.png)">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="our-brand-item">
+                                            <div class="contain" style="background-image: url(images/our-brand-02.png)">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="our-brand-item">
+                                            <div class="contain" style="background-image: url(images/our-brand-03.png)">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="our-brand-item">
+                                            <div class="contain" style="background-image: url(images/our-brand-01.png)">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="our-brand-item">
+                                            <div class="contain" style="background-image: url(images/our-brand-02.png)">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="our-brand-item">
+                                            <div class="contain" style="background-image: url(images/our-brand-03.png)">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="our-brand-item">
+                                            <div class="contain" style="background-image: url(images/our-brand-01.png)">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="our-brand-item">
+                                            <div class="contain" style="background-image: url(images/our-brand-02.png)">
+                                                
+                                            </div>
+                                        </div>
+                                        <div class="our-brand-item">
+                                            <div class="contain" style="background-image: url(images/our-brand-03.png)">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                     </div>
                     <div class="slide">
-                        <div class="intro">
-                            <img data-src="imgs/1.png" alt="simple" height="176" width="176" />
-                            <h1>Simple</h1>
-                            <p>Easy to use. Configurable and customizable.</p>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="intro">
-                            <img data-src="imgs/2.png" alt="Cool" height="176" width="176" />
-                            <h1>Cool</h1>
-                            <p>It just looks cool. Impress everybody with a simple and modern web design!</p>
-                        </div>
-                    </div>
-                    <div class="slide">
-                        <div class="intro">
-                            <img data-src="imgs/3.png" alt="Compatible" height="176" width="176" />
-                            <h1>Compatible</h1>
-                            <p>Working in modern and old browsers too! It's not IE 8 users' fault having to use that horrible browser! Lets give them a chance to see your site in a proper way!</p>
+                        <div class="intro about">
+                            <div>
+                                <a href="index.html#home" class="logo"></a>
+                                <div class="contact-us">
+                                    <div class="our-title"><span>CONTACT</span></div>
+                                    <div class="contact-us-box">
+                                        <h2>DROP US A LINE</h2>
+                                        <p>Press contact <a href="">hotro@creativedesignvn.com</a>. Hotline <a href="">0902 389 579 (8A.M - 6P.M)</a>
+Address <a href="">39 Luong Huu Khanh,Ben Nghe Ward, Distrist 1,HCMC</a></p>
+                                        <div class="form-contact-us">
+                                            HI     <span contenteditable="true">YOUR NAME</span>     . WELCOME TO CDS STUDIO
+                                            TO DISCUSS A PROJECT, YOU COULD LEAVE
+                                                <span contenteditable="true">YOUR EMAIL</span>     AND     <span contenteditable="true">YOUR PHONE</span>    HERE.
+                                            THE INFORMATION WILL BE SAVED AFTER
+                                            YOU CLICK SUBMIT. 
+                                            <div class="space-line1"></div>
+                                            <div>
+                                                <button class="btn btn-default">SUBMIT</button>
+                                            </div>
+                                            <div class="space-line1"></div>
+                                            <div class="space-line1"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="section" id="section2">
-                
-            </div>
-            <div class="section" id="section3">
-                
+            <div class="section" id="section-about">
+                <div class="about-us section-container">
+                    <div class="about-bg contain"></div>
+                    <div class="container text-center who-we-are">
+                        <h3>who we are</h3>
+                        <div class="desc">
+                            <p class="text-justify">CDS STUDIO IS A CREATIVE DIGITAL AGENCY BASED IN SAIGON THAT CRAFTED FUNCTIONALLY BEAUTIFUL WEBSITES AND APPS. TOGETHER, WE CAN TRANSFORM THE WAY YOUR BRAND CONNECTS WITH CLIENTS.</p>
+
+                            <p class="text-justify">OUR UX DESIGN EXPERTISE AND INTERNATIONAL WORKING MINDSET ARE WHAT SET US APART FROM OTHER LOCAL AGENCIES. IF YOU HAVE AN AMAZING IDEA THAT YOU WANNA TURN INTO REALITY, WE CAN BE YOUR DIGITAL PARTNER TO POWER ALL THE DESIGN AND DEVELOPMENT WORKS SO YOU CAN RAISE MONEY AND TAKE OVER THE WORLD!</p>
+                        </div> 
+                        <div class="our-team">
+                            <h2>Our Team</h2>
+                            <div>
+                                
+                            </div>
+                        </div> 
+                    </div>
+                </div>
             </div>
         </div>
         <script>

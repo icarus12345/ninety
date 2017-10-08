@@ -1,9 +1,30 @@
 $(document).ready(function() {
+    $.fn.fullpage.removeTouchHandler = function (){ 
+        var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|Windows Phone)/);
+        if (isTouchDevice) {
+            $(document).off('touchstart MSPointerDown');
+            $(document).off('touchmove MSPointerMove');
+        }
+    };
     $('#fullpage').fullpage({
-        sectionsColor: ['#f6f6f6', '#12171e', '#12171e', 'whitesmoke', '#ccddff'],
-        anchors: ['home', 'about', 'our-brand', '4thpage', 'lastPage'],
+        sectionsColor: ['#f6f6f6', '#12171e', '#f6f6f6', 'whitesmoke', '#ccddff'],
+        anchors: ['home', 'our-brand-contact', 'about', '4thpage', 'lastPage'],
         menu: '#menu',
-        css3: true,
-        scrollingSpeed: 1000
+        // css3: true,
+        // scrollingSpeed: 1000,
+        // autoScrolling: false,
+        // fitToSection: false
+        scrollOverflow:true,
+        // autoScrolling:false,
+        scrollOverflowOptions:{
+            mouseWheel: true,
+            scrollbars: false,
+        },
+        afterRender: function(){
+            $.fn.fullpage.removeTouchHandler();
+            // $.fn.fullpage.setAllowScrolling(false, 'left, right, top, bottom');
+            $.fn.fullpage.setMouseWheelScrolling(false);
+            $.fn.fullpage.setKeyboardScrolling(false);
+        }
     });
 });

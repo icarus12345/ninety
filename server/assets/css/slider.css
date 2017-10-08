@@ -1,9 +1,6 @@
 
 .home-slider{
-    width: calc(100vw - 80px);
-    height: calc(100vh - 80px);
     position: relative;
-    left: 40px;
     background: url(../images/lines.png) no-repeat center #fff;
     background-position: center;
     -webkit-background-size: cover;
@@ -25,8 +22,8 @@
 }
 #owl-home .item>div{
     position: absolute;
-    /*top: 60px;bottom: 80px;*/
-    top: 0px;bottom: 0px;
+    top: 60px;bottom: 80px;
+    /*top: 0px;bottom: 0px;*/
     left: 0;right: 0;
     display: block;
 }
@@ -90,26 +87,6 @@
     /*border-radius: 40px;*/
     /*overflow: hidden;*/
 }
-@media (max-width: 1024px){
-    #owl-home .item .cap{width: 60%}
-}
-@media (max-width: 767px) and (orientation : portrait){
-    #owl-thumb{
-        width: 80%;
-    }
-    #owl-home .item h3{font-size: 20px}
-    #owl-home .item p{font-size: 12px}
-    #owl-home .item .cap{width: 96%;padding-top: 100px}
-}
-@media (max-width: 767px) and (orientation : landscape){
-    .thumbs{bottom: 0}
-    #owl-thumb{
-        width: 60%;
-    }
-    #owl-home .item .cap{width: 60%}
-    #owl-home .item h3{font-size: 24px}
-    #owl-home .item p{font-size: 14px}
-}
 #owl-thumb .owl-stage{margin: auto}
 #owl-thumb .owl-item{padding-top: 14px;}
 #owl-thumb .item{
@@ -158,6 +135,38 @@
     border-radius: 50%;opacity: .5;
     transition: all .5s ease-in-out;
 }
+@media (max-width: 1024px){
+    #owl-home .item .cap{width: 80%}
+}
+@media (max-width: 767px) and (orientation : portrait){
+    #owl-thumb{
+        width: 100%;
+        font-size: 10px;
+    }
+    #owl-home .item h3{font-size: 20px}
+    #owl-home .item p{font-size: 12px}
+    #owl-home .item .cap{width: 96%;padding-top: 100px}
+}
+@media (max-width: 767px) and (orientation : landscape){
+    .thumbs{bottom: 0}
+    #owl-thumb{
+        width: 100%;font-size: 10px;
+    }
+    #owl-home .item .cap{width: 60%}
+    #owl-home .item h3{font-size: 24px}
+    #owl-home .item p{font-size: 14px}
+    #owl-home .item>div{
+        top: 40px;
+        bottom: 50px;
+    }
+    #owl-home .owl-item {
+        height: calc(100vh - 20px);
+    }
+    #owl-thumb .item{
+        height: 40px;
+    }
+}
+
 /* Feel free to change duration  */ 
 .animated  {
   -webkit-animation-duration : 1000 ms  ;

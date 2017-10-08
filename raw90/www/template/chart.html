@@ -74,7 +74,7 @@
                             <i class=""></i>
                         </div>
 
-                        <div ng-class="{'comment-none': item.score==undefined, 'comment-lower': item.score < 2.5, 'comment-medium': item.score >= 2.5 && item.score < 3.5, 'comment-higher': item.score >= 3.5}">
+                        <div ng-class="item.comment_class">
                             <p class="word-wrap">{{item.comment}}</p>
                         </div>
                     </div>
@@ -133,7 +133,7 @@
                             <i class=""></i>
                         </div>
 
-                        <div ng-class="{'comment-none': item.score==undefined, 'comment-lower': item.score < 2.5, 'comment-medium': item.score >= 2.5 && item.score < 3.5, 'comment-higher': item.score >= 3.5}">
+                        <div ng-class="item.comment_class">
                             <p class="word-wrap">{{item.comment}}</p>
                         </div>
                     </div>
