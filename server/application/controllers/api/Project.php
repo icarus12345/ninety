@@ -188,7 +188,7 @@ class Project extends Api_Controller {
             if($project){
                 $project->alias = convertUrl($project->title);
                 $answereds[] = $this->Answer_Model->get_by_uid_pid($uid,$id);
-                $this->db->where('email !=',$this->user->email);
+                $this->db->where('ninety_shared.email !=',$this->user->email);
                 $shareds = $this->Share_Model->get_by_pid($id);
                 foreach ($shareds as $key => $value) {
                     $u = $this->Account_Model->get_by_email($value->email);
@@ -246,7 +246,10 @@ class Project extends Api_Controller {
                 'setting' => $setting,
                 'show_global' => (bool)$show_global,
             ));
-            $html = $this->load->view('risk/pdf',null,true);
+            if($this->client_id == 'risk')
+                $html = $this->load->view('risk/pdf',null,true);
+            elseif($this->client_id == 'raw')
+                $html = $this->load->view('raw/pdf',null,true);
 
             $file_name = convertUrl($project->title)."-{$uid}";
             if($setting['all_user']){

@@ -20,7 +20,7 @@ class Auth extends CI_Controller {
                 'username' => array(
                     'field'=>'username',
                     'label'=>'Username',
-                    'rules'=>'trim|required|alpha_numeric|min_length[4]|max_length[50]'
+                    'rules'=>'trim|required|min_length[4]|max_length[50]'
                     ),
                 'password' => array(
                     'field'=>'password',
@@ -39,9 +39,9 @@ class Auth extends CI_Controller {
                     'label'=>'Email',
                     'rules'=>'trim|valid_email|required|is_unique[ninety_account.email]',
                     'errors' => array (
-                        'required' => 'Error Message rule "required" for field email',
-                        'trim' => 'Error message for rule "trim" for field email',
-                        'valid_email' => 'Error message for rule "valid_email" for field email'
+                        'required' => 'Wrong e-mail. Try again',
+                        'trim' => 'Wrong e-mail. Try again',
+                        'valid_email' => 'Wrong e-mail. Try again'
                     )
                 ),
                 'first_name' => array(
@@ -59,6 +59,21 @@ class Auth extends CI_Controller {
                     'label'=>'Password',
                     'rules'=>'trim|required|min_length[4]|max_length[50]'
                     ),
+                'sex' => array(
+                    'field'=>'sex',
+                    'label'=>'Sex',
+                    'rules'=>'trim|max_length[10]'
+                    ),
+                'interest' => array(
+                    'field'=>'interest',
+                    'label'=>'Interest',
+                    'rules'=>'trim|max_length[30]'
+                    ),
+                'professional' => array(
+                    'field'=>'professional',
+                    'label'=>'Professional',
+                    'rules'=>'trim|max_length[30]'
+                    ),
         ),
         'sendcode' => array(
                 'email' => array(
@@ -66,9 +81,9 @@ class Auth extends CI_Controller {
                     'label'=>'Email',
                     'rules'=>'trim|valid_email|required',
                     'errors' => array (
-                        'required' => 'Error Message rule "required" for field email',
-                        'trim' => 'Error message for rule "trim" for field email',
-                        'valid_email' => 'Error message for rule "valid_email" for field email'
+                        'required' => 'Wrong e-mail. Try again',
+                        'trim' => 'Wrong e-mail. Try again',
+                        'valid_email' => 'Wrong e-mail. Try again'
                     )
                 ),
         ),
@@ -190,6 +205,9 @@ class Auth extends CI_Controller {
         $first = $this->input->post('first_name');
         $last = $this->input->post('last_name');
         $password = $this->input->post('password');
+        $sex = $this->input->post('sex');
+        $professional = $this->input->post('professional');
+        $interest = $this->input->post('interest');
         // $token = $_SERVER['HTTP_X_CSRF_TOKEN'];
         $this->form_validation->set_rules($this->rules['register']);
         if ($this->form_validation->run() == FALSE) {
@@ -206,18 +224,24 @@ class Auth extends CI_Controller {
                     'password' => user_hash_password($password),
                     'first_name' => $first,
                     'last_name' => $last,
+                    'data'=>serialize(array(
+                        'sex' => $sex,
+                        'professional' => $professional,
+                        'interest' => $interest,
+                        ))
                     );
                 $rs = $this->Account_Model->create($params);
                 if($rs){
                     $user = $this->Account_Model->get_by_username($username);
                     $code = 200;
                     $output['code'] = 1;
-                    $output['text'] = 'Success.';
+                    $output['text'] = 'ok';
+                    $output['message'] = 'Register new Ninety account success.';
                     $output['data'] = $user;
                 } else {
                     $code = 200;
-                    $output['text'] = 'Can\'t register account.';
-                    $output['text'] = 'Fail.';
+                    $output['message'] = 'Can\'t register account.';
+                    $output['text'] = 'fail';
                 }
             // } else {
                 // $code = 403;
@@ -252,6 +276,9 @@ class Auth extends CI_Controller {
                 
                     $code = 200;
                     $user = $this->Account_Model->get_by_username($username);
+                    if(!$user){
+                        $user = $this->Account_Model->get_by_email($username);
+                    }
                     if($user){
                         if(user_check_password($password,$user->password)){
                             if($user->status=='true'){
@@ -275,11 +302,11 @@ class Auth extends CI_Controller {
                                 $output['message'] = 'Your account have been deleted.';
                             }
                         } else {
-                            $output['message'] = 'Login failed password did not match that for the login provided.';
+                            $output['message'] = 'Oops. Incorrect passowrd. Please try again';
                             
                         }
                     } else {
-                        $output['message'] = 'User does\'t exists.';
+                        $output['message'] = 'Incorrect user. Please try again';
                     }
                 
             // } else {

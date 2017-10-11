@@ -29,9 +29,10 @@ function ChartController(
                 var series = []
                 if(SHOW_GLOBAL) series = ["Goal"]
                 var device_info = StorageService.get('device-info')
-                series.push(device_info.user_info.email);
+                series.push(device_info.user_info.username);
+                
                 for(var u in shareds){
-                    series.push(shareds[u].email)
+                    series.push(shareds[u].username)
                 }
                 $scope.series = series;
                 console.log(series)

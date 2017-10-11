@@ -11,7 +11,7 @@ var hsl_colors = [
     [187,100,48],
 ];
 function Category(opt){
-    var SCORE_LEVEL = [1.5,2.5,4];
+    var SCORE_LEVEL = [2,3,5];
     // var SCORE_LEVEL = [2.5,-1,5];
     var SCORE_DATA = [1.5,2.5,4];
     // var SCORE_DATA = [0,1,2,3,4,5];
@@ -26,15 +26,18 @@ function Category(opt){
     this.parent_id = opt.parent_id || undefined;
 
     var arrayColors = [
-        "153, 204, 51",
-        "17, 123, 192",
-        "247, 70, 74",
-        "255, 127, 14",
-        "44, 160, 44",
+        "156, 39, 176",
+        "33, 150, 243",
+        "255, 235, 59",
+        "255, 152, 0",
+        "121, 85, 72",
         "148, 159, 177",
         "255, 214, 0"
     ];
-    var colors = [ '#99cc33', '#117bc0', '#f7464a', '#ff7f0e', '#2ca02c', '#949FB1', '#FFD600'];
+    var colors = [ '#9C27B0', '#2196F3', '#FFEB3B', '#FF9800', '#795548', '#607D8B', '#FFD600'];
+    // var colors = arrayColors.map(function(color){
+    //     return 'rgb(' + color + ')'
+    // })
     var chart_options = {
         // width:320,
         // height:320,
@@ -456,6 +459,7 @@ function Category(opt){
                     // 'fill': "false",
                     // 'backgroundColor': "rgba(0,0,0,0)",
                     'borderColor': "rgba(" + rgb + ",1)",
+                    // 'borderColor': colors[i],
                     'pointBackgroundColor': "rgba(" + rgb + ",1)",
                     'pointHoverBackgroundColor': "rgba(" + rgb + ",0.8)",
                     'pointBorderColor': "#fff",
@@ -468,7 +472,8 @@ function Category(opt){
                     labels: this.chart_info.labels,
                     datasets: datasets
                 },
-                options: chart_options
+                options: chart_options,
+                // color: colors
             };
             var div = document.createElement('div');
             div.style.position='absolute';
@@ -506,6 +511,7 @@ function Category(opt){
                     return {
                         title: c.title,
                         comment: c.comment,
+                        comment_class: c.comment_class,
                         score: c.score,
                     }
                 })
@@ -515,6 +521,7 @@ function Category(opt){
                 return {
                     title: q.title,
                     comment: q.comment,
+                    comment_class: q.comment_class,
                     score: q.score,
                 }
             })
@@ -524,6 +531,7 @@ function Category(opt){
             title: this.title,
             desc: this.desc,
             comment: this.comment,
+            comment_class: this.comment_class,
             score: this.score,
             image: this._get_image(opt.all_user),
             items: items
@@ -546,19 +554,27 @@ function Category(opt){
         return data;
     }
     this._set_color = function(hsl){
-        this._color = hsl;
-        if(this.items){
-            this.items.map(function(c,i){
-                c._set_color([
-                    hsl[0],
-                    hsl[1],
-                    hsl[2]+4 + i*4,
-                    ]);
-            })
+        try{
+            this._color = hsl;
+            if(this.items){
+                this.items.map(function(c,i){
+                    c._set_color([
+                        hsl[0],
+                        hsl[1],
+                        hsl[2]+4 + i*4,
+                        ]);
+                })
+            }
+        } catch(e){
+            alert('Error when set color:' + e.message)
         }
     }
     this.color = function(){
-        return 'hsla(' + this._color[0] + ',' + this._color[1] + '%,' + this._color[2] + '%,.9)'
+        try{
+            return 'hsla(' + this._color[0] + ',' + this._color[1] + '%,' + this._color[2] + '%,.9)';
+        } catch(e){
+            alert('Error when get color:' + e.message)
+        }
     }
 }
 function CategoryFactory(API,StorageService, $mdDialog, Dialog) {

@@ -67,10 +67,11 @@ class Share_Model extends CI_Model {
     }
     function get_by_pid($pid){
         $query=$this->db
-            ->select('ninety_shared.id,ninety_shared.pid,ninety_shared.email,ninety_shared.mode')
+            ->select('ninety_shared.id,ninety_shared.pid,ninety_shared.email,ninety_shared.mode,ninety_account.username')
             ->from('ninety_shared')
-            ->where("pid", $pid)
-            ->where("type", $this->client_id)
+            ->join('ninety_account','ninety_shared.email = ninety_account.email')
+            ->where("ninety_shared.pid", $pid)
+            ->where("ninety_shared.type", $this->client_id)
             ->get();
 
         $errordb = $this->db->error();

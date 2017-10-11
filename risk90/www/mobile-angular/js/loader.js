@@ -65,7 +65,7 @@ angular.module('loader', [])
             create();
 
             $scope.$watch(function() {
-                console.log($rootScope.loading)
+                console.log($rootScope.loading,'asdsadsd')
                 if($rootScope.loading==0){
                     $rootScope.loading_text = undefined;
                 }
