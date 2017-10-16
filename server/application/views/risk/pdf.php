@@ -4,7 +4,9 @@
         <title>RISK</title>
         <style>
             @page {
-                margin-top: 30mm;size: auto;
+                margin-top: 30mm;
+                margin-bottom: 20mm;
+                size: auto;
                 odd-header-name: Risk_Header;
                 even-header-name: Risk_Header;
                 odd-footer-name: Risk_Footer;
@@ -19,7 +21,7 @@
             }
             p{margin:0;padding:0;}
             .wrapper{width:180mm;margin:0 15mm;}
-            .page{height:297mm;width:210mm;page-break-after:always;}
+            .page{height:290mm;width:210mm;page-break-after:always;}
             hr{color:#ccc;background:#ccc;}
             .footer{width:180mm;margin:0 15mm;padding-bottom:3mm;text-align: center;}
             .footer table{width:100%;border-left: 1px solid #ccc;border-top: 1px solid #ccc;background:#eee;border-spacing:0;border-collapse: collapse;}
@@ -69,6 +71,18 @@
             .lendgen-colorbel{
                 float: left;width: 260;
             }
+            .comment-lower{
+                padding-left: .5em;
+                border-left: .2em solid #c4e0a9;
+            }
+            .comment-medium{
+                padding-left: .5em;
+                border-left: .2em solid #ffe8a3;
+            }
+            .comment-higher{
+                padding-left: .5em;
+                border-left: .2em solid #ffafab;
+            }
         </style>
     </head>
    <body>
@@ -98,7 +112,8 @@
             // }
         ?>
             
-            <div class="container" style="page-break-after:always;">
+            <!--<div class="container" style="page-break-after:always;">-->
+            <div class="container">
                 <?php if($key > 0){ ?>
                 <h3><?php echo $value['title'] ?></h3>
                 <div><?php echo $value['desc'] ?></div>
@@ -110,7 +125,7 @@
                     <div class="series">
                         <div style="height: <?php echo 12 - count($shareds)*2 ?>em"></div>
                         <?php 
-                        $colors = [ '#99cc33', '#117bc0', '#f7464a', '#ff7f0e', '#2ca02c', '#949FB1', '#FFD600']; 
+                        $colors = [ '#9C27B0', '#2196F3', '#FFEB3B', '#FF9800', '#795548', '#607D8B', '#FFD600'];
                         ?>
                         <?php if($show_global) { ?>
                         <div class="legend">
@@ -121,7 +136,7 @@
                         <?php } ?>
                         <div class="legend">
                             <div class="lendgen-color" style="border-bottom: 1em solid <?php echo $colors[$show_global?1:0]; ?>"></div>
-                            <div class="legend-label">&nbsp;&nbsp;<?php echo $user->email; ?></div>
+                            <div class="legend-label">&nbsp;&nbsp;<?php echo $user->username; ?></div>
                             <div class="clear"></div>
                         </div>
                         <?php
@@ -134,7 +149,7 @@
                         ?>
                         <div class="legend">
                             <div class="lendgen-color" style="border-bottom: 1em solid <?php echo $colors[$ckey+($show_global?2:1)];?>"></div>
-                            <div class="legend-label">&nbsp;&nbsp;<?php echo $cvalue->email; ?></div>
+                            <div class="legend-label">&nbsp;&nbsp;<?php echo $cvalue->username; ?></div>
                             <div class="clear"></div>
                         </div>
                         <?php
@@ -155,7 +170,7 @@
                             $setting['all_comment'] == true
                             ){
                                 ?>
-                            <div style="color:<?php echo $cvalue['score'] < 2.5?'red':$cvalue['score'] < 3.5?'':'green'; ?>"><?php echo $cvalue['comment']; ?></div>
+                            <div class="<?php echo $cvalue['comment_class']; ?>"><?php echo $cvalue['comment']; ?></div>
                             <?php } ?>
                         </div>
                     </div>
@@ -166,7 +181,9 @@
         }
         ?>
         <div style="text-align:center">
-            &copy; 2017 90&deg; Ready
+            <div><a href="#">Download Risk90° App on Apple Store</a></div>
+            <div><a href="#">Download Risk90° App on Play Store</a></div>
+            <h2>&copy; 2017 90&deg; Ready</h2>
         </div>
     </body>
 </html>

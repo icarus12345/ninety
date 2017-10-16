@@ -185,3 +185,8 @@
   z-index : 0 
    }
 /* .fadeOut is style taken from Animation.css and this is how it looks in owl.carousel.css:  */ 
+
+
+#owl-our-team .item{
+    padding-bottom: 100%
+}

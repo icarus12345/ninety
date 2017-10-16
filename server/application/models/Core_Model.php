@@ -605,13 +605,18 @@ class Core_Model extends CI_Model {
 				$sLimit
 			";
         }
+        $output['query'] = $sQuery;
         $query = $this->db->query($sQuery);
-        $_error_number = $this->db->_error_number();
-        if($_error_number!=0){
-            $_error_message =  $this->db->_error_message();
+        // $_error_number = $this->db->_error_number();
+        $errordb = $this->db->error();
+        $error_message = $errordb['message'];
+        if($errordb['code']!==0){
+        // if($_error_number!=0){
+            $output['errordb'] = $errordb;
+            // $_error_message =  $this->db->_error_message();
             $log="<div class='sql-message'>$_error_number - $_error_message</div>";
             $log.="<div class='sql-query'>$sQuery</div>";
-            $this->writelog($log,'Binding Table');
+            // $this->writelog($log,'Binding Table');
         }else{
             $rows = $query->result();
             $sql = "SELECT FOUND_ROWS() AS `found_rows`;";
