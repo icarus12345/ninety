@@ -11,7 +11,7 @@ var hsl_colors = [
     [187,100,48],
 ];
 function Category(opt){
-    var SCORE_LEVEL = [1.5,2.5,4];
+    var SCORE_LEVEL = [2,3,5];
     // var SCORE_LEVEL = [2.5,-1,5];
     var SCORE_DATA = [1.5,2.5,4];
     // var SCORE_DATA = [0,1,2,3,4,5];
