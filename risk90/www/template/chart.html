@@ -37,10 +37,10 @@
             </div>
             <div class="graph-box">
                 <div ng-show="category_info.items" class="chart-title over-all">OVERALL</div>
-                <div class="chart-legend">
-                    <div class="legend" ng-repeat="(i,serie) in category_info.chart_info.legends" ng-tap="category_info.toggle_serie(i)">
-                        <span style="background-color:{{category_info.chart_info.colors[i]}}"></span>{{series[i] || serie}}
-                    </div>
+                <div class="chart-label">
+                    <div class="dot-higher"><span></span> Higher</div>
+                    <div class="dot-medium"><span></span> Medium</div>
+                    <div class="dot-lower"><span></span> Lower</div>
                 </div>
                 <div class="risk-chart">
                 <canvas 
@@ -59,6 +59,11 @@
                     chart-dataset-override="category_info.chart_info.dataset_override"
                     >
                 </canvas>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend" ng-repeat="(i,serie) in category_info.chart_info.legends" ng-tap="category_info.toggle_serie(i)">
+                        <span style="background-color:{{category_info.chart_info.colors[i]}}"></span>{{series[i] || serie}}
+                    </div>
                 </div>
                 
                 <div class="chart-info">
