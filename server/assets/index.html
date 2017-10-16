@@ -206,28 +206,55 @@ Address <a href="">39 Luong Huu Khanh,Ben Nghe Ward, Distrist 1,HCMC</a></p>
                 </div>
             </div>
             <div class="section" id="section-about">
-                <div class="about-us section-container">
-                    <div class="about-bg contain"></div>
-                    <div class="container text-center who-we-are">
-                        <h3>who we are</h3>
-                        <div class="desc">
-                            <p class="text-justify">CDS STUDIO IS A CREATIVE DIGITAL AGENCY BASED IN SAIGON THAT CRAFTED FUNCTIONALLY BEAUTIFUL WEBSITES AND APPS. TOGETHER, WE CAN TRANSFORM THE WAY YOUR BRAND CONNECTS WITH CLIENTS.</p>
+                <div class="about-us scroll-section">
+                    <div>
+                        <div class="about-bg contain"></div>
+                        <div class="container text-center who-we-are">
+                            <h3>who we are</h3>
+                            <div class="desc">
+                                <p class="text-justify">CDS STUDIO IS A CREATIVE DIGITAL AGENCY BASED IN SAIGON THAT CRAFTED FUNCTIONALLY BEAUTIFUL WEBSITES AND APPS. TOGETHER, WE CAN TRANSFORM THE WAY YOUR BRAND CONNECTS WITH CLIENTS.</p>
 
-                            <p class="text-justify">OUR UX DESIGN EXPERTISE AND INTERNATIONAL WORKING MINDSET ARE WHAT SET US APART FROM OTHER LOCAL AGENCIES. IF YOU HAVE AN AMAZING IDEA THAT YOU WANNA TURN INTO REALITY, WE CAN BE YOUR DIGITAL PARTNER TO POWER ALL THE DESIGN AND DEVELOPMENT WORKS SO YOU CAN RAISE MONEY AND TAKE OVER THE WORLD!</p>
-                        </div> 
-                        <div class="our-team">
-                            <h2>Our Team</h2>
-                            <div>
-                                
-                            </div>
-                        </div> 
+                                <p class="text-justify">OUR UX DESIGN EXPERTISE AND INTERNATIONAL WORKING MINDSET ARE WHAT SET US APART FROM OTHER LOCAL AGENCIES. IF YOU HAVE AN AMAZING IDEA THAT YOU WANNA TURN INTO REALITY, WE CAN BE YOUR DIGITAL PARTNER TO POWER ALL THE DESIGN AND DEVELOPMENT WORKS SO YOU CAN RAISE MONEY AND TAKE OVER THE WORLD!</p>
+                            </div> 
+                            <div class="our-team">
+                                <h2>Our Team</h2>
+                                <div class="our-team-slider">
+                                    <div class="owl-carousel" id="owl-our-team">
+                                        <div class="item" >
+                                            <div class="our-avatar">
+                                                <div></div>
+                                            </div>
+                                            <div class="our-desc">
+                                                OUR UX DESIGN EXPERTISE AND INTERNATIONAL WORKING MINDSET ARE WHAT SET US APART FROM OTHER LOCAL AGENCIES. IF YOU HAVE AN AMAZING IDEA THAT YOU WANNA TURN INTO REALITY, WE CAN BE YOUR DIGITAL PARTNER TO POWER ALL THE DESIGN AND DEVELOPMENT WORKS SO YOU CAN RAISE MONEY AND TAKE OVER THE WORLD !
+                                            </div>
+                                        </div>
+                                        <div class="item" >B
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <script>
     jQuery(document).ready(function() {
-
+        var owl_our_team = $("#owl-our-team").owlCarousel({
+                autoplay: false,
+                autoplayTimeout: 6000,
+                animateOut: 'fadeOut',
+                // animateIn: 'fadeOut',
+    
+                items : 1,
+                // center:true,
+                loop:true,
+                // lazyLoad: true,
+                nav : true,
+                margin: 0,
+                dots: false,
+                navText : ["", ""],
+            });
         if($('#owl-home').length==1){
             var length = $('#owl-thumb .item').length;
             var owlThumb = $("#owl-thumb").owlCarousel({

@@ -382,7 +382,7 @@ body.head-collapsed{overflow:hidden;}
 .section-container,
 .home-slider{
     width: calc(100vw - 80px);
-    height: calc(100vh - 80px);
+    min-height: calc(100vh - 80px);
     left: 40px;position: relative;
 }
 .fp-controlArrow{
@@ -487,8 +487,42 @@ body.head-collapsed{overflow:hidden;}
     padding: 10px 0
 }
 .about-us .desc{
-    max-width: 640px;margin: auto;
+    max-width: 640px;
+    margin: auto;
     font-size: 12px;
+    text-align-last: center;
+}
+.our-team{
+    padding: 40px 0;
+}
+.scroll-section{
+    padding: 40px;
+    background: rgb(246, 246, 246);
+}
+.scroll-section>div{
+    background: #fff;
+}
+.our-team-slider{
+    position: relative;width: 60%;
+    background: #ebebeb
+}
+.our-avatar{
+    /*position: absolute;*/
+    left: 0;width: 50%;
+    /*height: 70%;*/
+    /*top: 0%;*/
+    padding: 40px 20px 40px 40px;
+    float: left;
+}
+.our-avatar>div{
+    padding-bottom: 135%;
+    background: #fff
+}
+.our-desc{
+    /*position: absolute;*/
+    /*top: 0;right: 0;width: 50%;*/
+    /*height: 100%;*/
+    padding: 40px 40px 40px 20px;
 }
 @media (min-height: 824px) {
     .navbar-collapse>div{
@@ -629,6 +663,9 @@ body.head-collapsed{overflow:hidden;}
     .our-brand-item:nth-last-child(1):before,
     .our-brand-item:nth-last-child(1):after{
         display: none;
+    }
+    .scroll-section{
+        padding: 20px;
     }
     
 }
