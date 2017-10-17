@@ -12086,8 +12086,8 @@ module.exports = function(Chart) {
 
 	function drawRadiusLine(scale, gridLineOpts, radius, index) {
 		var ctx = scale.ctx;
-        ctx.strokeStyle = helpers.getValueAtIndexOrDefault(gridLineOpts.color, index - 1);
-		ctx.fillStyle = helpers.getValueAtIndexOrDefault(gridLineOpts.fillColor, index - 1);
+        ctx.strokeStyle = helpers.getValueAtIndexOrDefault(gridLineOpts.color, index - 1); // Truong Khuong add
+		ctx.fillStyle = helpers.getValueAtIndexOrDefault(gridLineOpts.fillColor, index - 1); // Truong Khuong add
 		ctx.lineWidth = helpers.getValueAtIndexOrDefault(gridLineOpts.lineWidth, index - 1);
 
 		if (scale.options.gridLines.circular) {
@@ -12096,7 +12096,7 @@ module.exports = function(Chart) {
 			ctx.arc(scale.xCenter, scale.yCenter, radius, 0, Math.PI * 2);
 			ctx.closePath();
             ctx.stroke();
-			ctx.fill();
+			ctx.fill(); // Truong Khuong add
 		} else {
 			// Draw straight lines connecting each index
 			var valueCount = getValueCount(scale);
@@ -12116,6 +12116,7 @@ module.exports = function(Chart) {
 
 			ctx.closePath();
 			ctx.stroke();
+			ctx.fill(); // Truong Khuong add
 		}
 	}
 

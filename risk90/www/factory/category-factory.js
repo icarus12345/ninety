@@ -331,16 +331,16 @@ function Category(opt){
                 // this.chart_info.options.scale.gridLines.color[3] = "rgba(0, 0, 0, .1)";
                 // this.chart_info.options.scale.gridLines.color[4] = "rgba(0, 0, 0, 0)";
                 // this.chart_info.options.scale.gridLines.color[5] = "rgba(0, 0, 0, .1)";
-                this.chart_info.options.scale.gridLines.fillColor[1] = "rgba(0, 0, 0, 0)";
-                this.chart_info.options.scale.gridLines.fillColor[2] = "rgba(0, 0, 0, 0)";
-                this.chart_info.options.scale.gridLines.fillColor[3] = "rgba(0, 0, 0, 0)";
-                this.chart_info.options.scale.gridLines.fillColor[4] = "rgba(0, 0, 0, 0)";
+                // this.chart_info.options.scale.gridLines.fillColor[1] = "rgba(0, 0, 0, 0)";
+                // this.chart_info.options.scale.gridLines.fillColor[2] = "rgba(0, 0, 0, 0)";
+                // this.chart_info.options.scale.gridLines.fillColor[3] = "rgba(0, 0, 0, 0)";
+                // this.chart_info.options.scale.gridLines.fillColor[4] = "rgba(0, 0, 0, 0)";
                 // this.chart_info.options.scale.gridLines.color[0] = "rgba(0, 0, 0, 0)";
-                this.chart_info.options.scale.gridLines.color[0] = "rgba(0, 0, 0, 0)";
-                this.chart_info.options.scale.gridLines.color[1] = "rgba(0, 0, 0, .1)";
-                this.chart_info.options.scale.gridLines.color[2] = "rgba(0, 0, 0, .1)";
-                this.chart_info.options.scale.gridLines.color[3] = "rgba(0, 0, 0, 0)";
-                this.chart_info.options.scale.gridLines.color[4] = "rgba(0, 0, 0, .1)";
+                // this.chart_info.options.scale.gridLines.color[0] = "rgba(0, 0, 0, 0)";
+                // this.chart_info.options.scale.gridLines.color[1] = "rgba(0, 0, 0, .1)";
+                // this.chart_info.options.scale.gridLines.color[2] = "rgba(0, 0, 0, .1)";
+                // this.chart_info.options.scale.gridLines.color[3] = "rgba(0, 0, 0, 0)";
+                // this.chart_info.options.scale.gridLines.color[4] = "rgba(0, 0, 0, .1)";
             }else if(this.items){
                 // Build Data
                 for(var c in this.items){
