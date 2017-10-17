@@ -1021,6 +1021,27 @@ a.list-group-item.project-desc{
     border-radius: 10px;
     padding: 14px 10px;
 }
+.chart-label{text-align: center;padding-top: 20px}
+.dot-higher,
+.dot-medium,
+.dot-lower{
+    position: relative;
+    padding: 0 20px;
+    line-height: 20px;
+    display: inline-block;
+
+}
+.dot-higher>span,
+.dot-medium>span,
+.dot-lower>span{
+    display: block;position: absolute;
+    left: 0;top: 2px;width: 16px;height: 16px;
+    border-radius: 8px;
+    border:1px solid rgba(0,0,0,.5);
+}
+.dot-higher>span{background: #ffafab}
+.dot-medium>span{background: #ffe8a3}
+.dot-lower>span{background: #c4e0a9}
 .fb-link,
 .info-link,
 .book-link{
