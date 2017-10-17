@@ -182,7 +182,7 @@ class Datatable
         $selectArray = array();
         $customCols = array();
         $columnIdxArray = array();
-
+        // echo '<pre>',print_r($f->post_get('columns'));die;
         foreach ($f->post_get('columns') as $c) {
             $columnIdxArray[] = $c['data'];
             if (substr($c['data'], 0, 1) === '$') {
@@ -197,7 +197,7 @@ class Datatable
         }
 
         //put the select string together
-        $sqlSelectStr = implode(', ', $selectArray);
+        // $sqlSelectStr = implode(', ', $selectArray);
         $appendStr = $this->model->appendToSelectStr();
         if (is_null($appendStr) === FALSE) {
             foreach ($appendStr as $alias => $sqlExp) {
@@ -233,7 +233,6 @@ class Datatable
         $whereDebug = $this->sqlJoinsAndWhere();
         $this->CI->db->limit($limit, $start);
         $query = $this->CI->db->get();
-
         $jsonArry = array();
 
         if (!$query) {
@@ -251,6 +250,7 @@ class Datatable
         foreach ($query->result() as $row) {
             $colObj = array();
             //loop rows returned by the query
+
             foreach ($allColsArray as $c) {
                 if (trim($c) === '') {
                     continue;
@@ -269,8 +269,8 @@ class Datatable
                         $nestedObj = $colObj[$propParts[0]];
                     }
 
-
                     $nestedObj[$propParts[1]] = $this->formatValue($formats, $prop, $row->$prop);
+
                     $colObj[$propParts[0]] = $nestedObj;
                 } else {
                     $colObj[$c] = $this->formatValue($formats, $prop, $row->$prop);

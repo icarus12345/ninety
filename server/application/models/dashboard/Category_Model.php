@@ -12,7 +12,7 @@ class Category_Model extends Core_Model {
 
     function __construct()
     {
-        parent::__construct('tbl_category','','id');
+        parent::__construct('__category','','id');
     }
     function get_common(){
         $query=$this->db

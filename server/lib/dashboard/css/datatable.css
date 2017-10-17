@@ -32,15 +32,96 @@
 }
 .header-panel{
     position: relative;
+    padding-top: 10px;
 }
 .header-panel:after{
     content: '';display: block;clear: both;
 }
 .search-panel{
     width: 50%;float: left;
+    padding: 0 10px;
 }
 .setting-panel{
     width: 50%;float: left;
+    padding: 0 10px;
 }
 .search-panel .dataTables_filter{}
-.search-panel .form-control{}
+.search-panel .dataTables_filter label{
+    width: 100%;
+    line-height: 30px;
+    position: relative;
+    font-weight: normal;
+}
+.search-panel input{
+    position: absolute;
+    left: 54px;
+    width: calc(100% - 54px);
+    top: 3px;
+    line-height: 22px;
+    border: 1px solid #ccc;
+    padding-left: 6px;
+    padding-right: 6px;
+}
+.setting-panel .dataTables_length{text-align: right;}
+.setting-panel .dataTables_length label{
+    line-height: 30px;
+    /*width: 100%;*/
+    font-weight: normal;
+}
+.setting-panel select{
+    display: inline-block;
+    width: auto;
+}
+.footer-panel{
+    padding: 10px 0;
+}
+.footer-panel:after{
+    content: '';display: block;clear: both;
+}
+.info-panel{
+    width: 220px;float: left;
+    padding: 0 10px;
+    line-height: 30px;
+}
+.paging-panel{
+    width: calc(100% - 220px);float: left;
+    padding: 0px 10px;
+    text-align: right;
+    height: 30px;
+}
+.paging-panel .dataTables_paginate{
+
+}
+.paging-panel .dataTables_paginate>a,
+.paging-panel .dataTables_paginate>span>a{
+    display: inline-block;
+    padding: 4px;
+    min-width: 30px;
+    line-height: 20px;
+    border: 1px solid #ccc;
+    margin: 0;
+    text-align: center;
+    margin-left: 1px;
+    cursor: pointer;
+    height: 30px;
+}
+.paging-panel .dataTables_paginate>a.disabled{
+    opacity: .5
+}
+.paging-panel .dataTables_paginate a.current{
+    background: #f0f0f0;
+}
+.actions{
+    position: relative;line-height: 20px;
+    width: 60px;
+
+}
+.actions>span{display: block;text-align: right;display: block;}
+.actions>a{display: none;}
+.grid-panel tr:hover .actions>span{display: none;}
+.grid-panel tr:hover .actions>a{
+    display: inline-block;
+    line-height: 20px;
+    width: 20px;
+    text-align: center;
+}

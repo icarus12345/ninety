@@ -1,6 +1,7 @@
 <?php 
 $this->CI =& get_instance();
 ?>
+<script type="text/javascript" src="/lib/dashboard/js/trademark.js"></script>
 <!-- <div class=" fluid"> -->
     <div class="modal-body">
         <!-- <h3 class="page-title">
@@ -40,23 +41,17 @@ $this->CI =& get_instance();
                 <table id="datatable" class="table" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
+                            <th>#</th>
+                            <th>Title</th>
+                            <th>Country</th>
+                            <th>Created</th>
                         </tr>
                     </thead>
-                    <tfoot>
-                        <tr>
-                            <th>Name</th>
-                            <th>Position</th>
-                            <th>Office</th>
-                        </tr>
-                    </tfoot>
                 </table>
             </div>
         </div>
 
-        <div class="-secondary-box" id="entry-detail">
+        <div class="-secondary-box" id="entry-detail" style="display:none">
             <div class="modal-header">
                 <h4>
                     Trademark <small>Add/Edit</small>
@@ -71,21 +66,3 @@ $this->CI =& get_instance();
             </div>
         </div>
     </div>
-<!-- </div> -->
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#datatable').DataTable( {
-            "ajax": App.BaseUrl + 'dashboardapi/trademark/dataTable',
-            "processing": true,
-            "serverSide": true,
-            "dom": ["<'header-panel'<'search-panel'f><'setting-panel'l>>" +
-                    "<'container-panel'<'grid-panel'tr>>" +
-                    "<'footer-panel'<'info-panel'i><'paging-panel'p>>"].join(''),
-            "columns": [
-                { "data": "id" },
-                { "data": "title" },
-                { "data": "created" },
-            ]
-        } );
-    } );
-</script>

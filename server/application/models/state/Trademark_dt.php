@@ -12,10 +12,10 @@ class Trademark_dt extends Core_Model implements DatatableModel{
                     'id' => 't.id',
                     'title' => 't.title',
                     'created' => 't.created',
+                    'ctitle' => 'c.title',
                 );
                 
         }
-        
         public function fromTableStr() {
             return '__trademark t';
         }
@@ -25,7 +25,7 @@ class Trademark_dt extends Core_Model implements DatatableModel{
         public function joinArray(){
             return array(
               // 'city c|left outer' => 'c.state_id = s.id',
-              // 'user u' => 'u.state_id = s.id'
+              '__countries c|left outer' => 't.country_id = c.id'
               );
         }
         

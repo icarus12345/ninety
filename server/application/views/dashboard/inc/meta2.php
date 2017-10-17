@@ -21,8 +21,8 @@
 
         <script type="text/javascript" src="<?php echo base_url() ?>lib/jquery-1.9.1.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/ui/js/jquery-ui-1.9.2.custom.min.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>lib/bootstrap/js/bootstrap.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>lib/datatable/datatables.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/datatable/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/bootstrap/js/bootstrap-select.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/bootstrap/js/moment.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
@@ -36,12 +36,6 @@
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/route.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.auth.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.helper.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.setting.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.module.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.category.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.common.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.user.js"></script>
-        <script type="text/javascript" src="<?php echo base_url() ?>lib/dashboard/js/app.menu.js"></script>
 
         <script type="text/javascript" src="<?php echo base_url() ?>lib/serialize-object.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/validation-engine/jquery.validationEngine.js"></script>
