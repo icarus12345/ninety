@@ -162,7 +162,7 @@ $user = $CI->session->userdata('dasbboard_user');
                     </div>
                 </div>
             </div>
-            <div class="col-xs-6 half">
+            <div class="col-xs-6 half" style="z-index: 2">
                 <div class="pull-bottom">
                     <div>Available To :</div>
                     <div class="control-group">
@@ -185,7 +185,7 @@ $user = $CI->session->userdata('dasbboard_user');
                 </div>
             </div>
 
-            <div class="col-xs-6 half">
+            <div class="col-xs-6 half" style="z-index: 2">
                 <div class="pull-bottom">
                     <div>Apply For :</div>
                     <div class="control-group">
@@ -207,11 +207,11 @@ $user = $CI->session->userdata('dasbboard_user');
                     </div>
                 </div>
             </div>
-            <div id="apply-for-box">
+            <div id="apply-for-box" style="position: relative;z-index: 1">
 
             </div>
 
-            <div class="col-xs-12 half">
+            <div class="col-xs-12 half" style="z-index: 0">
                 <div class="pull-bottom" style="position: relative;">
                     <div style="position: relative;padding-left: 58px">
                         <div>Image :</div>

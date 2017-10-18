@@ -17,4 +17,4 @@
     </div>
     <div id="frm-err-data-city_id"></div>
 </div>
-<?php $this->load->view('dropdown-shop'); ?>
+<?php $this->load->view('dashboard/campaign/dropdown-shop'); ?>

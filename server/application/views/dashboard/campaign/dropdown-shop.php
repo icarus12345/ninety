@@ -1,4 +1,4 @@
-<div class="col-xs-12 half shop-list">
+<div class="col-xs-12 half shop-list" style="position: relative;z-index: 1">
     <div class="pull-bottom list-dropdown">
         <select 
             name="shop_ids" multiple="" 
