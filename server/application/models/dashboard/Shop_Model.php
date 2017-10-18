@@ -14,7 +14,19 @@ class Shop_Model extends Core_Model {
     {
         parent::__construct('__shop','','id');
     }
-    
+    function get_by_trademark_id($trademark_id){
+        $query=$this->db
+            ->select('id,title')
+            ->where("trademark_id", $trademark_id)
+            ->get('__shop');
+
+        $errordb = $this->db->error();
+        $error_message = $errordb['message'];
+        if($errordb['code']!==0){
+            return null;
+        }
+        return $query->result();
+    }
 }
 
 ?>

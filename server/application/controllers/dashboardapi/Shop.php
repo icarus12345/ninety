@@ -105,23 +105,26 @@ class Shop extends Core_Controller {
             'data' => null
         );
         $trademark_id = $this->input->post('trademark_id');
+        $trademark_detail = $this->Trademark_Model->get($trademark_id);
+        if($trademark_detail){
+            $provincies = $this->Province_Model->get_by_country_id($trademark_detail->country_id);
+        }
+        $this->load->vars(array(
+            // 'trademark_detail' => $trademark_detail,
+            'provincies' => $provincies,
+        ));
         $id = $this->input->post('id');
         if(!empty($id)) {
             $entry_detail = $this->Shop_Model->get($id);
-            $trademark_detail = $this->Trademark_Model->get($trademark_id);
-            if($trademark_detail){
-                $provincies = $this->Province_Model->get_by_country_id($trademark_detail->country_id);
-            }
             $this->load->vars(array(
                 // 'trademark_detail' => $trademark_detail,
                 'entry_detail' => $entry_detail,
-                'provincies' => $provincies,
             ));
             $output['trademark_detail'] = $trademark_detail;
             $output['entry_detail'] = $entry_detail;
             $output['provincies'] = $provincies;
         }
-        $output['html'] = $this->load->view('dashboard/shop/category-dropdown',null,true);
+        $output['html'] = $this->load->view('dashboard/shop/province-dropdown',null,true);
         return $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)

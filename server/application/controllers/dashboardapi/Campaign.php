@@ -7,6 +7,7 @@ class Campaign extends Core_Controller {
         $this->load->model('dashboard/Campaign_Model');
         $this->load->model('dashboard/Province_Model');
         $this->load->model('dashboard/Category_Model');
+        $this->load->model('dashboard/Shop_Model');
     }
     
     function index(){
@@ -107,11 +108,22 @@ class Campaign extends Core_Controller {
         $id = $this->input->post('id');
         $apply_for = $this->input->post('apply_for');
         $trademark_detail = $this->Trademark_Model->get($trademark_id);
+        $shops = $this->Shop_Model->get_by_trademark_id($trademark_id);
         if(!empty($id)) {
             $entry_detail = $this->Campaign_Model->get($id);
         }
+        $selected_shop_ids = [];
+        $this->load->vars(array(
+            'shops' => $shops
+        ));
         if($apply_for == '1'){
-            $output['html'] = '';
+            if($shops) foreach ($shops as $key => $value) {
+                $selected_shop_ids[] = $value->id;
+            }
+            $this->load->vars(array(
+                'selected_shop_ids' => $selected_shop_ids,
+            ));
+            $output['html'] = $this->load->view('dashboard/campaign/apply_for_trademark',null,true);;
         }else if($apply_for == '2'){
             if($trademark_detail){
                 $provincies = $this->Province_Model->get_by_country_id($trademark_detail->country_id);
@@ -125,7 +137,8 @@ class Campaign extends Core_Controller {
         }else if($apply_for == '3'){
             $output['html'] = $this->load->view('dashboard/campaign/apply_for_shop',null,true);
         }
-
+        
+        $output['shops'] = $shops;
         
         
         return $this->output
