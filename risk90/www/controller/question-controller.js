@@ -19,24 +19,27 @@ function QuestionController(
             })
         })
         $scope.view_chart = function(cate){
-            $rootScope.loading ++;
+            //$rootScope.loading ++;
             $timeout(function(){
                 try{
                     if($rootScope.loading > 1){
                         $timeout(function(){
-                            $rootScope.loading --;
+                            //$rootScope.loading --;
                             $scope.view_chart(cate);
                         },1000);
                     } else {
-                        $rootScope.loading --;
+                        
                     // $location.path( '/project/' + $scope.projectData.id + '/chart/' + cate.id );
                             
                         var cid = cate.id;
                         // if(cate.parent) cid = cate.parent.id;
+                        //$rootScope.loading --;
                         window.location.href = '#/project/' + $scope.projectData.id + '/chart/' + cid +'/2';
+                        
                     }
                 }catch(e){
                     Dialog.alert('Error when show chart page.' + e.message);
+                    //$rootScope.loading --;
                 }
             },1000);
         }

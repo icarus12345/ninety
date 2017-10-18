@@ -54,7 +54,7 @@ document.addEventListener("deviceready",function(){
         ]);
     APP.run(function(
         $transform,$rootScope, $location, $routeParams, $window, 
-        $timeout, $mdToast,
+        $timeout, $mdToast, $interval,
         API
         ) {
             try{
@@ -215,6 +215,9 @@ document.addEventListener("deviceready",function(){
             //             .hideDelay(3000)
             //             .theme("success")
             //     );
+            $interval(function(){
+                if($rootScope.loading<0) $rootScope.loading = 0;
+            },1000)
         });
     APP.config(function(
         $routeProvider, $locationProvider, $mdGestureProvider, $httpProvider

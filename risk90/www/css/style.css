@@ -359,15 +359,19 @@ textarea.form-control.ng-invalid.ng-touched{
 }
 .answers md-radio-button {
     height: 50px;
+    height: auto;
 }
 .answers md-radio-button .md-container,
 .answers md-radio-button .md-on,
 .answers md-radio-button .md-off{
-    height: 50px;
+    height: 100%;
     border-radius: 25px;
+    /* height: auto; */
 }
 .answers md-radio-button .md-label{
-    line-height: 50px;
+    line-height: 20px;
+    min-height: 50px;
+    padding: 15px;
 }
 .answers md-radio-button .md-off{
     background: transparent;
