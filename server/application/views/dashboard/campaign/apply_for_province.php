@@ -1,7 +1,9 @@
 <div class="col-xs-12 half">
+    <div>Provinces</div>
     <div class="pull-bottom">
         <select 
-            name="city_id" multiple="" 
+            name="tmp[city_id]" multiple="" 
+            id="city_id"
             class="form-control selectpicker validate[required]"
             data-putto="#frm-err-data-city_id"
             data-live-search="true"
@@ -17,4 +19,6 @@
     </div>
     <div id="frm-err-data-city_id"></div>
 </div>
+<span style="display: none;">
 <?php $this->load->view('dashboard/campaign/dropdown-shop'); ?>
+</span>

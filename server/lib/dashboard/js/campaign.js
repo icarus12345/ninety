@@ -354,7 +354,7 @@ $(document).ready(function() {
                 App.Common.LoadApplyFor()
             },
             LoadApplyFor:function(){
-                $('#apply-for-box').html('<div>Loading...</div>');
+                $('#apply-for-box').html('<div class="col-xs-12 pull-bottom">Loading...</div>');
                 var trademark_id = $('#entry-detail-frm').find('[name="trademark_id"]').val()
                 var id = $('#entry-detail-frm').find('[name="id"]').val()
                 var apply_for = $('#entry-detail-frm').find('[name="apply_for"]').val()
@@ -374,10 +374,23 @@ $(document).ready(function() {
                         $('#apply-for-box').html(res.html);
                         $('#apply-for-box').find('.selectpicker').selectpicker();
                         //App.Common.CreateList(res.data);
-                        
+                        if(apply_for == 2){
+
+                            $('#shop_ids option').prop("selected", false);
+                            $('#city_id').change(App.Common.onProvinceChanged)
+                        }
                         
                     }
                 })
+            },
+            onProvinceChanged: function(){
+                var province_ids = $('#city_id').val();
+                province_ids.map(function(province_id){
+
+                    $('#shop_ids option[data-city_id="'+province_id+'"]').prop("selected", true);
+                })
+                $('#shop_ids').selectpicker('refresh');
+                console.log('AAA')
             },
             LoadCategory: function(){
                 $('#category-box').html('<div class="form-control ">Loading...</div>')

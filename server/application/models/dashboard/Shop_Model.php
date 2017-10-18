@@ -16,7 +16,7 @@ class Shop_Model extends Core_Model {
     }
     function get_by_trademark_id($trademark_id){
         $query=$this->db
-            ->select('id,title')
+            ->select('id,title,city_id')
             ->where("trademark_id", $trademark_id)
             ->get('__shop');
 
