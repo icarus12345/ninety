@@ -23,7 +23,7 @@ $user = $CI->session->userdata('dasbboard_user');
                         <div>
                             <select 
                                 name="trademark_id" 
-                                class="form-control selectpicker "
+                                class="form-control selectpicker validate[required]"
                                 data-putto="#frm-err-data-trademark_id"
                                 data-live-search="true"
                                 data-size="10"
@@ -57,7 +57,7 @@ $user = $CI->session->userdata('dasbboard_user');
                         <div>
                             <input 
                                 type="text"
-                                class="form-control " 
+                                class="form-control validate[required,minSize[2],maxSize[250]]" 
                                 data-putto="#frm-err-data-title"
                                 name="title"
                                 value="<?php echo html_escape($entry_detail->title); ?>" >
@@ -68,156 +68,36 @@ $user = $CI->session->userdata('dasbboard_user');
             </div>
             <div class="col-xs-6 half">
                 <div class="pull-bottom">
-                    <div>Email :</div>
-                    <div class="control-group">
-                        <div>
-                            <input 
-                                type="text"
-                                class="form-control " 
-                                data-putto="#frm-err-data-email"
-                                name="email"
-                                value="<?php echo html_escape($entry_detail->email); ?>" >
-                        </div>
-                        <div id="frm-err-data-email"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-3 half">
-                <div class="pull-bottom">
-                    <div>Contact Person :</div>
-                    <div class="control-group">
-                        <div>
-                            <input 
-                                type="text"
-                                class="form-control " 
-                                data-putto="#frm-err-data-contact-name"
-                                name="contact_name"
-                                value="<?php echo html_escape($entry_detail->contact_name); ?>" >
-                        </div>
-                        <div id="frm-err-data-contact-name"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-3 half">
-                <div class="pull-bottom">
-                    <div>Phone :</div>
-                    <div class="control-group">
-                        <div>
-                            <input 
-                                type="text"
-                                class="form-control " 
-                                data-putto="#frm-err-data-contact_phone"
-                                name="contact_phone"
-                                value="<?php echo html_escape($entry_detail->contact_phone); ?>" >
-                        </div>
-                        <div id="frm-err-data-contact_phone"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 half">
-                <div class="pull-bottom">
                     <div>Address :</div>
                     <div class="control-group">
                         <div>
                             <input 
                                 type="text"
-                                class="form-control " 
-                                data-putto="#frm-err-data-contact_address"
-                                name="contact_address"
-                                value="<?php echo html_escape($entry_detail->contact_address); ?>" >
+                                class="form-control validate[required,minSize[2],maxSize[250]]" 
+                                data-putto="#frm-err-data-address"
+                                name="address"
+                                value="<?php echo html_escape($entry_detail->address); ?>" >
                         </div>
-                        <div id="frm-err-data-contact_address"></div>
+                        <div id="frm-err-data-address"></div>
                     </div>
                 </div>
             </div>
             <div class="col-xs-12 half">
                 <div class="pull-bottom">
-                    <div>Description :</div>
+                    <div>Lat : <span data-latlonpreview="latlon"><?php echo html_escape($entry_detail->lat); ?> <?php echo html_escape($entry_detail->lon); ?></span></div>
                     <div class="control-group">
-                        <div>
-                            <textarea 
-                                type="text"
-                                class="form-control " 
-                                data-putto="#frm-err-data-desc"
-                                name="desc"
-                                ><?php echo html_escape($entry_detail->desc); ?></textarea>
-                        </div>
-                        <div id="frm-err-data-desc"></div>
+                        <div style="height:320px;background:#ccc"
+                            data-googlemap="1" 
+                            data-lat="<?php echo html_escape($entry_detail->lat); ?>" 
+                            data-latcolumn="lat" 
+                            data-lon="<?php echo html_escape($entry_detail->lon); ?>"
+                            data-loncolumn="lon"
+                            ></div>
                     </div>
                 </div>
             </div>
-            <div class="col-xs-6 half">
-                <div class="pull-bottom" style="position: relative;">
-                    <div style="position: relative;padding-left: 58px">
-                        <div>Logo :</div>
-                        <div class="control-group">
-                            <div class="input-append">
-                                <input type="text" 
-                                    class="form-control " 
-                                    data-putto="#frm-err-logo"
-                                    name="logo"
-                                    id="logo"
-                                    onblur="$('#preview-common-thumblogo').css('background-image','url('+this.value+')')"
-                                    value="<?php echo html_escape($entry_detail->logo); ?>"
-                                    >
-                                <span class="add-on" onclick="App.KCFinder.BrowseServer('#logo')">
-                                    <i class="fa fa-image"></i>
-                                </span>
-                            </div>
-                            <div id="frm-err-logo"></div>
-                        </div>
-                    </div>
-                    <div style="position: absolute;left: 0;top: 0;width: 48px;height: 48px;">
-                        <div id="preview-common-thumblogo" 
-                            style="padding-bottom: 100%;border:1px solid #ccc;background-image:url(<?php echo html_escape($entry_detail->logo); ?>)" class="cover"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 half">
-                <div class="pull-bottom" style="position: relative;">
-                    <div style="position: relative;padding-left: 58px">
-                        <div>Image :</div>
-                        <div class="control-group">
-                            <div class="input-append">
-                                <input type="text" 
-                                    class="form-control " 
-                                    data-putto="#frm-err-image"
-                                    name="image"
-                                    id="image"
-                                    onblur="$('#preview-common-thumbimage').css('background-image','url('+this.value+')')"
-                                    value="<?php echo html_escape($entry_detail->image); ?>"
-                                    >
-                                <span class="add-on" onclick="App.KCFinder.BrowseServer('#image')">
-                                    <i class="fa fa-image"></i>
-                                </span>
-                            </div>
-                            <div id="frm-err-image"></div>
-                        </div>
-                    </div>
-                    <div style="position: absolute;left: 0;top: 0;width: 48px;height: 48px;">
-                        <div id="preview-common-thumbimage" 
-                            style="padding-bottom: 100%;border:1px solid #ccc;background-image:url(<?php echo html_escape($entry_detail->image); ?>)" class="cover"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-12 half">
-                <div class="pull-bottom">
-                    <div>Content :</div>
-                    <div class="control-group">
-                        <div>
-                            <textarea 
-                                type="text" row="4" 
-                                id="content"
-                                data-editor=1
-                                class="form-control " 
-                                data-putto="#frm-err-content"
-                                name="content"
-                                ><?php echo $entry_detail->content; ?></textarea>
-                        </div>
-                        <div id="frm-err-content"></div>
-                    </div>
-                </div>
-            </div>
+            <input type="hidden" name="lat" class="validate[required]" value="<?php echo html_escape($entry_detail->lat); ?>">
+            <input type="hidden" name="lon" value="<?php echo html_escape($entry_detail->lon); ?>">
         </form>
     </div>
     <?php if($entry_detail): ?>

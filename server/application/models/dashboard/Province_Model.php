@@ -14,6 +14,20 @@ class Province_Model extends Core_Model {
     {
         parent::__construct('__province','','id');
     }
+    function get_all(){
+        $query=$this->db
+            // ->where("country_id", $cid)
+            ->order_by('type','ASC')
+            ->order_by('title','ASC')
+            ->get("__province");
+
+        $errordb = $this->db->error();
+        $error_message = $errordb['message'];
+        if($errordb['code']!==0){
+            return null;
+        }
+        return $query->result();
+    }
     function get_by_country_id($cid){
         $query=$this->db
             ->where("country_id", $cid)

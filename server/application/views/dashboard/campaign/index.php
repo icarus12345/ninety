@@ -1,7 +1,7 @@
 <?php 
 $this->CI =& get_instance();
 ?>
-<script type="text/javascript" src="/lib/dashboard/js/shop.js"></script>
+<script type="text/javascript" src="/lib/dashboard/js/campaign.js"></script>
 <!-- <div class=" fluid"> -->
     <div class="modal-body">
         <!-- <h3 class="page-title">
@@ -14,14 +14,14 @@ $this->CI =& get_instance();
                     <a href="<?php echo base_url('dashboard') ?>">Dashboard</a>
                 </li>
                 <li>
-                    <a href="#">Shop</a>
+                    <a href="#">Campaign</a>
                 </li>
             </ul>
         </div>
         <div class="secondary-box" id="entrys-list">
             <div class="modal-header">
                 <h4>
-                    Shop <small>List</small>
+                    Campaign <small>List</small>
                 </h4>
                 <div class="modal-action">
                     <div><a <?php $settings[$sid]->data['add'] != 'true'?'disabled':'' ?> href="JavaScript:App.Common.ShowDetailDialog()" class="icon-plus" title="Add new entry"></a></div>
@@ -38,18 +38,20 @@ $this->CI =& get_instance();
                 </div>
             </div>
             <div class="datatableGrid" id="datatableGrid" style="border:0">
-                <table id="datatable" class="table" cellspacing="0" width="100%">
+                <table id="datatable" class="table nowrap" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th>#ID</th>
                             <th>Trademark</th>
-                            <th>Province</th>
                             <th>Title</th>
+                            <th>Start</th>
+                            <th>End</th>
                             <th>Created</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -65,14 +67,14 @@ $this->CI =& get_instance();
         <div class="-secondary-box" id="entry-detail" style="display:none">
             <div class="modal-header">
                 <h4>
-                    Shop <small>Add/Edit</small>
+                    Campaign <small>Add/Edit</small>
                 </h4>
             </div>
         </div>
         <div class="-secondary-box" id="entry-see" style="display:none">
             <div class="modal-header">
                 <h4>
-                    Shop <small>View</small>
+                    Campaign <small>View</small>
                 </h4>
             </div>
         </div>

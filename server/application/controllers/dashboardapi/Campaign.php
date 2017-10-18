@@ -1,11 +1,12 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class Trademark extends Core_Controller {
+class Campaign extends Core_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('dashboard/Trademark_Model');
+        $this->load->model('dashboard/Campaign_Model');
+        $this->load->model('dashboard/Province_Model');
         $this->load->model('dashboard/Category_Model');
-        $this->load->model('dashboard/Country_Model');
     }
     
     function index(){
@@ -69,22 +70,11 @@ class Trademark extends Core_Controller {
             ),
         )
     );
-    public function get_all(){
-        $output = array(
-            'text' => 'ok',
-            'code' => 1,
-            'data' => $this->Trademark_Model->gets()
-        );
-        return $this->output
-            ->set_content_type('application/json')
-            ->set_status_header(200)
-            ->set_output(json_encode($output));
-    }
     public function bind() {
         //Important to NOT load the model and let the library load it instead.  
         $this -> load -> library('Datatable', array(
-            'model' => 'trademark_dt', 
-            'model_path' => 'state/trademark_dt',
+            'model' => 'campaign_dt', 
+            'model_path' => 'state/campaign_dt',
             'rowIdCol' => 't.id'
             ));
         
@@ -97,7 +87,7 @@ class Trademark extends Core_Controller {
                 // 'a_currency_col' => 'currency'
                 'id' => 'string',
                 'title' => 'string',
-                'country_title' => 'string',
+                'trademark_title' => 'string',
                 'cteated' => 'date',
             ),true
         );
@@ -107,6 +97,93 @@ class Trademark extends Core_Controller {
         $this -> output -> set_content_type('application/json') -> set_output(json_encode($json));
  
     }
+    function load_apply_for_by_trademark(){
+        $output = array(
+            'text' => 'ok',
+            'code' => 1,
+            'data' => null
+        );
+        $trademark_id = $this->input->post('trademark_id');
+        $id = $this->input->post('id');
+        $apply_for = $this->input->post('apply_for');
+        $trademark_detail = $this->Trademark_Model->get($trademark_id);
+        if(!empty($id)) {
+            $entry_detail = $this->Campaign_Model->get($id);
+        }
+        if($apply_for == '1'){
+            $output['html'] = '';
+        }else if($apply_for == '2'){
+            if($trademark_detail){
+                $provincies = $this->Province_Model->get_by_country_id($trademark_detail->country_id);
+                $this->load->vars(array(
+                    'trademark_detail' => $trademark_detail,
+                    'provincies' => $provincies,
+                ));
+            }
+            $output['html'] = $this->load->view('dashboard/campaign/apply_for_province',null,true);
+
+        }else if($apply_for == '3'){
+            $output['html'] = $this->load->view('dashboard/campaign/apply_for_shop',null,true);
+        }
+
+        
+        
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($output));
+    }
+    function load_category_by_trademark(){
+        $output = array(
+            'text' => 'ok',
+            'code' => 1,
+            'data' => null
+        );
+        $categories = $this->Category_Model->gets();
+        $trademark_id = $this->input->post('trademark_id');
+        $trademark_category = $this->Trademark_Model->get_category_by_trademark_id($trademark_id);
+        $trademark_category_ids = [];
+        if($trademark_category) {
+            foreach ($trademark_category as $key => $value) {
+                $trademark_category_ids[] = $value->category_id;
+            }
+        }
+        $this->load->vars(array(
+                'trademark_category_ids' => $trademark_category_ids,
+                'categories' => $categories,
+            ));
+        $id = $this->input->post('id');
+        if(!empty($id)) {
+            $entry_detail = $this->Campaign_Model->get($id);
+
+
+            // $trademark_detail = $this->Trademark_Model->get($trademark_id);
+            // if($trademark_detail){
+                
+            // }
+            if($entry_detail){
+                $campaign_category = $this->Category_Model->get_by_campaign_id($id);
+                $campaign_category_ids = [];
+                if($campaign_category) foreach ($campaign_category as $key => $value) {
+                    $campaign_category_ids[] = $value->category_id;
+                }
+            }
+            $this->load->vars(array(
+                'campaign_category_ids' => $campaign_category_ids,
+                'entry_detail' => $entry_detail,
+            ));
+            $output['campaign_category_ids'] = $campaign_category_ids;
+            $output['entry_detail'] = $entry_detail;
+        }
+        $output['categories'] = $categories;
+        $output['trademark_category_ids'] = $trademark_category_ids;
+        $output['trademark_category'] = $trademark_category;
+        $output['html'] = $this->load->view('dashboard/campaign/category-dropdown',null,true);
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($output));
+    }
     function detail(){
         $output = array(
             'text' => 'ok',
@@ -114,29 +191,35 @@ class Trademark extends Core_Controller {
             'data' => null
         );
         $id = $this->input->post('id');
-        $categories = $this->Category_Model->gets();
-        $countries = $this->Country_Model->gets();
+        $trademarks = $this->Trademark_Model->gets();
         $this->load->vars(array(
-            'countries' => $countries,
-            'categories' => $categories
+            'trademarks' => $trademarks,
+            'categories' => $categories,
+            'arr_status' => array(
+                'draf' => 'Draf',
+                'new' => 'New',
+                'active' => 'Active',
+                'actived' => 'Actived',
+                ),
+            'arr_available_to' => array(
+                '1' => 'Shop',
+                '2' => 'Online',
+                ),
+            'arr_apply_for' => array(
+                '1' => 'All',
+                '2' => 'Provinces',
+                '3' => 'Shops',
+                ),
         ));
         if(!empty($id)) {
-            $trademark_category = $this->Trademark_Model->get_category_by_trademark_id($id);
-            $trademark_category_ids = [];
-            if($trademark_category) {
-                foreach ($trademark_category as $key => $value) {
-                    $trademark_category_ids[] = $value->category_id;
-                }
-            }
-            $entry_detail = $this->Trademark_Model->get($id);
+            $entry_detail = $this->Campaign_Model->get($id);
             $this->load->vars(array(
-                'entry_detail' => $entry_detail,
-                'trademark_category_ids'=>$trademark_category_ids
+                'entry_detail' => $entry_detail
                 ));
             $output['data'] = $entry_detail;
             // $output['trademark_category_ids'] = $trademark_category_ids;
         }
-        $output['html'] = $this->load->view('dashboard/trademark/detail',null,true);
+        $output['html'] = $this->load->view('dashboard/campaign/detail',null,true);
         return $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)
@@ -160,29 +243,20 @@ class Trademark extends Core_Controller {
         } else {
 
             $params = $data;
-            $category_ids = $params['category_id'];
-
-            unset($params['category_id']);
             $params['status'] = 'true';
             $params['author'] = $user->ause_id;
-            $this->db->trans_begin();
-            $this->Trademark_Model->onInsert($params);
-            $insert_id = $this->db->insert_id();
-            if(!empty($category_ids)) foreach ($category_ids as $category_id) {
-                $batchData[] = array(
-                    'trademark_id'=>$insert_id,
-                    'category_id'=>$category_id,
-                    );
-            }
-            $this->Trademark_Model->insertBatchCategory($batchData);
-            if ($this->db->trans_status() !== FALSE) {
+            // $this->db->trans_begin();
+            $rs = $this->Shop_Model->onInsert($params);
+            
+            if ($rs) {
+            // if ($this->db->trans_status() !== FALSE) {
                 $output["code"] = 1;
                 $output["text"] = 'ok';
                 $output["message"] = 'Register record to database.';
-                $this->db->trans_commit();
+                // $this->db->trans_commit();
 
             } else {
-                $this->db->trans_rollback();
+                // $this->db->trans_rollback();
                 $output["code"] = -1;
                 $output["message"] = "Record faily to insert. Please check data input and try again.";
             }
@@ -212,31 +286,21 @@ class Trademark extends Core_Controller {
         } else {
 
             $params = $data;
-            $category_ids = $params['category_id'];
-            
-            unset($params['category_id']);
-            $entry_detail = $this->Trademark_Model->get($id);
+            $entry_detail = $this->Shop_Model->get($id);
             if($entry_detail){
                 if(empty($entry_detail->author)) 
                     $params['author'] = $user->ause_id;
                 
-                $this->db->trans_begin();
-                $this->Trademark_Model->onUpdate($id, $params);
-                $this->Trademark_Model->deleteCategoryByTrademarkId($id);
-                if(!empty($category_ids)) foreach ($category_ids as $category_id) {
-                    $batchData[] = array(
-                        'trademark_id'=>$id,
-                        'category_id'=>$category_id,
-                        );
-                }
-                $this->Trademark_Model->insertBatchCategory($batchData);
-                if ($this->db->trans_status() !== FALSE) {
+                // $this->db->trans_begin();
+                $rs = $this->Shop_Model->onUpdate($id, $params);
+                if ($rs) {
+                // if ($this->db->trans_status() !== FALSE) {
                     $output["code"] = 1;
                     $output["text"] = 'ok';
                     $output["message"] = 'Updated Entry to database.';
-                    $this->db->trans_commit();
+                    // $this->db->trans_commit();
                 } else {
-                    $this->db->trans_rollback();
+                    // $this->db->trans_rollback();
                     $output["code"] = -1;
                     $output["message"] = "Entry faily to update. Please check data input and try again.";
                 }
@@ -262,18 +326,15 @@ class Trademark extends Core_Controller {
             'data' => null
         );
         $id = $this->input->post('id');
-        $entry_detail = $this->Trademark_Model->get($id);
+        $entry_detail = $this->Shop_Model->get($id);
         if($entry_detail){
-            $this->db->trans_begin();
-            $this->Trademark_Model->deleteCategoryByTrademarkId($id);
-            $this->Trademark_Model->onDelete($id);
-            if ($this->db->trans_status() !== FALSE) {
+            
+            $rs = $this->Shop_Model->onDelete($id);
+            if ($rs === true) {
                 $output["code"] = 1;
                 $output["text"] = 'ok';
                 $output["message"] = 'Deleted record on database.';
-                $this->db->trans_commit();
             } else {
-                $this->db->trans_rollback();
                 $output["code"] = -1;
                 $output["message"] = "Record faily to delete. Please check data input and try again.";
             }

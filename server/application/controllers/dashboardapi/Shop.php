@@ -88,6 +88,7 @@ class Shop extends Core_Controller {
                 'id' => 'string',
                 'title' => 'string',
                 'province_title' => 'string',
+                'trademark_title' => 'string',
                 'cteated' => 'date',
             ),true
         );
@@ -103,18 +104,24 @@ class Shop extends Core_Controller {
             'code' => 1,
             'data' => null
         );
+        $trademark_id = $this->input->post('trademark_id');
         $id = $this->input->post('id');
         if(!empty($id)) {
-            $entry_detail = $this->Trademark_Model->get($id);
-            if($entry_detail){
-                $provincies = $this->Province_Model->get_by_country_id($entry_detail->country_id);
-                $this->load->vars(array(
-                    'entry_detail' => $entry_detail,
-                    'provincies' => $provincies,
-                ));
+            $entry_detail = $this->Shop_Model->get($id);
+            $trademark_detail = $this->Trademark_Model->get($trademark_id);
+            if($trademark_detail){
+                $provincies = $this->Province_Model->get_by_country_id($trademark_detail->country_id);
             }
+            $this->load->vars(array(
+                // 'trademark_detail' => $trademark_detail,
+                'entry_detail' => $entry_detail,
+                'provincies' => $provincies,
+            ));
+            $output['trademark_detail'] = $trademark_detail;
+            $output['entry_detail'] = $entry_detail;
+            $output['provincies'] = $provincies;
         }
-        $output['html'] = $this->load->view('dashboard/shop/province-dropdown',null,true);
+        $output['html'] = $this->load->view('dashboard/shop/category-dropdown',null,true);
         return $this->output
             ->set_content_type('application/json')
             ->set_status_header(200)
@@ -133,7 +140,7 @@ class Shop extends Core_Controller {
             'trademarks' => $trademarks,
         ));
         if(!empty($id)) {
-            $entry_detail = $this->Trademark_Model->get($id);
+            $entry_detail = $this->Shop_Model->get($id);
             $this->load->vars(array(
                 'entry_detail' => $entry_detail
                 ));
@@ -164,29 +171,20 @@ class Shop extends Core_Controller {
         } else {
 
             $params = $data;
-            $category_ids = $params['category_id'];
-
-            unset($params['category_id']);
             $params['status'] = 'true';
             $params['author'] = $user->ause_id;
-            $this->db->trans_begin();
-            $this->Trademark_Model->onInsert($params);
-            $insert_id = $this->db->insert_id();
-            if(!empty($category_ids)) foreach ($category_ids as $category_id) {
-                $batchData[] = array(
-                    'trademark_id'=>$insert_id,
-                    'category_id'=>$category_id,
-                    );
-            }
-            $this->Trademark_Model->insertBatchCategory($batchData);
-            if ($this->db->trans_status() !== FALSE) {
+            // $this->db->trans_begin();
+            $rs = $this->Shop_Model->onInsert($params);
+            
+            if ($rs) {
+            // if ($this->db->trans_status() !== FALSE) {
                 $output["code"] = 1;
                 $output["text"] = 'ok';
                 $output["message"] = 'Register record to database.';
-                $this->db->trans_commit();
+                // $this->db->trans_commit();
 
             } else {
-                $this->db->trans_rollback();
+                // $this->db->trans_rollback();
                 $output["code"] = -1;
                 $output["message"] = "Record faily to insert. Please check data input and try again.";
             }
@@ -216,31 +214,21 @@ class Shop extends Core_Controller {
         } else {
 
             $params = $data;
-            $category_ids = $params['category_id'];
-            
-            unset($params['category_id']);
-            $entry_detail = $this->Trademark_Model->get($id);
+            $entry_detail = $this->Shop_Model->get($id);
             if($entry_detail){
                 if(empty($entry_detail->author)) 
                     $params['author'] = $user->ause_id;
                 
-                $this->db->trans_begin();
-                $this->Trademark_Model->onUpdate($id, $params);
-                $this->Trademark_Model->deleteCategoryByTrademarkId($id);
-                if(!empty($category_ids)) foreach ($category_ids as $category_id) {
-                    $batchData[] = array(
-                        'trademark_id'=>$id,
-                        'category_id'=>$category_id,
-                        );
-                }
-                $this->Trademark_Model->insertBatchCategory($batchData);
-                if ($this->db->trans_status() !== FALSE) {
+                // $this->db->trans_begin();
+                $rs = $this->Shop_Model->onUpdate($id, $params);
+                if ($rs) {
+                // if ($this->db->trans_status() !== FALSE) {
                     $output["code"] = 1;
                     $output["text"] = 'ok';
                     $output["message"] = 'Updated Entry to database.';
-                    $this->db->trans_commit();
+                    // $this->db->trans_commit();
                 } else {
-                    $this->db->trans_rollback();
+                    // $this->db->trans_rollback();
                     $output["code"] = -1;
                     $output["message"] = "Entry faily to update. Please check data input and try again.";
                 }
@@ -258,5 +246,33 @@ class Shop extends Core_Controller {
         $id = $this->input->post('id');
         if(!empty($id)) $this->onupdate();
         else $this->oncreate();
+    }
+    function delete(){
+        $output = array(
+            'text' => 'fail',
+            'code' => -1,
+            'data' => null
+        );
+        $id = $this->input->post('id');
+        $entry_detail = $this->Shop_Model->get($id);
+        if($entry_detail){
+            
+            $rs = $this->Shop_Model->onDelete($id);
+            if ($rs === true) {
+                $output["code"] = 1;
+                $output["text"] = 'ok';
+                $output["message"] = 'Deleted record on database.';
+            } else {
+                $output["code"] = -1;
+                $output["message"] = "Record faily to delete. Please check data input and try again.";
+            }
+        }else{
+            $output["message"] = 'Record doest exists.';
+        }
+        
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header(200)
+            ->set_output(json_encode($output));
     }
 }

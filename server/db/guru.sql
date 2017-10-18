@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50714
 File Encoding         : 65001
 
-Date: 2017-10-17 14:36:55
+Date: 2017-10-18 15:22:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -66,11 +66,7 @@ CREATE TABLE `ci_sessions` (
 -- ----------------------------
 -- Records of ci_sessions
 -- ----------------------------
-INSERT INTO `ci_sessions` VALUES ('1ihbfuc2m7p9ihl7v01tc75oiuqgs330', '127.0.0.1', '1508223594', 0x5F5F63695F6C6173745F726567656E65726174657C693A313530383232333539343B);
-INSERT INTO `ci_sessions` VALUES ('2sn9o6hnbb02q79hii33a22d0pfo6s98', '127.0.0.1', '1508225765', 0x5F5F63695F6C6173745F726567656E65726174657C693A313530383232353532393B6E6C6F67696E7C693A303B4B4346494E4445527C613A343A7B733A383A2264697361626C6564223B623A303B733A393A2275706C6F616455524C223B733A353A222F64617461223B733A393A2275706C6F6164446972223B733A34323A22453A5C77616D7036345C7777775C6E696E6574795C7365727665725C73797374656D5C2E2E2F64617461223B733A363A22616363657373223B613A323A7B733A353A2266696C6573223B613A363A7B733A363A2275706C6F6164223B623A313B733A363A2264656C657465223B623A313B733A343A22636F7079223B623A313B733A343A226D6F7665223B623A313B733A363A2272656E616D65223B623A313B733A343A2265646974223B623A313B7D733A343A2264697273223B613A333A7B733A363A22637265617465223B623A313B733A363A2264656C657465223B623A313B733A363A2272656E616D65223B623A313B7D7D7D64617362626F6172645F757365727C4F3A383A22737464436C617373223A31363A7B733A373A22617573655F6964223B733A353A223130303031223B733A383A22617573655F6B6579223B733A383A2256395A5872365577223B733A31353A22617573655F636F6D70616E795F6964223B4E3B733A393A22617573655F6E616D65223B733A31383A225472C6B0E1BB9D6E67204B68C6B0C6A16E67223B733A31333A22617573655F757365726E616D65223B733A32363A226B68756F6E677875616E7472756F6E6740676D61696C2E636F6D223B733A31303A22617573655F656D61696C223B733A32363A226B68756F6E677875616E7472756F6E6740676D61696C2E636F6D223B733A31333A22617573655F706F736974696F6E223B733A313A2231223B733A31313A22617573655F737461747573223B733A343A2274727565223B733A31323A22617573655F63726561746564223B733A31393A22323031332D30342D30322031363A34333A3432223B733A31333A22617573655F6D6F646966696564223B733A31393A22323031372D30362D31312032313A34303A3338223B733A31323A22617573655F70696374757265223B733A39323A2268747470733A2F2F6C68352E676F6F676C6575736572636F6E74656E742E636F6D2F2D57414D67546C6664356F672F41414141414141414141492F41414141414141414150302F62304C43454A62657853342F70686F746F2E6A7067223B733A31343A22617573655F617574686F72697479223B733A353A22312C393939223B733A31343A22617573655F6C6173746C6F67696E223B733A31393A22323031332D30342D30382031303A30313A3034223B733A31323A22617573655F736F7274696E67223B4E3B733A31323A22617573655F64656C65746564223B4E3B733A31303A22617573655F6C6576656C223B733A313A2231223B7D);
-INSERT INTO `ci_sessions` VALUES ('bood5mbksk27un43klji9s55ah598n9a', '127.0.0.1', '1508225019', 0x5F5F63695F6C6173745F726567656E65726174657C693A313530383232353031393B);
-INSERT INTO `ci_sessions` VALUES ('dumrlcvmpgnramlm31ti6iqcj7l8iao6', '127.0.0.1', '1508222539', 0x5F5F63695F6C6173745F726567656E65726174657C693A313530383232323533393B);
-INSERT INTO `ci_sessions` VALUES ('g8tr86makjkg1ugbd0u3rq8m1ee2ai4c', '127.0.0.1', '1508225530', 0x5F5F63695F6C6173745F726567656E65726174657C693A313530383232353532393B);
+INSERT INTO `ci_sessions` VALUES ('auq7p2kmtmj93facl9lpor2gff7mbudl', '127.0.0.1', '1508314926', 0x5F5F63695F6C6173745F726567656E65726174657C693A313530383331343838323B6E6C6F67696E7C693A303B4B4346494E4445527C613A343A7B733A383A2264697361626C6564223B623A303B733A393A2275706C6F616455524C223B733A353A222F64617461223B733A393A2275706C6F6164446972223B733A34323A22453A5C77616D7036345C7777775C6E696E6574795C7365727665725C73797374656D5C2E2E2F64617461223B733A363A22616363657373223B613A323A7B733A353A2266696C6573223B613A363A7B733A363A2275706C6F6164223B623A313B733A363A2264656C657465223B623A313B733A343A22636F7079223B623A313B733A343A226D6F7665223B623A313B733A363A2272656E616D65223B623A313B733A343A2265646974223B623A313B7D733A343A2264697273223B613A333A7B733A363A22637265617465223B623A313B733A363A2264656C657465223B623A313B733A363A2272656E616D65223B623A313B7D7D7D64617362626F6172645F757365727C4F3A383A22737464436C617373223A31363A7B733A373A22617573655F6964223B733A353A223130303031223B733A383A22617573655F6B6579223B733A383A2256395A5872365577223B733A31353A22617573655F636F6D70616E795F6964223B4E3B733A393A22617573655F6E616D65223B733A31383A225472C6B0E1BB9D6E67204B68C6B0C6A16E67223B733A31333A22617573655F757365726E616D65223B733A32363A226B68756F6E677875616E7472756F6E6740676D61696C2E636F6D223B733A31303A22617573655F656D61696C223B733A32363A226B68756F6E677875616E7472756F6E6740676D61696C2E636F6D223B733A31333A22617573655F706F736974696F6E223B733A313A2231223B733A31313A22617573655F737461747573223B733A343A2274727565223B733A31323A22617573655F63726561746564223B733A31393A22323031332D30342D30322031363A34333A3432223B733A31333A22617573655F6D6F646966696564223B733A31393A22323031372D30362D31312032313A34303A3338223B733A31323A22617573655F70696374757265223B733A39323A2268747470733A2F2F6C68352E676F6F676C6575736572636F6E74656E742E636F6D2F2D57414D67546C6664356F672F41414141414141414141492F41414141414141414150302F62304C43454A62657853342F70686F746F2E6A7067223B733A31343A22617573655F617574686F72697479223B733A353A22312C393939223B733A31343A22617573655F6C6173746C6F67696E223B733A31393A22323031332D30342D30382031303A30313A3034223B733A31323A22617573655F736F7274696E67223B4E3B733A31323A22617573655F64656C65746564223B4E3B733A31303A22617573655F6C6576656C223B733A313A2231223B7D);
 
 -- ----------------------------
 -- Table structure for ninety_account
@@ -9978,18 +9974,20 @@ CREATE TABLE `__campaign` (
   `author` int(11) DEFAULT NULL,
   `type_id` int(11) DEFAULT NULL,
   `category_id` int(11) DEFAULT NULL,
+  `available_to` varchar(20) DEFAULT NULL,
+  `apply_for` varchar(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1001 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of __campaign
 -- ----------------------------
-INSERT INTO `__campaign` VALUES ('3', '1000', '1', '4,5', 'Ưu đãi 30%', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 'https://cdn02.static-adayroi.com/0/2017/05/18/1495092976685_5966543.jpg', '2017-09-05 13:32:57', null, 'true', '2017-09-05 13:30:17', '2017-09-28 13:30:21', '0', '0', 'https://www.adayroi.com/tui-ngu-leu-trai-m1241?featured=isPromotion', '0', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', '024-3975.9568', '2', '10025', '50', '98');
-INSERT INTO `__campaign` VALUES ('4', '1000', '1', '4,5', 'Hết hạn', 'Hết hạn', '', '2017-09-05 16:02:45', null, 'true', '2017-09-03 16:02:38', '2017-09-04 16:02:41', '0', '0', '', '0', 'Hết hạn', '', '3', '10025', '50', '98');
-INSERT INTO `__campaign` VALUES ('5', '1000', '1', '4,5', 'Khuyễn mãi tết nguyên đán 2018', 'Khuyễn mãi tết nguyên đán 2018', '', '2017-09-05 16:03:29', null, 'true', '2017-11-01 16:03:17', '2017-11-29 16:03:23', '0', '0', '', '0', 'Khuyễn m&atilde;i tết nguy&ecirc;n đ&aacute;n 2018', '', '4', '10025', '49', '96');
-INSERT INTO `__campaign` VALUES ('6', '1000', '1', '4,5', 'Khuến mãi hôm nay', 'Khuến mãi hôm nay', '', '2017-09-05 16:05:40', null, 'true', '2017-09-05 16:05:24', '2017-09-05 23:05:29', '0', '0', '', '0', 'Khuến m&atilde;i h&ocirc;m nay', '', '5', '10025', '50', '97');
-INSERT INTO `__campaign` VALUES ('7', '1000', '1', '4', 'Khuyến mãi cuối tuần', 'Khuyến mãi cuối tuần', '', '2017-09-05 16:21:16', '2017-09-05 16:22:12', 'true', '2017-09-04 16:21:06', '2017-09-10 16:21:09', '0', '0', '', '0', 'Khuyến mãi cuối tuần', '', '6', '10025', '49', '95');
-INSERT INTO `__campaign` VALUES ('1000', '1002', '3', '3,2,1', 'Khuyến mãi 2-9', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '', '2017-09-04 08:51:14', null, 'true', '2017-09-04 08:50:07', '2017-09-30 08:50:13', '0', '0', '', '0', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '', '1', '10001', null, null);
+INSERT INTO `__campaign` VALUES ('3', '1000', '1', '4,5', 'Ưu đãi 30%', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', 'https://cdn02.static-adayroi.com/0/2017/05/18/1495092976685_5966543.jpg', '2017-09-05 13:32:57', null, 'true', '2017-09-05 13:30:17', '2017-09-28 13:30:21', '0', '0', 'https://www.adayroi.com/tui-ngu-leu-trai-m1241?featured=isPromotion', '0', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book', '024-3975.9568', '2', '10025', '50', '98', null, null);
+INSERT INTO `__campaign` VALUES ('4', '1000', '1', '4,5', 'Hết hạn', 'Hết hạn', '', '2017-09-05 16:02:45', null, 'true', '2017-09-03 16:02:38', '2017-09-04 16:02:41', '0', '0', '', '0', 'Hết hạn', '', '3', '10025', '50', '98', null, null);
+INSERT INTO `__campaign` VALUES ('5', '1000', '1', '4,5', 'Khuyễn mãi tết nguyên đán 2018', 'Khuyễn mãi tết nguyên đán 2018', '', '2017-09-05 16:03:29', null, 'true', '2017-11-01 16:03:17', '2017-11-29 16:03:23', '0', '0', '', '0', 'Khuyễn m&atilde;i tết nguy&ecirc;n đ&aacute;n 2018', '', '4', '10025', '49', '96', null, null);
+INSERT INTO `__campaign` VALUES ('6', '1000', '1', '4,5', 'Khuến mãi hôm nay', 'Khuến mãi hôm nay', '', '2017-09-05 16:05:40', null, 'true', '2017-09-05 16:05:24', '2017-09-05 23:05:29', '0', '0', '', '0', 'Khuến m&atilde;i h&ocirc;m nay', '', '5', '10025', '50', '97', null, null);
+INSERT INTO `__campaign` VALUES ('7', '1000', '1', '4', 'Khuyến mãi cuối tuần', 'Khuyến mãi cuối tuần', '', '2017-09-05 16:21:16', '2017-09-05 16:22:12', 'true', '2017-09-04 16:21:06', '2017-09-10 16:21:09', '0', '0', '', '0', 'Khuyến mãi cuối tuần', '', '6', '10025', '49', '95', null, null);
+INSERT INTO `__campaign` VALUES ('1000', '1002', '3', '3,2,1', 'Khuyến mãi 2-9', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '', '2017-09-04 08:51:14', null, 'true', '2017-09-04 08:50:07', '2017-09-30 08:50:13', '0', '0', '', '0', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '', '1', '10001', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for __campaign_category
@@ -10900,7 +10898,7 @@ CREATE TABLE `__shop` (
   `author` int(11) DEFAULT NULL,
   `sorting` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of __shop
@@ -10908,8 +10906,8 @@ CREATE TABLE `__shop` (
 INSERT INTO `__shop` VALUES ('1', '2', '3', 'Điện máy xanh đường 3/2', 'Số 03 đường 3/2, P. 11, Q. 10, phường 11, Quận 10, Hồ Chí Minh, Việt Nam', '/data/1002/1386662148-13455094851361762701-574-0.jpg', '2017-09-03 21:22:07', null, '1', '10.7773', '106.682', '1002', '10018', '1');
 INSERT INTO `__shop` VALUES ('2', '2', '3', 'Điện máy xanh đường CMT8', 'Số 03 đường 3/2, P. 11, Q. 10, phường 11, Quận 10, Hồ Chí Minh, Việt Nam', '/data/1002/1386662148-13455094851361762701-574-0.jpg', '2017-09-03 21:26:39', '2017-09-03 21:28:55', '1', '10.7851', '106.669', '1002', '10018', '2');
 INSERT INTO `__shop` VALUES ('3', '2', '3', 'Điện máy xanh Q12', 'Số 03 đường 3/2, P. 11, Q. 10, phường 11, Quận 10, Hồ Chí Minh, Việt Nam', '/data/1002/1386662148-13455094851361762701-574-0.jpg', '2017-09-03 21:29:02', '2017-09-03 21:29:36', '1', '10.8709', '106.65', '1002', '10018', '3');
-INSERT INTO `__shop` VALUES ('4', '2', '1', 'Trụ Sở Chính', 'Số 72 Lê Thánh Tôn, Phường Bến Nghé, Quận 1', '', '2017-09-05 13:18:12', null, '1', '10.7548', '106.416', '1000', '10025', '4');
 INSERT INTO `__shop` VALUES ('5', '1', '1', 'Trụ Sở Tại Hà Nội', 'Tower 2, Times City, 458 Minh Khai, Phường Vĩnh Tuy, Quận Hai Bà Trưng, Thành Phố Hà Nội', '', '2017-09-05 13:19:00', null, '1', '21.0918', '105.8', '1000', '10025', '5');
+INSERT INTO `__shop` VALUES ('6', '3', '1', 'Cao bằng shop 01', 'không biết địa chỉ', null, '2017-10-18 10:15:06', null, 'true', '10.7405', '106.387', null, '10001', '6');
 
 -- ----------------------------
 -- Table structure for __token
@@ -10957,7 +10955,7 @@ CREATE TABLE `__trademark` (
   `contact_address` varchar(255) DEFAULT NULL,
   `email` varchar(120) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of __trademark
@@ -10967,6 +10965,7 @@ INSERT INTO `__trademark` VALUES ('2', '1001', 'Zenrin ZDC', 'Lorem Ipsum is sim
 INSERT INTO `__trademark` VALUES ('3', '1002', 'Guru', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', '2017-09-03 20:06:17', null, 'true', '/data/image/avatar/11.jpg', '/data/image/avatar/11.jpg', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry&#39;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.', null, '10001', '3', '237', null, null, null, null);
 INSERT INTO `__trademark` VALUES ('4', null, '12', '62', '2017-10-17 13:38:18', '2017-10-17 14:35:26', 'true', '72', '82', '92', '97', '10001', '4', '5', '32', '42', '52', '22');
 INSERT INTO `__trademark` VALUES ('5', null, '222', '222', '2017-10-17 14:36:04', null, 'true', '222', '222', '222', null, '10001', '5', '2', '222', '222', '222', '222');
+INSERT INTO `__trademark` VALUES ('6', null, 'VN-001', '111', '2017-10-18 15:11:21', null, 'true', '', '', '111', null, '10001', '6', '237', '111', '111', '111', 'vn@gmail.com');
 
 -- ----------------------------
 -- Table structure for __trademark_category
@@ -10977,7 +10976,7 @@ CREATE TABLE `__trademark_category` (
   `trademark_id` int(11) NOT NULL,
   `category_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of __trademark_category
@@ -10990,6 +10989,10 @@ INSERT INTO `__trademark_category` VALUES ('9', '4', '95');
 INSERT INTO `__trademark_category` VALUES ('10', '4', '94');
 INSERT INTO `__trademark_category` VALUES ('11', '5', '99');
 INSERT INTO `__trademark_category` VALUES ('12', '5', '98');
+INSERT INTO `__trademark_category` VALUES ('13', '6', '99');
+INSERT INTO `__trademark_category` VALUES ('14', '6', '98');
+INSERT INTO `__trademark_category` VALUES ('15', '6', '97');
+INSERT INTO `__trademark_category` VALUES ('16', '6', '96');
 
 -- ----------------------------
 -- Table structure for __trademark_wish

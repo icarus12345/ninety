@@ -13,11 +13,13 @@ $(document).ready(function() {
             delete  : App.BaseUrl + 'dashboardapi/shop/delete',
             catebinding : App.BaseUrl + 'dashboardapi/category/bind',
         };
-        var oTable = $('#datatable').DataTable( {
+        var province_data,province_select,trademark_select;
+        var oTable = this.oTable = $('#datatable').DataTable( {
             "ajax": URI.bind,
             "processing": true,
             "serverSide": true,
             "bAutoWidth": false , 
+            "order": [[ 0, "desc" ]],
             "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "language": {
                 "paginate": {
@@ -25,6 +27,7 @@ $(document).ready(function() {
                   "next": "<span class='fa fa-angle-right'></span>"
                 }
             },
+
             "dom": [
                 "<'header-panel'<'search-panel'f><'setting-panel'l>>" +
                 "<'container-panel'<'grid-panel'tr>>" +
@@ -35,34 +38,136 @@ $(document).ready(function() {
                     "data": "$.id" ,
                     'sWidth': '60px',
                     "className": '',
-                    "render": function ( data, type, row, meta ) {
+                    "render": function ( data, type, row, setting ) {
                       return [
                         '<div class="actions" title="'+data+'">',
                             '<span>'+data+'</span>',
                             '<a href="javascript:App.Common.ShowDetailDialog('+data+')" class="fa fa-pencil"></a>',
-                            '<a href="#" class="fa fa-trash-o"></a>',
+                            '<a href="javascript:App.Common.Delete('+data+','+setting.row+')" class="fa fa-trash-o"></a>',
                         '</div>'
                         ].join('')
                     }
                 },
-                { "data": "$.title" },
+                { 
+                    "data": "$.trademark_title",
+                    'sWidth': '120px'
+                },
                 { 
                     "data": "$.province_title",
                     'sWidth': '120px'
                 },
+                { "data": "$.title" },
                 { 
                     "data": "$.created",
                     'searchable':false,
                     'sWidth': '146px'
                 },
-            ]
-        } );
-        $('#datatable input').unbind();
-        $('#datatable input').bind('keyup', function(e) {
-            if(e.keyCode == 13) {
-                oTable.fnFilter(this.value);    
+            ],
+            initComplete: function () {
+                this.api().columns().every( function (index) {
+                    var column = this;
+                    // console.log(column,index)
+                    if(index == 3){
+                        var select = $('<input class="fillter-row-input" type="text"/>')
+                            .appendTo( $(column.footer()).empty() )
+                            .on( 'keyup', function (e) {
+                                if(e.keyCode == 13) {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+             
+                                    column
+                                        .search( val ? '%'+val+'%' : '', true, false )
+                                        .draw();
+                                }
+                            } );
+                    }
+                    function load_filter_trademark(select){
+                        var url = '/dashboardapi/trademark/get_all';
+                        new App.Request({
+                            'url': url,
+                            'data': {
+                            },
+                        }).done(function(res) {
+                            if (res.code < 0) {
+                                toastr.error(res.message,'Error');
+                            } else {
+                                if(res.data) res.data.map(function(d){
+                                    var title = $.fn.dataTable.util.escapeRegex(d.title)
+                                    trademark_select.append( '<option value="'+d.country_id+'">'+title+'</option>' );
+                                    load_filter_province();
+                                })
+                            }
+                        })
+                    }
+                    
+                    function load_filter_province(){
+                        var url = '/dashboardapi/province/get_all';
+                        new App.Request({
+                            'url': url,
+                            'data': {
+                            },
+                        }).done(function(res) {
+                            if (res.code < 0) {
+                                toastr.error(res.message,'Error');
+                            } else {
+                                province_data = res.data;
+                                
+                            }
+                        })
+                    }
+                    function filter_province(){
+                        province_select.html('<option value=""></option>') 
+                            var selected_country_id = trademark_select.val();
+                            console.log(selected_country_id,'selected_country_id')
+                        if(province_data) province_data.map(function(d){
+                            var title = $.fn.dataTable.util.escapeRegex(d.title)
+                            if(d.country_id == selected_country_id)
+                            province_select.append( '<option value="'+d.id+'">'+title+'</option>' )
+                        })
+                    }
+                    if(
+                        index == 1
+                        ){
+                        trademark_select = $('<select class="fillter-row-input"><option value=""></option></select>')
+                        trademark_select.appendTo( $(column.footer()).empty() )
+                            .on( 'change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).find("option:selected").text()
+                                    );
+                                    column
+                                        .search( val ? '%'+val+'%' : '', true, false )
+                                        .draw();
+                                    filter_province();
+                                    province_select.change()
+                            } );
+                        load_filter_trademark();
+                    }
+                    if(
+                        index == 2
+                        ){
+                        province_select = $('<select class="fillter-row-input"><option value=""></option></select>')
+                        province_select.appendTo( $(column.footer()).empty() )
+                            .on( 'change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).find("option:selected").text()
+                                    );
+             
+                                    column
+                                        .search( val ? '%'+val+'%' : '', true, false )
+                                        .draw();
+                            } );
+                        
+                    }
+                } );
+                // $('#datatableGrid .dataTables_filter input').unbind();
+                // $('#datatableGrid .dataTables_filter input').bind('keyup', function(e) {
+                //     if(e.keyCode == 13) {
+                //         oTable.fnFilter(this.value);    
+                //     }
+                // });
             }
-        });
+        } );
         
         var Lists = {};
         var Grids = {};
@@ -139,13 +244,10 @@ $(document).ready(function() {
                 App.Common.Save();
             },
             Delete: function(id,row){
+                data_row = oTable.row(row).data();
                 // toastr.warning('This function to requires an administrative account.<br/>Please check your authority, and try again.','Warning');
-                var _data = $(gridElm).jqxGrid('getrowdata', row);
-                if(_data.lock == 1){
-                    toastr.warning('You can not delete this Item.','Warning');
-                    return; 
-                }
-                var itemName = _data.title;
+                
+                var itemName = data_row.$.title;
                 App.Confirm(
                     'Delete item ?',
                     'Do you want delete "'+itemName+'".<br/>These items will be permanently deleted and cannot be recovered. Are you sure ?',
@@ -153,8 +255,7 @@ $(document).ready(function() {
                         new App.Request({
                             'url': URI.delete,
                             'data': {
-                                'id': id,
-                                sid: App.Common.sid,
+                                'id': id
                             },
                         }).done(function(res) {
                             if (res.code < 0) {
@@ -215,8 +316,6 @@ $(document).ready(function() {
                     // datatype: 'html',
                     data: {
                         id: id || null,
-                        sid: App.Common.sid || null,
-                        onlysave: App.Common.onlysave || null
                     },
                 }).done(function(res){
                     if(res.code < 0){
@@ -257,9 +356,7 @@ $(document).ready(function() {
                     url: URI.detail,
                     // datatype: 'html',
                     data: {
-                        id: id || null,
-                        sid: App.Common.sid || null,
-                        onlysave: App.Common.onlysave || null
+                        id: id || null
                     },
                 }).done(function(res){
                     if(res.code < 0){
@@ -278,11 +375,13 @@ $(document).ready(function() {
             },
             LoadProvince: function(){
                 $('#province-box').html('<div class="form-control ">Loading...</div>')
-                var id = $('#entry-detail-frm').find('[name="trademark_id"]').val()
+                var trademark_id = $('#entry-detail-frm').find('[name="trademark_id"]').val()
+                var id = $('#entry-detail-frm').find('[name="id"]').val()
                 new App.Request({
                     url: URI.load_province,
                     // datatype: 'html',
                     data: {
+                        trademark_id: trademark_id || null,
                         id: id || null
                     },
                 }).done(function(res){

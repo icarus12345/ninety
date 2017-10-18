@@ -1,24 +1,25 @@
 <?php
-class Shop_dt extends Core_Model implements DatatableModel{
+class Campaign_dt extends Core_Model implements DatatableModel{
         
         function __construct()
         {
-            parent::__construct('__shop','','id');
+            parent::__construct('__campaign','','id');
         }
 
         public function appendToSelectStr() {
                 return array(
                     // 'id' => 'concat(s.s_name, \'  \', c.c_name, \'  \', c.c_zip)'
-                    'id' => 's.id',
-                    'title' => 's.title',
-                    'created' => 's.created',
-                    'province_title' => 'p.title',
+                    'id' => 'c.id',
+                    'title' => 'c.title',
+                    'start_date' => 'c.start_date',
+                    'end_date' => 'c.end_date',
+                    'created' => 'c.created',
                     'trademark_title' => 't.title',
                 );
                 
         }
         public function fromTableStr() {
-            return '__shop s';
+            return '__campaign c';
         }
         
     
@@ -26,8 +27,7 @@ class Shop_dt extends Core_Model implements DatatableModel{
         public function joinArray(){
             return array(
               // 'city c|left outer' => 'c.state_id = s.id',
-              '__province p|left outer' => 's.city_id = p.id',
-              '__trademark t|left outer' => 's.trademark_id = t.id',
+              '__trademark t|left outer' => 'c.trademark_id = t.id',
               );
         }
         

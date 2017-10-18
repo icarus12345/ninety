@@ -1,7 +1,7 @@
 <div>
-    <select multiple
+    <select 
         name="city_id" 
-        class="form-control selectpicker "
+        class="form-control selectpicker validate[required]"
         data-putto="#frm-err-data-city_id"
         data-live-search="true"
         data-size="10"

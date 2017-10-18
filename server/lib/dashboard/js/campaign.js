@@ -1,30 +1,36 @@
 $(document).ready(function() {
     App.Common = (function(){
         var URI = {
-            bind : App.BaseUrl + 'dashboardapi/trademark/bind',
-            detail  : App.BaseUrl + 'dashboardapi/trademark/detail',
-            see  : App.BaseUrl + 'dashboardapi/trademark/see',
-            subdetail  : App.BaseUrl + 'dashboardapi/trademark/subdetail',
-            commit  : App.BaseUrl + 'dashboardapi/trademark/commit',
-            sendlatest  : App.BaseUrl + 'dashboardapi/trademark/sendlatest',
-            sendoldest  : App.BaseUrl + 'dashboardapi/trademark/sendoldest',
-            update  : App.BaseUrl + 'dashboardapi/trademark/update',
-            delete  : App.BaseUrl + 'dashboardapi/trademark/delete',
+            bind : App.BaseUrl + 'dashboardapi/campaign/bind',
+            detail  : App.BaseUrl + 'dashboardapi/campaign/detail',
+            load_category  : App.BaseUrl + 'dashboardapi/campaign/load_category_by_trademark',
+            load_apply_for  : App.BaseUrl + 'dashboardapi/campaign/load_apply_for_by_trademark',
+            see  : App.BaseUrl + 'dashboardapi/campaign/see',
+            subdetail  : App.BaseUrl + 'dashboardapi/campaign/subdetail',
+            commit  : App.BaseUrl + 'dashboardapi/campaign/commit',
+            sendlatest  : App.BaseUrl + 'dashboardapi/campaign/sendlatest',
+            sendoldest  : App.BaseUrl + 'dashboardapi/campaign/sendoldest',
+            update  : App.BaseUrl + 'dashboardapi/campaign/update',
+            delete  : App.BaseUrl + 'dashboardapi/campaign/delete',
             catebinding : App.BaseUrl + 'dashboardapi/category/bind',
         };
-        var oTable = $('#datatable').DataTable( {
+        var province_data,province_select,trademark_select;
+        var oTable =  $('#datatable').DataTable( {
             "ajax": URI.bind,
             "processing": true,
             "serverSide": true,
             "bAutoWidth": false , 
-            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "order": [[ 0, "desc" ]],
+            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             "language": {
                 "paginate": {
                   "previous": "<span class='fa fa-angle-left'></span>",
                   "next": "<span class='fa fa-angle-right'></span>"
                 }
             },
+
+            "scrollX": true,
+
             "dom": [
                 "<'header-panel'<'search-panel'f><'setting-panel'l>>" +
                 "<'container-panel'<'grid-panel'tr>>" +
@@ -45,24 +51,95 @@ $(document).ready(function() {
                         ].join('')
                     }
                 },
-                { "data": "$.title" },
                 { 
-                    "data": "$.ctitle",
+                    "data": "$.trademark_title",
                     'sWidth': '120px'
+                },
+                { 
+                    "data": "$.title" ,
+                    'sWidth': '180px'
+                },
+                { 
+                    "data": "$.start_date" ,
+                    'searchable':false,
+                    'sWidth': '146px'
+                },
+                { 
+                    "data": "$.end_date" ,
+                    'searchable':false,
+                    'sWidth': '146px'
                 },
                 { 
                     "data": "$.created",
                     'searchable':false,
                     'sWidth': '146px'
                 },
-            ]
-        } );
-        $('#datatable input').unbind();
-        $('#datatable input').bind('keyup', function(e) {
-            if(e.keyCode == 13) {
-                oTable.fnFilter(this.value);    
+            ],
+            initComplete: function () {
+                this.api().columns().every( function (index) {
+                    var column = this;
+                    // console.log(column,index)
+                    if(index == 2){
+                        var select = $('<input class="fillter-row-input" type="text"/>')
+                            .appendTo( $(column.footer()).empty() )
+                            .on( 'keyup', function (e) {
+                                if(e.keyCode == 13) {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+             
+                                    column
+                                        .search( val ? '%'+val+'%' : '', true, false )
+                                        .draw();
+                                }
+                            } );
+                    }
+                    function load_filter_trademark(select){
+                        var url = '/dashboardapi/trademark/get_all';
+                        new App.Request({
+                            'url': url,
+                            'data': {
+                            },
+                        }).done(function(res) {
+                            if (res.code < 0) {
+                                toastr.error(res.message,'Error');
+                            } else {
+                                if(res.data) res.data.map(function(d){
+                                    var title = $.fn.dataTable.util.escapeRegex(d.title)
+                                    trademark_select.append( '<option value="'+d.country_id+'">'+title+'</option>' );
+                                })
+                            }
+                        })
+                    }
+                    
+                    
+                    if(
+                        index == 1
+                        ){
+                        trademark_select = $('<select class="fillter-row-input"><option value=""></option></select>')
+                        trademark_select.appendTo( $(column.footer()).empty() )
+                            .on( 'change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).find("option:selected").text()
+                                    );
+                                    column
+                                        .search( val ? '%'+val+'%' : '', true, false )
+                                        .draw();
+                            } );
+                        load_filter_trademark();
+                    }
+                    
+                } );
+
+                // $('#datatableGrid .dataTables_filter input').unbind();
+                // $('#datatableGrid .dataTables_filter input').bind('keyup', function(e) {
+                //     if(e.keyCode == 13) {
+                //         oTable.fnFilter(this.value);    
+                //     }
+                // });
             }
-        });
+        } );
+        
         
         var Lists = {};
         var Grids = {};
@@ -150,8 +227,7 @@ $(document).ready(function() {
                         new App.Request({
                             'url': URI.delete,
                             'data': {
-                                'id': id,
-                                sid: App.Common.sid,
+                                'id': id
                             },
                         }).done(function(res) {
                             if (res.code < 0) {
@@ -185,6 +261,7 @@ $(document).ready(function() {
                     url: URI.commit,
                     data: {
                         id: id,
+                        sid: App.Common.sid || null,
                         data: data
                     },
                 }).done(function(res){
@@ -211,8 +288,6 @@ $(document).ready(function() {
                     // datatype: 'html',
                     data: {
                         id: id || null,
-                        sid: App.Common.sid || null,
-                        onlysave: App.Common.onlysave || null
                     },
                 }).done(function(res){
                     if(res.code < 0){
@@ -261,7 +336,9 @@ $(document).ready(function() {
                         App.Common.Back()
                     } else {
                         $('#entry-detail').html(res.html);
-
+                        App.Common.onTradeMarkChanged();
+                        $('#entry-detail-frm').find('[name="trademark_id"]').change(App.Common.onTradeMarkChanged)
+                        $('#entry-detail-frm').find('[name="apply_for"]').change(App.Common.onApplyForChanged)
                         App.InitForm($('#entry-detail-frm'));
                         //App.Common.CreateList(res.data);
                         
@@ -269,81 +346,59 @@ $(document).ready(function() {
                     }
                 })
             },
-            ShowSubDetailDialog: function(column,sid,data){
-                if ($("#sub-entry-detail").length === 0) {
-                    $('body').append('<div id="sub-entry-detail"></div>');
-                }
-
-                $('#sub-entry-detail').html('<div class="loading"><span>Loading...</span></div>');
-                var subdialog = new App.Dialog({
-                    'modal': true,
-                    'message' : $('#sub-entry-detail'),
-                    'title': '<h4>Add <small>'+App.Common.settings[sid].title+'</small></h4>',
-                    'dialogClass':'',
-                    'width': App.Common.settings[sid].data.size || 640,
-                    'type':'notice',
-                    'hideclose':true,
-                    'closeOnEscape':false,
-                    'oncreate': function(event, ui){
-                        var toolbar = [
-                            '<div class="modal-action">',
-                                '<div class="dropdown pull-right">',
-                                    '<a href="JavaScript:" class="icon-options-vertical" data-toggle="dropdown" title="Show more action"></a>',
-                                    '<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">',
-                                        '<li><a href="#"><span class="icon-settings"></span> Setting</a></li>',
-                                        '<li role="separator" class="divider"></li>',
-                                        '<li><a href="#"><span class="icon-question"></span> Help</a></li>',
-                                    '</ul>',
-                                '</div>',
-                            '</div>'
-                        ].join('')
-                        $(event.target).dialog('widget')
-                            .find('.ui-widget-header')
-                            .append(toolbar)
-                    },
-                    'buttons' : [{
-                        'text': 'Done',
-                        'class': 'ui-btn btn',
-                        'click': function(){
-                            var frm = $('#subentry-detail-frm');
-                            if( frm.validationEngine('validate') === false){
-                                toastr.warning('Please complete input data.','Warning');
-                                return;
-                            }
-                            var data = $('#subentry-detail-frm').serializeObject();
-                            if (editingItem) {
-                                editingItem.data('cdata',data);
-                                editingItem.find('>div>span').html(data.title)
-                            } else {
-                                addItem(column,sid,data);
-                            }
-                            $(this).dialog("close");
-                        }
-                    },{
-                        'text': 'Cancel',
-                        'class': 'btn btn-link',
-                        'click': function() {
-                            $(this).dialog("close");
-                        }
-                    }]
-                })
-                subdialog.open();
+            onTradeMarkChanged: function(){
+                App.Common.LoadCategory();
+                App.Common.LoadApplyFor();
+            },
+            onApplyForChanged: function(){
+                App.Common.LoadApplyFor()
+            },
+            LoadApplyFor:function(){
+                $('#apply-for-box').html('<div>Loading...</div>');
+                var trademark_id = $('#entry-detail-frm').find('[name="trademark_id"]').val()
+                var id = $('#entry-detail-frm').find('[name="id"]').val()
+                var apply_for = $('#entry-detail-frm').find('[name="apply_for"]').val()
                 new App.Request({
-                    url: URI.subdetail,
+                    url: URI.load_apply_for,
                     // datatype: 'html',
                     data: {
-                        sid: sid,
-                        data: data || null
+                        trademark_id: trademark_id || null,
+                        id: id || null,
+                        apply_for: apply_for || null,
                     },
                 }).done(function(res){
                     if(res.code < 0){
                         toastr.warning(res.message,'Warning');
+                        App.Common.Back()
                     } else {
-                        $('#sub-entry-detail').html(res.html);
-
-                        App.InitForm($('#subentry-detail-frm'));
-                        subdialog.close();
-                        subdialog.open();
+                        $('#apply-for-box').html(res.html);
+                        $('#apply-for-box').find('.selectpicker').selectpicker();
+                        //App.Common.CreateList(res.data);
+                        
+                        
+                    }
+                })
+            },
+            LoadCategory: function(){
+                $('#category-box').html('<div class="form-control ">Loading...</div>')
+                var trademark_id = $('#entry-detail-frm').find('[name="trademark_id"]').val()
+                var id = $('#entry-detail-frm').find('[name="id"]').val()
+                new App.Request({
+                    url: URI.load_category,
+                    // datatype: 'html',
+                    data: {
+                        trademark_id: trademark_id || null,
+                        id: id || null
+                    },
+                }).done(function(res){
+                    if(res.code < 0){
+                        toastr.warning(res.message,'Warning');
+                        App.Common.Back()
+                    } else {
+                        $('#category-box').html(res.html);
+                        $('#category-box').find('.selectpicker').selectpicker();
+                        //App.Common.CreateList(res.data);
+                        
                         
                     }
                 })

@@ -273,10 +273,13 @@ App.AddGoogleMap = function(mapElement,callback){
         });
         if(typeof callback == 'function'){
             google.maps.event.addListener(marker,'drag',callback);
-
             google.maps.event.addListener(marker,'dragend',callback);
             // marker.addListener('drag', callback);
             // marker.addListener('dragend', callback);
+            google.maps.event.addListener(map,'click',function(e){
+                marker.setPosition(e.latLng)
+                callback(e)
+            });
         }
     // });
 }

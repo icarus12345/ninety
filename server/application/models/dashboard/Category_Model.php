@@ -27,6 +27,30 @@ class Category_Model extends Core_Model {
         }
         return $query->result();
     }
+    function get_by_trademark_id($trademark_id){
+        $query=$this->db
+            ->where("trademark_id", $trademark_id)
+            ->get('__trademark_category');
+
+        $errordb = $this->db->error();
+        $error_message = $errordb['message'];
+        if($errordb['code']!==0){
+            return null;
+        }
+        return $query->result();
+    }
+    function get_by_campaign_id($campaign_id){
+        $query=$this->db
+            ->where("campaign_id", $campaign_id)
+            ->get('__campaign_category');
+
+        $errordb = $this->db->error();
+        $error_message = $errordb['message'];
+        if($errordb['code']!==0){
+            return null;
+        }
+        return $query->result();
+    }
 
     function buildTree(array $elements, $pid = 0,$parents=array(0)) {
         $branch = array();
