@@ -186,7 +186,52 @@
    }
 /* .fadeOut is style taken from Animation.css and this is how it looks in owl.carousel.css:  */ 
 
-
+#owl-our-team{
+    margin-bottom: 60px;
+    background: #ebebeb;
+}
 #owl-our-team .item{
     padding-bottom: 100%
+}
+#owl-our-team .owl-nav{
+    position: absolute;left: 100%;bottom: -60px;
+
+}
+#owl-our-team .owl-next.disabled,
+#owl-our-team .owl-prev.disabled{opacity: .5}
+#owl-our-team .owl-prev{
+    width: 20px;
+    height: 78px;
+    position: relative;
+    background: url(../images/icon_up.png) no-repeat center;
+    margin-bottom:10px;
+}
+#owl-our-team .owl-next{
+    width: 20px;
+    height: 106px;
+    background: url(../images/icon_down.png) no-repeat center
+}
+@media (max-width: 768px) {
+    .our-team-slider{
+        width: 100%;
+    }
+    .our-team-thumbs{
+        width: 100%;
+        padding-left: 0;
+    }
+    .our-team-thumbs .item{
+        width: 25%;
+    }
+    .our-team-thumbs > div> .item:nth-child(2n){
+        transform: translateY(0%);
+        -moz-transform: translateY(0%);
+        -webkit-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+    }
+    #owl-our-team{
+        margin-bottom: 10px;
+    }
+    #owl-our-team .owl-nav{
+        display: none;
+    }
 }

@@ -2,7 +2,7 @@
     <div>Shops</div>
     <div class="pull-bottom list-dropdown">
         <select 
-            name="tmp[shop_ids]" multiple="" 
+            name="shop_ids" multiple="" 
             id="shop_ids"
             class="form-control selectpicker validate[required]"
             data-putto="#frm-err-data-shop_ids"

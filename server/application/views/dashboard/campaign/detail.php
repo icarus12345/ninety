@@ -55,8 +55,8 @@ $user = $CI->session->userdata('dasbboard_user');
                                 <option value="">None</option>
                                 <?php if(is_array($arr_status)) foreach($arr_status as $key => $value): ?>
                                     <option 
-                                        value="<?php echo $c->id; ?>"
-                                        <?php if ($value == $entry_detail->status){echo 'selected="1"';} ?>
+                                        value="<?php echo $key; ?>"
+                                        <?php if ($key == $entry_detail->status){echo 'selected="1"';} ?>
                                         ><?php echo $value; ?></span></option>
                                 <?php endforeach; ?>
                             </select>
@@ -172,12 +172,19 @@ $user = $CI->session->userdata('dasbboard_user');
                                 class="form-control selectpicker validate[required]"
                                 data-putto="#frm-err-data-available_to"
                                 >
-                                <?php if(is_array($arr_available_to)) foreach($arr_available_to as $key => $value): ?>
+                                <?php 
+                                if(is_array($arr_available_to)){
+                                    $entry_detail->status = explode(',',$entry_detail->status);
+                                    foreach($arr_available_to as $key => $value){
+                                ?>
                                     <option 
-                                        value="<?php echo $c->id; ?>"
-                                        <?php if ($value == $entry_detail->status){echo 'selected="1"';} ?>
+                                        value="<?php echo $key; ?>"
+                                        <?php if (in_array($key,$entry_detail->status)){echo 'selected="1"';} ?>
                                         ><?php echo $value; ?></span></option>
-                                <?php endforeach; ?>
+                                <?php 
+                                    }
+                                }
+                                ?>
                             </select>
                         </div>
                         <div id="frm-err-data-available_to"></div>
@@ -198,7 +205,7 @@ $user = $CI->session->userdata('dasbboard_user');
                                 <?php if(is_array($arr_apply_for)) foreach($arr_apply_for as $key => $value): ?>
                                     <option 
                                         value="<?php echo $key; ?>"
-                                        <?php if ($value == $entry_detail->apply_for){echo 'selected="1"';} ?>
+                                        <?php if ($key == $entry_detail->apply_for){echo 'selected="1"';} ?>
                                         ><?php echo $value; ?></span></option>
                                 <?php endforeach; ?>
                             </select>

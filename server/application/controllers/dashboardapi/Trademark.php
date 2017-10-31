@@ -161,7 +161,6 @@ class Trademark extends Core_Controller {
 
             $params = $data;
             $category_ids = $params['category_id'];
-
             unset($params['category_id']);
             $params['status'] = 'true';
             $params['author'] = $user->ause_id;

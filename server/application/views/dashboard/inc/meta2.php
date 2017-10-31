@@ -16,6 +16,7 @@
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/bootstrap/css/bootstrap-select.min.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/bootstrap/css/bootstrap-datetimepicker.min.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/tagsinput/bootstrap-tagsinput.css"/>
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/tokeninput/token-input.css"/>
         <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>lib/ckeditor/contents.css"/>
 
 
@@ -27,6 +28,7 @@
         <script type="text/javascript" src="<?php echo base_url() ?>lib/bootstrap/js/moment.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/bootstrap/js/bootstrap-datetimepicker.min.js"></script>
         <script type="text/javascript" src="<?php echo base_url() ?>lib/tagsinput/bootstrap-tagsinput.js"></script>
+        <script type="text/javascript" src="<?php echo base_url() ?>lib/tokeninput/jquery.tokeninput.js"></script>
 
         <script type="text/javascript" src="<?php echo base_url() ?>lib/toastr/toastr.js"></script>
         <!--

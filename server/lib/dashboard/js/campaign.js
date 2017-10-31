@@ -381,6 +381,8 @@ $(document).ready(function() {
                         }
                         
                     }
+                }).fail(function(){
+                    $('#apply-for-box').html('<div class="col-xs-12 pull-bottom">Fail to load data</div>');
                 })
             },
             onProvinceChanged: function(){

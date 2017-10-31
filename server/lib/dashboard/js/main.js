@@ -191,11 +191,18 @@ App.Request = function (opt) {
             } else {
                 toastr.error('Sorry. Your request could not be completed. Please check your input data and try again.','Error');
             }
+            if (typeof(option.fail) === 'function')
+                option.fail();
         }
     });
     return {
         done: function(fn) {
             option.done = fn;
+            return this;
+        },
+        fail: function(fn){
+            option.fail = fn;
+            return this;
         }
     };
 }

@@ -157,3 +157,9 @@ table.dataTable.nowrap td {
 .list-dropdown .bootstrap-select .dropdown-menu > li > a{
     padding: 6px 20px;
 }
+.list-dropdown .dropdown-menu > li{
+    margin-top: 1px;
+}
+.list-dropdown .dropdown-menu > li.selected > a{
+    background: #ebebeb
+}

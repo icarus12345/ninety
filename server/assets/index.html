@@ -223,12 +223,82 @@ Address <a href="">39 Luong Huu Khanh,Ben Nghe Ward, Distrist 1,HCMC</a></p>
                                         <div class="item" >
                                             <div class="our-avatar">
                                                 <div></div>
+                                                <p><span class="line-clamp-1">NGUYEN TRUONG GIANG</span></p>
+                                                <span>CO - FOUNDER</span>
                                             </div>
                                             <div class="our-desc">
-                                                OUR UX DESIGN EXPERTISE AND INTERNATIONAL WORKING MINDSET ARE WHAT SET US APART FROM OTHER LOCAL AGENCIES. IF YOU HAVE AN AMAZING IDEA THAT YOU WANNA TURN INTO REALITY, WE CAN BE YOUR DIGITAL PARTNER TO POWER ALL THE DESIGN AND DEVELOPMENT WORKS SO YOU CAN RAISE MONEY AND TAKE OVER THE WORLD !
+                                                <div>
+                                                    <p><span></span></p>
+                                                    <i class="clear-fix"></i>
+                                                    OUR UX DESIGN EXPERTISE AND INTERNATIONAL WORKING MINDSET ARE WHAT SET US APART FROM OTHER LOCAL AGENCIES. IF YOU HAVE AN AMAZING IDEA THAT YOU WANNA TURN INTO REALITY, WE CAN BE YOUR DIGITAL PARTNER TO POWER ALL THE DESIGN AND DEVELOPMENT WORKS SO YOU CAN RAISE MONEY AND TAKE OVER THE WORLD !
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="item" >B
+                                        <div class="item" >
+                                            <div class="our-avatar">
+                                                <div></div>
+                                                <p><span class="line-clamp-1">TRAN DUY HUNG</span></p>
+                                                <span>CO - FOUNDER</span>
+                                            </div>
+                                            <div class="our-desc">
+                                                <div>
+                                                    <p><span></span></p>
+                                                    <i class="clear-fix"></i>
+                                                    OUR UX DESIGN EXPERTISE AND INTERNATIONAL WORKING MINDSET ARE WHAT SET US APART FROM OTHER LOCAL AGENCIES. IF YOU HAVE AN AMAZING IDEA THAT YOU WANNA TURN INTO REALITY, WE CAN BE YOUR DIGITAL PARTNER TO POWER ALL THE DESIGN AND DEVELOPMENT WORKS SO YOU CAN RAISE MONEY AND TAKE OVER THE WORLD !
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item" >
+                                            <div class="our-avatar">
+                                                <div></div>
+                                                <p><span class="line-clamp-1">NGUYEN TRUONG GIANG</span></p>
+                                                <span>CO - FOUNDER</span>
+                                            </div>
+                                            <div class="our-desc">
+                                                <div>
+                                                    <p><span></span></p>
+                                                    <i class="clear-fix"></i>
+                                                    OUR UX DESIGN EXPERTISE AND INTERNATIONAL WORKING MINDSET ARE WHAT SET US APART FROM OTHER LOCAL AGENCIES. IF YOU HAVE AN AMAZING IDEA THAT YOU WANNA TURN INTO REALITY, WE CAN BE YOUR DIGITAL PARTNER TO POWER ALL THE DESIGN AND DEVELOPMENT WORKS SO YOU CAN RAISE MONEY AND TAKE OVER THE WORLD !
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item" >
+                                            <div class="our-avatar">
+                                                <div></div>
+                                                <p><span class="line-clamp-1">TRAN DUY HUNG</span></p>
+                                                <span>CO - FOUNDER</span>
+                                            </div>
+                                            <div class="our-desc">
+                                                <div>
+                                                    <p><span></span></p>
+                                                    <i class="clear-fix"></i>
+                                                    OUR UX DESIGN EXPERTISE AND INTERNATIONAL WORKING MINDSET ARE WHAT SET US APART FROM OTHER LOCAL AGENCIES. IF YOU HAVE AN AMAZING IDEA THAT YOU WANNA TURN INTO REALITY, WE CAN BE YOUR DIGITAL PARTNER TO POWER ALL THE DESIGN AND DEVELOPMENT WORKS SO YOU CAN RAISE MONEY AND TAKE OVER THE WORLD !
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="our-team-thumbs">
+                                    <div>
+                                        <div class="item actived">
+                                            <div class="thumb-img"></div>
+                                            <div class="thumb-name"><span class="line-clamp-1">TRAN DUY HUNG</span></div>
+                                            <div class="thumb-pos"><span class="line-clamp-1">UX/UI DESIGN</span></div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="thumb-img"></div>
+                                            <div class="thumb-name"><span class="line-clamp-1">TRAN DUY HUNG</span></div>
+                                            <div class="thumb-pos"><span class="line-clamp-1">UX/UI DESIGN</span></div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="thumb-img"></div>
+                                            <div class="thumb-name"><span class="line-clamp-1">TRAN DUY HUNG</span></div>
+                                            <div class="thumb-pos"><span class="line-clamp-1">UX/UI DESIGN</span></div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="thumb-img"></div>
+                                            <div class="thumb-name"><span class="line-clamp-1">TRAN DUY HUNG</span></div>
+                                            <div class="thumb-pos"><span class="line-clamp-1">UX/UI DESIGN</span></div>
                                         </div>
                                     </div>
                                 </div>
@@ -240,7 +310,8 @@ Address <a href="">39 Luong Huu Khanh,Ben Nghe Ward, Distrist 1,HCMC</a></p>
         </div>
         <script>
     jQuery(document).ready(function() {
-        var owl_our_team = $("#owl-our-team").owlCarousel({
+        if($('#owl-our-team').length==1){
+            var owl_our_team = $("#owl-our-team").owlCarousel({
                 autoplay: false,
                 autoplayTimeout: 6000,
                 animateOut: 'fadeOut',
@@ -248,13 +319,30 @@ Address <a href="">39 Luong Huu Khanh,Ben Nghe Ward, Distrist 1,HCMC</a></p>
     
                 items : 1,
                 // center:true,
-                loop:true,
+                // loop:true,
                 // lazyLoad: true,
                 nav : true,
                 margin: 0,
                 dots: false,
                 navText : ["", ""],
+                onChanged: function(event){
+                    var current = event.item.index;
+                    // var carousel = $('#owl-our-team').data('owl.carousel');
+                    // var index = carousel.relative(current)
+                    console.log(current)
+                    var elm = $('.our-team-thumbs>div').find(".item").eq(current);
+                    if(elm){
+                        $(".our-team-thumbs>div>.item.selected").removeClass('selected')
+                        elm.addClass('selected')
+                    }
+                }
             });
+            $(".our-team-thumbs>div>.item").click(function(){
+                var index = $(".our-team-thumbs>div>.item").get().indexOf(this);
+                $("#owl-our-team").trigger('to.owl.carousel',[index,1,true]);
+            })
+            
+        }
         if($('#owl-home').length==1){
             var length = $('#owl-thumb .item').length;
             var owlThumb = $("#owl-thumb").owlCarousel({

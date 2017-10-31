@@ -113,18 +113,32 @@ class Campaign extends Core_Controller {
             $entry_detail = $this->Campaign_Model->get($id);
         }
         $selected_shop_ids = [];
+        $selected_shops = [];
+        $shops_data = [];
+        if($shops){
+            foreach ($shops as $key => $value) {
+                $selected_shop_ids[] = $value->id;
+                $shops_data[] =
+                $selected_shops[] = array(
+                    "id" => $value->id,
+                    "name" => $value->title,
+                    );
+            }
+        }
         $this->load->vars(array(
-            'shops' => $shops
+            'shops' => $shops,
+            'shops_data' => $shops_data
         ));
         if($apply_for == '1'){
-            if($shops) foreach ($shops as $key => $value) {
-                $selected_shop_ids[] = $value->id;
-            }
+            
             $this->load->vars(array(
                 'selected_shop_ids' => $selected_shop_ids,
+                'selected_shops' => $selected_shops,
             ));
             $output['html'] = $this->load->view('dashboard/campaign/apply_for_trademark',null,true);;
         }else if($apply_for == '2'){
+            $selected_shop_ids = [];
+            $selected_shops = [];
             if($trademark_detail){
                 $provincies = $this->Province_Model->get_by_country_id($trademark_detail->country_id);
                 $this->load->vars(array(
@@ -135,6 +149,18 @@ class Campaign extends Core_Controller {
             $output['html'] = $this->load->view('dashboard/campaign/apply_for_province',null,true);
 
         }else if($apply_for == '3'){
+            $selected_shop_ids = [];
+            $selected_shops = [];
+            if($entry_detail){
+                $campaign_shops = $this->Campaign_Model->get_shop_by_campaign_id($id);
+                if($campaign_shops) foreach ($campaign_shops as $key => $value) {
+                    $selected_shop_ids[] = $value->shop_id;
+                }
+            }
+            $this->load->vars(array(
+                'selected_shop_ids' => $selected_shop_ids,
+                'selected_shops' => $selected_shops,
+            ));
             $output['html'] = $this->load->view('dashboard/campaign/apply_for_shop',null,true);
         }
         
@@ -175,7 +201,7 @@ class Campaign extends Core_Controller {
                 
             // }
             if($entry_detail){
-                $campaign_category = $this->Category_Model->get_by_campaign_id($id);
+                $campaign_category = $this->Campaign_Model->get_category_by_campaign_id($id);
                 $campaign_category_ids = [];
                 if($campaign_category) foreach ($campaign_category as $key => $value) {
                     $campaign_category_ids[] = $value->category_id;
@@ -209,10 +235,10 @@ class Campaign extends Core_Controller {
             'trademarks' => $trademarks,
             'categories' => $categories,
             'arr_status' => array(
-                'draf' => 'Draf',
-                'new' => 'New',
-                'active' => 'Active',
-                'actived' => 'Actived',
+                '1' => 'Draf',
+                '2' => 'New',
+                '3' => 'Active',
+                '4' => 'Actived',
                 ),
             'arr_available_to' => array(
                 '1' => 'Shop',
@@ -226,9 +252,12 @@ class Campaign extends Core_Controller {
         ));
         if(!empty($id)) {
             $entry_detail = $this->Campaign_Model->get($id);
-            $this->load->vars(array(
-                'entry_detail' => $entry_detail
-                ));
+            if($entry_detail){
+                $entry_detail->apply_for = 3;
+                $this->load->vars(array(
+                    'entry_detail' => $entry_detail
+                    ));
+            }
             $output['data'] = $entry_detail;
             // $output['trademark_category_ids'] = $trademark_category_ids;
         }
@@ -256,20 +285,44 @@ class Campaign extends Core_Controller {
         } else {
 
             $params = $data;
-            $params['status'] = 'true';
+            $category_ids = $params['category_ids'];
+            unset($params['category_ids']);
+            $shop_ids = $params['shop_ids'];
+            unset($params['shop_ids']);
+            unset($params['apply_for']);
+            if(!empty($params['available_to'])){
+                $params['available_to'] = implode(",",$params['available_to']);
+            }
             $params['author'] = $user->ause_id;
-            // $this->db->trans_begin();
-            $rs = $this->Shop_Model->onInsert($params);
-            
-            if ($rs) {
-            // if ($this->db->trans_status() !== FALSE) {
+            $this->db->trans_begin();
+            $this->Campaign_Model->onInsert($params);
+            $insert_id = $this->db->insert_id();
+            if(!empty($category_ids)){
+                foreach ($category_ids as $category_id) {
+                    $batchDataCate[] = array(
+                        'campaign_id'=>$insert_id,
+                        'category_id'=>$category_id,
+                        );
+                }
+                $this->Campaign_Model->insertBatchCategory($batchDataCate);
+            }
+            if(!empty($shop_ids)){ 
+                foreach ($shop_ids as $shop_id) {
+                    $batchDataShop[] = array(
+                        'campaign_id'=>$insert_id,
+                        'shop_id'=>$shop_id,
+                        );
+                }
+                $this->Campaign_Model->insertBatchShop($batchDataShop);
+            }
+            if ($this->db->trans_status() !== FALSE) {
                 $output["code"] = 1;
                 $output["text"] = 'ok';
                 $output["message"] = 'Register record to database.';
-                // $this->db->trans_commit();
+                $this->db->trans_commit();
 
             } else {
-                // $this->db->trans_rollback();
+                $this->db->trans_rollback();
                 $output["code"] = -1;
                 $output["message"] = "Record faily to insert. Please check data input and try again.";
             }
@@ -299,21 +352,49 @@ class Campaign extends Core_Controller {
         } else {
 
             $params = $data;
-            $entry_detail = $this->Shop_Model->get($id);
+            $category_ids = $params['category_ids'];
+            unset($params['category_ids']);
+            $shop_ids = $params['shop_ids'];
+            unset($params['shop_ids']);
+            unset($params['apply_for']);
+            if(!empty($params['available_to'])){
+                $params['available_to'] = implode(",",$params['available_to']);
+            }
+            $entry_detail = $this->Campaign_Model->get($id);
             if($entry_detail){
                 if(empty($entry_detail->author)) 
                     $params['author'] = $user->ause_id;
                 
-                // $this->db->trans_begin();
-                $rs = $this->Shop_Model->onUpdate($id, $params);
-                if ($rs) {
-                // if ($this->db->trans_status() !== FALSE) {
+                $this->db->trans_begin();
+                $rs = $this->Campaign_Model->onUpdate($id, $params);
+                $this->Campaign_Model->delete_category_by_campaign_id($entry_detail->id);
+                if(!empty($category_ids)){
+                    foreach ($category_ids as $category_id) {
+                        $batchDataCate[] = array(
+                            'campaign_id'=> $entry_detail->id,
+                            'category_id'=>$category_id,
+                            );
+                    }
+                    $this->Campaign_Model->insertBatchCategory($batchDataCate);
+                }
+                $this->Campaign_Model->delete_shop_by_campaign_id($entry_detail->id);
+                if(!empty($shop_ids)){ 
+                    foreach ($shop_ids as $shop_id) {
+                        $batchDataShop[] = array(
+                            'campaign_id'=> $entry_detail->id,
+                            'shop_id'=>$shop_id,
+                            );
+                    }
+                    $this->Campaign_Model->insertBatchShop($batchDataShop);
+                }
+                // if ($rs) {
+                if ($this->db->trans_status() !== FALSE) {
                     $output["code"] = 1;
                     $output["text"] = 'ok';
                     $output["message"] = 'Updated Entry to database.';
-                    // $this->db->trans_commit();
+                    $this->db->trans_commit();
                 } else {
-                    // $this->db->trans_rollback();
+                    $this->db->trans_rollback();
                     $output["code"] = -1;
                     $output["message"] = "Entry faily to update. Please check data input and try again.";
                 }
@@ -339,17 +420,22 @@ class Campaign extends Core_Controller {
             'data' => null
         );
         $id = $this->input->post('id');
-        $entry_detail = $this->Shop_Model->get($id);
+        $entry_detail = $this->Campaign_Model->get($id);
         if($entry_detail){
-            
-            $rs = $this->Shop_Model->onDelete($id);
-            if ($rs === true) {
+            $this->db->trans_begin();
+            $rs = $this->Campaign_Model->onDelete($id);
+            $this->Campaign_Model->delete_shop_by_campaign_id($entry_detail->id);
+            $this->Campaign_Model->delete_category_by_campaign_id($entry_detail->id);
+            // if ($rs === true) {
+            if ($this->db->trans_status() !== FALSE) {
                 $output["code"] = 1;
                 $output["text"] = 'ok';
                 $output["message"] = 'Deleted record on database.';
+                $this->db->trans_commit();
             } else {
                 $output["code"] = -1;
                 $output["message"] = "Record faily to delete. Please check data input and try again.";
+                $this->db->trans_rollback();
             }
         }else{
             $output["message"] = 'Record doest exists.';

@@ -1,8 +1,8 @@
 <div>
     <select multiple
-        name="category_id" 
+        name="category_ids" 
         class="form-control selectpicker validate[required]"
-        data-putto="#frm-err-data-category_id"
+        data-putto="#frm-err-data-category_ids"
         data-live-search="true"
         data-size="10"
         data-server-dropdown="1"
@@ -17,4 +17,4 @@
         <?php endforeach; ?>
     </select>
 </div>
-<div id="frm-err-data-category_id"></div>
+<div id="frm-err-data-category_ids"></div>
