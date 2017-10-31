@@ -1,4 +1,4 @@
-var BASE_URL = 'http://risk90.com.au/';
+var BASE_URL = 'http://ninety.widdleman.com/';
 // var BASE_URL = 'http://local.ninety.com/';
 var APP_ID = 'raw';
 // var APP_ID = 'raw';
@@ -216,13 +216,13 @@ document.addEventListener("deviceready",function(){
                     alert(e.message)
                 }
             }
-            $mdToast.show(
-                    $mdToast.simple()
-                        .textContent('Notification!')
-                        .position("top right")
-                        .hideDelay(3000)
-                        .theme("success")
-                );
+            // $mdToast.show(
+            //         $mdToast.simple()
+            //             .textContent('Notification!')
+            //             .position("top right")
+            //             .hideDelay(3000)
+            //             .theme("success")
+            //     );
         });
     APP.config(function(
         $routeProvider, $locationProvider, $mdGestureProvider, $httpProvider
