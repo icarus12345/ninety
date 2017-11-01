@@ -261,7 +261,7 @@ function Main2Controller(
                     pdf_info.target_path = _CONS.DIR + pdf_file_name;
                     pdf_info.project = p;
                     pdf_info.export_option = export_option;
-
+                    console.log(pdf_info,'pdf_info')
                     _check_exits_pdf_file(_open_pdf, _export_pdf);
 
                     

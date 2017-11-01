@@ -38,6 +38,7 @@ body,html{
     /*font-weight: 300;*/
     background: #f6f6f6;
 }
+.clear-fix{clear: both;display: block;}
 .ckeditor{color: #777;font-size: 15px}
 h1,h2,h3,h4,h5,p{margin: 0}
 .nav-collapse{
@@ -480,7 +481,7 @@ body.head-collapsed{overflow:hidden;}
     max-width: 1200px;margin: auto
 }
 .who-we-are{
-    padding: 40px 0 80px 0;
+    padding: 40px 0 0px 0;
 }
 .about-us h3{
     font-size: 16px;
@@ -493,7 +494,7 @@ body.head-collapsed{overflow:hidden;}
     text-align-last: center;
 }
 .our-team{
-    padding: 40px 0;
+    padding: 80px 0;
 }
 .scroll-section{
     padding: 40px;
@@ -583,8 +584,9 @@ body.head-collapsed{overflow:hidden;}
     margin-bottom: 10px;
     background: #ecbe3f;
 }
+.h2,
 .our-team h2{
-    padding: 20px 0
+    padding: 30px 0
 }
 .thumb-img{
     background: #ebebeb;
@@ -612,6 +614,23 @@ body.head-collapsed{overflow:hidden;}
     -webkit-transform: translateY(45%);
     -ms-transform: translateY(45%);
 }
+.how-we-work{padding-bottom: 20px;}
+.how-we-work-1{
+    height: 100px;
+    background-image: url(../images/Layer-41.png);
+}
+.how-we-work-2{
+    height: 100px;
+    background-image: url(../images/Layer-43.png);
+}
+.how-we-work-3{
+    height: 100px;
+    background-image: url(../images/Forma-1.png);
+}
+.how-we-work .item { min-height: 212px;padding-bottom: 20px;}
+.how-we-work .item h3{ font-style: italic; padding: 20px 0 10px 0;color: #000}
+.how-we-work .item p{font-size: 12px;padding: 0 10px;text-align: left;}
+.footer{background:#000;height: 60px}
 @media (min-height: 824px) {
     .navbar-collapse>div{
         padding-top: calc( (100vh - 80px - 544px) / 2 );

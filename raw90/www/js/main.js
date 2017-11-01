@@ -126,6 +126,7 @@ document.addEventListener("deviceready",function(){
             }
             // document.addEventListener("deviceready",function(){
                 try{
+                    _CONS.DIR = '/';
                     _CONS.PLATFORM = device.platform;
                     if(device.platform == 'iOS'){
                         _CONS.DIR = cordova.file.dataDirectory;
