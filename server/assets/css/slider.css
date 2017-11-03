@@ -211,6 +211,11 @@
     height: 106px;
     background: url(../images/icon_down.png) no-repeat center
 }
+#owl-our-service{height: 100%;}
+#owl-our-service .owl-stage-outer{height: 100%;}
+#owl-our-service .owl-stage-outer .owl-stage{height: 100%;}
+#owl-our-service .owl-stage-outer .owl-stage .owl-item{height: 100%;}
+#owl-our-service .item{height: 100%}
 @media (max-width: 768px) {
     .our-team-slider{
         width: 100%;

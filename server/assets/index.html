@@ -60,7 +60,7 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href='index.html#home' data-toggle="collapse" data-target="#navigation">Home</a></li>
                     <li class=""><a href='#about' data-toggle="collapse" data-target="#navigation">About</a></li>
-                    <li class=""><a href='#'>Services</a></li>
+                    <li class=""><a href='#service' data-toggle="collapse" data-target="#navigation">Services</a></li>
                     <li class=""><a href='index.html#our-brand-contact' data-toggle="collapse" data-target="#navigation">Our Brands</a></li>
                     <li class=""><a href='#'>Projects</a></li>
                     <li class=""><a href='#'>Blogs</a></li>
@@ -209,7 +209,10 @@ Address <a href="">39 Luong Huu Khanh,Ben Nghe Ward, Distrist 1,HCMC</a></p>
             <div class="section" id="section-about">
                 <div class="about-us scroll-section">
                     <div>
-                        <div class="about-bg contain"></div>
+                        <div class="service-bg contain" style="background-image: url(images/about.jpg)">
+                            <h2><span>Who<br/> we are</span></h2>
+                            
+                        </div>
                         <div class="container text-center who-we-are">
                             <h3>who we are</h3>
                             <div data-wow-delay="0.5s" class="wow fadeInUp desc">
@@ -334,9 +337,96 @@ Address <a href="">39 Luong Huu Khanh,Ben Nghe Ward, Distrist 1,HCMC</a></p>
                     </div>
                 </div>
             </div>
+            <div class="section" id="section-service">
+                <div class="about-us scroll-section">
+                    <div>
+                        <div class="service-bg contain" style="background-image: url(images/service.jpg)">
+                            <h2><span>What<br/> we do</span></h2>
+                            
+                        </div>
+                        <div class="container text-center who-we-are">
+                            <h3>what we do</h3>
+                            <div data-wow-delay="0.5s" class="wow fadeInUp desc">
+                                <p class="text-justify">CDS STUDIO IS A CREATIVE DIGITAL AGENCY BASED IN SAIGON THAT CRAFTED FUNCTIONALLY BEAUTIFUL WEBSITES AND APPS. TOGETHER, WE CAN TRANSFORM THE WAY YOUR BRAND CONNECTS WITH CLIENTS.</p>
+
+                                <p class="text-justify wow fadeInUp">OUR UX DESIGN EXPERTISE AND INTERNATIONAL WORKING MINDSET ARE WHAT SET US APART FROM OTHER LOCAL AGENCIES. IF YOU HAVE AN AMAZING IDEA THAT YOU WANNA TURN INTO REALITY, WE CAN BE YOUR DIGITAL PARTNER TO POWER ALL THE DESIGN AND DEVELOPMENT WORKS SO YOU CAN RAISE MONEY AND TAKE OVER THE WORLD!</p>
+                            </div> 
+                        </div>
+                        <div class="how-we-work">
+                            <h2 class="h2 wow fadeInUp text-center">OUR SERVICE</h2>
+                                <div class="container">
+                            <div class="our-service-box ">
+                                    <div class="left"></div>
+                                    <div class="right">
+                                        <div>
+                                        <div class="our-service-slider">
+                                            <div class="owl-carousel" id="owl-our-service">
+                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                            </div>
+                                        </div>
+                                        <ul class="list-service">
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">1</a></li>
+                                            <li><a href="#">1</a></li>
+                                        </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         <script>
     jQuery(document).ready(function() {
+        if($('#owl-our-service').length==1){
+            var owl_our_team = $("#owl-our-service").owlCarousel({
+                autoplay: false,
+                autoplayTimeout: 6000,
+                animateOut: 'fadeOut',
+                // animateIn: 'fadeOut',
+    
+                items : 1,
+                // center:true,
+                // loop:true,
+                // lazyLoad: true,
+                nav : true,
+                margin: 0,
+                dots: false,
+                navText : ["", ""],
+                onChanged: function(event){
+                    // var current = event.item.index;
+                    // // var carousel = $('#owl-our-team').data('owl.carousel');
+                    // // var index = carousel.relative(current)
+                    // console.log(current)
+                    // var elm = $('.our-team-thumbs>div').find(".item").eq(current);
+                    // if(elm){
+                    //     $(".our-team-thumbs>div>.item.selected").removeClass('selected')
+                    //     elm.addClass('selected')
+                    // }
+                }
+            });
+            // $(".our-team-thumbs>div>.item").click(function(){
+            //     var index = $(".our-team-thumbs>div>.item").get().indexOf(this);
+            //     $("#owl-our-team").trigger('to.owl.carousel',[index,1,true]);
+            // })
+            
+        }
         if($('#owl-our-team').length==1){
             var owl_our_team = $("#owl-our-team").owlCarousel({
                 autoplay: false,

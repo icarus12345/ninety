@@ -9,7 +9,7 @@ $(document).ready(function() {
     };
     $('#fullpage').fullpage({
         sectionsColor: ['#f6f6f6', '#12171e', '#f6f6f6', 'whitesmoke', '#ccddff'],
-        anchors: ['home', 'our-brand-contact', 'about', '4thpage', 'lastPage'],
+        anchors: ['home', 'our-brand-contact', 'about', 'service', 'lastPage'],
         menu: '#menu',
         // css3: true,
         // scrollingSpeed: 1000,
