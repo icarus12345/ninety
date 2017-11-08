@@ -359,30 +359,32 @@ Address <a href="">39 Luong Huu Khanh,Ben Nghe Ward, Distrist 1,HCMC</a></p>
                                     <div class="left"></div>
                                     <div class="right">
                                         <div>
-                                        <div class="our-service-slider">
-                                            <div class="owl-carousel" id="owl-our-service">
-                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
-                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
-                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
-                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
-                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
-                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
-                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
-                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
-                                                <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                            <div class="our-service-slider">
+                                                <div class="owl-carousel" id="owl-our-service">
+                                                    <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                    <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                    <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                    <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                    <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                    <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                    <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                    <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                    <div class="item cover" style="background-image: url(images/Layer-44.jpg)"></div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <ul class="list-service">
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">1</a></li>
-                                            <li><a href="#">1</a></li>
-                                        </ul>
+                                            <div class="list-service">
+                                                <ul >
+                                                    <li><a href="JavaScript:">UI/UX DESIGN</a></li>
+                                                    <li><a href="JavaScript:">BRAND INDENTITY</a></li>
+                                                    <li><a href="JavaScript:">WEB DESIGN & DEVELOPMENT</a></li>
+                                                    <li><a href="JavaScript:">MOBILE APP DEVELOPMENT</a></li>
+                                                    <li><a href="JavaScript:">VIDEO & ANIMATION</a></li>
+                                                    <li><a href="JavaScript:">PHOTOGRAPHY</a></li>
+                                                    <li><a href="JavaScript:">SOCIAL MARKETING</a></li>
+                                                    <li><a href="JavaScript:">BRAND STRATEGY</a></li>
+                                                    <li><a href="JavaScript:">PRINT DESIGN</a></li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -410,21 +412,21 @@ Address <a href="">39 Luong Huu Khanh,Ben Nghe Ward, Distrist 1,HCMC</a></p>
                 dots: false,
                 navText : ["", ""],
                 onChanged: function(event){
-                    // var current = event.item.index;
-                    // // var carousel = $('#owl-our-team').data('owl.carousel');
-                    // // var index = carousel.relative(current)
+                    var current = event.item.index;
+                    // var carousel = $('#owl-our-service').data('owl.carousel');
+                    // var index = carousel.relative(current)
                     // console.log(current)
-                    // var elm = $('.our-team-thumbs>div').find(".item").eq(current);
-                    // if(elm){
-                    //     $(".our-team-thumbs>div>.item.selected").removeClass('selected')
-                    //     elm.addClass('selected')
-                    // }
+                    var elm = $('.list-service').find("li").eq(current);
+                    if(elm){
+                        $(".list-service li.actived").removeClass('actived')
+                        elm.addClass('actived')
+                    }
                 }
             });
-            // $(".our-team-thumbs>div>.item").click(function(){
-            //     var index = $(".our-team-thumbs>div>.item").get().indexOf(this);
-            //     $("#owl-our-team").trigger('to.owl.carousel',[index,1,true]);
-            // })
+            $(".list-service li").click(function(){
+                var index = $(".list-service li").get().indexOf(this);
+                $("#owl-our-service").trigger('to.owl.carousel',[index,1,true]);
+            })
             
         }
         if($('#owl-our-team').length==1){
