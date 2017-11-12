@@ -1,5 +1,8 @@
 var wow
 $(document).ready(function() {
+    $(window).scroll(function(){
+        $('.cate-menu').css({top:$(window).scrollTop()+190})
+    })
     $.fn.fullpage.removeTouchHandler = function (){ 
         var isTouchDevice = navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|Windows Phone)/);
         if (isTouchDevice) {

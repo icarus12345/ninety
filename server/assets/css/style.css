@@ -647,7 +647,7 @@ body.head-collapsed{overflow:hidden;}
 .how-we-work .item { min-height: 212px;padding-bottom: 20px;}
 .how-we-work .item h3{ font-style: italic; padding: 20px 0 10px 0;color: #000}
 .how-we-work .item p{font-size: 12px;padding: 0 10px;text-align: left;}
-.footer{background:#000;height: 60px}
+.footer{background:#000;height: 60px;padding: 10px;}
 .our-service-box{
     padding-left: 36%;
     position: relative;
@@ -800,6 +800,165 @@ body.head-collapsed{overflow:hidden;}
     -ms-transform-origin: 0 0;
     -webkit-transform-origin: 0 0;
 }
+.our-project{
+    position: relative;
+}
+.our-project h2:after{
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;right: -15%;
+    height: 1px;background: #111;
+    z-index: 11;
+    bottom: 0;
+}
+.our-project h2{
+    line-height: 80px;
+    font-size: 80px;
+    padding: 10px 0 30px 0;
+    font-weight:bold;
+    position: relative;
+}
+.our-project .right{
+    float: left;
+    width:50%;
+    
+}
+.our-project-img {
+    padding-bottom: 80%;
+    background-color: #ccc;
+}
+.our-project-info{}
+.our-project-info .title{color: #111;font-weight:bold;padding: 10px 0 ;}
+.our-project-info .cate{color: #333;padding: 10px 0;}
+.our-project-info p{line-height: 2em;font-size: .8em}
+.our-project-info p>span{color: #ecbe3f}
+.portfolio{
+    text-align: center;
+    background: #f0f0f0;padding: 30px 10px;
+}
+.portfolio>div{
+    font-size: 12px;
+}
+.portfolio h1{
+    margin:0;
+    padding: 10px 0;
+    font-weight: bold;
+    font-size: 40px;
+}
+.project-list{
+    padding-top: 40px;
+}
+.project-list .x22{}
+.project-list .x22>div{
+    padding-bottom: 90%;
+    margin-bottom: 100px;
+    position: relative;}
+.project-list .g21>div,
+.project-list .x21>div{
+    padding-bottom: calc((100% + 10px) * 2 * 90 / 100);
+    padding-bottom: -ms-calc((100% + 10px) * 2 * 90 / 100);
+    padding-bottom: -moz-calc((100% + 10px) * 2 * 90 / 100);
+    padding-bottom: -webkit-calc((100% + 10px) * 2 * 90 / 100);
+    position: relative;
+    margin-bottom: 100px;
+}
+.project-list .thumb{background-color: #ccc;}
+.project-list .x22 .item{position: absolute;left: 0;top: 0;width:100%;height: 100%;}
+.project-list .x21 .item{position: absolute;left: 0;top: 0;width:100%;height: 100%;}
+.project-list .g21 .item{
+    position: absolute;left: 0;width:100%;
+    height: calc(50% - 30px - 10px);
+}
+.project-list .g21 .item:first-child{top: 0;}
+.project-list .g21 .item:last-child{bottom: 0;}
+
+.project-list .x22 .item .thumb{
+    height: 100%
+}
+.project-list .g21 .item .thumb{height: 100%;}
+.project-list .x21 .item .thumb{height: 100%;}
+
+
+.project-list .item .cap{padding: 10px 0;}
+.project-list .item .name{font-weight: bold;line-height: 1.5em}
+.project-list .item .pdesc{text-transform: uppercase;text-align: left;color: #777;}
+.footer{font-size: 11px;color:#ccc;}
+.footer >div{
+    float: left;background: url(../images/white-logo.png) center left no-repeat;
+    padding: 4px 4px 4px 50px;
+}
+.footer >div>a>b{color: #fff}
+.footer >div>a{
+    line-height: 16px;
+    color: #ccc;
+    text-decoration: none;
+}
+.footer>ul{
+    list-style: none;
+    padding: 0;margin:0;
+    text-align: right;
+}
+.footer>ul>li{display: inline-block;padding: 0 5px}
+.footer>ul>li>a{
+    color: #ccc;
+    text-decoration: none;
+    line-height: 40px;
+}
+.cate-menu{
+    position: absolute;
+    top: 190px;
+    left: 50%;
+    margin-left: -50%;
+    -webkit-transition: all .5s; /*adjust timing here */
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+.cate-menu>span{
+    margin: auto;
+    width: 8px;height: 12px;
+    display: block;
+    border-right: 8px solid #ecbe3f;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    position: relative;
+
+}
+.cate-menu>span:after{
+    content: '';
+    position: absolute;
+    top:-6px;left: -8px;
+    margin: auto;
+    width: 8px;height: 12px;
+    display: block;
+    border-right: 8px solid #ecbe3f;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    opacity: .5;
+
+}
+.cate-menu>span:before{
+    content: '';
+    position: absolute;
+    top: -6px;
+    right: -18px;
+    margin: auto;
+    width: 8px;height: 12px;
+    display: block;
+    border-right: 8px solid #ecbe3f;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    opacity: .5;
+
+}
+.cate-menu>ul{
+    margin: 0;padding: 0;list-style: none;
+    border:1px solid #ccc;
+}
+.cate-menu>ul>li{position: relative;padding-left: 20px}
+.cate-menu>ul>li:before{}
+.cate-menu>ul>li>a{}
 @media (min-height: 824px) {
     .navbar-collapse>div{
         padding-top: calc( (100vh - 80px - 544px) / 2 );
@@ -850,6 +1009,10 @@ body.head-collapsed{overflow:hidden;}
 }
 
 @media (max-width: 1600px) {
+    .our-project h2{
+        line-height: 70px;
+        font-size: 70px;
+    }
 }
 @media (max-width: 1200px) {
     .navbar-collapse{
@@ -884,6 +1047,10 @@ body.head-collapsed{overflow:hidden;}
     }
     .our-service-box .left>p{
         font-size: 13px;
+    }
+    .our-project h2{
+        line-height: 60px;
+        font-size: 60px;
     }
 }
 @media (max-width: 960px) {
@@ -923,6 +1090,10 @@ body.head-collapsed{overflow:hidden;}
     }
     .our-service-box .right .list-service li.actived>a:before, .our-service-box .right .list-service li:hover>a:before{
         width: 50px
+    }
+    .our-project h2{
+        line-height: 50px;
+        font-size: 50px;
     }
 }
     
@@ -999,6 +1170,22 @@ body.head-collapsed{overflow:hidden;}
     .our-service-box .left>p{font-size: 12px;}
     .our-service-box .left>p:before{padding-top: 10px;}
     .who-we-are{padding-right: 10px;padding-left: 10px;}
+    .our-project h2{
+        line-height: 30px;
+        font-size: 30px;
+    }
+    .project-list .item .cap{
+        font-size: 12px;
+    }
+    .footer{height: auto;}
+    .footer>div{
+        padding-top:50px;
+        background-position: top center;
+    }
+    .footer>div,.footer>ul{
+        width: 100%;
+        text-align: center;
+    }
 }
 @media (max-width: 480px) {
     .scroll-section{
