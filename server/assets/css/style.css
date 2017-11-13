@@ -828,7 +828,9 @@ body.head-collapsed{overflow:hidden;}
     padding-bottom: 80%;
     background-color: #ccc;
 }
-.our-project-info{}
+.our-project-info{
+    padding-bottom: 40px;
+}
 .our-project-info .title{color: #111;font-weight:bold;padding: 10px 0 ;}
 .our-project-info .cate{color: #333;padding: 10px 0;}
 .our-project-info p{line-height: 2em;font-size: .8em}
@@ -914,9 +916,11 @@ body.head-collapsed{overflow:hidden;}
     -moz-transition: all .5s;
     -o-transition: all .5s;
     transition: all .5s;
+    z-index: 10;
+    font-size: 12px;
 }
 .cate-menu>span{
-    margin: auto;
+    margin-left: 8px;
     width: 8px;height: 12px;
     display: block;
     border-right: 8px solid #ecbe3f;
@@ -954,11 +958,45 @@ body.head-collapsed{overflow:hidden;}
 }
 .cate-menu>ul{
     margin: 0;padding: 0;list-style: none;
-    border:1px solid #ccc;
+    background-color: rgba(255,255,255,.5);
 }
-.cate-menu>ul>li{position: relative;padding-left: 20px}
-.cate-menu>ul>li:before{}
-.cate-menu>ul>li>a{}
+.cate-menu>ul>li{position: relative;padding:10px 0 10px 30px}
+.cate-menu>ul>li:before{
+    content: '';
+    display: block;
+    width: 12px;
+    height: 12px;
+    position: absolute;
+    border-radius: 50%;
+    background-color: #FFEB3B;
+    border: 0 solid #FFEB3B;
+    top: 50%;
+    left: 6px;
+    margin-top: -6px;
+    -webkit-transition: all .5s; /*adjust timing here */
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+.cate-menu>ul>li:hover:before,
+.cate-menu>ul>li.actived:before{
+    width: 16px;height: 16px;
+    background-color: #ecbe3f;
+    border:2px solid #FFEB3B;
+    left: 4px;margin-top: -8px;
+}
+.cate-menu>ul>li>a{
+    color: #777;
+    text-decoration: none;
+    -webkit-transition: all .5s; /*adjust timing here */
+    -moz-transition: all .5s;
+    -o-transition: all .5s;
+    transition: all .5s;
+}
+.cate-menu>ul>li:hover>a,
+.cate-menu>ul>li.actived>a{
+    color: #111;
+}
 @media (min-height: 824px) {
     .navbar-collapse>div{
         padding-top: calc( (100vh - 80px - 544px) / 2 );
@@ -1003,7 +1041,10 @@ body.head-collapsed{overflow:hidden;}
 @media (min-width: 961px) {
     
 }
-@media (min-width: 1201px) {
+@media (min-width: 1300px) {
+    .cate-menu{
+        padding-left: 40px;
+    }
 }
 @media (min-width: 1601px) {
 }
@@ -1184,6 +1225,12 @@ body.head-collapsed{overflow:hidden;}
     }
     .footer>div,.footer>ul{
         width: 100%;
+        text-align: center;
+    }
+    .our-project h2,
+    .our-project-info,
+    .project-list .item .name,
+    .project-list .item .pdesc{
         text-align: center;
     }
 }
