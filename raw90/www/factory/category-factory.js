@@ -232,15 +232,22 @@ function Category(opt){
                                     q.comment = 'You have not completed this question';
                                     q.comment_class = 'comment-none';
                                     if(q.score>0){
-                                        if(q.score < SCORE_LEVEL[0]){
-                                            q.comment = q.lower || NODATACOMMENT;
-                                            q.comment_class = 'comment-lower';
-                                        } else if(q.score < SCORE_LEVEL[1]){
-                                            q.comment = q.medium || NODATACOMMENT;
-                                            q.comment_class = 'comment-medium';
-                                        } else {
+                                    //     if(q.score < SCORE_LEVEL[0]){
+                                    //         q.comment = q.lower || NODATACOMMENT;
+                                    //         q.comment_class = 'comment-lower';
+                                    //     } else if(q.score < SCORE_LEVEL[1]){
+                                    //         q.comment = q.medium || NODATACOMMENT;
+                                    //         q.comment_class = 'comment-medium';
+                                    //     } else {
+                                    //         q.comment = q.higher || NODATACOMMENT;
+                                    //         q.comment_class = 'comment-higher';
+                                    //     }
+                                        if(q.score >= q.global){
                                             q.comment = q.higher || NODATACOMMENT;
                                             q.comment_class = 'comment-higher';
+                                        } else{
+                                            q.comment = q.lower || NODATACOMMENT;
+                                            q.comment_class = 'comment-lower';
                                         }
                                     }
                                     // console.log(q.score,q.comment,SCORE_LEVEL,'QQQRRR')
@@ -261,15 +268,22 @@ function Category(opt){
                 this.comment = 'You have not completed this section';
                 this.comment_class = 'comment-none';
                 if(this.count_answered == this.count_question){
-                    if(this.score < SCORE_LEVEL[0]){
+                    // if(this.score < SCORE_LEVEL[0]){
+                    //     this.comment = this.lower || NODATACOMMENT;
+                    //     this.comment_class = 'comment-lower'
+                    // } else if(this.score < SCORE_LEVEL[1]){
+                    //     this.comment = this.medium || NODATACOMMENT;
+                    //     this.comment_class = 'comment-medium'
+                    // } else {
+                    //     this.comment = this.higher || NODATACOMMENT;
+                    //     this.comment_class = 'comment-higher'
+                    // }
+                    if(+this.score < +this.global_score){
                         this.comment = this.lower || NODATACOMMENT;
-                        this.comment_class = 'comment-lower'
-                    } else if(this.score < SCORE_LEVEL[1]){
-                        this.comment = this.medium || NODATACOMMENT;
-                        this.comment_class = 'comment-medium'
-                    } else {
+                        this.comment_class = 'comment-lower';
+                    }else{
                         this.comment = this.higher || NODATACOMMENT;
-                        this.comment_class = 'comment-higher'
+                        this.comment_class = 'comment-higher';
                     }
                 }
                 
@@ -387,13 +401,20 @@ function Category(opt){
                 this.comment = 'You have not completed this section';
                 this.comment_class = 'comment-none';
                 if(this.count_answered == this.count_question){
-                    if(this.score < SCORE_LEVEL[0]){
+                    // if(this.score < SCORE_LEVEL[0]){
+                    //     this.comment = this.lower || NODATACOMMENT;
+                    //     this.comment_class = 'comment-lower';
+                    // } else if(this.score < SCORE_LEVEL[1]){
+                    //     this.comment = this.medium || NODATACOMMENT;
+                    //     this.comment_class = 'comment-medium';
+                    // } else {
+                    //     this.comment = this.higher || NODATACOMMENT;
+                    //     this.comment_class = 'comment-higher';
+                    // }
+                    if(+this.score < +this.global_score){
                         this.comment = this.lower || NODATACOMMENT;
                         this.comment_class = 'comment-lower';
-                    } else if(this.score < SCORE_LEVEL[1]){
-                        this.comment = this.medium || NODATACOMMENT;
-                        this.comment_class = 'comment-medium';
-                    } else {
+                    }else{
                         this.comment = this.higher || NODATACOMMENT;
                         this.comment_class = 'comment-higher';
                     }
