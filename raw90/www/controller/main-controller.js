@@ -408,7 +408,7 @@ function Main2Controller(
         // });
         }
 
-        __get_list();
+        $timeout(__get_list,1000);
         $rootScope.reload_list_project = __get_list;
     } catch (e){
         Dialog.alert('EM414:'+e.message);

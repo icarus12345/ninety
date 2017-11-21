@@ -11,7 +11,8 @@
     <preference name="loadUrlTimeoutValue" value="700000" />
     <preference name="SplashScreenDelay" value="0" />
     <preference name="FadeSplashScreenDuration" value="0" />
-    <preference name="Fullscreen" value="false" />
+    <preference name="Fullscreen" value="true" />
+    <preference name="StatusBarOverlaysWebView" value="true" />
     <preference name="HideKeyboardFormAccessoryBar" value="true" />
     <preference name="Orientation" value="portrait" />
     <content src="index.html" />
@@ -45,4 +46,5 @@
     <plugin name="cordova-plugin-screen-orientation" spec="^2.0.1" />
     <plugin name="cordova-plugin-statusbar" spec="^2.2.3" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <plugin name="cordova-plugin-disable-ios11-statusbar" spec="^1.0.0" />
 </widget>
