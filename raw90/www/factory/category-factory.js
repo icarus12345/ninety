@@ -14,7 +14,7 @@ function Category(opt){
     // var SCORE_LEVEL = [1.5,2.5,4];
     var SCORE_LEVEL = [2.5,-1,5];
     // var SCORE_DATA = [1.5,2.5,4];
-    var SCORE_DATA = [0,1,2,3,4,5];
+    var SCORE_DATA = [1,2,3,4,5,6];
     var NODATACOMMENT = "This section don't have comment.";
     var me = this;
     this.id = opt.id || 0;
@@ -225,24 +225,34 @@ function Category(opt){
                                 //     q.comment = q.higher || NODATACOMMENT;
                                 // }
                                 if(+q.answered[I]>=0){
-                                    score = SCORE_DATA[+q.answered[I]]
+                                    // score = SCORE_DATA[+q.answered[I]]
+                                    score = q.answers[+q.answered[I]].score
                                 }
                                 if(I==0){
                                     q.score = score;
                                     q.comment = 'You have not completed this question';
                                     q.comment_class = 'comment-none';
-                                    if(q.score>0){
-                                        if(q.score < SCORE_LEVEL[0]){
-                                            q.comment = q.lower || NODATACOMMENT;
-                                            q.comment_class = 'comment-lower';
-                                        } else if(q.score < SCORE_LEVEL[1]){
-                                            q.comment = q.medium || NODATACOMMENT;
-                                            q.comment_class = 'comment-medium';
-                                        } else {
+                                    if(q.answers[q.answered[0]]!=undefined){
+                                        // if(q.score < SCORE_LEVEL[0]){
+                                        //     q.comment = q.lower || NODATACOMMENT;
+                                        //     q.comment_class = 'comment-lower';
+                                        // } else if(q.score < SCORE_LEVEL[1]){
+                                        //     q.comment = q.medium || NODATACOMMENT;
+                                        //     q.comment_class = 'comment-medium';
+                                        // } else {
+                                        //     q.comment = q.higher || NODATACOMMENT;
+                                        //     q.comment_class = 'comment-higher';
+                                        // }
+
+                                        if(q.score >= q.global){
                                             q.comment = q.higher || NODATACOMMENT;
                                             q.comment_class = 'comment-higher';
+                                        } else{
+                                            q.comment = q.lower || NODATACOMMENT;
+                                            q.comment_class = 'comment-lower';
                                         }
                                     }
+
                                     // console.log(q.score,q.comment,SCORE_LEVEL,'QQQRRR')
                                 }
                             return sum + score; 
@@ -271,6 +281,14 @@ function Category(opt){
                         this.comment = this.higher || NODATACOMMENT;
                         this.comment_class = 'comment-higher'
                     }
+                    if(+this.score < +this.global_score){
+                        this.comment = this.lower || NODATACOMMENT;
+                        this.comment_class = 'comment-lower';
+                    }else{
+                        this.comment = this.higher || NODATACOMMENT;
+                        this.comment_class = 'comment-higher';
+                    }
+
                 }
                 
                 // Chart Data
@@ -288,7 +306,7 @@ function Category(opt){
                     // if(q.global == 3) global_score = SCORE_LEVEL[3];
                     // if(q.global == 4) global_score = SCORE_LEVEL[4];
                     if(+q.global>=0){
-                        global_score = SCORE_DATA[+q.global];
+                        global_score = +q.global;
                     }
                     _labels.push(+J+1);
                     _goalData.push(score);
@@ -394,6 +412,13 @@ function Category(opt){
                         this.comment = this.medium || NODATACOMMENT;
                         this.comment_class = 'comment-medium';
                     } else {
+                        this.comment = this.higher || NODATACOMMENT;
+                        this.comment_class = 'comment-higher';
+                    }
+                    if(+this.score < +this.global_score){
+                        this.comment = this.lower || NODATACOMMENT;
+                        this.comment_class = 'comment-lower';
+                    }else{
                         this.comment = this.higher || NODATACOMMENT;
                         this.comment_class = 'comment-higher';
                     }
@@ -512,6 +537,7 @@ function Category(opt){
                             title: c.title,
                             comment: c.comment,
                             score: c.score,
+                            comment_class: c.comment_class
                         }
                     })
                 }
@@ -521,6 +547,7 @@ function Category(opt){
                         title: q.title,
                         comment: q.comment,
                         score: q.score,
+                        comment_class: q.comment_class
                     }
                 })
             }
@@ -529,6 +556,7 @@ function Category(opt){
                 title: this.title,
                 desc: this.desc,
                 comment: this.comment,
+                comment_class: this.comment_class,
                 score: this.score,
                 image: this._get_image(opt.all_user),
                 items: items

@@ -53,6 +53,10 @@ h1,h2,h3,h4,h5,h6{margin: 0}
     text-align: center;color: #fff;
     font-size: 14px;
 }
+.no-data{
+    text-align: center;
+    padding: 40px 0;
+}
 body:not(.ng-scope) .loading-text{
     display: none;
 }
@@ -382,6 +386,7 @@ a.list-group-item-risk,
     border:0;
     color: #fff;
     border-top: 1px solid rgba(255,255,255,.4);
+    opacity: .9
 }
 .list-group-item-risk>.process-bar{
     position: absolute;left: 0;top: 0;height: 100%;

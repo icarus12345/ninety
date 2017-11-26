@@ -2,7 +2,7 @@ function StorageFactory() {
     this.__storage = {};
     this.set = function(name,id,val,time){
         id = id || '';
-        time = (time || 10*60)*1000;
+        time = (time || 60*60)*1000;
         // var key = name + '-' + id;
         // var data = {
         //     value: val,
@@ -54,7 +54,7 @@ function DialogFactory($mdDialog, $fancyModal, $cordovaDialogs){
                 .textContent(message)
                 .ariaLabel('Alert Dialog')
                 .ok('OK')
-        );
+        ).then(callback);
     }
     this.warning = function(message,callback){
         $mdDialog.show(
@@ -65,7 +65,7 @@ function DialogFactory($mdDialog, $fancyModal, $cordovaDialogs){
                 .textContent(message)
                 .ariaLabel('Alert Dialog')
                 .ok('OK')
-        )
+        ).then(callback)
     }
     this.error = function(message,callback){
         $mdDialog.show(
@@ -76,12 +76,12 @@ function DialogFactory($mdDialog, $fancyModal, $cordovaDialogs){
                 .textContent(message)
                 .ariaLabel('Alert Dialog')
                 .ok('OK')
-        )
+        ).then(callback)
     }
     this.confirm = function(opt){
         $mdDialog.show(
             $mdDialog.confirm()
-            .title(opt.title || 'Confirm ?')
+            .title(opt.title || 'Confirm')
             .textContent(opt.message || '')
             .ariaLabel('Confirm')
             // .targetEvent(ev)

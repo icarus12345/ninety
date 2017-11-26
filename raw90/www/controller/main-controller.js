@@ -19,7 +19,7 @@ function MainController(
     $scope.doLogout = function(){
         Dialog.confirm({
             title:'',
-            message: 'Do you want logout?',
+            message: 'Do you want to logout?',
             oktext:'Logout',
             ok: function(){
                 API.Logout(function(){
@@ -129,7 +129,7 @@ function Main2Controller(
             if(p.mode==2){
                 Dialog.confirm({
                     title:'Delete Project ?',
-                    message:'Would you like delete the project "' + p.title + '".',
+                    message:'Would you like to delete the project "' + p.title + '".',
                     oktext:'Delete',
                     ok: function(){
                         API.request({
@@ -140,14 +140,20 @@ function Main2Controller(
                         },function(res){
                             if(res.data.code == 1){
                                 // update project
-                                for(var i in MainService.listProject){
-                                    var cp = MainService.listProject[i];
-                                    if(p.id ==cp.id){
-                                        MainService.listProject.splice(i, 1);
+                                console.log(p,$scope.listProject)
+                                for(var i in $scope.listProject){
+                                    var cp = $scope.listProject[i];
+                                    if(p.id == cp.id){
+                                        $scope.listProject.splice(i, 1);
                                         break;
                                     }
                                 }
-                                Dialog.error(res.data.message);
+                                Dialog.error(res.data.message,function(){
+                                    // ProjectService.re_get_list(function(list){
+                                    //     $scope.listProject = list;
+                                    // })
+                                });
+                                
                             } else {
                                 Dialog.error(res.data.message);
                             }
@@ -412,5 +418,10 @@ function Main2Controller(
         $rootScope.reload_list_project = __get_list;
     } catch (e){
         Dialog.alert('EM414:'+e.message);
+    }
+    $scope.goToFacebook = function(){
+        var ref = cordova.InAppBrowser.open('http://facebook.com', '_system', 'location=yes');
+        // window.open = cordova.InAppBrowser.open;
+        // window.open('http://apache.org', '_system');
     }
 }

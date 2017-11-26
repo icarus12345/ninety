@@ -198,7 +198,7 @@ function APIFactory(
         },function(res){
             if(res.data.code == 1){
                 SharedState.turnOff('IsShowLogin');
-                StorageService.set('device-info','',res.data.data);
+                StorageService.set('device-info','',res.data.data, 60*60*24*365);
                 API.token = true;
                 API.runQueue();
             } else {
@@ -309,7 +309,7 @@ function APIFactory(
             },function(res){
                 if(res.data.code==1 && res.data.data){
                     if(res.data.data.user_info){
-                        StorageService.set('device-info','',res.data.data);
+                        StorageService.set('device-info','',res.data.data, 60*60*24*365);
                         callback();
                     }else{
                         SharedState.turnOn('IsShowLogin');

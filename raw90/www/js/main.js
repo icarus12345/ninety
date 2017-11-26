@@ -103,11 +103,16 @@ document.addEventListener("deviceready",function(){
                             $rootScope.__prevLevel = $rootScope.__level || 0;
                             $rootScope.__frontPage = 'project';
                             break;
-                        case '/app-info/:id':
+                        case '/app-info/:id/:categoryId':
                             $rootScope.__level = 1;
                             $rootScope.__prevLevel = $rootScope.__level || 0;
                             $rootScope.__frontPage = 'project';
                             break;
+                       case '/app-info/:id':
+                           $rootScope.__level = 1;
+                           $rootScope.__prevLevel = $rootScope.__level || 0;
+                           $rootScope.__frontPage = 'project';
+                           break;
                         case '/content/:id':
                             $rootScope.__level = 1;
                             $rootScope.__prevLevel = $rootScope.__level || 0;
@@ -278,6 +283,11 @@ document.addEventListener("deviceready",function(){
                 reloadOnSearch: false,
                 controller: 'ContentController'
             });
+            $routeProvider.when('/app-info/:id/:categoryId', {
+               templateUrl: 'template/app-info.html',
+               reloadOnSearch: false,
+               controller: 'ContentController'
+            });
             $routeProvider.when('/content/:id', {
                 templateUrl: 'template/content.html',
                 reloadOnSearch: false,
@@ -300,3 +310,12 @@ document.addEventListener("deviceready",function(){
     APP.controller('SendController', SendController);
     APP.controller('ShareController', ShareController);
     APP.controller('ContentController', ContentController);
+    APP.directive('scrollIf', function () {
+          return function (scope, element, attributes) {
+          setTimeout(function () {
+                     if (scope.$eval(attributes.scrollIf)) {
+                     window.scrollTo(0, element[0].offsetTop)
+                     }
+                     });
+          }
+    });

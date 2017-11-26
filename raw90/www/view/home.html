@@ -25,11 +25,11 @@
                     
                 </form>
             </md-content>
-            <a href="" class="fb-link"></a>
+            <a ng-tap="goToFacebook()" class="fb-link"></a>
             <a href="#/app-info/45" class="info-link"></a>
             <a href="#/content/46" class="book-link"></a>
         </div>
-        <div class="accordions">
+        <div class="accordions" style="opacity: 0.95">
             <div class="panel-group">
                 <div 
                     class="panel" 
@@ -43,7 +43,7 @@
                         <div class="panel-body">
                             <div class="list-group text-center">
                                 <div class="risk-list-item list-group">
-                                    <div class="no-data" ng-show="!listProject">No data to display !</div>
+                                    <div class="no-data" ng-show="!listProject || listProject.length == 0">No data to display !</div>
                                   <div 
                                     ng-repeat="project in listProject" 
                                     ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" 
