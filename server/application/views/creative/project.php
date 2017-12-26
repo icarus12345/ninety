@@ -43,7 +43,7 @@
             <div class="">
                 <div class="navbar-header">
                     <!-- <a href="http://creativedesignvn.com/" class="navbar-brand"></a> -->
-                    <a href="index.html" class="navbar-toggle collapsed" type="button">
+                    <a href="/" class="navbar-toggle collapsed" type="button">
                         <span>
                             <span class="icon-bar line-1"></span>
                             <span class="icon-bar line-2"></span>
@@ -59,7 +59,7 @@
             <span></span>
             <ul>
             	<?php foreach($categories as $item){ ?>
-                <li><a href="/project/<?php echo $item->alias; ?>"><?php echo $item->title; ?></a></li>
+                <li class="<?php if($category_detail && $category_detail->id ==  $item->id){echo 'actived';}?>"><a href="/project/<?php echo $item->alias; ?>"><?php echo $item->title; ?></a></li>
                 <?php } ?>
             </ul>
         </div>
@@ -96,10 +96,10 @@
                                     <div class="col-sm-6 x22">
                                         <div>
                                             <div class=" item wow fadeInUp">
-                                                <div class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></div>
+                                                <a href="/project-detail/<?php echo $item->alias; ?>" class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></a>
                                                 <div class="cap">
-                                                    <div class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></div>
-                                                    <div class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></div>
+                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></a>
+                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -112,10 +112,10 @@
                                     <div class="col-sm-3 col-xs-6 g21">
                                         <div>
                                             <div class=" item wow fadeInUp">
-                                                <div class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></div>
+                                                <a href="/project-detail/<?php echo $item->alias; ?>" class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></a>
                                                 <div class="cap">
-                                                    <div class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></div>
-                                                    <div class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></div>
+                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></a>
+                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></a>
                                                 </div>
                                             </div>
                                             <?php 
@@ -123,10 +123,10 @@
 	                                			$item = $projects[2];
 	                                		?>
                                             <div class=" item wow fadeInUp">
-                                                <div class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></div>
+                                                <a href="/project-detail/<?php echo $item->alias; ?>" class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></a>
                                                 <div class="cap">
-                                                    <div class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></div>
-                                                    <div class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></div>
+                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></a>
+                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></a>
                                                 </div>
                                             </div>
                                             <?php } ?>
@@ -140,18 +140,27 @@
                                     <div class="col-sm-3 col-xs-6 x21">
                                         <div>
                                             <div class=" item wow fadeInUp">
-                                                <div class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></div>
+                                                <a href="/project-detail/<?php echo $item->alias; ?>" class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></a>
                                                 <div class="cap">
-                                                    <div class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></div>
-                                                    <div class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></div>
+                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></a>
+                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <?php } ?>
                                 </div>
-                                <divb class="">
-
+                                <div class="nav-control">
+                                    <?php if($page<=1) { ?>
+                                    <a href="#" class="prev" style="opacity: .5"></a>
+                                    <?php }else{ ?>
+                                    <a href="/project<?php if($category_detail){ echo '/'.$category_detail->alias;} ?>/page/<?php echo $page -1; ?>" class="prev"></a>
+                                    <?php } ?>
+                                    <?php if($page*$perpage >= $total_rows) { ?>
+                                    <a href="#" class="next" style="opacity: .5"></a>
+                                    <?php }else{ ?>
+                                    <a href="/project<?php if($category_detail){ echo '/'.$category_detail->alias;} ?>/page/<?php echo $page +1; ?>" class="next"></a>
+                                    <?php } ?>
                                 </div>
                             </div>
                             
@@ -159,7 +168,7 @@
                         <div class="footer">
                             <div>
                                 <a href="#">
-                                    COPYRIGHT&copy;2017<br/>
+                                    COPYRIGHT&copy;2017<br/><?php echo $page; ?><?php echo $page; ?><?php echo $page; ?><?php echo $page; ?>
                                     WEBDESIGN & DEVELOPMENT BY <b>CDS</b>
                                 </a>
                             </div>

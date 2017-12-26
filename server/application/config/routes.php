@@ -52,6 +52,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['dashboard/(:num)'] = 'dashboard/welcome/view/$1';
 $route['dashboard/detail/(:num)/(:num)'] = 'dashboard/welcome/detail/$1/$2';
 $route['dashboard/(:num)/(:num)'] = 'dashboard/welcome/detail/$1/$2';
+$route['project'] = 'creative/home/project';
+$route['project/(:any)'] = 'creative/home/project/$1';
+$route['project/page/(:num)'] = 'creative/home/project/all/$1';
+$route['project/(:any)/page/(:num)'] = 'creative/home/project/$1/$2';
 
 // $route['ve-chung-toi'] = 'creative/home/about';
 // $route['about'] = 'creative/home/about';

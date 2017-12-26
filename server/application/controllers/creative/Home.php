@@ -60,6 +60,7 @@ class Home extends Front_Controller {
 
 
     public function project($alias = null,$page = 1){
+        if($page<=1) $page = 1;
         if($alias=='all') $alias = null;
         $this->layout='project';
         $this->assigns['actived_menu'] = 'project';
@@ -73,6 +74,7 @@ class Home extends Front_Controller {
             $category_detail = $this->Category_Model
                 ->set_type('cds')
                 ->get_by_alias($alias);
+            $this->assigns['category_detail'] = $category_detail;
             if($category_detail){
                 $this->db->where('category',$category_detail->id);
                 $this->assigns['projects'] = $this->model
@@ -83,7 +85,13 @@ class Home extends Front_Controller {
                     ->limit($page,$perpage)
                     ->gets();
                     // ->get_by_category($category_detail->id);
-                $this->assigns['paging'] = $this->paging($page,$perpage,base_url("tin-tuc/{$category_detail->alias}/page"));
+                $query = $this->db->query('SELECT FOUND_ROWS() AS `found_rows`;');
+                $tmp = $query->row_array();
+                $total_rows = $tmp['found_rows'];
+                $this->assigns['total_rows'] = $total_rows;
+                $this->assigns['page'] = $page;
+                $this->assigns['perpage'] = $perpage;
+                // $this->assigns['paging'] = $this->paging($page,$perpage,base_url("tin-tuc/{$category_detail->alias}/page"));
                 $this->render(null,null);
             } else {
                 $this->blog_detail($alias);
@@ -97,7 +105,13 @@ class Home extends Front_Controller {
                 // ->join_category()
                 ->limit($page,$perpage)
                 ->gets();
-            $this->assigns['paging'] = $this->paging($page,$perpage,base_url('tin-tuc/page'));
+            $query = $this->db->query('SELECT FOUND_ROWS() AS `found_rows`;');
+                $tmp = $query->row_array();
+                $total_rows = $tmp['found_rows'];
+                $this->assigns['total_rows'] = $total_rows;
+                $this->assigns['page'] = $page;
+                $this->assigns['perpage'] = $perpage;
+            // $this->assigns['paging'] = $this->paging($page,$perpage,base_url('tin-tuc/page'));
             $this->render(null,null);
         }
     }

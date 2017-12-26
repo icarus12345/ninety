@@ -33,12 +33,12 @@ class Front_Controller extends CI_Controller {
         $config['is_ajax_paging'] = $this->input->is_ajax_request();
         $config['paging_function'] = $function;
         $config['base_url'] = $function;
-        $config['first_url'] = "";
+        // $config['first_url'] = "";
         $config['suffix'] = '.html';
         $config['total_rows'] = $total_rows;
         $config['per_page'] = $perpage;
         $config['cur_page'] = $page;
-        $config['num_links'] = 3;
+        $config['num_links'] = 0;
         $config['use_page_numbers'] = true;
         // $config['uri_segment'] = 4;
         $config['full_tag_open'] = '<ul class="pagination">';
