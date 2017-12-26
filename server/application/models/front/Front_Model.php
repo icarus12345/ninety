@@ -8,7 +8,7 @@ class Front_Model extends CI_Model {
         $this->table = $table;
         $this->prefix = '';
         $this->colid = 'id';
-        $this->status = '1';
+        $this->status = 'true';
         
     }
 

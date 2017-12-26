@@ -26,10 +26,15 @@ class Home extends Front_Controller {
         $this->layout='home';
         $this->assigns['actived_menu'] = 'home';
         $slider = $this->model
-            ->set_type('slider')
-            ->desc()
+            ->set_type('homeslider')
+            ->asc()
             ->gets();
         $this->assigns['slider'] = $slider;
+        $ourbrands = $this->model
+            ->set_type('our-brand')
+            ->asc()
+            ->gets();
+        $this->assigns['ourbrands'] = $ourbrands;
         $this->render(null,null);
     }
     public function about(){

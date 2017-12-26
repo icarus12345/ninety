@@ -7,7 +7,7 @@ var SHOW_GLOBAL = true;
 var _CONS = {
 };
 var APP ;
-document.addEventListener("deviceready",function(){
+function onDeviceReady(){
     try{
         if(device.platform == 'iOS'){
             if(window.StatusBar) StatusBar.hide();
@@ -15,7 +15,7 @@ document.addEventListener("deviceready",function(){
         screen.orientation.lock('portrait').then(function success() {
             console.log("Successfully locked the orientation");
         }, function error(errMsg) {
-            console.log("Error locking the orientation :: " + errMsg);
+            alert("Error locking the orientation :: " + errMsg);
         });
         if(device.platform == 'Android'){
             if(window.cordova && window.cordova.plugins.Keyboard) {
@@ -24,12 +24,14 @@ document.addEventListener("deviceready",function(){
             }
         }
     }catch(e){
-        alert(e.message)
+        alert("onDeviceReady"+e.message)
     }
-    var domElement = document.body;
-    angular.bootstrap(domElement, ["MobileAngularUiExamples"]);
     
-}, false);
+}
+//function onLoad() {
+    document.addEventListener("deviceready", onDeviceReady, false);
+    //var domElement = document.body;
+    //angular.bootstrap(domElement, ["MobileAngularUiExamples"]);
     APP = angular
         .module('MobileAngularUiExamples', [
             'ngRoute',
@@ -124,7 +126,12 @@ document.addEventListener("deviceready",function(){
                 // history.back();
                 // rootScope.$apply();
             }
-            // document.addEventListener("deviceready",function(){
+
+            document.addEventListener("deviceready",function(){
+                //onDeviceReady()
+                if(device.platform == 'iOS'){
+                    if(window.StatusBar) StatusBar.hide();
+                }
                 try{
                     _CONS.DIR = '/';
                     _CONS.PLATFORM = device.platform;
@@ -170,53 +177,53 @@ document.addEventListener("deviceready",function(){
                     }, failFun);
 
                 }catch(e){
-                    alert(e.message)
+                    alert('Device ready:'+e.message)
                 }
                 $rootScope._CONS = _CONS;
                 $rootScope.device = device;
                 $rootScope.cordova = cordova;
                 // API.get_device_info();
-            // }, false);
+                if(device.platform == 'Android'){
+                    try{
+                        // if(window.cordova && window.cordova.plugins.Keyboard) {
+                        //     window.cordova.plugins.Keyboard.disableScroll(true);
+                        //         $mdToast.show(
+                        //             $mdToast.simple()
+                        //                 .textContent('Simple Toast!')
+                        //                 .position(  "top right" )
+                        //                 .hideDelay(3000)
+                        //         );
+                        //     window.addEventListener('native.keyboardshow', function(e){
+                        //         $rootScope.keyboard_height = e.keyboardHeight;
+                        //     });
+                        //     window.addEventListener('native.keyboardhide', function(){
+                        //         $timeout(function(){
+                        //             $rootScope.keyboard_height = 0;
+                        //         })
+                        //     });
+                        // }
+                        window.addEventListener('native.keyboardhide', onKeyboardHide, false);
+                        window.addEventListener('native.keyboardshow', onKeyboardShow, false);
+                        var keyboard_timer;
+                        function onKeyboardHide(e) {
+                            console.log('onKeyboardHide');
+                            keyboard_timer = $timeout(function(){
+                                $rootScope.keyboard_height = 0;
+                            }, 200)
+                        }
+
+                        function onKeyboardShow(e) {
+                            $timeout.cancel(keyboard_timer);
+                            console.log('onKeyboardShow');
+                            $rootScope.keyboard_height = e.keyboardHeight;
+                        }
+                    }catch(e){
+                        alert('NativeEvent:'+e.message)
+                    }
+                }
+            }, false);
           // Get all URL parameter
             $rootScope.keyboard_height = 0;
-            if(device.platform == 'Android'){
-                try{
-                    // if(window.cordova && window.cordova.plugins.Keyboard) {
-                    //     window.cordova.plugins.Keyboard.disableScroll(true);
-                    //         $mdToast.show(
-                    //             $mdToast.simple()
-                    //                 .textContent('Simple Toast!')
-                    //                 .position(  "top right" )
-                    //                 .hideDelay(3000)
-                    //         );
-                    //     window.addEventListener('native.keyboardshow', function(e){
-                    //         $rootScope.keyboard_height = e.keyboardHeight;
-                    //     });
-                    //     window.addEventListener('native.keyboardhide', function(){
-                    //         $timeout(function(){
-                    //             $rootScope.keyboard_height = 0;
-                    //         })
-                    //     });
-                    // }
-                    window.addEventListener('native.keyboardhide', onKeyboardHide, false);
-                    window.addEventListener('native.keyboardshow', onKeyboardShow, false);
-                    var keyboard_timer;
-                    function onKeyboardHide(e) {
-                        console.log('onKeyboardHide');
-                        keyboard_timer = $timeout(function(){
-                            $rootScope.keyboard_height = 0;
-                        }, 200)
-                    }
-
-                    function onKeyboardShow(e) {
-                        $timeout.cancel(keyboard_timer);
-                        console.log('onKeyboardShow');
-                        $rootScope.keyboard_height = e.keyboardHeight;
-                    }
-                }catch(e){
-                    alert(e.message)
-                }
-            }
             // $mdToast.show(
             //         $mdToast.simple()
             //             .textContent('Notification!')
@@ -301,3 +308,4 @@ document.addEventListener("deviceready",function(){
     APP.controller('SendController', SendController);
     APP.controller('ShareController', ShareController);
     APP.controller('ContentController', ContentController);
+//}

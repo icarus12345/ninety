@@ -97,7 +97,7 @@ function ProjectFactory(API,StorageService, $mdDialog,Dialog) {
                 })
             }
         } catch (e){
-            alert(e.message);
+            alert('GetList:'+e.message);
         }
     }
     this.re_get_list = function(callback){

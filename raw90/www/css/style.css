@@ -2,7 +2,6 @@
 @import url('material.css');
 @import url('login.css');
 @import url('../mobile-angular/css/simple-line-icons.css');
-@import url('https://fonts.googleapis.com/css?family=Ek+Mukta:200,300,400,500,600,700');
 *{
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -382,6 +381,7 @@ a.list-group-item-risk,
     border:0;
     color: #fff;
     border-top: 1px solid rgba(255,255,255,.4);
+    opacity: .9
 }
 .list-group-item-risk>.process-bar{
     position: absolute;left: 0;top: 0;height: 100%;

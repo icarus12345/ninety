@@ -9,27 +9,12 @@ class Front_Controller extends CI_Controller {
         $this->assigns = array();
         $this->load->library('pagination');
         $this->load->model('front/Front_Model');
-        $this->load->model('dashboard/Auth_Model');
-        $this->load->model('front/Category_Model');
         $this->model= new Front_Model('tbl_data');
         $this->load->model('front/Setting_Model');
         $this->assigns['settings'] = $this->Setting_Model
             ->set_type('creative')
             ->get_list();
-        $this->assigns['service_category'] = $this->Category_Model
-            ->set_type('services')
-            ->desc()
-            ->gets();
-        $this->assigns['project_category'] = $this->Category_Model
-            ->set_type('projects')
-            ->desc()
-            ->gets();
-        $this->assigns['event_category'] = $this->Category_Model
-            ->set_type('events')
-            ->desc()
-            ->gets();
-        $this->assigns['users'] = $this->Auth_Model
-            ->get_all();
+        
     }
     
     function render($path_view = '',$data = array()){
