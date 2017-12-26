@@ -12,8 +12,8 @@ $(document).ready(function() {
     };
     if($('#fullpage').length == 1){
         $('#fullpage').fullpage({
-            sectionsColor: ['#f6f6f6', '#12171e', '#f6f6f6', 'whitesmoke', '#ccddff'],
-            anchors: ['home', 'our-brand-contact', 'about', 'service', 'lastPage'],
+            sectionsColor: ['#12171e', '#12171e', '#f6f6f6', 'whitesmoke', '#ccddff'],
+            anchors: ['creative'],
             menu: '#menu',
             // css3: true,
             // scrollingSpeed: 1000,

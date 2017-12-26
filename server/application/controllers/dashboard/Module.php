@@ -8,15 +8,15 @@ class Module extends Core_Controller {
         
     }
     function _check_permission(){
-        $user = $this->session->userdata('dasbboard_user');
-        $user_privileges = explode(',',$user->ause_authority);
-        $privileges = array('1');
-        $check = !!array_intersect($user_privileges,$privileges);
-        if(!$check){
-            $this->load->view('dashboard/auth/accessdenied',null);
-            $this->output->_display();
-            die();
-        }
+        // $user = $this->session->userdata('dasbboard_user');
+        // $user_privileges = explode(',',$user->ause_authority);
+        // $privileges = array('1');
+        // $check = !!array_intersect($user_privileges,$privileges);
+        // if(!$check){
+        //     $this->load->view('dashboard/auth/accessdenied',null);
+        //     $this->output->_display();
+        //     die();
+        // }
     }
     function index(){
         $this->view(null);
