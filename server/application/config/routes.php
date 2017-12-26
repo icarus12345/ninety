@@ -53,42 +53,42 @@ $route['dashboard/(:num)'] = 'dashboard/welcome/view/$1';
 $route['dashboard/detail/(:num)/(:num)'] = 'dashboard/welcome/detail/$1/$2';
 $route['dashboard/(:num)/(:num)'] = 'dashboard/welcome/detail/$1/$2';
 
-$route['ve-chung-toi'] = 'creative/home/about';
-$route['about'] = 'creative/home/about';
+// $route['ve-chung-toi'] = 'creative/home/about';
+// $route['about'] = 'creative/home/about';
 
-$route['lien-he'] = 'creative/home/contact';
-$route['contact-us'] = 'creative/home/contact';
+// $route['lien-he'] = 'creative/home/contact';
+// $route['contact-us'] = 'creative/home/contact';
 
-$route['tuyen-dung'] = 'creative/home/recruitment';
-$route['recruitment'] = 'creative/home/recruitment';
+// $route['tuyen-dung'] = 'creative/home/recruitment';
+// $route['recruitment'] = 'creative/home/recruitment';
 
-$route['dich-vu'] = 'creative/home/services';
-$route['services'] = 'creative/home/services';
-$route['dich-vu/(:any)'] = 'creative/home/service_detail/$1';
-$route['services/(:any)'] = 'creative/home/service_detail/$1';
+// $route['dich-vu'] = 'creative/home/services';
+// $route['services'] = 'creative/home/services';
+// $route['dich-vu/(:any)'] = 'creative/home/service_detail/$1';
+// $route['services/(:any)'] = 'creative/home/service_detail/$1';
 
-$route['su-kien'] = 'creative/home/events';
-$route['events'] = 'creative/home/events';
-$route['su-kien/(:any)'] = 'creative/home/events/$1';
-$route['events/(:any)'] = 'creative/home/events/$1';
+// $route['su-kien'] = 'creative/home/events';
+// $route['events'] = 'creative/home/events';
+// $route['su-kien/(:any)'] = 'creative/home/events/$1';
+// $route['events/(:any)'] = 'creative/home/events/$1';
 
-$route['du-an'] = 'creative/home/projects';
-$route['projects'] = 'creative/home/projects';
-$route['du-an/(:any)'] = 'creative/home/projects/$1';
-$route['projects/(:any)'] = 'creative/home/projects/$1';
+// $route['du-an'] = 'creative/home/projects';
+// $route['projects'] = 'creative/home/projects';
+// $route['du-an/(:any)'] = 'creative/home/projects/$1';
+// $route['projects/(:any)'] = 'creative/home/projects/$1';
 
-$route['tin-tuc'] = 'creative/home/blogs';
-$route['blogs'] = 'creative/home/blogs';
-$route['tin-tuc/page'] = 'creative/home/blogs';
-$route['tin-tuc/page/(:num)'] = 'creative/home/blogs/all/$1';
-$route['blogs/page'] = 'creative/home/blogs';
-$route['blogs/page/(:num)'] = 'creative/home/blogs/all/$1';
-$route['tin-tuc/(:any)'] = 'creative/home/blogs/$1';
-$route['blogs/(:any)'] = 'creative/home/blogs/$1';
-$route['tin-tuc/(:any)/page'] = 'creative/home/blogs/$1';
-$route['tin-tuc/(:any)/page/(:num)'] = 'creative/home/blogs/$1/$2';
-$route['blogs/(:any)/page'] = 'creative/home/blogs/$1';
-$route['blogs/(:any)/page/(:num)'] = 'creative/home/blogs/$1/$2';
+// $route['tin-tuc'] = 'creative/home/blogs';
+// $route['blogs'] = 'creative/home/blogs';
+// $route['tin-tuc/page'] = 'creative/home/blogs';
+// $route['tin-tuc/page/(:num)'] = 'creative/home/blogs/all/$1';
+// $route['blogs/page'] = 'creative/home/blogs';
+// $route['blogs/page/(:num)'] = 'creative/home/blogs/all/$1';
+// $route['tin-tuc/(:any)'] = 'creative/home/blogs/$1';
+// $route['blogs/(:any)'] = 'creative/home/blogs/$1';
+// $route['tin-tuc/(:any)/page'] = 'creative/home/blogs/$1';
+// $route['tin-tuc/(:any)/page/(:num)'] = 'creative/home/blogs/$1/$2';
+// $route['blogs/(:any)/page'] = 'creative/home/blogs/$1';
+// $route['blogs/(:any)/page/(:num)'] = 'creative/home/blogs/$1/$2';
 
 $route['default_controller'] = 'welcome';
 $route['404_override'] = '';

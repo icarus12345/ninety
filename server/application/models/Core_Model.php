@@ -93,7 +93,7 @@ class Core_Model extends CI_Model {
         }
         $query = $this->db
             ->from($this->table)
-            ->order_by($this->prefix . 'created', 'DESC')
+            //->order_by($this->prefix . 'created', 'DESC')
             ->get();
         $entrys = $query->result();
         if($entrys) foreach ($entrys as $key => $value) {

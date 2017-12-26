@@ -543,7 +543,7 @@ body.head-collapsed{overflow:hidden;}
 }
 .our-avatar>div{
     padding-bottom: 135%;
-    background: #fff
+    background-color: #fff
 }
 .thumb-name,
 .our-avatar>p{
@@ -606,7 +606,7 @@ body.head-collapsed{overflow:hidden;}
     padding: 30px 0
 }
 .thumb-img{
-    background: #ebebeb;
+    background-color: #ebebeb;
     padding-bottom: 135%;
     position: relative;
 }
@@ -647,7 +647,7 @@ body.head-collapsed{overflow:hidden;}
 .how-we-work .item { min-height: 212px;padding-bottom: 20px;}
 .how-we-work .item h3{ font-style: italic; padding: 20px 0 10px 0;color: #000}
 .how-we-work .item p{font-size: 12px;padding: 0 10px;text-align: left;}
-.footer{background:#000;height: 60px;padding: 10px;}
+.footer{background:#000 !important;height: 60px;padding: 10px;}
 .our-service-box{
     padding-left: 36%;
     position: relative;
