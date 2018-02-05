@@ -43,7 +43,7 @@
             <div class="">
                 <div class="navbar-header">
                     <!-- <a href="http://creativedesignvn.com/" class="navbar-brand"></a> -->
-                    <a href="index.html" class="navbar-toggle collapsed" type="button">
+                    <a href="/" class="navbar-toggle collapsed" type="button">
                         <span>
                             <span class="icon-bar line-1"></span>
                             <span class="icon-bar line-2"></span>
@@ -55,20 +55,19 @@
             </div>
             <!-- Menu ] -->
         </header>
-        
+        <a href="/#creative/1" class="our-band-btn"><span>OUR BRAND</span></a>
+        <a href="/#creative/2" class="contact-btn"><span>CONTACT</span></a>
         
         <div class="about-us scroll-section">
             <div>
-                <div class="service-bg contain" style="background-image: url(/assets/images/service.jpg)">
+                <div class="service-bg contain" style="background-image: url(<?php echo ($detail->data['image']);?>)">
                     <h2><span>What<br/> we do</span></h2>
                     
                 </div>
                 <div class="container text-center who-we-are">
                     <h3>what we do</h3>
                     <div data-wow-delay="0.5s" class="wow fadeInUp desc">
-                        <p class="text-justify">CDS STUDIO IS A CREATIVE DIGITAL AGENCY BASED IN SAIGON THAT CRAFTED FUNCTIONALLY BEAUTIFUL WEBSITES AND APPS. TOGETHER, WE CAN TRANSFORM THE WAY YOUR BRAND CONNECTS WITH CLIENTS.</p>
-
-                        <p class="text-justify wow fadeInUp">OUR UX DESIGN EXPERTISE AND INTERNATIONAL WORKING MINDSET ARE WHAT SET US APART FROM OTHER LOCAL AGENCIES. IF YOU HAVE AN AMAZING IDEA THAT YOU WANNA TURN INTO REALITY, WE CAN BE YOUR DIGITAL PARTNER TO POWER ALL THE DESIGN AND DEVELOPMENT WORKS SO YOU CAN RAISE MONEY AND TAKE OVER THE WORLD!</p>
+                        <?php echo ($detail->data['whatwedo']);?>
                     </div> 
                 </div>
                 <div class="how-we-work">
@@ -77,7 +76,7 @@
                     <div class="our-service-box ">
                             <div class="left">
                                 <p>
-                                    WITH A FOCUS ON USER EXPERIENCE AND STRATEGY, WE DESIGN AND DEVELOP WEB AND MOBILE EXPERIENCES FOR COMPANIES AT EVERY STAGE. SEE THE LIST OF SERVICES WE PROVIDE:
+                                    <?php echo ($detail->data['ourservice']);?>
                                 </p>
                             </div>
                             <div class="right">

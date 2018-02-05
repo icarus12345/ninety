@@ -38,7 +38,7 @@
 
     </head>
     <body class="full-page">
-    <header id="navbar" class="navbar navbar-fixed-top" role="banner">
+        <header id="navbar" class="navbar navbar-fixed-top" role="banner">
             <!-- Menu [ -->
             <div class="">
                 <div class="navbar-header">
@@ -56,48 +56,50 @@
         </header>
         <nav id="navigation" class="navbar-collapse bs-navbar-collapse collapse" role="navigation" data-transition-duration=0>
             <div>
-                <a href="index.html#home" class="logo" data-toggle="collapse" data-target="#navigation"></a>
+                <a href="index.html#creative" class="logo" data-toggle="collapse" data-target="#navigation"></a>
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href='index.html#home' data-toggle="collapse" data-target="#navigation">Home</a></li>
-                    <li class=""><a href='about.html' >About</a></li>
-                    <li class=""><a href='service.html'>Services</a></li>
-                    <li class=""><a href='#our-brand-contact' data-toggle="collapse" data-target="#navigation">Our Brands</a></li>
-                    <li class=""><a href='project.html'>Projects</a></li>
+                    <li class="active"><a href='/#creative' data-toggle="collapse" data-target="#navigation">Home</a></li>
+                    <li class=""><a href='/about.html' >About</a></li>
+                    <li class=""><a href='/service.html'>Services</a></li>
+                    <li class=""><a href='/#creative/1' data-toggle="collapse" data-target="#navigation">Our Brands</a></li>
+                    <li class=""><a href='/project.html'>Projects</a></li>
                     <!-- <li class=""><a href='#'>Blogs</a></li> -->
                     <!-- <li class=""><a href='#'>Job Opportunities</a></li> -->
-                    <li class=""><a href='#our-brand-contact/1' data-toggle="collapse" data-target="#navigation">Contact</a></li>
+                    <li class=""><a href='/#creative/2' data-toggle="collapse" data-target="#navigation">Contact</a></li>
                 </ul>
                 <span data-toggle="collapse" data-target="#navigation">CLOSE</span>
             </div>
         </nav>
+        <a href="/#creative/1" class="our-band-btn"><span>OUR BRAND</span></a>
+        <a href="/#creative/2" class="contact-btn"><span>CONTACT</span></a>
         <div id="fullpage">
-            <div class="section active" id="section-home">
-                <div class="home-slider">
-                    <div class="owl-carousel" id="owl-home">
-                        <?php foreach($slider as $item){ ?>
-                        <div class="item" >
-                            <div class="contain img" style="background-image:url('<?php echo $item->data['image'];?>')">
-                            </div>
-                        </div>
-                        <?php } ?>
-                    </div>
-                    <div class="thumbs">
-                        <div class="owl-carousel" id="owl-thumb">
-                            <?php foreach($slider as $item){ ?>
-                            <div class="item" >
-                                <div><span><?php echo $item->title;?></span></div>
-                            </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="section home-section" id="section-about-our-brand">
+            <div class="section home-section" >
                 <div class="">
-                    <div class="slide active">
+                    <div class="slide active" style="background:#f6f6f6">
+                        <div class="home-slider">
+                            <div class="owl-carousel" id="owl-home">
+                                <?php foreach($slider as $item){ ?>
+                                <div class="item" >
+                                    <div class="contain img" style="background-image:url('<?php echo $item->data['image'];?>')">
+                                    </div>
+                                </div>
+                                <?php } ?>
+                            </div>
+                            <div class="thumbs">
+                                <div class="owl-carousel" id="owl-thumb">
+                                    <?php foreach($slider as $item){ ?>
+                                    <div class="item" >
+                                        <div><span><?php echo $item->title;?></span></div>
+                                    </div>
+                                    <?php } ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
                         <div class="intro our-brand">
                             <div>
-                                <a href="index.html#home" class="logo"></a>
+                                <a href="index.html#creative" class="logo"></a>
                                 <div class="list-our-brand">
                                     <div class="our-title"><span>OUR <b>BRAND</b></span></div>
                                     <div>
@@ -117,7 +119,7 @@
                     <div class="slide">
                         <div class="intro about">
                             <div>
-                                <a href="index.html#home" class="logo"></a>
+                                <a href="index.html#creative" class="logo"></a>
                                 <div class="contact-us">
                                     <div class="our-title"><span>CONTACT</span></div>
                                     <div class="contact-us-box">
@@ -150,3 +152,5 @@ Address <a href="">39 Luong Huu Khanh,Ben Nghe Ward, Distrist 1,HCMC</a></p>
         
     });
 </script>
+
+

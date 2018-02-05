@@ -43,7 +43,7 @@
             <div class="">
                 <div class="navbar-header">
                     <!-- <a href="http://creativedesignvn.com/" class="navbar-brand"></a> -->
-                    <a href="index.html" class="navbar-toggle collapsed" type="button">
+                    <a href="/" class="navbar-toggle collapsed" type="button">
                         <span>
                             <span class="icon-bar line-1"></span>
                             <span class="icon-bar line-2"></span>
@@ -55,18 +55,19 @@
             </div>
             <!-- Menu ] -->
         </header>
+        <a href="/#creative/1" class="our-band-btn"><span>OUR BRAND</span></a>
+        <a href="/#creative/2" class="contact-btn"><span>CONTACT</span></a>
                 <div class="about-us scroll-section">
                     <div>
-                        <div class="service-bg contain" style="background-image: url(/assets/images/about.jpg)">
+                        <div class="service-bg contain" style="background-image: url(<?php echo ($detail->data['image']);?>)">
                             <h2><span>Who<br/> we are</span></h2>
                             
                         </div>
                         <div class="container text-center who-we-are">
+
                             <h3>who we are</h3>
                             <div data-wow-delay="0.5s" class="wow fadeInUp desc">
-                                <p class="text-justify">CDS STUDIO IS A CREATIVE DIGITAL AGENCY BASED IN SAIGON THAT CRAFTED FUNCTIONALLY BEAUTIFUL WEBSITES AND APPS. TOGETHER, WE CAN TRANSFORM THE WAY YOUR BRAND CONNECTS WITH CLIENTS.</p>
-
-                                <p class="text-justify wow fadeInUp">OUR UX DESIGN EXPERTISE AND INTERNATIONAL WORKING MINDSET ARE WHAT SET US APART FROM OTHER LOCAL AGENCIES. IF YOU HAVE AN AMAZING IDEA THAT YOU WANNA TURN INTO REALITY, WE CAN BE YOUR DIGITAL PARTNER TO POWER ALL THE DESIGN AND DEVELOPMENT WORKS SO YOU CAN RAISE MONEY AND TAKE OVER THE WORLD!</p>
+                                <?php echo ($detail->data['whoweare']);?>
                             </div> 
                             <div class="our-team">
                                 <h2>Our Team</h2>
@@ -106,24 +107,24 @@
                             <div class="how-we-work">
                                  <h2 class="h2 wow fadeInUp">How We Work</h2>
                                  <div class="desc text-justify wow fadeInUp">
-                                     OUR UX DESIGN EXPERTISE AND INTERNATIONAL WORKING MINDSET ARE WHAT SET US APART FROM OTHER LOCAL AGENCIES. IF YOU HAVE AN AMAZING IDEA THAT YOU WANNA TURN INTO REALITY, WE CAN BE YOUR DIGITAL PARTNER TO POWER ALL THE DESIGN AND DEVELOPMENT WORKS SO YOU CAN RAISE MONEY AND TAKE OVER THE WORLD !
+                                     <?php echo ($detail->data['howwework']);?>
                                  </div>
                                  <div class="space-linex2"></div>
                                  <div class="row half">
                                      <div class="col-sm-4 half item">
                                          <div class="how-we-work-1 contain"></div>
                                          <h3>DISCOVER</h3>
-                                         <p>WE DEVELOP A THOROUGH UNDERSTANDING OF OUR CLIENTS BRIEF & OBJECTIVES TO FORMULATE A STRATEGY</p>
+                                         <p><?php echo ($detail->data['discover']);?></p>
                                      </div>
                                      <div class="col-sm-4 half item">
                                          <div class="how-we-work-2 contain"></div>
                                          <h3>CONCEPT & DESIGN</h3>
-                                         <p>WE BRAINSTORM WITH TEAM TO CRAFT A FUNCTIONAL YET CREATIVE DESIGN THAT MEET THE OBJECTIVES OF THE PROJECT</p>
+                                         <p><?php echo ($detail->data['conceptdesign']);?></p>
                                      </div>
                                      <div class="col-sm-4 half item">
                                          <div class="how-we-work-3 contain"></div>
                                          <h3>DEVELOP & DEPLOY</h3>
-                                         <p>WE BRING YOUR VISION TO LIFE, DEVELOP SEAMLESS PERFORMANCE PRODUCTS WITH CAREFUL TESTING PROCESS</p>
+                                         <p><?php echo ($detail->data['developdeploy']);?></p>
                                      </div>
                                  </div>
                             </div>

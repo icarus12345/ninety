@@ -55,6 +55,8 @@
             </div>
             <!-- Menu ] -->
         </header>
+        <a href="/#creative/1" class="our-band-btn"><span>OUR BRAND</span></a>
+        <a href="/#creative/2" class="contact-btn"><span>CONTACT</span></a>
         <div class="cate-menu">
             <span></span>
             <ul>
@@ -74,11 +76,8 @@
                                 <div class="col-sm-6">
                                     <h2 class="wow fadeInUp">Our Project</h2>
                                     <div class="our-project-info wow fadeInUp">
-                                        <div class="title">OVITO BRAND </div>
-                                        <div class="cate">WORKING MINDSET ARE WHAT SET </div>
-                                        <p><span>US APART</span> FROM OTHER LOCAL AGENCIES. <br/>
-                                        <span>IF YOU HAVE</span> AN AMAZING IDEA THAT <br/>
-                                        <span>OU WANNA</span> TURN INTO REALITY, WE CA</p>
+                                        <div class="title"><?php echo $category_detail->data['full_title'];?> </div>
+                                        <div class=""><?php echo $category_detail->data['desc'];?></div>
                                     </div>
                                 </div>
                                 <div class="col-sm-6">
@@ -96,10 +95,10 @@
                                     <div class="col-sm-6 x22">
                                         <div>
                                             <div class=" item wow fadeInUp">
-                                                <a href="/project-detail/<?php echo $item->alias; ?>" class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></a>
+                                                <a href="/project/<?php echo $item->alias; ?>" class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></a>
                                                 <div class="cap">
-                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></a>
-                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></a>
+                                                    <a href="/project/<?php echo $item->alias; ?>" class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></a>
+                                                    <a href="/project/<?php echo $item->alias; ?>" class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></a>
                                                 </div>
                                             </div>
                                         </div>
@@ -112,10 +111,10 @@
                                     <div class="col-sm-3 col-xs-6 g21">
                                         <div>
                                             <div class=" item wow fadeInUp">
-                                                <a href="/project-detail/<?php echo $item->alias; ?>" class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></a>
+                                                <a href="/project/<?php echo $item->alias; ?>" class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></a>
                                                 <div class="cap">
-                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></a>
-                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></a>
+                                                    <a href="/project/<?php echo $item->alias; ?>" class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></a>
+                                                    <a href="/project/<?php echo $item->alias; ?>" class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></a>
                                                 </div>
                                             </div>
                                             <?php 
@@ -123,10 +122,10 @@
 	                                			$item = $projects[2];
 	                                		?>
                                             <div class=" item wow fadeInUp">
-                                                <a href="/project-detail/<?php echo $item->alias; ?>" class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></a>
+                                                <a href="/project/<?php echo $item->alias; ?>" class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></a>
                                                 <div class="cap">
-                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></a>
-                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></a>
+                                                    <a href="/project/<?php echo $item->alias; ?>" class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></a>
+                                                    <a href="/project/<?php echo $item->alias; ?>" class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></a>
                                                 </div>
                                             </div>
                                             <?php } ?>
@@ -140,10 +139,10 @@
                                     <div class="col-sm-3 col-xs-6 x21">
                                         <div>
                                             <div class=" item wow fadeInUp">
-                                                <a href="/project-detail/<?php echo $item->alias; ?>" class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></a>
+                                                <a href="/project/<?php echo $item->alias; ?>" class="thumb cover" style="background-image: url(<?php echo $item->data['image']; ?>)"></a>
                                                 <div class="cap">
-                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></a>
-                                                    <a href="/project-detail/<?php echo $item->alias; ?>" class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></a>
+                                                    <a href="/project/<?php echo $item->alias; ?>" class="name"><span class="line-clamp-1"><?php echo $item->title; ?></span></a>
+                                                    <a href="/project/<?php echo $item->alias; ?>" class="pdesc"><span class="line-clamp-1"><?php echo $item->data['desc']; ?></span></a>
                                                 </div>
                                             </div>
                                         </div>

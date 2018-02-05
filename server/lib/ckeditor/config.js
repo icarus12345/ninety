@@ -14,10 +14,10 @@ CKEDITOR.editorConfig = function(config) {
     //config.removePlugins = 'magicline,save,newpage,preview,print,find,forms,selectall,about,iframe';
     config.toolbar = [
         {name: 'Source', items: ['Source']},
-        //{name: 'document', groups: ['mode', 'document', 'doctools'], items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
-        //{name: 'clipboard'/*, groups: ['clipboard', 'undo']*/, items: [/*'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-',*/ 'Undo', 'Redo']},
-        //{name: 'editing', groups: ['find', 'selection', 'spellchecker'], items: ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt']},
-        //{name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField']},
+        {name: 'document', groups: ['mode', 'document', 'doctools'], items: ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
+        {name: 'clipboard', groups: ['clipboard', 'undo'], items: [/*'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-',*/ 'Undo', 'Redo']},
+        {name: 'editing', groups: ['find', 'selection', 'spellchecker'], items: ['Find', 'Replace', '-', 'SelectAll', '-', 'Scayt']},
+        {name: 'forms', items: ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField']},
         {name: 'tools', items: ['Maximize', 'ShowBlocks']},
         {name: 'basicstyles', groups: ['basicstyles', 'cleanup'], items: ['Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat']},
         
