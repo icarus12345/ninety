@@ -225,33 +225,37 @@ function Category(opt){
                                 //     q.comment = q.higher || NODATACOMMENT;
                                 // }
                                 if(+q.answered[I]>=0){
-                                    score = SCORE_DATA[+q.answered[I]]
-                                }
-                                if(I==0){
-                                    q.score = score;
+                                    score = SCORE_DATA[+q.answered[I]];
+                                    if(I==0){
+                                        q.score = score;
+                                        q.comment_class = 'comment-none';
+                                        if(q.score>=0){
+                                        //     if(q.score < SCORE_LEVEL[0]){
+                                        //         q.comment = q.lower || NODATACOMMENT;
+                                        //         q.comment_class = 'comment-lower';
+                                        //     } else if(q.score < SCORE_LEVEL[1]){
+                                        //         q.comment = q.medium || NODATACOMMENT;
+                                        //         q.comment_class = 'comment-medium';
+                                        //     } else {
+                                        //         q.comment = q.higher || NODATACOMMENT;
+                                        //         q.comment_class = 'comment-higher';
+                                        //     }
+                                            if(q.score >= q.global){
+                                                q.comment = q.higher || NODATACOMMENT;
+                                                q.comment_class = 'comment-higher';
+                                            } else{
+                                                q.comment = q.lower || NODATACOMMENT;
+                                                q.comment_class = 'comment-lower';
+                                            }
+                                        }
+                                        // console.log(q.score,q.comment,SCORE_LEVEL,'QQQRRR')
+                                    }
+                                }else{
                                     q.comment = 'You have not completed this question';
                                     q.comment_class = 'comment-none';
-                                    if(q.score>0){
-                                    //     if(q.score < SCORE_LEVEL[0]){
-                                    //         q.comment = q.lower || NODATACOMMENT;
-                                    //         q.comment_class = 'comment-lower';
-                                    //     } else if(q.score < SCORE_LEVEL[1]){
-                                    //         q.comment = q.medium || NODATACOMMENT;
-                                    //         q.comment_class = 'comment-medium';
-                                    //     } else {
-                                    //         q.comment = q.higher || NODATACOMMENT;
-                                    //         q.comment_class = 'comment-higher';
-                                    //     }
-                                        if(q.score >= q.global){
-                                            q.comment = q.higher || NODATACOMMENT;
-                                            q.comment_class = 'comment-higher';
-                                        } else{
-                                            q.comment = q.lower || NODATACOMMENT;
-                                            q.comment_class = 'comment-lower';
-                                        }
-                                    }
-                                    // console.log(q.score,q.comment,SCORE_LEVEL,'QQQRRR')
+                                    q.score = 0;
                                 }
+                                
                             return sum + score; 
                         }, 0)
                     ;

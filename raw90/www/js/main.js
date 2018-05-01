@@ -7,7 +7,10 @@ var SHOW_GLOBAL = true;
 var _CONS = {
 };
 var APP ;
+var isDeviceReady = false;
+
 function onDeviceReady(){
+    isDeviceReady = true;
     try{
         if(device.platform == 'iOS'){
             if(window.StatusBar) StatusBar.hide();
@@ -17,6 +20,7 @@ function onDeviceReady(){
         }, function error(errMsg) {
             alert("Error locking the orientation :: " + errMsg);
         });
+        // device = device || JSON.parse(window.localStorage.getItem("device")) || {};
         if(device.platform == 'Android'){
             if(window.cordova && window.cordova.plugins.Keyboard) {
                 window.cordova.plugins.Keyboard.disableScroll(false);
@@ -57,7 +61,7 @@ function onDeviceReady(){
         ]);
     APP.run(function(
         $transform,$rootScope, $location, $routeParams, $window, 
-        $timeout, $mdToast,
+        $timeout, $mdToast,$cordovaDevice,
         API
         ) {
             try{
@@ -119,16 +123,24 @@ function onDeviceReady(){
                     console.log(fullRoute,$rootScope.__frontPage);
                 })
             } catch (e){
-                alert(e.message)
+                alert('E124'+e.message)
             }
             $rootScope.goBack = function(){
                 $window.history.back();
                 // history.back();
                 // rootScope.$apply();
             }
-
+            document.addEventListener("resume", function(){
+                window.location.reload();
+            }, false);
             document.addEventListener("deviceready",function(){
                 //onDeviceReady()
+                if(typeof device == 'object'){
+                    // Save to localstore
+                    window.localStorage.setItem("device", JSON.stringify(device));
+                }else{
+                    device = JSON.parse(window.localStorage.getItem("device")) || {};
+                }
                 if(device.platform == 'iOS'){
                     if(window.StatusBar) StatusBar.hide();
                 }

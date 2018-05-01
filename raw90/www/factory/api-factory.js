@@ -12,7 +12,6 @@ function APIFactory(
         console.log($rootScope.loading,'++')
         // opt.data.app_id = APP_ID;
         // opt.data.app_secret = APP_SECRET;
-        
         var sCallback = function(res){
             if(res.data.code==-201){
                 SharedState.turnOn('IsShowLogin');
@@ -295,6 +294,13 @@ function APIFactory(
     }
     this.__authentication_callback = [];
     this.authentication = function(callback){
+        if(typeof device != 'object'){
+            $timeout(function(){
+                API.authentication(callback);
+            }, 500);
+            return;
+        }
+
         var device_info = StorageService.get('device-info');
         if(device_info){
             callback();

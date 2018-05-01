@@ -140,14 +140,17 @@ function Main2Controller(
                         },function(res){
                             if(res.data.code == 1){
                                 // update project
-                                for(var i in MainService.listProject){
-                                    var cp = MainService.listProject[i];
-                                    if(p.id ==cp.id){
-                                        MainService.listProject.splice(i, 1);
-                                        break;
-                                    }
-                                }
-                                Dialog.error(res.data.message);
+                                // for(var i in MainService.listProject){
+                                //     var cp = MainService.listProject[i];
+                                //     if(p.id ==cp.id){
+                                //         MainService.listProject.splice(i, 1);
+                                //         break;
+                                //     }
+                                // }
+                                Dialog.alert(res.data.message);
+                                ProjectService.re_get_list(function(list){
+                                    $scope.listProject = list;
+                                })
                             } else {
                                 Dialog.error(res.data.message);
                             }
@@ -241,6 +244,10 @@ function Main2Controller(
         
         var pdf_info = {}
         $scope.export_and_open_pdf = function(project, export_option){
+            if(!_CONS.DIR){
+                Dialog.alert('Can\'t get data directory.')
+                return;
+            }
             try{
                 // window.plugins.spinnerDialog.show(null,"Exporting...");
                 ProjectService.get(project.id,function(p){
