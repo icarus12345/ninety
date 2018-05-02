@@ -20,21 +20,24 @@ function ChartController(
             // SET ANSWERS
             // GET CATEGORY
             CategoryService.get($routeParams.categoryId,function(data){
-                console.log(shareds)
+                // console.log(shareds)
                 console.log('data')
-                console.log(data)
+                // console.log(data)
                 // return;
                 $scope.category_info = data;
                 $scope.chart_data = data.chart_data;
                 var series = []
-                if(SHOW_GLOBAL) series = [$scope.projectData.title]
+                if(SHOW_GLOBAL) {
+                    // series = [$scope.projectData.title]
+                    series = ['Goal'];
+                } 
                 var device_info = StorageService.get('device-info')
                 series.push(device_info.user_info.username);
                 for(var u in shareds){
                     series.push(shareds[u].username)
                 }
                 $scope.series = series;
-                console.log(series)
+                // console.log(series)
                 // $scope.$apply(function() {
                 //     $scope.___++;
                 //     console.log($scope.___)

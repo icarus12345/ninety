@@ -14,7 +14,7 @@ function Category(opt){
     // var SCORE_LEVEL = [1.5,2.5,4];
     var SCORE_LEVEL = [2.5,-1,5];
     // var SCORE_DATA = [1.5,2.5,4];
-    var SCORE_DATA = [0,1,2,3,4,5];
+    var SCORE_DATA = [1,2,3,4,5];
     var NODATACOMMENT = "This section don't have comment.";
     var me = this;
     this.id = opt.id || 0;
