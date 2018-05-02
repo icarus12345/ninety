@@ -464,7 +464,7 @@ function Category(opt){
                 this.process = this.count_answered/this.count_question;
             }
         } catch (e){
-            alert(e.message);
+            alert('F.C467'+e.message);
         }
     }
     this._get_image = function(all_user){
@@ -520,7 +520,7 @@ function Category(opt){
             document.body.removeChild(div);
             return url;
         } catch (e){
-            alert(e.message);
+            alert('F.C523'+e.message);
         }
     }
     this._get_info = function(opt){
@@ -555,7 +555,7 @@ function Category(opt){
                 items: items
             }
         } catch (e){
-            alert(e.message);
+            alert('F.C558'+e.message);
         }
     }
     this.get_infos = function(opt){
@@ -627,6 +627,7 @@ function CategoryFactory(API,StorageService, $mdDialog, Dialog) {
 
     this.get_list_category = function(callback){
         var data = StorageService.get('list_category','');
+
         if(data) {
             me.build(data);
             if(typeof callback == 'function') callback(data)
@@ -649,7 +650,9 @@ function CategoryFactory(API,StorageService, $mdDialog, Dialog) {
         })
     }
     this.build = function(data){
-        try {
+        console.log(data)
+        console.log('data')
+        // try {
             var items = data.items;
             this.rootId = items[0].id;
             this._categories = {
@@ -664,6 +667,9 @@ function CategoryFactory(API,StorageService, $mdDialog, Dialog) {
                 this.questions[q.id] = q;
                 var c = q.category_id;
                 var cat = this._categories[c];
+                console.log(q)
+                console.log(q.category_id)
+                console.log('q.category_id')
                 if(!cat.questions) cat.questions = [];
                     cat.questions.push(q);
             }
@@ -678,9 +684,9 @@ function CategoryFactory(API,StorageService, $mdDialog, Dialog) {
             }
             this.set_answereds();
             //this._categories[0].init();
-        } catch (e){
-            alert(e.message);
-        }
+        // } catch (e){
+        //     alert('F.682'+e.message);
+        // }
     }
     this.clear_answered = function(){
         for(var q in this.questions){
@@ -755,7 +761,7 @@ function CategoryFactory(API,StorageService, $mdDialog, Dialog) {
                 console.log('Export FAIL:',res)
             })
         } catch (e){
-            alert(e.message);
+            alert('F.C758'+e.message);
         }
     }
     return this;
