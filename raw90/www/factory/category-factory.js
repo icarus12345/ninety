@@ -14,7 +14,7 @@ function Category(opt){
     // var SCORE_LEVEL = [1.5,2.5,4];
     var SCORE_LEVEL = [2.5,-1,5];
     // var SCORE_DATA = [1.5,2.5,4];
-    var SCORE_DATA = [0,1,2,3,4,5];
+    var SCORE_DATA = [1,2,3,4,5,6];
     var NODATACOMMENT = "This section don't have comment.";
     var me = this;
     this.id = opt.id || 0;
@@ -191,7 +191,8 @@ function Category(opt){
                         // if(q.global == 3) score = SCORE_DATA[3];
                         // if(q.global == 4) score = SCORE_DATA[4];
                         if(+q.global>=0){
-                            score = SCORE_DATA[+q.global];
+                            // score = SCORE_DATA[+q.global];
+                            score = +q.global;
                         }
                     return sum + score; 
                 }, 0);
@@ -225,9 +226,12 @@ function Category(opt){
                                 //     q.comment = q.higher || NODATACOMMENT;
                                 // }
                                 if(+q.answered[I]>=0){
-                                    score = SCORE_DATA[+q.answered[I]];
+                                    if(q.answers[q.answered[I]]){
+                                        score = +q.answers[q.answered[I]].score;
+                                    }
                                     if(I==0){
                                         q.score = score;
+                                        q.comment = 'You have not completed this question';
                                         q.comment_class = 'comment-none';
                                         if(q.score>=0){
                                         //     if(q.score < SCORE_LEVEL[0]){
@@ -251,9 +255,11 @@ function Category(opt){
                                         // console.log(q.score,q.comment,SCORE_LEVEL,'QQQRRR')
                                     }
                                 }else{
-                                    q.comment = 'You have not completed this question';
-                                    q.comment_class = 'comment-none';
-                                    q.score = 0;
+                                    if(I==0){
+                                        q.score = 0;
+                                        q.comment = 'You have not completed this question';
+                                        q.comment_class = 'comment-none';
+                                    }
                                 }
                                 
                             return sum + score; 
@@ -269,27 +275,7 @@ function Category(opt){
                 
                 this.score = this.scores[0];
 
-                this.comment = 'You have not completed this section';
-                this.comment_class = 'comment-none';
-                if(this.count_answered == this.count_question){
-                    // if(this.score < SCORE_LEVEL[0]){
-                    //     this.comment = this.lower || NODATACOMMENT;
-                    //     this.comment_class = 'comment-lower'
-                    // } else if(this.score < SCORE_LEVEL[1]){
-                    //     this.comment = this.medium || NODATACOMMENT;
-                    //     this.comment_class = 'comment-medium'
-                    // } else {
-                    //     this.comment = this.higher || NODATACOMMENT;
-                    //     this.comment_class = 'comment-higher'
-                    // }
-                    if(+this.score < +this.global_score){
-                        this.comment = this.lower || NODATACOMMENT;
-                        this.comment_class = 'comment-lower';
-                    }else{
-                        this.comment = this.higher || NODATACOMMENT;
-                        this.comment_class = 'comment-higher';
-                    }
-                }
+                
                 
                 // Chart Data
                 var _goalData = [];
@@ -306,7 +292,8 @@ function Category(opt){
                     // if(q.global == 3) global_score = SCORE_LEVEL[3];
                     // if(q.global == 4) global_score = SCORE_LEVEL[4];
                     if(+q.global>=0){
-                        global_score = SCORE_DATA[+q.global];
+                        // global_score = SCORE_DATA[+q.global];
+                        global_score = +q.global;
                     }
                     _labels.push(+J+1);
                     _goalData.push(score);
@@ -320,10 +307,35 @@ function Category(opt){
                         // if(q.answered[I] == 3) score = SCORE_LEVEL[3];
                         // if(q.answered[I] == 4) score = SCORE_LEVEL[4];
                         if(+q.answered[I]>=0){
-                            score = SCORE_DATA[+q.answered[I]];
+                            if(q.answers[q.answered[I]]){
+                                score = +q.answers[q.answered[I]].score;
+                            }
                         }
                         if(SHOW_GLOBAL) _series_data[I + 1].push(score);
                         else _series_data[I].push(score);
+                        if(I==0){
+                            this.comment = 'You have not completed this section';
+                            this.comment_class = 'comment-none';
+                            if(this.count_answered == this.count_question){
+                                // if(this.score < SCORE_LEVEL[0]){
+                                //     this.comment = this.lower || NODATACOMMENT;
+                                //     this.comment_class = 'comment-lower'
+                                // } else if(this.score < SCORE_LEVEL[1]){
+                                //     this.comment = this.medium || NODATACOMMENT;
+                                //     this.comment_class = 'comment-medium'
+                                // } else {
+                                //     this.comment = this.higher || NODATACOMMENT;
+                                //     this.comment_class = 'comment-higher'
+                                // }
+                                if(+this.score < +this.global_score){
+                                    this.comment = this.lower || NODATACOMMENT;
+                                    this.comment_class = 'comment-lower';
+                                }else{
+                                    this.comment = this.higher || NODATACOMMENT;
+                                    this.comment_class = 'comment-higher';
+                                }
+                            }
+                        }
                     }
                 }
                 this.chart_info = {
