@@ -789,6 +789,17 @@ md-icon>span{
 .white-bg{
     background: #fff;
 }
+.app-logo{
+    position: absolute;
+    left: 50%;
+    top: 35px;
+    width: 180px;
+    margin-left: -90px;
+    height: 112px;
+    background: url(../img/logo-sharktank.png) no-repeat top center;
+    background-size: 100% auto;
+    -webkit-background-size: 100% auto;
+}
 .modal-header .modal-title,
 .navbar-head .navbar-brand{
     height: 60px;
@@ -892,6 +903,23 @@ md-icon>span{
     position: relative;
     
 }
+.green-action-btn>.num{
+    position: absolute;
+        top: 15px;right: 15px;
+        width:30px;height: 30px;
+        border-radius: 15px;
+        text-align: center;
+        background: rgba(0,0,0,.4);
+        line-height: 30px;
+    }
+.green-action-btn{
+    background: rgba(17, 142, 160, 0.9);
+    height: 60px;line-height: 20px;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;left: 0;width:100%;
+    color: #fff;
+}
 .accordions .panel-group .panel:first-child .panel-heading{
     background: rgba(17, 142, 160, 0.9)
 }
@@ -922,11 +950,11 @@ md-icon>span{
 }
 .accordions .panel-title{position: relative;}
 .add-project-box{
-    min-height: calc(100vh - 60px - 80px - 80px - 50px);
-    min-height: -webkit-calc(100vh - 60px - 80px - 80px - 50px);
-    min-height: -moz-calc(100vh - 60px - 80px - 80px - 50px);
-    min-height: -ms-calc(100vh - 60px - 80px - 80px - 50px);
+    min-height: calc(100vh - 60px);
+    min-height: -webkit-calc(100vh - 60px);
     position: relative;
+    margin-top: calc(100vh - 232px - 60px);
+    margin-top: -webkit-calc(100vh - 232px - 60px);
 }
 .accordions .panel-body{
     padding: 0;
@@ -936,14 +964,16 @@ button.btn-add-project.md-button:not([disabled]),
 button.btn-risk-submit.md-button:not([disabled]),
 button.btn-risk-submit.md-button{
     background: url(../img/submit.png) transparent center no-repeat;
-    -webkit-background-size: auto 40px;
-    background-size: auto 40px;
+    -webkit-background-size: auto 50px;
+    background-size: auto 50px;
     box-shadow: none;
     -webkit-box-shadow: none;
     color: transparent;text-indent: -1000px;
     margin: 0;
-    line-height: 40px;
-    min-height: 40px;
+    line-height: 50px;
+    min-height: 50px;
+    width: 50px;
+    margin: auto;
 }
 button.btn-add-project.md-button:not([disabled]),
 button.btn-add-project.md-button{
@@ -1015,8 +1045,9 @@ a.list-group-item.project-desc{
     border-radius: 10px;
     padding: 14px 10px;
 }
+.my-account-ico,
 .fb-link,
-.info-link,
+.app-info-ico,
 .book-link{
     position: absolute;width: 40px;height: 40px;
     background-repeat: no-repeat;
@@ -1029,13 +1060,17 @@ a.list-group-item.project-desc{
     bottom: 70px;
     background-image: url(../img/fb.png);
 }
-.info-link{
-    left: 15px;bottom: 15px;
+.app-info-ico{
+    left: 15px;top: 15px;
     background-image: url(../img/info.png);
 }
 .book-link{
     right: 15px;bottom: 15px;
     background-image: url(../img/book.png);
+}
+.my-account-ico{
+    right: 15px;top: 15px;
+    background-image: url(../img/user.png);
 }
 .second-navbar-top{
     position: absolute;top: 100%;left: 0;width: 100%;

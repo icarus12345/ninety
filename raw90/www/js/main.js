@@ -126,12 +126,16 @@ function onDeviceReady(){
                 alert('E124'+e.message)
             }
             $rootScope.goBack = function(){
+
                 $window.history.back();
                 // history.back();
                 // rootScope.$apply();
             }
             document.addEventListener("resume", function(){
-                window.location.reload();
+                if(device.platform != 'browser'){
+                    window.location.reload();
+                }
+                
             }, false);
             document.addEventListener("deviceready",function(){
                 //onDeviceReady()
