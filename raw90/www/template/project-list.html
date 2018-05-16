@@ -1,72 +1,55 @@
-<div class="scrollable viewer risk-bg" ng-class="__path=='/'?'actived':''">
-    <div class="scrollable-content" ui-scroll-bottom="loadMore()" ng-controller="Main2Controller">
-        <div class="add-project-box" style="min-height: {{min_height_project}}px;min-height: calc(100vh - 60px - 80px - 80px - 50px);min-height: -webkit-calc(100vh - 60px - 80px - 80px - 50px);">
-            <md-content layout-padding>
-                <form name="addProjectFrm" id="addProjectFrm" ng-submit="onCreateProject()" autocomplete="off">
-                    <md-input-container class="md-block">
-                        <label>New Project Name</label>
-                        <input 
-                            required md-no-asterisk 
-                            name="title" 
-                            ng-model="addProjectInfo.title">
-                    </md-input-container>
-                    <md-input-container class="md-block">
-                        <label>Project Description</label>
-                        <textarea 
-                            name="desc" md-no-asterisk 
-                            ng-model="addProjectInfo.desc" 
-                         
-                            rows="2" 
-                            md-select-on-focus></textarea>
-                    </md-input-container>
-                    <div  layout="column">
-                        <md-button  class="btn-block btn-add-project" type="submit">Submit</md-button>
-                    </div>
-                    
-                </form>
-            </md-content>
-            <a href="" class="fb-link"></a>
-            <a href="#/app-info/45" class="info-link"></a>
-            <a href="#/content/46" class="book-link"></a>
+<div ui-content-for="navbarTop">
+    <div class="navbar navbar-head navbar-absolute-top black-navbar-head">
+        <div class="navbar-brand navbar-brand-center">
+            <span ng-show="category_info.level == 0">HOME</span>
         </div>
-        <div class="accordions" style="opacity:0.95">
+        <div class="btn-group pull-left">
+            <div class="btn" ng-click="goBack()">
+                <img class="" src="img/back.png">
+            </div>
+        </div>
+        <div class="btn-group pull-right">
+            <a href="#/app-info/46" class="btn">
+                <img class="" src="img/book-black.png">
+            </a>
+            <a href="#/" class="btn">
+                <img class="" src="img/home-black.png">
+            </a>
+        </div>
+    </div>
+</div>
+<div class="scrollable viewer risk-bg" ng-class="__path=='/'?'actived':''">
+    <div class="scrollable-content" ui-scroll-bottom="loadMore()" >
+        
+        <div class="accordions">
             <div class="panel-group">
                 <div 
-                    class="panel" 
-                    ng-repeat="(i, accordion) in accordions"
-                    ng-class="{'actived':accordion.status}"
-                    >
-                    <div class="panel-heading" ng-tap="accordion.status=!accordion.status">
-                        <div class="panel-title">{{accordion.title}}</div>
+                    class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">Projects you created</div>
                     </div>
-                    <div ng-show="accordion.status">
+                    <div>
                         <div class="panel-body">
                             <div class="list-group text-center">
                                 <div class="risk-list-item list-group">
-                                    <div class="no-data" ng-show="!listProject">No data to display !</div>
+                                    <div class="no-data" ng-show="!listProject">Loading...</div>
+                                    <div class="no-data" ng-show="listProject && listProject.length==0">No data to display !</div>
                                   <div 
                                     ng-repeat="project in listProject" 
                                     ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" 
                                     class="item"
-                                    ng-class="(i==0 && Ui.active('dropdown' + project.id))?'active':''"
+                                    ng-class="(Ui.active('dropdown' + project.id))?'active':''"
+                                    ng-if="project.mode==2"
                                     >
                                         <a 
-                                            ng-if="i==0"
                                             ng-href="#/project/{{project.id}}/cat/0"
                                             class="list-group-item" >
+                                            <span class="process-num">{{project.process}}%</span>
                                             <div class="item-title">
                                                 {{project.title}}
                                             </div>
                                         </a>
-                                        <div 
-                                            ng-if="i==1"
-                                            ng-tap="showListBottomSheet(project,true)" 
-                                            class="list-group-item" >
-                                            <div class="item-title">
-                                                {{project.title}}
-                                            </div>
-                                        </div>
-                                        <div class="dropdown" ng-if="i==0">
+                                        <div class="dropdown">
                                             <button 
                                                 ui-turn-on='dropdown{{project.id}}' 
                                                 class='btn'>
@@ -81,21 +64,21 @@
                                             ui-show="dropdown{{project.id}}"
                                             ui-turn-off="dropdown{{project.id}}"
                                             >
-                                                <li ng-show="project.mode==2">
+                                                <li>
                                                     <a ng-tap="show_edit(project)"><span class="icon-note"></span> Edit</a>
                                                 </li>
                                                 <li>
                                                     <a ng-tap="showListBottomSheet(project,true)"><span class="icon-book-open"></span> Export</a>
                                                 </li>
-                                                <li ng-show="project.mode==2" class="divider"></li>
-                                                <li ng-show="project.mode==2">
+                                                <li class="divider"></li>
+                                                <li>
                                                     <a ng-tap="do_share(project)"><span class="icon-share"></span> Share</a>
                                                 </li>
                                                 <li>
                                                     <a href="#/send/{{project.id}}"><span class="icon-envelope-letter"></span> Email</a>
                                                 </li>
-                                                <li ng-show="project.mode==2" class="divider"></li>
-                                                <li ng-show="project.mode==2">
+                                                <li class="divider"></li>
+                                                <li>
                                                     <a ng-tap="do_remove(project)"><span class="icon-trash"></span> Delete</a>
                                                 </li>
                                             </ul>
@@ -103,30 +86,78 @@
                                   </div>
                                 </div>
                             </div>
-                            <md-content ng-show="i==2">
-                                <md-list flex>
-                                    <md-list-item 
-                                        class="md-1-line mb-risk-item" 
-                                        ng-repeat="project in listProject" 
-                                        ng-href="#/project/{{project.id}}/cat/0"
-                                        >
-                                        <div 
-                                            class="md-list-item-text" 
-                                            layout="column"
-                                            
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordions">
+            <div class="panel-group">
+                <div 
+                    class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">Projects shared with you</div>
+                    </div>
+                    <div>
+                        <div class="panel-body">
+                            <div class="list-group text-center">
+                                <div class="risk-list-item list-group">
+                                    <div class="no-data" ng-show="!listSharedProject">Loading...</div>
+                                    <div class="no-data" ng-show="listSharedProject && listSharedProject.length==0">No data to display !</div>
+                                  <div 
+                                    ng-repeat="project in listSharedProject" 
+                                    ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" 
+                                    class="item"
+                                    ng-class="(Ui.active('dropdown' + project.id))?'active':''"
+                                    >
+                                        <a 
+                                            ng-href="#/project/{{project.id}}/cat/0"
+                                            class="list-group-item" >
+                                            <span class="process-num">{{project.process}}%</span>
+                                            <div class="item-title">
+                                                {{project.title}}
+                                            </div>
+                                        </a>
+                                        <div class="dropdown">
+                                            <button 
+                                                ui-turn-on='dropdown{{project.id}}' 
+                                                class='btn'>
+                                                <i class="icon-options-vertical"></i>
+                                            </button>
+                                            <ul
+                                            ui-state="dropdown{{project.id}}"
+                                            class="dropdown-menu"
+                                            ui-outer-click="Ui.turnOff('dropdown' + project.id)"
+                                            ui-outer-click-if="Ui.active('dropdown' + project.id)"
+                                            role="menu"
+                                            ui-show="dropdown{{project.id}}"
+                                            ui-turn-off="dropdown{{project.id}}"
                                             >
-                                            <div class="item-title">{{ project.title }}</div>
-                                            <!-- <p>{{project.created}}</p> -->
+                                                <li ng-if="project.mode==2">
+                                                    <a ng-tap="show_edit(project)"><span class="icon-note"></span> Edit</a>
+                                                </li>
+                                                <li>
+                                                    <a ng-tap="showListBottomSheet(project,true)"><span class="icon-book-open"></span> Export</a>
+                                                </li>
+                                                <li ng-if="project.mode==2" class="divider"></li>
+                                                <li ng-if="project.mode==2">
+                                                    <a ng-tap="do_share(project)"><span class="icon-share"></span> Share</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#/send/{{project.id}}"><span class="icon-envelope-letter"></span> Email</a>
+                                                </li>
+                                                <li ng-if="project.mode==2" class="divider"></li>
+                                                <li ng-if="project.mode==2">
+                                                    <a ng-tap="do_remove(project)"><span class="icon-trash"></span> Delete</a>
+                                                </li>
+                                            </ul>
                                         </div>
-                                        <md-button  
-                                            class="md-icon-button md-secondary" 
-                                            aria-label="showListBottomSheet(project)"
-                                            ng-click="showListBottomSheet(project)">
-                                            <i class="icon-options-vertical"></i>
-                                        </md-button >
-                                    </md-list-item>
-                                </md-list>
-                            </md-content>
+                                  </div>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -135,9 +166,6 @@
 
 
         
-        <div class="navbar-app navbar-bottom" >
-            <a class="copy-right">&copy; 2017 90&deg; Ready</a>
-            <a class="team-condition" href="#/content/47" class="btn btn-navbar">Terms & Conditions</a>
-        </div>
+        
     </div>
 </div>

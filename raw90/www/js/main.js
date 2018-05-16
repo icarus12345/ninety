@@ -69,58 +69,8 @@ function onDeviceReady(){
 
                 window.$transform = $transform;
                 $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
-                    $rootScope.__path = $location.path()
-                    var fullRoute = current.$$route.originalPath;
-                    $rootScope.__fullRoute = fullRoute;
-                    $rootScope.__backPage = $rootScope.__frontPage;
-                    switch(fullRoute){
-                        case '/':
-                            $rootScope.__level = 0;
-                            $rootScope.__prevLevel = $rootScope.__level || 0;
-                            $rootScope.__frontPage = 'home';
-                            break;
-                        case '/project/:projectId':
-                            $rootScope.__level = 1;
-                            $rootScope.__prevLevel = $rootScope.__level || 0;
-                            $rootScope.__frontPage = 'project';
-                            break;
-                        case '/project/:projectId/cat/:categoryId':
-                            $rootScope.__level = 1;
-                            $rootScope.__prevLevel = $rootScope.__level || 0;
-                            $rootScope.__frontPage = 'project';
-                            break;
-                        case '/project/:projectId/quest/:categoryId':
-                            $rootScope.__level = 1;
-                            $rootScope.__prevLevel = $rootScope.__level || 0;
-                            $rootScope.__frontPage = 'project';
-                            break;
-                        case '/project/:projectId/chart/:categoryId/:backNum':
-                            $rootScope.__level = 1;
-                            $rootScope.__prevLevel = $rootScope.__level || 0;
-                            $rootScope.__frontPage = 'project';
-                            break;
-                        case '/share/:projectId':
-                            $rootScope.__level = 1;
-                            $rootScope.__prevLevel = $rootScope.__level || 0;
-                            $rootScope.__frontPage = 'project';
-                            break;
-                        case '/send/:projectId':
-                            $rootScope.__level = 1;
-                            $rootScope.__prevLevel = $rootScope.__level || 0;
-                            $rootScope.__frontPage = 'project';
-                            break;
-                        case '/app-info/:id':
-                            $rootScope.__level = 1;
-                            $rootScope.__prevLevel = $rootScope.__level || 0;
-                            $rootScope.__frontPage = 'project';
-                            break;
-                        case '/content/:id':
-                            $rootScope.__level = 1;
-                            $rootScope.__prevLevel = $rootScope.__level || 0;
-                            $rootScope.__frontPage = 'project';
-                            break;
-                    }
-                    console.log(fullRoute,$rootScope.__frontPage);
+                    
+                    
                 })
             } catch (e){
                 alert('E124'+e.message)
@@ -272,6 +222,11 @@ function onDeviceReady(){
                 reloadOnSearch: false,
                 controller: 'ProjectController'
             });
+            $routeProvider.when('/project-list', {
+                templateUrl: 'template/project-list.html',
+                reloadOnSearch: false,
+                controller: 'ProjectListController'
+            });
             $routeProvider.when('/project/:projectId/cat/:categoryId', {
                 templateUrl: 'template/project-detail.html',
                 reloadOnSearch: false,
@@ -317,7 +272,7 @@ function onDeviceReady(){
     APP.factory('QuestionService', QuestionFactory);
 
     APP.controller('MainController',MainController);
-    APP.controller('Main2Controller',Main2Controller);
+    APP.controller('ProjectListController',ProjectListController);
     APP.controller('ChartController', ChartController);
     APP.controller('ProjectController', ProjectController);
     APP.controller('QuestionController', QuestionController);
