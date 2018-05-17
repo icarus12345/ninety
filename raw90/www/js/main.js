@@ -214,7 +214,11 @@ function onDeviceReady(){
                 enabled: false,
                 requireBase: false
             });
-
+            $routeProvider.when('/profile', {
+                templateUrl: 'template/profile.html',
+                reloadOnSearch: false,
+                controller: 'ProfileController'
+            });
             $routeProvider.when('/', {
                 templateUrl: 'template/home.html',
                 reloadOnSearch: false,
@@ -281,6 +285,7 @@ function onDeviceReady(){
 
     APP.controller('MainController',MainController);
     APP.controller('ProjectListController',ProjectListController);
+    APP.controller('ProfileController',ProfileController);
     APP.controller('ChartController', ChartController);
     APP.controller('ProjectController', ProjectController);
     APP.controller('QuestionController', QuestionController);

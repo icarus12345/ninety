@@ -200,8 +200,14 @@ function APIFactory(
             if(res.data.code == 1){
                 SharedState.turnOff('IsShowLogin');
                 StorageService.set('device-info','',res.data.data);
+                API.UserInfo = res.data.data.user_info;
+                API.token = true;
+                _CONS.total_question = +res.data.data.total_question;
+                _CONS.total_project = +res.data.data.total_project;
                 API.token = true;
                 API.runQueue();
+                API.get_device_info()
+                window.location.href = '#/';
             } else {
                 Dialog.error(res.data.message);
             }
@@ -267,6 +273,7 @@ function APIFactory(
         password:'',
 
     }
+    $rootScope.iams = ['an entrepreneur','a start-up','an angel investor','a venture capitalist','other']
     $rootScope.auth_reg_info = {
         email:'',
         username:'',
@@ -274,6 +281,7 @@ function APIFactory(
         sex: 'male',
         interest: '',
         professional: '',
+        iam: '',
         tos: false
     }
     this.Logout = function(callback){

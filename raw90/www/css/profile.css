@@ -1,0 +1,54 @@
+.profile-info>div{
+	padding: 30px 20px 100px 20px;
+}
+.profile-info{
+	color:#009999;
+	text-align: center;
+
+}
+.profile-info h4{
+	font-weight: 500;
+}
+.profile-info p{
+	font-weight: 300;
+	font-size: 16px;
+	min-height: 30px;
+	line-height: 30px;
+}
+.profile-info span{
+	color: #666;
+	display: block;
+}
+.profile-info h1{
+	font-weight: 300;font-size: 40px;
+	min-height: 60px;
+	line-height: 60px;
+}
+.profile-btn+.profile-btn{
+	margin-top: 20px
+}
+.profile-btn{
+	background-color: #009999;
+	line-height: 30px;
+	padding: 10px;
+	border-radius: 25px;
+	color: #fff;
+	display: block;
+	margin: auto;
+	width: 200px;
+	font-weight: 500;
+	font-size: 16px;
+	margin-top: 30px;
+
+}
+.logout-btn{
+	background-color: #F44336;
+	color: #fff;
+	text-align: center;
+	line-height: 20px;
+	padding: 20px;
+	position: absolute;bottom: 0;
+	left: 0;width: 100%;
+	font-weight: 500;
+	font-size: 16px;
+}

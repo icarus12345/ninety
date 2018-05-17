@@ -58,32 +58,13 @@
                                 <div ng-message="md-maxlength">The Passowrd must be less than 30 characters long.</div>
                             </div>
                         </md-input-container>
-
-                        <md-radio-group ng-model="auth_reg_info.sex" class="button-radio">
-                            <div layout="row">
-                                <div flex="50">
-                                    <md-radio-button  value="male" class="md-danger">Male</md-radio-button>
-                                </div>
-                                <div flex="50">
-                                    <md-radio-button  value="female" class="md-danger">Female</md-radio-button>
-                                </div>
-                            </div>
-                        </md-radio-group>
-
-                        <md-input-container class="md-block">
-                            <label>Professional</label>
-                            <input 
-                                md-no-asterisk 
-                                name="professional" 
-                                ng-model="auth_reg_info.professional">
-                        </md-input-container>
-
-                        <md-input-container class="md-block">
-                            <label>Interest</label>
-                            <input 
-                                md-no-asterisk 
-                                name="interest" 
-                                ng-model="auth_reg_info.interest">
+                        <md-input-container>
+                          <md-select ng-model="auth_reg_info.iam">
+                            <md-option><em>I am</em></md-option>
+                            <md-option ng-repeat="iam in iams" ng-value="iam" >
+                              {{iam}}
+                            </md-option>
+                          </md-select>
                         </md-input-container>
 
                         <md-input-container class="md-block" style="text-align:center">
@@ -101,7 +82,7 @@
                         </div>
 
                         <p style="width: 100%; text-align: center;padding:40px 0 0 0">
-                        Have an account already? <a style="color:#fff;padding: 6px 7px;font-weight:bold;" ng-tap="show_login()" ui-turn-off="IsShowRegister" ui-turn-on="IsShowLogin">Login Now!</a>
+                        Have an account already? <a style="color:#fff;padding: 6px 7px;font-weight:bold;" ng-tap="show_login()" ui-turn-off="IsShowRegister" ui-turn-on="IsShowLogin">Login now!</a>
                         </p>
                     </form>
                 </md-content>

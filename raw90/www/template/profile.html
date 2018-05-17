@@ -1,0 +1,30 @@
+<div ui-content-for="navbarTop">
+    <div class="navbar navbar-head navbar-absolute-top black-navbar-head">
+        <div class="navbar-brand navbar-brand-center">
+            <span>YOUR ACCOUNT</span>
+        </div>
+        <div class="btn-group pull-left">
+            <div class="btn" ng-click="goBack()">
+                <img class="" src="img/back.png">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="scrollable viewer white-bg" ng-class="__path=='/'?'actived':''">
+    <div class="scrollable-content profile-info">
+        <div>
+            <h4>Welcome</h4>
+            <h1>{{user_info.username}}</h1>
+            <hr/>
+            <span>Email</span>
+            <p>{{user_info.email}}</p>
+            <hr/>
+            <span>I am</span>
+            <p>{{user_info.iam}}</p>
+            <hr/>
+            <a href="#/edit-profile" class="profile-btn">Edit Profile</a>
+            <a href="#/change-password" class="profile-btn">Change Password</a>
+        </div>
+        <a class="logout-btn" ng-tap="doLogout()">Logout</a>
+    </div>
+</div>

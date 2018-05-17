@@ -13,7 +13,7 @@ var MainService = {
 function MainController(
     $rootScope, $scope, $http, $route, $routeParams, API, Auth, SharedState, 
     $mdBottomSheet, $location, $mdDialog, $timeout, $window,
-    $cordovaFileTransfer, $cordovaFileOpener2,
+    $cordovaFileTransfer, $cordovaFileOpener2,$interval,
     ProjectService, CategoryService, StorageService, Dialog
     ) {
     $scope.doLogout = function(){
@@ -37,11 +37,10 @@ function MainController(
         id:''
     }
     $scope.total_project = _CONS.total_project;
-    $timeout(function(){
-        API.authentication(function(){
+    API.authentication(function(){})
+    $interval(function(){
             $scope.total_project = _CONS.total_project;
 
-        })
     },1000);
     $scope.onCreateProject = function(){
         try {
