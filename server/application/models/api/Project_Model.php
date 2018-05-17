@@ -103,16 +103,19 @@ class Project_Model extends API_Model {
         }
         if(empty($pids)) $pids = array(-1);
         $query = $this->db
-            ->select('id,title,uid,data')
-            ->where('status','true')
-            ->where("type", $this->client_id)
+            ->select('ninety_project.id,ninety_project.title,ninety_project.uid,ninety_project.data,count(ninety_answer.id) as total_answer')
+            ->from('ninety_project')
+            ->join('ninety_answer','ninety_project.id = ninety_answer.pid','left')
+            ->where('ninety_project.status','true')
+            ->where("ninety_project.type", $this->client_id)
             ->group_start()
-            ->where_in('id',$pids)
-            ->or_where('uid',$uid)
+            ->where_in('ninety_project.id',$pids)
+            ->or_where('ninety_project.uid',$uid)
             ->group_end()
-            ->order_by('created','desc')
+            ->order_by('ninety_project.created','desc')
+            ->group_by('ninety_project.id')
             ->limit($perpage, ($page - 1) * $perpage)
-            ->get('ninety_project');
+            ->get();
         $result = $query->result();
         foreach ($result as $key => $value) {
             // $result[$key]->created = date('Y M d',strtotime($result[$key]->created));
@@ -140,6 +143,30 @@ class Project_Model extends API_Model {
         if ($count == 1)
             return true;
         return false;
+    }
+    function count_project($uid){
+        $shareds = $this->get_shared_by_uid($uid);
+        foreach ($shareds as $key => $value) {
+            $pids[] = $value->pid;
+            $modes[$value->pid] = $value->mode;
+        }
+        if(empty($pids)) $pids = array(-1);
+        $query = $this->db
+            ->select('id')
+            ->where('status','true')
+            ->where("type", $this->client_id)
+            ->group_start()
+            ->where_in('id',$pids)
+            ->or_where('uid',$uid)
+            ->group_end()
+            ->get('ninety_project');
+        $errordb = $this->db->error();
+        $error_message = $errordb['message'];
+        if($errordb['code']!==0){
+            return null;
+        }
+        $num_rows = $query->num_rows();
+        return $num_rows;
     }
 }
 

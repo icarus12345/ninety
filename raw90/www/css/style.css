@@ -431,15 +431,29 @@ small .switch.active .switch-handle{
 }
 .risk-list-item{
     padding: 0;
-    background: #ebebeb
+    background: #ebebeb;
+    min-height: calc((100vh - 60px - 60px - 60px) / 2);
+    min-height: -webkit-calc((100vh - 60px - 60px - 60px) / 2);
+}
+.risk-list-item .list-group-item .process-num{
+    color:#009999;
+    font-weight: 500;
+    display: inline-block;width: 50px;
+    line-height: 20px;
+    position: absolute;
+    left: 0;top: 50%;margin-top: -10px;
+    border-right: 1px solid #009999;
 }
 .risk-list-item .list-group-item{
-    padding: 17px 0px;
+    padding: 20px 0px 20px 60px;
     border:0;
 }
 .risk-list-item .item .list-group-item>div{
     font-size: 15px;
-    /*color: #fff;*/
+    color: #111;
+}
+.risk-list-item .item:first-child{
+    margin-top: 0
 }
 .risk-list-item .item{
     position: relative;
@@ -469,8 +483,13 @@ small .switch.active .switch-handle{
       -o-transform:translate3d(0,-50%,2px);
       transform:translate3d(0,-50%,2px);
 }
+.risk-list-item .item .dropdown>.btn>i{display: none;}
 .risk-list-item .item .dropdown>.btn{
     background: transparent;width: 40px;height: 100%;
+    background-image: url(../img/dot-bar.png);
+    background-size: 20px auto;
+    background-repeat: no-repeat;
+    background-position: center;
 }
 .risk-list-item .item .dropdown>.dropdown-menu{
     top:50%;
@@ -486,6 +505,16 @@ small .switch.active .switch-handle{
     -ms-box-shadow: -2px 2px 12px rgba(0,0,0,.175);
     -o-box-shadow: -2px 2px 12px rgba(0,0,0,.175);
     box-shadow: -2px 2px 12px rgba(0,0,0,.175);
+}
+.risk-list-item .item .dropdown>.dropdown-menu>li{
+    border-bottom: 1px solid #ddd;
+}
+.risk-list-item .item .dropdown>.dropdown-menu>li:last-child{
+    border-bottom: none;
+}
+.risk-list-item .item .dropdown>.dropdown-menu>li>a{
+    padding: 10px 20px;
+    
 }
 .risk-list-item .item:last-child .dropdown>.dropdown-menu{
     top:auto;
@@ -789,6 +818,17 @@ md-icon>span{
 .white-bg{
     background: #fff;
 }
+.app-logo{
+    position: absolute;
+    left: 50%;
+    top: 35px;
+    width: 180px;
+    margin-left: -90px;
+    height: 112px;
+    background: url(../img/logo-sharktank.png) no-repeat top center;
+    background-size: 100% auto;
+    -webkit-background-size: 100% auto;
+}
 .modal-header .modal-title,
 .navbar-head .navbar-brand{
     height: 60px;
@@ -892,11 +932,28 @@ md-icon>span{
     position: relative;
     
 }
+.green-action-btn>.num{
+    position: absolute;
+        top: 15px;right: 15px;
+        width:30px;height: 30px;
+        border-radius: 15px;
+        text-align: center;
+        background: rgba(0,0,0,.4);
+        line-height: 30px;
+    }
+.green-action-btn{
+    background: rgba(17, 142, 160, 0.9);
+    height: 60px;line-height: 20px;
+    padding: 20px;
+    position: absolute;
+    bottom: 0;left: 0;width:100%;
+    color: #fff;
+}
 .accordions .panel-group .panel:first-child .panel-heading{
-    background: rgba(17, 142, 160, 0.9)
+    background: #019899
 }
 .accordions .panel-group .panel .panel-heading::after{
-    content: '';display: block;position: absolute;
+    /*content: '';display: block;position: absolute;
     right: 20px;top: 50%;margin-top: -13px;
     width: 26px;height: 26px;
     background: url(../img/down.png) no-repeat center;
@@ -905,28 +962,31 @@ md-icon>span{
     -webkit-transition: 0.4s ease-in-out ;
     -moz-transition: 0.4s ease-in-out ;
     -o-transition: 0.4s ease-in-out ;
-    transition: 0.4s ease-in-out ;
+    transition: 0.4s ease-in-out ;*/
+}
+.no-data{
+    padding: 20px;
 }
 .accordions .panel-group .panel.actived .panel-heading::after{
-    transform: rotate(180deg);
-    -webkit-transform: rotate(180deg);
+    /*transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);*/
 }
 .accordions .panel-heading{
     position: relative;
-    background: rgba(23, 181, 204, 0.9);
+    background: #019899;
     color: #fff;
     border-radius: 0;
     line-height: 20px;
-    padding: 30px 0;
-    text-align: center;
+    padding: 20px;
+    font-weight: 500;
 }
 .accordions .panel-title{position: relative;}
 .add-project-box{
-    min-height: calc(100vh - 60px - 80px - 80px - 50px);
-    min-height: -webkit-calc(100vh - 60px - 80px - 80px - 50px);
-    min-height: -moz-calc(100vh - 60px - 80px - 80px - 50px);
-    min-height: -ms-calc(100vh - 60px - 80px - 80px - 50px);
+    min-height: calc(100vh - 60px);
+    min-height: -webkit-calc(100vh - 60px);
     position: relative;
+    margin-top: calc(100vh - 232px - 60px);
+    margin-top: -webkit-calc(100vh - 232px - 60px);
 }
 .accordions .panel-body{
     padding: 0;
@@ -936,14 +996,16 @@ button.btn-add-project.md-button:not([disabled]),
 button.btn-risk-submit.md-button:not([disabled]),
 button.btn-risk-submit.md-button{
     background: url(../img/submit.png) transparent center no-repeat;
-    -webkit-background-size: auto 40px;
-    background-size: auto 40px;
+    -webkit-background-size: auto 50px;
+    background-size: auto 50px;
     box-shadow: none;
     -webkit-box-shadow: none;
     color: transparent;text-indent: -1000px;
     margin: 0;
-    line-height: 40px;
-    min-height: 40px;
+    line-height: 50px;
+    min-height: 50px;
+    width: 50px;
+    margin: auto;
 }
 button.btn-add-project.md-button:not([disabled]),
 button.btn-add-project.md-button{
@@ -1015,8 +1077,9 @@ a.list-group-item.project-desc{
     border-radius: 10px;
     padding: 14px 10px;
 }
+.my-account-ico,
 .fb-link,
-.info-link,
+.app-info-ico,
 .book-link{
     position: absolute;width: 40px;height: 40px;
     background-repeat: no-repeat;
@@ -1029,13 +1092,17 @@ a.list-group-item.project-desc{
     bottom: 70px;
     background-image: url(../img/fb.png);
 }
-.info-link{
-    left: 15px;bottom: 15px;
+.app-info-ico{
+    left: 15px;top: 15px;
     background-image: url(../img/info.png);
 }
 .book-link{
     right: 15px;bottom: 15px;
     background-image: url(../img/book.png);
+}
+.my-account-ico{
+    right: 15px;top: 15px;
+    background-image: url(../img/user.png);
 }
 .second-navbar-top{
     position: absolute;top: 100%;left: 0;width: 100%;

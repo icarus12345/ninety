@@ -7,12 +7,29 @@ if (strcasecmp($_SERVER['REQUEST_METHOD'], 'post') === 0 && stripos($_SERVER['CO
 class Auth extends CI_Controller {
     function __construct() {
         parent::__construct();
+        
+        header("Access-Control-Allow-Origin: *");
+        header("Access-Control-Allow-Credentials: true");
+        header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
+        header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
+        header('P3P: CP="CAO PSA OUR"'); // Makes IE to support cookies
+        header("Content-Type: application/json; charset=utf-8");
         $this->load->model("api/Token_Model");
         $this->load->model("api/Client_Model");
         $this->load->model("api/Account_Model");
+        $this->load->model("api/Project_Model");
+        $this->load->model("api/Question_Model");
         $this->load->library('CI_Phpmailer');
         $this->form_validation->set_error_delimiters('', '');
         $this->_code = 200;
+        $this->_output = array(
+            'text' => 'fail',
+            'message' => 'Bad request.',
+            'code' => -1,
+        );
+        $this->client_id = $this->input->get_post('client_id');
+        $this->client_name = $this->input->get_post('client_name');
+        $this->client_secret = $this->input->get_post('client_secret');
     }
 
     public $rules = array(
@@ -141,9 +158,13 @@ class Auth extends CI_Controller {
             if($device) {
                 $user = $this->Account_Model->get_by_id($device->uid);
                 if($user){
+                    $count_project = $this->Project_Model->count_project($device->uid);
+                    $count_question = $this->Question_Model->count_questions();
                     unset($user->password);
                     $data = array(
-                        'user_info' => $user
+                        'user_info' => $user,
+                        'total_project'=>$count_project,
+                        'total_question'=>$count_question,
                         );
                     $this->_output['data'] = $data;
                     $this->_output['code'] = 1;
@@ -199,7 +220,7 @@ class Auth extends CI_Controller {
             'text' => 'Access Denied.',
             'code' => -1,
         );
-        $app_id = $this->input->post('app_id');
+        $client_id = $this->input->post('client_id');
         $username = $this->input->post('username');
         $email = $this->input->post('email');
         $first = $this->input->post('first_name');
@@ -236,7 +257,12 @@ class Auth extends CI_Controller {
                     $code = 200;
                     $output['code'] = 1;
                     $output['text'] = 'ok';
-                    $output['message'] = 'Register new Ninety account success.';
+                    $output['message'] = 'Raw90 Registration Complete.';
+                    if($client_id=='raw'){
+                    	$output['message'] = 'Raw90 Registration Complete.';
+                    }elseif($client_id=='risk'){
+                    	$output['message'] = 'Risk90 Registration Complete.';
+                    }
                     $output['data'] = $user;
                 } else {
                     $code = 200;
@@ -269,7 +295,7 @@ class Auth extends CI_Controller {
         if ($this->form_validation->run() == FALSE) {
             $code = 200;
             $output['validation'] = validation_errors_array();
-            $output['message'] = validation_errors();
+            $output['message'] = 'The Username and Password fields are required';
         } else {
             // $tok = $this->Token_Model->get($app_id,$token);
             // if($tok){
@@ -302,7 +328,7 @@ class Auth extends CI_Controller {
                                 $output['message'] = 'Your account have been deleted.';
                             }
                         } else {
-                            $output['message'] = 'Oops. Incorrect passowrd. Please try again';
+                            $output['message'] = 'Oops. Incorrect password. Please try again';
                             
                         }
                     } else {

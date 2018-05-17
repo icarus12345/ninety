@@ -52,6 +52,7 @@ class Question_Model extends Api_Model {
         if($entrys) foreach ($entrys as $key => $value) {
             $data = unserialize($entrys[$key]->data);
             foreach ($data['answers'] as $akey => $answer) {
+            	$data['answers'][$akey]['score'] = (int)$data['answers'][$akey]['score'];
                 unset($data['answers'][$akey]['alias']);
             }
             $entrys[$key]->answers = $data['answers'];
@@ -63,6 +64,20 @@ class Question_Model extends Api_Model {
             unset($entrys[$key]->data);
         }
         return $entrys;
+    }
+    function count_questions(){
+        $query = $this->db
+            ->select('id')
+            ->where('status','true')
+            ->where("type", $this->client_id)
+            ->get('ninety_question');
+        $errordb = $this->db->error();
+        $error_message = $errordb['message'];
+        if($errordb['code']!==0){
+            return null;
+        }
+        $num_rows = $query->num_rows();
+        return $num_rows;
     }
 }
 

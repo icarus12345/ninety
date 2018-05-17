@@ -27,10 +27,9 @@ function ChartController(
                 $scope.category_info = data;
                 $scope.chart_data = data.chart_data;
                 var series = []
-                if(SHOW_GLOBAL) {
-                    // series = [$scope.projectData.title]
+                if(SHOW_GLOBAL){
                     series = ['Goal'];
-                } 
+                }
                 var device_info = StorageService.get('device-info')
                 series.push(device_info.user_info.username);
                 for(var u in shareds){

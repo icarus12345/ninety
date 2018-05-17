@@ -156,6 +156,8 @@ function APIFactory(
                     if(res.data.data.user_info){
                         API.UserInfo = res.data.data.user_info;
                         API.token = true;
+                        _CONS.total_question = +res.data.data.total_question;
+                        _CONS.total_project = +res.data.data.total_project;
                         API.runQueue();
                     }else{
                         SharedState.turnOn('IsShowLogin');
@@ -315,6 +317,9 @@ function APIFactory(
             },function(res){
                 if(res.data.code==1 && res.data.data){
                     if(res.data.data.user_info){
+                        API.UserInfo = res.data.data.user_info;
+                        _CONS.total_question = +res.data.data.total_question;
+                        _CONS.total_project = +res.data.data.total_project;
                         StorageService.set('device-info','',res.data.data);
                         callback();
                     }else{
