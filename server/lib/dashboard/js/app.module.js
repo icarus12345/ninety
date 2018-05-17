@@ -604,6 +604,7 @@ $(document).ready(function(){
                                 case 'dropdown':
                                 case 'radio':
                                     frm.find('[data-box="data"]').show();
+                                    frm.find('[data-box="valid"]').show();
                             }
                             switch(type) {
                                 case 'privilege':
@@ -627,11 +628,13 @@ $(document).ready(function(){
                                 case 'server-multidropdown':
                                 case 'server-multidropdown':
                                     frm.find('[data-box="sid"]').show();
+                                    frm.find('[data-box="valid"]').show();
                             }
                             switch(type) {
                                 case 'group-server-dropdown':
                                 case 'group-server-multidropdown':
                                     frm.find('[data-box="group-dropdown"]').show();
+                                    frm.find('[data-box="valid"]').show();
                             }
                         })
                         dialog.close();

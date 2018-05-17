@@ -42,7 +42,7 @@ $user = $CI->session->userdata('dasbboard_user');
                         <div>
                             <select 
                                 name="<?php echo $name; ?>" 
-                                class="form-control selectpicker "
+                                class="form-control selectpicker <?php echo $column['client']; ?>"
                                 data-putto="#frm-err-data-<?php echo $column['name']; ?>"
                                 data-live-search="true"
                                 data-size="10"
@@ -106,7 +106,7 @@ $user = $CI->session->userdata('dasbboard_user');
                         <div>
                             <select 
                                 name="<?php echo $name; ?>" 
-                                class="form-control selectpicker "
+                                class="form-control selectpicker <?php echo $column['client']; ?>"
                                 data-putto="#frm-err-data-<?php echo $column['name']; ?>"
                                 data-live-search="true"
                                 data-size="10"
@@ -136,7 +136,7 @@ $user = $CI->session->userdata('dasbboard_user');
                         <div>
                             <select 
                                 name="<?php echo $name; ?>" 
-                                class="form-control selectpicker "
+                                class="form-control selectpicker <?php echo $column['client']; ?>"
                                 data-putto="#frm-err-data-<?php echo $column['name']; ?>"
                                 data-live-search="true"
                                 data-size="10"
@@ -165,7 +165,7 @@ $user = $CI->session->userdata('dasbboard_user');
                         <div>
                             <select multiple
                                 name="<?php echo $name; ?>" 
-                                class="form-control selectpicker "
+                                class="form-control selectpicker <?php echo $column['client']; ?>"
                                 data-putto="#frm-err-data-<?php echo $column['name']; ?>"
                                 data-live-search="true"
                                 data-size="10"
@@ -210,7 +210,7 @@ $user = $CI->session->userdata('dasbboard_user');
                         <div>
                             <select 
                                 name="<?php echo $name; ?>" 
-                                class="form-control selectpicker "
+                                class="form-control selectpicker <?php echo $column['client']; ?>"
                                 data-putto="#frm-err-data-<?php echo $column['name']; ?>"
                                 data-live-search="true"
                                 data-size="10"
@@ -242,7 +242,7 @@ $user = $CI->session->userdata('dasbboard_user');
                         <div>
                             <select 
                                 name="<?php echo $name; ?>" 
-                                class="form-control selectpicker "
+                                class="form-control selectpicker <?php echo $column['client']; ?>"
                                 data-putto="#frm-err-data-<?php echo $column['name']; ?>"
                                 data-live-search="true"
                                 data-size="10"
@@ -280,7 +280,7 @@ $user = $CI->session->userdata('dasbboard_user');
                         <div>
                             <select multiple
                                 name="<?php echo $name; ?>" 
-                                class="form-control selectpicker "
+                                class="form-control selectpicker <?php echo $column['client']; ?>"
                                 data-putto="#frm-err-data-<?php echo $column['name']; ?>"
                                 data-live-search="true"
                                 data-size="10"
@@ -307,7 +307,7 @@ $user = $CI->session->userdata('dasbboard_user');
                         <div>
                             <select multiple
                                 name="<?php echo $name; ?>" 
-                                class="form-control selectpicker "
+                                class="form-control selectpicker <?php echo $column['client']; ?>"
                                 data-putto="#frm-err-data-<?php echo $column['name']; ?>"
                                 data-live-search="true"
                                 data-size="10"
