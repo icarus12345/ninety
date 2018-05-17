@@ -305,6 +305,9 @@ function APIFactory(
 
         var device_info = StorageService.get('device-info');
         if(device_info){
+            API.UserInfo = device_info.user_info;
+            _CONS.total_question = +device_info.total_question;
+            _CONS.total_project = +device_info.total_project;
             callback();
         }else{
             API.__request({

@@ -98,11 +98,7 @@ function ProjectListController(
            
         }
         
-        $scope.addProjectInfo  = {
-            title : '',
-            desc: '',
-            id:''
-        }
+        
         $rootScope.editProjectInfo = {
             title : '',
             desc: '',
@@ -110,31 +106,7 @@ function ProjectListController(
         }
         $rootScope.onCancelUpdate = function(){
         }
-        $scope.onCreateProject = function(){
-            try {
-                API.__request({
-                    url: BASE_URL + 'api/project/create',
-                    data: $scope.addProjectInfo,
-                },function(res){
-                    if(res.data.code == 1){
-                        ProjectService.re_get_list(function(list){
-                            $scope.listProject = list;
-                        })
-                        
-                        $scope.addProjectInfo.title='';
-                        $scope.addProjectInfo.desc='';
-                        $scope.addProjectInfo.id='';
-                    } else {
-                        Dialog.error(res.data.message);
-                    }
-                },function(res){
-                    Dialog.error('Create Project Fail');
-                    console.log('Create Project Fail:',res)
-                });
-            } catch (e){
-                Dialog.alert('EM100: '+e.message);
-            }
-        }
+        
         $rootScope.onUpdateProject = function(){
             API.__request({
                 url: BASE_URL + 'api/project/create',

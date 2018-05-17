@@ -5,6 +5,8 @@ var APP_ID = 'raw';
 var APP_SECRET = '6789';
 var SHOW_GLOBAL = true;
 var _CONS = {
+    total_project:0,
+    total_question:0
 };
 var APP ;
 var isDeviceReady = false;
@@ -64,6 +66,7 @@ function onDeviceReady(){
         $timeout, $mdToast,$cordovaDevice,
         API
         ) {
+            
             try{
 
 
@@ -257,6 +260,11 @@ function onDeviceReady(){
                 reloadOnSearch: false,
                 controller: 'ContentController'
             });
+            $routeProvider.when('/app-info/:id/:cate', {
+                templateUrl: 'template/app-info.html',
+                reloadOnSearch: false,
+                controller: 'ContentController'
+            });
             $routeProvider.when('/content/:id', {
                 templateUrl: 'template/content.html',
                 reloadOnSearch: false,
@@ -279,4 +287,5 @@ function onDeviceReady(){
     APP.controller('SendController', SendController);
     APP.controller('ShareController', ShareController);
     APP.controller('ContentController', ContentController);
+    
 //}

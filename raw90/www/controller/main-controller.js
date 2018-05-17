@@ -31,5 +31,42 @@ function MainController(
             }
         });
     }
+    $scope.addProjectInfo  = {
+        title : '',
+        desc: '',
+        id:''
+    }
+    $scope.total_project = _CONS.total_project;
+    $timeout(function(){
+        API.authentication(function(){
+            $scope.total_project = _CONS.total_project;
+
+        })
+    },1000);
+    $scope.onCreateProject = function(){
+        try {
+            API.__request({
+                url: BASE_URL + 'api/project/create',
+                data: $scope.addProjectInfo,
+            },function(res){
+                if(res.data.code == 1){
+                    ProjectService.re_get_list(function(list){
+                        _CONS.total_project++;
+                    })
+                    
+                    $scope.addProjectInfo.title='';
+                    $scope.addProjectInfo.desc='';
+                    $scope.addProjectInfo.id='';
+                } else {
+                    Dialog.error(res.data.message);
+                }
+            },function(res){
+                Dialog.error('Create Project Fail');
+                console.log('Create Project Fail:',res)
+            });
+        } catch (e){
+            Dialog.alert('EM100: '+e.message);
+        }
+    }
 }
 

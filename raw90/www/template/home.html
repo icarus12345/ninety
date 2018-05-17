@@ -11,6 +11,7 @@
                         <label>New project name</label>
                         <input 
                             required md-no-asterisk 
+                            maxlength="20"
                             name="title" 
                             ng-model="addProjectInfo.title">
                     </md-input-container>
@@ -19,7 +20,7 @@
                         <textarea 
                             name="desc" md-no-asterisk 
                             ng-model="addProjectInfo.desc" 
-                         
+                            maxlength="255"
                             rows="2" 
                             md-select-on-focus></textarea>
                     </md-input-container>
@@ -35,7 +36,7 @@
             <div class="app-logo"></div>
             <a href="#/project-list" class="green-action-btn">
                 Your Projects
-                <span class="num">15</span>
+                <span class="num">{{total_project}}</span>
             </a>
     </div>
 </div>

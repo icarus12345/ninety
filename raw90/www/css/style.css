@@ -516,13 +516,16 @@ small .switch.active .switch-handle{
     padding: 10px 20px;
     
 }
-.risk-list-item .item:last-child .dropdown>.dropdown-menu{
+.accordions:last-child .risk-list-item .item:last-child .dropdown>.dropdown-menu{
     top:auto;
     bottom: 0;
     -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     -o-transform: translateY(0);
     transform: translateY(0);
+}
+.accordions:first-child .risk-list-item .item:first-child .dropdown>.dropdown-menu{
+    margin-top: 20px;
 }
 .risk-list-item .item .dropdown>.dropdown-menu:before,
 .risk-list-item .item .dropdown>.dropdown-menu::before{
@@ -550,21 +553,27 @@ small .switch.active .switch-handle{
     -o-transform: translateY(-50%);
     transform: translateY(-50%);
 }
-.risk-list-item .item:last-child .dropdown>.dropdown-menu:before,
-.risk-list-item .item:last-child .dropdown>.dropdown-menu::before{
+/*.accordions:last-child .risk-list-item .item:last-child .dropdown>.dropdown-menu:before,*/
+.accordions:last-child .risk-list-item .item:last-child .dropdown>.dropdown-menu::before{
     top: auto;bottom: 17px;
      -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     -o-transform: translateY(0);
     transform: translateY(0);
 }
-.risk-list-item .item:last-child .dropdown>.dropdown-menu:after,
-.risk-list-item .item:last-child .dropdown>.dropdown-menu::after{
+/*.accordions:last-child .risk-list-item .item:last-child .dropdown>.dropdown-menu:after,*/
+.accordions:last-child .risk-list-item .item:last-child .dropdown>.dropdown-menu::after{
     top: auto;bottom: 18px;
      -webkit-transform: translateY(0);
     -ms-transform: translateY(0);
     -o-transform: translateY(0);
     transform: translateY(0);
+}
+.accordions:first-child .risk-list-item .item:first-child .dropdown>.dropdown-menu::before{
+    margin-top: -20px;
+}
+.accordions:first-child .risk-list-item .item:first-child .dropdown>.dropdown-menu::after{
+    margin-top: -20px;
 }
 .risk-chart{
     position: relative;max-width: 320px;margin: auto;
@@ -985,8 +994,9 @@ md-icon>span{
     min-height: calc(100vh - 60px);
     min-height: -webkit-calc(100vh - 60px);
     position: relative;
-    margin-top: calc(100vh - 232px - 60px);
-    margin-top: -webkit-calc(100vh - 232px - 60px);
+    padding-top: calc(100vh - 232px - 60px);
+    padding-top: -webkit-calc(100vh - 232px - 60px);
+    padding-bottom: 60px;
 }
 .accordions .panel-body{
     padding: 0;
