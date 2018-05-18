@@ -58,9 +58,9 @@
                                 <div ng-message="md-maxlength">The Passowrd must be less than 30 characters long.</div>
                             </div>
                         </md-input-container>
-                        <md-input-container>
+                        <md-input-container class="md-block">
+                            <label>I am</label>
                           <md-select ng-model="auth_reg_info.iam">
-                            <md-option><em>I am</em></md-option>
                             <md-option ng-repeat="iam in iams" ng-value="iam" >
                               {{iam}}
                             </md-option>
