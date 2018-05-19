@@ -20,10 +20,10 @@
             <p>{{user_info.email}}</p>
             <hr/>
             <span>I am</span>
-            <p>{{user_info.iam}}</p>
+            <p>{{user_info.data.iam}}</p>
             <hr/>
-            <a href="#/edit-profile" class="profile-btn">Edit Profile</a>
-            <a href="#/change-password" class="profile-btn">Change Password</a>
+            <a href="#/profile/edit" class="profile-btn">Edit Profile</a>
+            <a href="#/profile/changepassword" class="profile-btn">Change Password</a>
         </div>
         <a class="logout-btn" ng-tap="doLogout()">Logout</a>
     </div>

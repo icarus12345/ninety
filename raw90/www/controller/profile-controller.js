@@ -8,10 +8,12 @@ function ProfileController(
     function setData(){
         $timeout(function(){
             API.authentication(function(){
+                API.UserInfo.first_name = API.UserInfo.first_name || API.UserInfo.username;
                 $scope.user_info = API.UserInfo;
             })
         },1000);
     }
+    $scope.iams = $rootScope.iams;
     $scope.user_info = API.UserInfo;
     setData();
     $scope.doLogout = function(){
@@ -29,5 +31,22 @@ function ProfileController(
             }
         });
     }
-    
+    $scope.doUpdateProfile = function(){
+
+        API.__request({
+            url: BASE_URL + 'api/member/update_profile',
+            data: {
+                iam: $scope.user_info.data.iam
+            },
+        },function(res){
+            if(res.data.code == 1){
+                 window.location.href = '#/profile';
+            } else {
+                Dialog.error(res.data.message);
+            }
+        },function(res){
+            console.log('Register Fail:',res)
+            Dialog.error('Register Fail');
+        });
+    }
 }

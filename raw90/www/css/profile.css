@@ -6,20 +6,20 @@
 	text-align: center;
 
 }
-.profile-info h4{
+.profile-info>div> h4{
 	font-weight: 500;
 }
-.profile-info p{
+.profile-info>div> p{
 	font-weight: 300;
 	font-size: 16px;
 	min-height: 30px;
 	line-height: 30px;
 }
-.profile-info span{
+.profile-info>div> span{
 	color: #666;
 	display: block;
 }
-.profile-info h1{
+.profile-info>div> h1{
 	font-weight: 300;font-size: 40px;
 	min-height: 60px;
 	line-height: 60px;
@@ -51,4 +51,12 @@
 	left: 0;width: 100%;
 	font-weight: 500;
 	font-size: 16px;
+}
+@media (max-height: 600px){
+	.profile-info>div{
+		    padding: 20px 10px 80px 10px;
+	}
+	hr{
+		margin: 14px 0;
+	}
 }

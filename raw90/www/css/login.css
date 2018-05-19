@@ -115,18 +115,24 @@ md-content,
     color: #fff;
     background: #3ac5b2;
 }
-.login-logo{
+
+.sharktank-logo{
     margin: auto;
-    width: 210px;height: 50px;
-    /*border:1px solid rgba(0,0,0,.1);*/
-    /*background: rgba(0,0,0,.1);*/
+    background: url(../img/logo-sharktank.png) no-repeat top center;
+    background-size: 160px auto;
+    -webkit-background-size: 160px auto;
+    background-position: center;
+    min-height: 130px;
+}
+.register-logo{
     margin-bottom: 20px;
-    text-align: center;
-    line-height: 98px;
-    background: url(../img/logo.png) no-repeat center;
-    -moz-background-size: 180px auto;
-    -webkit-background-size: 180px auto;
-    background-size: 180px auto;
+    height: calc(100vh - 40px - 434px);
+    height: -webkit-calc(100vh - 40px - 434px);
+}
+.login-logo{
+    height: calc(100vh - 40px - 280px);
+    height: -webkit-calc(100vh - 40px - 280px);
+    margin-bottom: 20px;
 }
 .new-to{
     padding-top: 40px;
@@ -143,6 +149,12 @@ md-content,
     background: rgba(0,0,0,.1);
     color: #fff;
 }
+.help-login,
+.help-register{
+    width: 100%; 
+    text-align: center;
+    padding:40px 0 0 0;
+}
 @media (orientation: landscape){
     /*.login-box{
         padding-left: 130px !important;
@@ -154,7 +166,13 @@ md-content,
         margin-top: -50px;
     }*/
 }
-@media (orientation: portrait){
+@media (max-height: 600px){
+    .register-logo{
+        height: 112px;min-height: 112px;
+    }
+    .help-register{
+        padding-top: 20px;
+    }
 }
 .login-space{
     min-height: calc(100vh - 400px);

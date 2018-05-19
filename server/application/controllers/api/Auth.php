@@ -129,7 +129,10 @@ class Auth extends CI_Controller {
                     'label'=>'Password',
                     'rules'=>'trim|required'
                 )
-        )
+        ),
+        'update_profile' => array(
+                
+        ),
     );
 
     function index(){
@@ -227,6 +230,7 @@ class Auth extends CI_Controller {
         $last = $this->input->post('last_name');
         $password = $this->input->post('password');
         $sex = $this->input->post('sex');
+        $iam = $this->input->post('iam');
         $professional = $this->input->post('professional');
         $interest = $this->input->post('interest');
         // $token = $_SERVER['HTTP_X_CSRF_TOKEN'];
@@ -247,6 +251,7 @@ class Auth extends CI_Controller {
                     'last_name' => $last,
                     'data'=>serialize(array(
                         'sex' => $sex,
+                        'iam' => $iam,
                         'professional' => $professional,
                         'interest' => $interest,
                         ))
@@ -459,4 +464,6 @@ class Auth extends CI_Controller {
             ->set_status_header($code)
             ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
+
+    
 }

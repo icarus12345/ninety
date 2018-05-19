@@ -219,6 +219,11 @@ function onDeviceReady(){
                 reloadOnSearch: false,
                 controller: 'ProfileController'
             });
+            $routeProvider.when('/profile/edit', {
+                templateUrl: 'template/profile-edit.html',
+                reloadOnSearch: false,
+                controller: 'ProfileController'
+            });
             $routeProvider.when('/', {
                 templateUrl: 'template/home.html',
                 reloadOnSearch: false,

@@ -11,42 +11,43 @@
                                 id="loginForm" 
                                 ng-submit='doAuthLogin()' 
                                 autocomplete="off">
-                                <div class="login-logo"></div>
-                                <div class="login-space"></div>
-                                <md-input-container class="md-block">
-                                    <label>Username</label>
-                                    <input 
-                                        required md-no-asterisk 
-                                        name="username" 
-                                        ng-model="auth_singin_info.username">
-                                    <!-- <div ng-messages="loginForm.username.$error">
-                                        <div ng-message="required">This is required.</div>
-                                        <div ng-message="md-maxlength">The username must be less than 30 characters long.</div>
-                                    </div> -->
-                                </md-input-container>
+                                <div class="login-logo sharktank-logo"></div>
+                                <div>
+                                    <md-input-container class="md-block">
+                                        <label>Username</label>
+                                        <input 
+                                            required md-no-asterisk 
+                                            name="username" 
+                                            ng-model="auth_singin_info.username">
+                                        <!-- <div ng-messages="loginForm.username.$error">
+                                            <div ng-message="required">This is required.</div>
+                                            <div ng-message="md-maxlength">The username must be less than 30 characters long.</div>
+                                        </div> -->
+                                    </md-input-container>
 
-                                <md-input-container class="md-block">
-                                    <label>Password</label>
-                                    <input 
-                                        type="password" 
-                                        required md-no-asterisk 
-                                        name="password" 
-                                        ng-model="auth_singin_info.password">
-                                    <!-- <div ng-messages="loginForm.password.$error">
-                                        <div ng-message="required">This is required.</div>
-                                        <div ng-message="md-maxlength">The pasword must be less than 30 characters long.</div>
-                                    </div> -->
-                                </md-input-container>
-                                <div  layout="column">
-                                    <md-button  class="btn-block btn-risk-submit" type="submit">Submit</md-button>
+                                    <md-input-container class="md-block">
+                                        <label>Password</label>
+                                        <input 
+                                            type="password" 
+                                            required md-no-asterisk 
+                                            name="password" 
+                                            ng-model="auth_singin_info.password">
+                                        <!-- <div ng-messages="loginForm.password.$error">
+                                            <div ng-message="required">This is required.</div>
+                                            <div ng-message="md-maxlength">The pasword must be less than 30 characters long.</div>
+                                        </div> -->
+                                    </md-input-container>
+                                    <div  layout="column">
+                                        <md-button  class="btn-block btn-risk-submit" type="submit">Submit</md-button>
+                                    </div>
+
+                                    <p class="help-login">
+                                    Don't have an account? <a style="color:#fff;padding:6px 7px;font-weight:bold;" ng-tap="show_register()" ui-turn-on="IsShowRegister" ui-turn-off="IsShowLogin">Register now!</a>
+                                    </p>
+                                    <p style="width: 100%; text-align: center;">
+                                        <a style="color:#fff;padding:6px 7px;font-weight:bold;" ng-tap="show_forgot(1)">Forgot password ?</a>
+                                    </p>
                                 </div>
-
-                                <p style="width: 100%; text-align: center;padding-top:40px;">
-                                Don't have an account? <a style="color:#fff;padding:6px 7px;font-weight:bold;" ng-tap="show_register()" ui-turn-on="IsShowRegister" ui-turn-off="IsShowLogin">Register now!</a>
-                                </p>
-                                <p style="width: 100%; text-align: center;">
-                                    <a style="color:#fff;padding:6px 7px;font-weight:bold;" ng-tap="show_forgot(1)">Forgot password ?</a>
-                                </p>
                             </form>
                             <form 
                                 name="sendCodeForm" 
@@ -54,10 +55,7 @@
                                 ng-submit='doAuthSendCode()' 
                                 ng-show="auth_forgot.status && auth_forgot.step == 1"
                                 autocomplete="off">
-                                <div class="login-logo"></div>
-                                <div class="forgot-space">
-                                    
-                                </div>
+                                <div class="login-logo sharktank-logo"></div>
                                 <md-input-container class="md-block">
                                     <label>Email</label>
                                     <input 
@@ -98,10 +96,7 @@
                                 ng-submit='doAuthForgot()' 
                                 ng-show="auth_forgot.status && auth_forgot.step == 2"
                                 autocomplete="off">
-                                <div class="login-logo"></div>
-                                <div class="forgot-space">
-                                    
-                                </div>
+                                <div class="login-logo sharktank-logo"></div>
                                 <div class="text-center">Please check your email for a password reset code.</div>
                                 <md-input-container class="md-block">
                                     <label>Code</label>

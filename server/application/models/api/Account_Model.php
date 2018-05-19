@@ -32,6 +32,9 @@ class Account_Model extends CI_Model {
                 ))
             ->get('ninety_account');
         $row = $query->row();
+        if($row){
+            $row->data = unserialize($row->data);
+        }
         return $row;
     }
     function get_by_email($email=''){
@@ -42,6 +45,9 @@ class Account_Model extends CI_Model {
                 ))
             ->get('ninety_account');
         $row = $query->row();
+        if($row){
+            $row->data = unserialize($row->data);
+        }
         return $row;
     }
     function get_by_id($id){
@@ -52,6 +58,9 @@ class Account_Model extends CI_Model {
                 ))
             ->get('ninety_account');
         $row = $query->row();
+        if($row){
+            $row->data = unserialize($row->data);
+        }
         return $row;
     }
     function update($id,$params){

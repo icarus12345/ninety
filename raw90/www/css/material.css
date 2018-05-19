@@ -253,10 +253,16 @@ md-input-container .md-input.ng-invalid.ng-dirty{
 }
 
 .btn-circle{border-radius: 20px;line-height: 20px;padding: 10px;margin: auto;}
+.md-btn-danger>span,
+.md-focused.md-btn-danger>span,
+.md-button.md-btn-danger:not([disabled]).md-focused>span{
+    color: #fff;
+}
 .md-btn-danger,
 .md-focused.md-btn-danger,
 .md-button.md-btn-danger:not([disabled]).md-focused{
     background: rgba(23, 181, 204, 0.8);;color: #fff;
+    min-width: 110px;
 }
 .md-btn-default,
 .md-focused.md-btn-default,
@@ -283,9 +289,20 @@ md-input-container .md-input.ng-invalid.ng-dirty{
 md-select.md-default-theme .md-select-value, md-select .md-select-value,
 md-select.md-default-theme .md-select-value.md-select-placeholder, 
 md-select .md-select-value.md-select-placeholder{
-    color: rgba(255,255,255,.8) !important;
     border-bottom: 0 !important;
     padding: 0;
+}
+.register-info md-select.md-default-theme .md-select-value, 
+.register-info md-select .md-select-value,
+.register-info md-select.md-default-theme .md-select-value.md-select-placeholder, 
+.register-info md-select .md-select-value.md-select-placeholder{
+    color: rgba(255,255,255,.8) !important;
+}
+.profile-edit md-select.md-default-theme .md-select-value, 
+.profile-edit md-select .md-select-value,
+.profile-edit md-select.md-default-theme .md-select-value.md-select-placeholder, 
+.profile-edit md-select .md-select-value.md-select-placeholder{
+    color: #111 !important;
 }
 .md-select-value .md-select-icon{
     border: 1px solid rgba(255,255,255,.8);
@@ -296,4 +313,8 @@ md-select .md-select-value.md-select-placeholder{
 }
 .md-select-menu-container.md-active md-select-menu{
     border-radius: 20px;
+}
+md-input-container.md-input-has-value .md-select-value>span:not(.md-select-icon){
+        -webkit-transform: translate3d(0,0px,0);
+    transform: translate3d(0,0px,0);
 }

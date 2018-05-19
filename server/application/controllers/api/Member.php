@@ -68,6 +68,10 @@ class Member extends Api_Controller {
                     'rules'=>'trim|min_length[4]|max_length[100]'
                 ),
         ),
+
+        'update_profile' => array(
+                
+        ),
     );
     function index(){
         $this->db->where('start_date < NOW()');
@@ -197,5 +201,49 @@ class Member extends Api_Controller {
             }
         }
         $this->display();
+    }
+
+    function update_profile(){
+        $code = 200;
+        $output = array(
+            'text' => 'fail',
+            'message' => 'Fail.',
+            'code' => -1,
+        );
+        $iam = $this->input->post('iam');
+        // $token = $_SERVER['HTTP_X_CSRF_TOKEN'];
+        // $this->form_validation->set_rules($this->rules['update_profile']);
+        // if ($this->form_validation->run() == FALSE) {
+            // $code = 200;
+            // $output['validation'] = validation_errors_array();
+            // $output['message'] = validation_errors();
+        // } else {
+                    
+            $code = 200;
+            
+            if($this->user){
+                $data = $this->user->data;
+                if(empty($data)){
+                    $data = array();
+                }
+                $data['iam'] = $iam;
+                $rs = $this->Account_Model->update($this->user->id,array(
+                    'data' => serialize($data),
+                    ));
+                if($rs){
+                    $output['code'] = 1;
+                    $output['text'] = 'ok';
+                    $output['message'] = 'Success';
+                } else {
+                    $output['message'] = 'Fail to update your profile.';
+                }
+            } else {
+                $output['message'] = 'User does\'t exists.';
+            }
+        // }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($code)
+            ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
 }
