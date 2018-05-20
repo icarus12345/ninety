@@ -224,6 +224,11 @@ function onDeviceReady(){
                 reloadOnSearch: false,
                 controller: 'ProfileController'
             });
+            $routeProvider.when('/profile/changepassword', {
+                templateUrl: 'template/profile-changepassword.html',
+                reloadOnSearch: false,
+                controller: 'ProfileController'
+            });
             $routeProvider.when('/', {
                 templateUrl: 'template/home.html',
                 reloadOnSearch: false,

@@ -45,8 +45,33 @@ function ProfileController(
                 Dialog.error(res.data.message);
             }
         },function(res){
-            console.log('Register Fail:',res)
-            Dialog.error('Register Fail');
+            console.log('Setting Profile Fail:',res)
+            Dialog.error('Setting Profile Fail');
         });
     }
+    $scope.doUpdatePassword = function(){
+        if($scope.new_password != $scope.confirm_new_password){
+            Dialog.error('Confirm password does\'t match.');
+            return;
+        }
+        API.__request({
+            url: BASE_URL + 'api/member/change_password',
+            data: {
+                password: $scope.new_password
+            },
+        },function(res){
+            if(res.data.code == 1){
+                window.location.href = '#/profile';
+                $scope.new_password = '';
+                $scope.confirm_new_password = '';
+            } else {
+                Dialog.error(res.data.message);
+            }
+        },function(res){
+            console.log('Change Password Fail:',res)
+            Dialog.error('Change Password Fail');
+        });
+    }
+    $scope.new_password = '';
+    $scope.confirm_new_password = '';
 }

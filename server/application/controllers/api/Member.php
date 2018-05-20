@@ -69,8 +69,12 @@ class Member extends Api_Controller {
                 ),
         ),
 
-        'update_profile' => array(
-                
+        'change_password' => array(
+                'password' => array(
+                    'field'=>'password',
+                    'label'=>'Password',
+                    'rules'=>'trim|required|min_length[4]|max_length[30]'
+                )
         ),
     );
     function index(){
@@ -241,6 +245,50 @@ class Member extends Api_Controller {
                 $output['message'] = 'User does\'t exists.';
             }
         // }
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($code)
+            ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
+
+    function change_password(){
+        $code = 200;
+        $output = array(
+            'text' => 'fail',
+            'message' => 'Fail.',
+            'code' => -1,
+        );
+        $password = $this->input->post('password');
+        // $token = $_SERVER['HTTP_X_CSRF_TOKEN'];
+        $this->form_validation->set_rules($this->rules['change_password']);
+        if ($this->form_validation->run() == FALSE) {
+            $code = 200;
+            $output['validation'] = validation_errors_array();
+            $output['message'] = validation_errors();
+        } else {
+                    
+            $code = 200;
+            
+            if($this->user){
+                $data = $this->user->data;
+                if(empty($data)){
+                    $data = array();
+                }
+                $data['iam'] = $iam;
+                $rs = $this->Account_Model->update($this->user->id,array(
+                    'password' => user_hash_password($password),
+                    ));
+                if($rs){
+                    $output['code'] = 1;
+                    $output['text'] = 'ok';
+                    $output['message'] = 'Success';
+                } else {
+                    $output['message'] = 'Fail to update your password.';
+                }
+            } else {
+                $output['message'] = 'User does\'t exists.';
+            }
+        }
         $this->output
             ->set_content_type('application/json')
             ->set_status_header($code)

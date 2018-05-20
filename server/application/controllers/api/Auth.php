@@ -127,11 +127,15 @@ class Auth extends CI_Controller {
                 'password' => array(
                     'field'=>'password',
                     'label'=>'Password',
-                    'rules'=>'trim|required'
+                    'rules'=>'trim|required|min_length[4]|max_length[50]'
                 )
         ),
         'update_profile' => array(
-                
+                'password' => array(
+                    'field'=>'password',
+                    'label'=>'Password',
+                    'rules'=>'trim|required|min_length[4]|max_length[50]'
+                )
         ),
     );
 
