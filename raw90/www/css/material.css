@@ -246,6 +246,9 @@ md-radio-button.md-default-theme .md-off, md-radio-button .md-off{
 .button-radio div[layout="row"] div[flex="50"]:last-child{
     padding-left: 5px;
 }
+md-input-container.hide-char-counter .md-errors-spacer{
+    display: none;
+}
 md-input-container.md-input-focused .md-input, 
 md-input-container.md-input-resized .md-input, 
 md-input-container .md-input.ng-invalid.ng-dirty{
@@ -305,11 +308,17 @@ md-select .md-select-value.md-select-placeholder{
     color: #111 !important;
 }
 .md-select-value .md-select-icon{
-    border: 1px solid rgba(255,255,255,.8);
+    
     text-align: center;
     border-radius: 50%;
     width: 26px;
-    opacity: .7;
+    text-indent: -1000px;
+    height: 36px;
+    background: url(../img/down.png) no-repeat center;
+    background-size: 26px 26px;
+    -webkit-background-size: 26px 26px;
+    opacity: .75;
+
 }
 .md-select-menu-container.md-active md-select-menu{
     border-radius: 20px;

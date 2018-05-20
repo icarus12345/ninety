@@ -323,9 +323,13 @@ class Auth extends CI_Controller {
                                 $output['code'] = 1;
                                 $output['text'] = 'ok';
                                 $output['message'] = 'Success';
-                                
+                                $count_project = $this->Project_Model->count_project($device->uid);
+                                $count_question = $this->Question_Model->count_questions();
+                                unset($user->password);
                                 $output['data'] = array(
-                                    'user_info' => $user
+                                    'user_info' => $user,
+                                    'total_project'=>$count_project,
+                                    'total_question'=>$count_question,
                                     );
                                 $this->Account_Model->update($user->id,array(
                                     'last_login' => date('Y-m-d H:i:s')

@@ -13,7 +13,7 @@
                         >
                         <div class="register-logo sharktank-logo"></div>
                         <div>
-                            <md-input-container class="md-block">
+                            <md-input-container class="md-block hide-char-counter">
                                 <label>Email</label>
                                 <input 
                                     required 
@@ -28,34 +28,46 @@
 
                                 <div ng-messages="registerForm.email.$error" role="alert">
                                     <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
-                                Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                        Your email must be between 10 and 100 characters long and look like an e-mail address.
                                     </div>
+                                    <div ng-message="md-maxlength">Your email must be less than 100 characters long.</div>
+                                    <div ng-message="md-minlength">Your email must be greater than 10 characters long.</div>
                                 </div>
                             </md-input-container>
 
-                            <md-input-container class="md-block">
+                            <md-input-container class="md-block hide-char-counter">
                                 <label>Username</label>
                                 <input 
                                     required md-no-asterisk 
                                     name="username" 
+                                    md-minlength="2" 
+                                    md-maxlength="20" 
+                                    ng-pattern="/^[0-9a-zA-Z]+$/" 
                                     ng-model="auth_reg_info.username">
                                 <div ng-messages="registerForm.username.$error">
                                     <div ng-message="required">This is required.</div>
+                                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                        Your username must be between 2 and 20 characters long and don't have space and special characters.
+                                    </div>
+                                    <div ng-message="md-maxlength">The username must be less than 20 characters long.</div>
+                                    <div ng-message="md-minlength">The username must be greater than 4 characters short.</div>
                                 </div>
                             </md-input-container>
 
 
-                            <md-input-container class="md-block">
+                            <md-input-container class="md-block hide-char-counter">
                                 <label>Password</label>
                                 <input 
                                     type="password" 
                                     required md-no-asterisk 
                                     name="password" 
-                                    maxlength="30" 
+                                    md-minlength="4" 
+                                    md-maxlength="20" 
                                     ng-model="auth_reg_info.password">
                                 <div ng-messages="registerForm.password.$error">
                                     <div ng-message="required">This is required.</div>
-                                    <div ng-message="md-maxlength">The Passowrd must be less than 30 characters long.</div>
+                                    <div ng-message="md-maxlength">The password must be less than 20 characters long.</div>
+                                    <div ng-message="md-minlength">The password must be greater than 4 characters short.</div>
                                 </div>
                             </md-input-container>
                             <md-input-container class="md-block">

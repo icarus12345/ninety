@@ -85,6 +85,7 @@ function ProjectFactory(API,StorageService, $mdDialog,Dialog) {
                 },function(res){
                     if(res.data.code == 1){
                         StorageService.set('list-project','',res.data.data);
+                        _CONS.total_project = +res.data.data.length;
                         callback(res.data.data);
                     } else {
                         Dialog.error(res.data.message);

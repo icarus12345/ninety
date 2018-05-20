@@ -957,6 +957,7 @@ md-icon>span{
     position: absolute;
     bottom: 0;left: 0;width:100%;
     color: #fff;
+    font-weight: 500;
 }
 .accordions .panel-group .panel:first-child .panel-heading{
     background: #019899
@@ -972,6 +973,17 @@ md-icon>span{
     -moz-transition: 0.4s ease-in-out ;
     -o-transition: 0.4s ease-in-out ;
     transition: 0.4s ease-in-out ;*/
+}
+.accordions .panel-group .panel .panel-heading .num {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    text-align: center;
+    background: rgba(0,0,0,.4);
+    line-height: 30px;
 }
 .no-data{
     padding: 20px;
@@ -1048,7 +1060,7 @@ button.btn-add-project.md-button{
 .list-group-item.project-desc,
 a.list-group-item.project-desc{
     color: #ebebeb;
-    padding: 30px 20px;
+    padding: 20px;
     border:0;
     overflow-y: auto;
     background: rgba(0, 30, 33, 0.8);

@@ -49,9 +49,9 @@ function MainController(
                 data: $scope.addProjectInfo,
             },function(res){
                 if(res.data.code == 1){
-                    ProjectService.re_get_list(function(list){
                         _CONS.total_project++;
-                    })
+                    // ProjectService.re_get_list(function(list){
+                    // })
                     
                     $scope.addProjectInfo.title='';
                     $scope.addProjectInfo.desc='';

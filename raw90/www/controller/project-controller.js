@@ -34,22 +34,28 @@ function ProjectController(
                 $scope.category_info = data;
                 $scope.min_height = Math.max($window.innerHeight - (60 + ($scope.category_info.items.length||3)*81 + 50),100);
                 // calculator height
-                // var html = $scope.category_info.desc || $scope.projectData.desc;
-                // var pElmDom = document.createElement('div');
-                // pElmDom.style.opacity = '0.01';
-                // pElmDom.style.overflow = 'hidden';
-                // pElmDom.style['position'] = 'absolute';
-                // pElmDom.style['top'] = '0px';
-                // pElmDom.style['left'] = '0px';
-                // pElmDom.style['zZndex'] = '-1';
-                // pElmDom.style.width = '100%';
-                // document.body.appendChild(pElmDom);
-                // var elm = document.createElement('div');
-                // pElmDom.appendChild(elm);
-                // elm.innerHTML = html;
-                // elm.style.padding = '20px 14px';
-                // elm.style.fontSize = '16px';
+                var html = $scope.category_info.desc;
+                if($routeParams.categoryId==0) html = $scope.projectData.desc;
+                $scope.description = html;
                 var desc_height = 0;
+                if(html && html!=''){
+                    var pElmDom = document.createElement('div');
+                    pElmDom.style.opacity = '0.01';
+                    pElmDom.style.overflow = 'hidden';
+                    pElmDom.style['position'] = 'absolute';
+                    pElmDom.style['top'] = '0px';
+                    pElmDom.style['left'] = '0px';
+                    pElmDom.style['zZndex'] = '-1';
+                    pElmDom.style.width = '100%';
+                    document.body.appendChild(pElmDom);
+                    var elm = document.createElement('div');
+                    pElmDom.appendChild(elm);
+                    elm.innerHTML = html;
+                    elm.style.padding = '20px';
+                    elm.style.fontSize = '16px';
+                    desc_height = elm.clientHeight;
+                    document.body.removeChild(pElmDom);
+                }
                 var item_length = $scope.category_info.items.length;
                 var total_height = window.innerHeight - 60 - 50 - desc_height;
                 var item_height = Math.floor((window.innerHeight - 60 - 50 - item_length - desc_height) / item_length);
@@ -60,7 +66,7 @@ function ProjectController(
                 $scope.item_height = item_height;
                 $scope.item_line_height = 20;
                 $scope.item_padding = (item_height - 20)/2;
-                // document.body.removeChild(pElmDom);
+                
             })
         })
     } catch (e){
@@ -412,10 +418,10 @@ function ProjectListController(
         function __get_list(){
         // API.authentication(function(){
             ProjectService.get_list(function(list){
-                if(list.length>0){
 
                 $scope.listProject = [];
                 $scope.listSharedProject = [];
+                if(list.length>0){
                 list.map(function(p){
                     p.process = parseInt(+p.total_answer/_CONS.total_question*100);
                     if(p.uid == API.UserInfo.id){

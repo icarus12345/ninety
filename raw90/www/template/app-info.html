@@ -1,18 +1,19 @@
+
 <div ui-content-for="navbarTop">
-    <div class="navbar navbar-head navbar-absolute-top red-navbar-head">
+    <div class="navbar navbar-head navbar-absolute-top black-navbar-head">
         <div class="navbar-brand navbar-brand-center">
-            {{content.title}}
+            <span>{{content.title}}</span>
         </div>
-        <div class="btn-group pull-right">
+        <div class="btn-group pull-left">
             <div class="btn" ng-click="goBack()">
-                <img class="" src="img/close.png">
+                <img class="" src="img/back.png">
             </div>
         </div>
     </div>
 </div>
-
 <div class="scrollable viewer white-bg" ng-class="">
     <div class="scrollable-content " ng-cloak>
+        <div class="sharktank-logo2"></div>
         <div ng-bind-html="content.content" class="ckeditor" style="padding:0px 0 20px 0"></div>
     </div>
 </div>

@@ -65,13 +65,12 @@
                 
                 <div class="chart-info">
                     <div ng-repeat="(i,item) in category_info.items"
-                        ng-class="{'open':check_open_comment(category_info,i)}"
+                        class="open"
                         >
                         <div class="chart-item-head" 
                             ng-tap="toggle_comment(category_info,i)"
                             >
                             <span class="num">{{i+1}}</span> {{item.title}}
-                            <i class=""></i>
                         </div>
 
                         <div ng-class="item.comment_class">
@@ -79,14 +78,13 @@
                         </div>
                     </div>
                     <div ng-repeat="(no,item) in category_info.questions"
-                        ng-class="{'open':check_open_comment(category_info,no)}"
+                        class="open"
                         >
                         <div class="chart-item-head" 
                             ng-tap="toggle_comment(category_info,no)"
                             >
                             <span class="num">{{no+1}}</span> 
                             {{item.title}}
-                            <i class=""></i>
                         </div>
 
                         
@@ -123,14 +121,13 @@
                 </div>
                 <div class="chart-info">
                     <div ng-repeat="(no,item) in foo.items"
-                        ng-class="{'open':check_open_comment(foo,no)}"
+                        class="open"
                         >
                         <div class="chart-item-head" 
                             ng-click="toggle_comment(foo,no)"
                             >
                             <span class="num">{{no+1}}</span> 
                             {{item.title}} 
-                            <i class=""></i>
                         </div>
 
                         <div ng-class="item.comment_class">
@@ -138,14 +135,13 @@
                         </div>
                     </div>
                     <div ng-repeat="(no,item) in foo.questions"
-                        ng-class="{'open':check_open_comment(foo,no)}"
+                        class="open"
                         >
                         <div class="chart-item-head" 
                             ng-tap="toggle_comment(foo,no)"
                             >
                             <span class="num">{{no+1}}</span> 
                             {{item.title}}
-                            <i class=""></i>
                         </div>
 
                         

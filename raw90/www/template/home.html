@@ -7,22 +7,41 @@
         <div class="add-project-box">
             <md-content layout-padding>
                 <form name="addProjectFrm" id="addProjectFrm" ng-submit="onCreateProject()" autocomplete="off">
-                    <md-input-container class="md-block">
+                    <md-input-container class="md-block hide-char-counter">
                         <label>New project name</label>
                         <input 
-                            required md-no-asterisk 
-                            maxlength="20"
                             name="title" 
+                            required
+                            minlength="2" 
+                            md-maxlength="20" 
                             ng-model="addProjectInfo.title">
+                        <div ng-messages="addProjectInfo.title.$error">
+                            <div ng-message="required">This is required.</div>
+                            <div ng-message="md-minlength">Project title must be greater than 2 characters short.</div>
+                            <div ng-message="md-maxlength">Project title must be less than 20 characters long.</div>
+                            <div ng-message-exp="['minlength', 'maxlength', 'pattern']">
+                                Project title must be between 2 and 20 characters long and don't have space and special characters.
+                            </div>
+                        </div>
                     </md-input-container>
-                    <md-input-container class="md-block">
+                    <md-input-container class="md-block hide-char-counter">
                         <label>Description</label>
                         <textarea 
-                            name="desc" md-no-asterisk 
+                            name="desc" 
                             ng-model="addProjectInfo.desc" 
-                            maxlength="100"
+                            required
+                            minlength="2" 
+                            md-maxlength="100"
                             rows="2" 
                             md-select-on-focus></textarea>
+                        <div ng-messages="addProjectInfo.desc.$error">
+                            <div ng-message="required">This is required.</div>
+                            <div ng-message="md-minlength">Project description must be greater than 2 characters short.</div>
+                            <div ng-message="md-maxlength">Project description must be less than 100 characters long.</div>
+                            <div ng-message-exp="['minlength', 'maxlength', 'pattern']">
+                                Project description must be between 2 and 100 characters long and don't have space and special characters.
+                            </div>
+                        </div>
                     </md-input-container>
                     <div  layout="column">
                         <md-button  class="btn-block btn-add-project" type="submit"></md-button>

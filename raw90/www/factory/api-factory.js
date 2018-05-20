@@ -156,8 +156,8 @@ function APIFactory(
                     if(res.data.data.user_info){
                         API.UserInfo = res.data.data.user_info;
                         API.token = true;
-                        _CONS.total_question = +res.data.data.total_question;
-                        _CONS.total_project = +res.data.data.total_project;
+                        if(!_CONS.total_question) _CONS.total_question = +res.data.data.total_question;
+                        if(!_CONS.total_project) _CONS.total_project = +res.data.data.total_project;
                         API.runQueue();
                     }else{
                         SharedState.turnOn('IsShowLogin');
@@ -316,6 +316,7 @@ function APIFactory(
             API.UserInfo = device_info.user_info;
             _CONS.total_question = +device_info.total_question;
             _CONS.total_project = +device_info.total_project;
+            console.log(device_info,'device_info:cache',device_info)
             callback();
         }else{
             API.__request({
@@ -329,8 +330,8 @@ function APIFactory(
                 if(res.data.code==1 && res.data.data){
                     if(res.data.data.user_info){
                         API.UserInfo = res.data.data.user_info;
-                        _CONS.total_question = +res.data.data.total_question;
-                        _CONS.total_project = +res.data.data.total_project;
+                        if(!_CONS.total_question) _CONS.total_question = +res.data.data.total_question;
+                        if(!_CONS.total_project) _CONS.total_project = +res.data.data.total_project;
                         StorageService.set('device-info','',res.data.data);
                         callback();
                     }else{
