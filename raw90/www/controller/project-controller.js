@@ -34,38 +34,39 @@ function ProjectController(
                 $scope.category_info = data;
                 $scope.min_height = Math.max($window.innerHeight - (60 + ($scope.category_info.items.length||3)*81 + 50),100);
                 // calculator height
-                var html = $scope.category_info.desc;
-                if($routeParams.categoryId==0) html = $scope.projectData.desc;
-                $scope.description = html;
                 var desc_height = 0;
-                if(html && html!=''){
-                    var pElmDom = document.createElement('div');
-                    pElmDom.style.opacity = '0.01';
-                    pElmDom.style.overflow = 'hidden';
-                    pElmDom.style['position'] = 'absolute';
-                    pElmDom.style['top'] = '0px';
-                    pElmDom.style['left'] = '0px';
-                    pElmDom.style['zZndex'] = '-1';
-                    pElmDom.style.width = '100%';
-                    document.body.appendChild(pElmDom);
-                    var elm = document.createElement('div');
-                    pElmDom.appendChild(elm);
-                    elm.innerHTML = html;
-                    elm.style.padding = '20px';
-                    elm.style.fontSize = '16px';
-                    desc_height = elm.clientHeight;
-                    document.body.removeChild(pElmDom);
-                }
+                
+                // var html = $scope.category_info.desc;
+                // if($routeParams.categoryId==0) html = $scope.projectData.desc;
+                // $scope.description = html;
+                // if(html && html!=''){
+                //     var pElmDom = document.createElement('div');
+                //     pElmDom.style.opacity = '0.01';
+                //     pElmDom.style.overflow = 'hidden';
+                //     pElmDom.style['position'] = 'absolute';
+                //     pElmDom.style['top'] = '0px';
+                //     pElmDom.style['left'] = '0px';
+                //     pElmDom.style['zZndex'] = '-1';
+                //     pElmDom.style.width = '100%';
+                //     document.body.appendChild(pElmDom);
+                //     var elm = document.createElement('div');
+                //     pElmDom.appendChild(elm);
+                //     elm.innerHTML = html;
+                //     elm.style.padding = '20px';
+                //     elm.style.fontSize = '16px';
+                //     desc_height = elm.clientHeight;
+                //     document.body.removeChild(pElmDom);
+                // }
                 var item_length = $scope.category_info.items.length;
                 var total_height = window.innerHeight - 60 - 50 - desc_height;
-                var item_height = Math.floor((window.innerHeight - 60 - 50 - item_length - desc_height) / item_length);
-                item_height = item_height - item_height%2;
+                var item_height = ((window.innerHeight - 60 - 50 - item_length - desc_height) / item_length);
+                // item_height = item_height - item_height%2;
                 item_height = Math.max(item_height,80);
                 var desc_height = window.innerHeight - 60 - 50 - item_height * item_length - item_length;
                 $scope.desc_height = desc_height;
                 $scope.item_height = item_height;
-                $scope.item_line_height = 20;
-                $scope.item_padding = (item_height - 20)/2;
+                $scope.item_line_height = item_height;//20;
+                $scope.item_padding = 0;//(item_height - 20)/2;
                 
             })
         })

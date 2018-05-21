@@ -1,7 +1,7 @@
 <div ui-content-for="navbarTop">
     <div class="navbar navbar-head navbar-absolute-top black-navbar-head">
         <div class="navbar-brand navbar-brand-center">
-            <span ng-show="category_info.level == 0">HOME</span>
+            <span ng-show="category_info.level == 0">{{projectData.title}}</span>
             <span ng-show="category_info.level == 1">{{projectData.title}}</span>
             <span ng-show="category_info.level > 1">{{category_info.parent.title}}</span>
         </div>

@@ -21,7 +21,7 @@
 <div class="scrollable viewer risk-bg" ng-class="__path=='/'?'actived':''">
     <div class="scrollable-content" ui-scroll-bottom="loadMore()" >
         
-        <div class="accordions">
+        <div class="accordions" ng-if="listProject && listProject.length>0">
             <div class="panel-group">
                 <div 
                     class="panel">
@@ -95,7 +95,7 @@
             </div>
         </div>
 
-        <div class="accordions">
+        <div class="accordions" ng-if="listSharedProject && listSharedProject.length>0">
             <div class="panel-group">
                 <div 
                     class="panel">

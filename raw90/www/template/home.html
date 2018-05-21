@@ -50,8 +50,8 @@
         </div>
             <a href="#/app-info/45" class="app-info-ico"></a>
             <a href="#/profile" class="my-account-ico"></a>
-            <div class="app-logo"></div>
-            <a href="#/project-list" class="green-action-btn">
+            <div class="app-logo"></div>{{total_project}}
+            <a href="#/project-list" class="green-action-btn" ng-if="total_project>0">
                 Your Projects
                 <span class="num">{{total_project}}</span>
             </a>

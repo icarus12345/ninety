@@ -94,7 +94,7 @@ div[ng-view]{
 }
 .form-group{padding-top: 0}
 .form-group:last-child{padding-bottom: 0}
-.toucharea{width: 100%;height: 100%}
+.fluid-h{min-height: 100%}
 .touch-mark {
   position: absolute;
   background-color: #ccc;
@@ -432,8 +432,8 @@ small .switch.active .switch-handle{
 .risk-list-item{
     padding: 0;
     background: #ebebeb;
-    min-height: calc((100vh - 60px - 60px - 60px) / 2);
-    min-height: -webkit-calc((100vh - 60px - 60px - 60px) / 2);
+    /*min-height: calc((100vh - 60px - 60px - 60px) / 2);*/
+    /*min-height: -webkit-calc((100vh - 60px - 60px - 60px) / 2);*/
 }
 .risk-list-item .list-group-item .process-num{
     color:#009999;
@@ -830,7 +830,7 @@ md-icon>span{
 .app-logo{
     position: absolute;
     left: 50%;
-    top: 35px;
+    top: 60px;
     width: 180px;
     margin-left: -90px;
     height: 112px;

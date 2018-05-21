@@ -270,7 +270,7 @@ md-input-container .md-input.ng-invalid.ng-dirty{
 .md-btn-default,
 .md-focused.md-btn-default,
 .md-focused.md-button.md-btn-default:not([disabled]){
-    background: #fff;color: #111;
+    background: rgba(255,255,255,0.8);color: #111;
 }
 
 .shared-list md-list-item{background: #ebebeb;margin-top:1px;padding: 0 10px}
