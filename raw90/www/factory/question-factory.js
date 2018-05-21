@@ -30,6 +30,7 @@ function QuestionFactory(API,StorageService,$mdDialog, Dialog) {
             loading: false
         },function(res){
             if(res.data.code == 1){
+                StorageService.delete('list-project');
                 callback(res.data.data);
             } else {
                 Dialog.alert(res.data.message);
