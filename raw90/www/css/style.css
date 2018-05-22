@@ -824,6 +824,9 @@ md-icon>span{
 .navbar-head{
     height: 60px;
 }
+.navbar-foot{
+    height: 60px;
+}
 .white-bg{
     background: #fff;
 }
@@ -855,6 +858,10 @@ md-icon>span{
 .has-navbar-top .app-body{
     padding-top: 60px;
 }
+.has-navbar-bottom .app-body{
+    padding-bottom: 60px;
+}
+.navbar.navbar-foot,
 .navbar.navbar-head{
     background: transparent;
     border:0;
