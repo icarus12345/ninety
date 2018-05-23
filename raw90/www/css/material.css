@@ -92,7 +92,7 @@ md-list-item.mb-risk-item>div.md-button .md-secondary-container .md-button.md-ic
 }
 form md-input-container md-select,
 form md-input-container .md-input{
-    background: rgba(153, 153, 153, 0.3);
+    background: rgba(255, 255, 255, 0.3);
     border-radius: 22px;
     height: 44px;
     line-height: 24px;
@@ -118,8 +118,8 @@ md-input-container:not(.md-input-invalid).md-input-has-value label{
 }
 md-input-container .md-placeholder, 
 md-input-container label:not(.md-no-float):not(.md-container-ignore){
-    -webkit-transform: translate3d(0,36px,0) scale(1);
-    transform: translate3d(0,36px,0) scale(1);
+    -webkit-transform: translate3d(0,34px,0) scale(1);
+    transform: translate3d(0,34px,0) scale(1);
     -webkit-transform-origin: center top;
     transform-origin: center top;
 }
@@ -331,4 +331,9 @@ md-input-container.md-input-has-value .md-select-value>span:not(.md-select-icon)
 .hide-required md-input-container.md-default-theme label.md-required:after, 
 .hide-required md-input-container label.md-required:after{
     display: none;
+}
+md-select-menu.md-default-theme md-content md-option[selected], 
+md-select-menu md-content md-option[selected]{
+    color: #45c4d5;
+        font-weight: 500;
 }

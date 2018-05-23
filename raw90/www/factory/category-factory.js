@@ -668,12 +668,14 @@ function CategoryFactory(API,StorageService, $mdDialog, Dialog) {
         try {
             var items = data.items;
             this.rootId = items[0].id;
+            this._categorie_ids = [];
             this._categories = {
             };
             var questions = data.questions;
             this.questions = {}
             for(var i = 0; i<items.length;i++){
                 this._categories[items[i].id] = new Category(items[i]);
+                this._categorie_ids.push(items[i].id);
             }
             for(var i = 0; i<questions.length;i++){
                 var q = questions[i];
@@ -683,15 +685,15 @@ function CategoryFactory(API,StorageService, $mdDialog, Dialog) {
                 if(!cat.questions) cat.questions = [];
                     cat.questions.push(q);
             }
-            for(var c in this._categories){
-                var cat = this._categories[c];
-                var pcat = this._categories[cat.parent_id];
+            this._categorie_ids.map(function(cid){
+                var cat = me._categories[cid];
+                var pcat = me._categories[cat.parent_id];
                 if(pcat){
                     cat.parent = pcat;
                     if(!pcat.items) pcat.items = [];
                     pcat.items.push(cat);
                 }
-            }
+            });
             this.set_answereds();
             //this._categories[0].init();
         } catch (e){

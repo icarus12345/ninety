@@ -143,7 +143,7 @@ function ProjectListController(
             if(p.mode==2){
                 Dialog.confirm({
                     title:'Delete Project ?',
-                    message:'Would you like delete the project "' + p.title + '".',
+                    message:'Would you like to delete the project "' + p.title + '".',
                     oktext:'Delete',
                     ok: function(){
                         API.request({

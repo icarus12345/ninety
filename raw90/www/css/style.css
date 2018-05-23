@@ -436,13 +436,13 @@ small .switch.active .switch-handle{
     /*min-height: -webkit-calc((100vh - 60px - 60px - 60px) / 2);*/
 }
 .risk-list-item .list-group-item .process-num{
-    color:#009999;
+    color:#45c4d5;
     font-weight: 500;
     display: inline-block;width: 50px;
     line-height: 20px;
     position: absolute;
     left: 0;top: 50%;margin-top: -10px;
-    border-right: 1px solid #009999;
+    border-right: 1px solid #45c4d5;
 }
 .risk-list-item .list-group-item{
     padding: 20px 0px 20px 60px;
@@ -967,7 +967,7 @@ md-icon>span{
     font-weight: 500;
 }
 .accordions .panel-group .panel:first-child .panel-heading{
-    background: #019899
+    background: #45c4d5
 }
 .accordions .panel-group .panel .panel-heading::after{
     /*content: '';display: block;position: absolute;
@@ -1001,7 +1001,7 @@ md-icon>span{
 }
 .accordions .panel-heading{
     position: relative;
-    background: #019899;
+    background: #45c4d5;
     color: #fff;
     border-radius: 0;
     line-height: 20px;

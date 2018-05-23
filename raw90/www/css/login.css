@@ -119,16 +119,16 @@ md-content,
 .sharktank-logo2{
     margin: auto;
     background: url(../img/logo-sharktank2.png) no-repeat top center;
-    background-size: 160px auto;
-    -webkit-background-size: 160px auto;
+    background-size: 180px auto;
+    -webkit-background-size: 180px auto;
     background-position: center;
     min-height: 130px;
 }
 .sharktank-logo{
     margin: auto;
     background: url(../img/logo-sharktank.png) no-repeat top center;
-    background-size: 160px auto;
-    -webkit-background-size: 160px auto;
+    background-size: 180px auto;
+    -webkit-background-size: 180px auto;
     background-position: center;
     min-height: 130px;
 }

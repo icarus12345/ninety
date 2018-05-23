@@ -21,6 +21,8 @@ class Category_Model extends API_Model {
             ->where("type", $this->client_id)
             ->where("status", 'true')
             ->order_by('parent_id','ASC')
+            ->order_by('sorting','ASC')
+            ->order_by('created','DESC')
             ->get('ninety_category');
 
         $errordb = $this->db->error();
