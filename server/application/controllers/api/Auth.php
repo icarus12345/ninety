@@ -165,7 +165,7 @@ class Auth extends CI_Controller {
             if($device) {
                 $user = $this->Account_Model->get_by_id($device->uid);
                 if($user){
-                    $count_project = $this->Project_Model->count_project($device->uid);
+                    $count_project = $this->Project_Model->count_project($user->id);
                     $count_question = $this->Question_Model->count_questions();
                     unset($user->password);
                     $data = array(
