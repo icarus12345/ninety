@@ -84,9 +84,19 @@ function onDeviceReady(){
                 // history.back();
                 // rootScope.$apply();
             }
+            var leave_time;
             document.addEventListener("resume", function(){
                 if(device.platform != 'browser'){
+                    if(new Date().getTime() - leave_time > 60 * 3 * 1000){
+                        window.location.reload();
+                    }
+                }
+                
+            }, false);
+            document.addEventListener("pause", function(){
+                if(device.platform != 'browser'){
                     window.location.reload();
+                    leave_time = new Date().getTime()
                 }
                 
             }, false);
