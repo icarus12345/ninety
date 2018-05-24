@@ -105,7 +105,7 @@ class Project_Model extends API_Model {
         $query = $this->db
             ->select('ninety_project.id,ninety_project.title,ninety_project.uid,ninety_project.data,count(ninety_answer.id) as total_answer')
             ->from('ninety_project')
-            ->join('ninety_answer','ninety_project.id = ninety_answer.pid','left')
+            ->join('ninety_answer','ninety_project.id = ninety_answer.pid and ninety_answer.uid = ' . $uid,'left')
             ->where('ninety_project.status','true')
             ->where("ninety_project.type", $this->client_id)
             ->group_start()
