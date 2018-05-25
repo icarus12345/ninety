@@ -53,6 +53,8 @@
 	font-weight: 500;
 	font-size: 16px;
 }
+md-input-container.gray-input .md-input, 
+md-input-container.gray-input md-select, 
 .profile-info form md-input-container md-select, 
 .profile-info form md-input-container .md-input{
 	background-color: rgba(0,0,0,.1)
