@@ -1,0 +1,160 @@
+<div class="modal modal-overlay auto-modal auth-bg" ui-if="IsShowLogin" ui-shared-state='IsShowLogin'>
+    <div class="scrollable">
+        <div class="scrollable-content">
+            <!-- <div ng-scrollbars style="width:100%;height:100%"> -->
+                <div class="aligner" >
+                    <div class="aligner-item hide-required fluid-h"> 
+                        <md-content layout-padding>
+                            <form 
+                                name="loginForm" 
+                                ng-show="!auth_forgot.status"
+                                id="loginForm" 
+                                ng-submit='doAuthLogin()' 
+                                autocomplete="off">
+                                <div class="login-logo sharktank-logo"></div>
+                                <div>
+                                    <md-input-container class="md-block hide-char-counter">
+                                        <label>Username</label>
+                                        <input 
+                                            name="username" 
+                                            ng-model="auth_singin_info.username"
+                                            required
+                                            minlength="2" 
+                                            md-maxlength="20" 
+                                            ng-pattern="/^[0-9a-zA-Z]+$/" 
+                                            >
+                                        <div ng-messages="loginForm.username.$error">
+                                            <div ng-message="required">This is required.</div>
+                                            <div ng-message="md-minlength">The username must be greater than 2 characters short.</div>
+                                            <div ng-message="md-maxlength">The username must be less than 20 characters long.</div>
+                                            <div ng-message-exp="['minlength', 'maxlength', 'pattern']">
+                                                Your username must be between 2 and 20 characters long and don't have space and special characters.
+                                            </div>
+                                        </div>
+                                    </md-input-container>
+
+                                    <md-input-container class="md-block hide-char-counter">
+                                        <label>Password</label>
+                                        <input 
+                                            type="password" 
+                                            required 
+                                            name="password" 
+                                            md-minlength="4" 
+                                            md-maxlength="20" 
+                                            ng-model="auth_singin_info.password">
+                                        <div ng-messages="loginForm.password.$error">
+                                            <div ng-message="required">This is required.</div>
+                                            <div ng-message="md-maxlength">The pasword must be less than 20 characters long.</div>
+                                        </div>
+                                    </md-input-container>
+                                    <div  layout="column">
+                                        <md-button  class="btn-block btn-risk-submit" type="submit">Submit</md-button>
+                                    </div>
+
+                                    <p class="help-login">
+                                    Don't have an account? <a style="color:#fff;padding:6px 7px;font-weight:bold;" ng-tap="show_register()" ui-turn-on="IsShowRegister" ui-turn-off="IsShowLogin">Register now!</a>
+                                    </p>
+                                    <p style="width: 100%; text-align: center;">
+                                        <a style="color:#fff;padding:6px 7px;font-weight:bold;" ng-tap="show_forgot(1)">Forgot password ?</a>
+                                    </p>
+                                </div>
+                            </form>
+                            <form 
+                                name="sendCodeForm" 
+                                id="sendCodeForm" 
+                                ng-submit='doAuthSendCode()' 
+                                ng-show="auth_forgot.status && auth_forgot.step == 1"
+                                autocomplete="off">
+                                <div class="sharktank-logo"></div>
+                                <md-input-container class="md-block">
+                                    <label>Email</label>
+                                    <input 
+                                        required 
+                                        md-no-asterisk 
+                                        type="email" 
+                                        name="email" 
+                                        ng-model="auth_forgot.email"
+                                        minlength="10" 
+                                        maxlength="100" 
+                                        ng-pattern="/^.+@.+\..+$/" 
+                                        />
+
+                                    <div ng-messages="forgotForm.email.$error" role="alert">
+                                        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                    Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <div layout="row">
+                                    <md-input-container flex="50">
+                                        <md-button 
+                                            md-no-ink 
+                                            class="btn-block btn-circle md-btn-default"  
+                                            type="button"
+                                            ng-tap="show_login()"
+                                            >Back</md-button>
+                                    </md-input-container>
+
+                                    <md-input-container flex="50">
+                                        <md-button class="btn-block btn-circle md-btn-danger" type="submit">Next</md-button>
+                                    </md-input-container>
+                                </div>
+                            </form>
+                            <form 
+                                name="forgotForm" 
+                                id="forgotForm" 
+                                ng-submit='doAuthForgot()' 
+                                ng-show="auth_forgot.status && auth_forgot.step == 2"
+                                autocomplete="off">
+                                <div class="login-logo sharktank-logo"></div>
+                                <div class="text-center">Please check your email for a password reset code.</div>
+                                <md-input-container class="md-block">
+                                    <label>Code</label>
+                                    <input 
+                                        required md-no-asterisk 
+                                        name="code" 
+                                        maxlength="8" 
+                                        ng-model="auth_forgot.code">
+                                    <div ng-messages="forgotForm.code.$error">
+                                        <div ng-message="required">This is required.</div>
+                                        <div ng-message="md-maxlength">The Code must be less than 8 characters long.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container class="md-block">
+                                    <label>New Password</label>
+                                    <input 
+                                        type="password" 
+                                        required md-no-asterisk 
+                                        name="password" 
+                                        maxlength="30" 
+                                        ng-model="auth_forgot.password">
+                                    <div ng-messages="forgotForm.password.$error">
+                                        <div ng-message="required">This is required.</div>
+                                        <div ng-message="md-maxlength">The Passowrd must be less than 30 characters long.</div>
+                                    </div>
+                                </md-input-container>
+                                <div layout="row">
+                                    <md-input-container flex="50">
+                                        <md-button 
+                                            md-no-ink 
+                                            class="btn-block btn-circle md-btn-default"  
+                                            type="button"
+                                            ng-tap="show_forgot(1)"
+                                            >Back</md-button>
+                                    </md-input-container>
+
+                                    <md-input-container flex="50">
+                                        <md-button class="btn-block btn-circle md-btn-danger" type="submit">Submit</md-button>
+                                    </md-input-container>
+                                </div>
+                            </form>
+                        </md-content>
+                        <div class="keyboard" style="height:{{keyboard_height}}px;"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

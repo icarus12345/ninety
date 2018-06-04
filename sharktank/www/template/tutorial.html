@@ -1,0 +1,37 @@
+
+<div ui-content-for="navbarTop">
+    <div class="navbar navbar-head navbar-absolute-top black-navbar-head">
+        <div class="navbar-brand navbar-brand-center">
+            <span>Terminology Database</span>
+        </div>
+        <div class="btn-group pull-left">
+            <div class="btn" ng-click="goBack(2)">
+                <img class="" src="img/back.png">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="scrollable viewer white-bg" ng-class="" >
+    <div class="scrollable-content " ng-cloak id="myScrollableContent" style="{{overflow_scrolling}}">
+        <div class="sharktank-logo2"></div>
+        <div class="ckeditor">
+
+            <div ng-repeat="(i1,lv1) in category_info.items">
+                <h2 id="cat-{{lv1.id}}">{{i1+1}} {{lv1.title}}</h2>
+                <div ng-if="lv1.tutorial" ng-bind-html="lv1.tutorial"></div>
+                <div ng-repeat="(i2,lv2) in lv1.items">
+                    <h3 id="cat-{{lv2.id}}">{{i1+1}}.{{i2+1}} {{lv2.title}}</h3>
+                    <div ng-if="lv2.tutorial" ng-bind-html="lv2.tutorial"></div>
+                    <div ng-repeat="(i3,lv3) in lv2.items">
+                        <h4 id="cat-{{lv3.id}}">{{i1+1}}.{{i2+1}}.{{i3+1}} {{lv3.title}}</h4>
+                        <div ng-if="lv3.tutorial" ng-bind-html="lv3.tutorial"></div>
+                        <div ng-repeat="(i4,lv4) in lv3.items">
+                            <h5 id="cat-{{lv4.id}}">{{i1+1}}.{{i2+1}}.{{i3+1}}.{i4+1}} {{lv4.title}}</h4>
+                            <div ng-if="lv4.tutorial" ng-bind-html="lv4.tutorial"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

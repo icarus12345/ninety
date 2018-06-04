@@ -1,0 +1,60 @@
+<div ui-content-for="navbarTop">
+    <div class="navbar navbar-head navbar-absolute-top black-navbar-head">
+        <div class="navbar-brand navbar-brand-center">
+            <span>EDIT PROFILE</span>
+        </div>
+        <div class="btn-group pull-left">
+            <a class="btn" href="#/profile">
+                <img class="" src="img/back.png">
+            </a>
+        </div>
+    </div>
+</div>
+<div class="scrollable viewer white-bg" ng-class="__path=='/'?'actived':''">
+    <div class="scrollable-content profile-info profile-edit hide-required">
+        <div>
+          <div>
+                <div ng-cloak>
+                    <md-content layout-padding>
+                        <form 
+                            name="updateProfileForm" 
+                            id="updateProfileForm" 
+                            ng-submit="doUpdateProfile()" 
+                            autocomplete="off"
+                            >
+                            <div>
+                                <md-input-container class="md-block">
+                                    <label>Username</label>
+                                    <input 
+                                        required 
+                                        name="first_name" disabled="" md-disabled 
+                                        maxlength="20"
+                                        ng-model="user_info.first_name">
+                                    <div ng-messages="updateProfileForm.first_name.$error">
+                                        <div ng-message="required">This is required.</div>
+                                        <div ng-message="md-maxlength">The name must be less than 20 characters long.</div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container class="md-block">
+                                    <label>I am</label>
+                                  <md-select ng-model="user_info.data.iam">
+                                    <md-option ng-repeat="iam in iams" ng-value="iam" >
+                                      {{iam}}
+                                    </md-option>
+                                  </md-select>
+                                </md-input-container>
+                                <div  layout="column">
+                                    <md-button  class="btn-circle md-btn-danger" type="submit">Submit</md-button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </md-content>
+                    <div class="keyboard" style="height:{{keyboard_height}}px;"></div>
+                </div> 
+            </div>
+        </div>
+    </div>
+    <!-- </div> -->
+</div>

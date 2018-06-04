@@ -1,0 +1,157 @@
+<div ui-content-for="navbarTop">
+    <div class="navbar navbar-head navbar-absolute-top black-navbar-head">
+        <div class="navbar-brand navbar-brand-center">
+            {{projectData.title}}
+        </div>
+        <div class="btn-group pull-left">
+            <div class="btn" ng-click="goBack()">
+                <img class="" src="img/back.png">
+            </div>
+        </div>
+        <div class="btn-group pull-right">
+            <a href="#/tutorial" class="btn">
+                <img class="" src="img/book-black.png">
+            </a>
+            <a href="#/" class="btn">
+                <img class="" src="img/home-black.png">
+            </a>
+        </div>
+        <div class="second-navbar-top">
+            <div class="head-title">
+                {{category_info.title||projectData.title}}
+                <span ng-tap="goBack()" class="close-icon head-icon"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="scrollable viewer" ng-class="">
+    <div class="scrollable-content">
+        <div class="head-title" style="opacity:0">
+            {{category_info.title||projectData.title}}
+            <span ng-tap="goBack()" class="close-icon head-icon"></span>
+        </div>
+        <div class="list-group ">
+            <!--
+            <div class="list-group-item text-justify project-desc">
+                <p >{{category_info.desc||projectData.desc}}</p>
+            </div>
+            -->
+            <div class="graph-box">
+                <div ng-show="category_info.items" class="chart-title over-all">OVERALL</div>
+                
+                <div class="risk-chart">
+                    <canvas 
+                        class="chart chart-radar"
+                        responsive="false"
+                        width="320"
+                        height="320"
+                        chart-series="category_info.chart_info.legends"
+                        chart-options="category_info.chart_info.options" 
+                        chart-colors="category_info.chart_info.colors"
+                        chart-lineTension="0"
+                        chart-legend="true"
+                        chart-fill="false"
+                        chart-data="category_info.chart_info.data" 
+                        chart-labels="category_info.chart_info.labels"
+                        chart-dataset-override="category_info.chart_info.dataset_override"
+                        >
+                    </canvas>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend" ng-repeat="(i,serie) in category_info.chart_info.legends" ng-tap="category_info.toggle_serie(i)">
+                        <span style="background-color:{{category_info.chart_info.colors[i]}}"></span>{{series[i] || serie}}
+                    </div>
+                </div>
+                <div class="chart-info">
+                    <div ng-repeat="(i,item) in category_info.items"
+                        class="open"
+                        >
+                        <div class="chart-item-head" 
+                            ng-tap="toggle_comment(category_info,i)"
+                            >
+                            <span class="num">{{i+1}}</span> {{item.title}}
+                        </div>
+
+                        <div ng-class="item.comment_class">
+                            <p class="word-wrap">{{item.comment}}</p>
+                        </div>
+                    </div>
+                    <div ng-repeat="(no,item) in category_info.questions"
+                        class="open"
+                        >
+                        <div class="chart-item-head" 
+                            ng-tap="toggle_comment(category_info,no)"
+                            >
+                            <span class="num">{{no+1}}</span> 
+                            {{item.title}}
+                        </div>
+
+                        
+                        <div ng-class="item.comment_class">
+                            <p class="word-wrap">{{item.comment}}</p>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+            <div class="graph-box" ng-repeat="(i,foo) in category_info.items">
+                <div class="chart-title">{{foo.title}}</div>
+                <div class="risk-chart">
+                    <canvas 
+                        class="chart chart-radar"
+                        responsive="false"
+                        width="320"
+                        height="320"
+                        chart-series="foo.chart_info.legends"
+                        chart-options="foo.chart_info.options" 
+                        chart-colors="foo.chart_info.colors"
+                        chart-lineTension="0"
+                        chart-legend="true"
+                        chart-fill="false"
+                        chart-data="foo.chart_info.data" 
+                        chart-labels="foo.chart_info.labels"
+                        chart-dataset-override="foo.chart_info.dataset_override"
+                        >
+                    </canvas>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend" ng-repeat="(i,serie) in foo.chart_info.legends" ng-tap="foo.toggle_serie(i)">
+                        <span style="background-color:{{foo.chart_info.colors[i]}}"></span>{{series[i] || serie}}
+                    </div>
+                </div>
+                <div class="chart-info">
+                    <div ng-repeat="(no,item) in foo.items"
+                        class="open"
+                        >
+                        <div class="chart-item-head" 
+                            ng-click="toggle_comment(foo,no)"
+                            >
+                            <span class="num">{{no+1}}</span> 
+                            {{item.title}} 
+                        </div>
+
+                        <div ng-class="item.comment_class">
+                            <p class="word-wrap">{{item.comment}}</p>
+                        </div>
+                    </div>
+                    <div ng-repeat="(no,item) in foo.questions"
+                        class="open"
+                        >
+                        <div class="chart-item-head" 
+                            ng-tap="toggle_comment(foo,no)"
+                            >
+                            <span class="num">{{no+1}}</span> 
+                            {{item.title}}
+                        </div>
+
+                        
+                        <div ng-class="item.comment_class">
+                            <p class="word-wrap">{{item.comment}}</p>
+                        </div>
+                    </div> 
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

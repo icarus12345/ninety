@@ -1,0 +1,109 @@
+<div class="modal modal-overlay auto-modal auth-bg" ui-if="IsShowRegister" ui-shared-state='IsShowRegister'>
+    <!-- <div ng-scrollbars style="width:100%;height:100%"> -->
+    <div class="scrollable">
+    <div class="scrollable-content register-info">
+      <div>
+            <div ng-cloak>
+                <md-content layout-padding>
+                    <form 
+                        name="registerForm" 
+                        id="registerForm" 
+                        ng-submit="doAuthRegister()" 
+                        autocomplete="off"
+                        >
+                        <div class="register-logo sharktank-logo"></div>
+                        <div>
+                            <md-input-container class="md-block hide-char-counter">
+                                <label>Email</label>
+                                <input 
+                                    required 
+                                    md-no-asterisk 
+                                    type="email" 
+                                    name="email" 
+                                    ng-model="auth_reg_info.email"
+                                    minlength="10" 
+                                    maxlength="100" 
+                                    ng-pattern="/^.+@.+\..+$/" 
+                                    />
+
+                                <div ng-messages="registerForm.email.$error" role="alert">
+                                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                        Your email must be between 10 and 100 characters long and look like an e-mail address.
+                                    </div>
+                                    <div ng-message="md-maxlength">Your email must be less than 100 characters long.</div>
+                                    <div ng-message="md-minlength">Your email must be greater than 10 characters long.</div>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block hide-char-counter">
+                                <label>Username</label>
+                                <input 
+                                    required md-no-asterisk 
+                                    name="username" 
+                                    md-minlength="2" 
+                                    md-maxlength="20" 
+                                    ng-pattern="/^[0-9a-zA-Z]+$/" 
+                                    ng-model="auth_reg_info.username">
+                                <div ng-messages="registerForm.username.$error">
+                                    <div ng-message="required">This is required.</div>
+                                    <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']">
+                                        Your username must be between 2 and 20 characters long and not have any spaces and special characters.
+                                    </div>
+                                    <div ng-message="md-maxlength">The username must be less than 20 characters long.</div>
+                                    <div ng-message="md-minlength">The username must be greater than 4 characters short.</div>
+                                </div>
+                            </md-input-container>
+
+
+                            <md-input-container class="md-block hide-char-counter">
+                                <label>Password</label>
+                                <input 
+                                    type="password" 
+                                    required md-no-asterisk 
+                                    name="password" 
+                                    md-minlength="4" 
+                                    md-maxlength="20" 
+                                    ng-model="auth_reg_info.password">
+                                <div ng-messages="registerForm.password.$error">
+                                    <div ng-message="required">This is required.</div>
+                                    <div ng-message="md-maxlength">The password must be less than 20 characters long.</div>
+                                    <div ng-message="md-minlength">The password must be greater than 4 characters short.</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>I am</label>
+                              <md-select ng-model="auth_reg_info.iam">
+                                <md-option ng-repeat="iam in iams" ng-value="iam" >
+                                  {{iam}}
+                                </md-option>
+                              </md-select>
+                            </md-input-container>
+
+                            <md-input-container class="md-block" style="text-align:center">
+                                <md-checkbox name="tos" ng-model="auth_reg_info.tos" required>
+                                     
+                                </md-checkbox>
+                                I accept the <a ng-tap="show_terms()" ui-turn-on="IsShowTerms" style="color:#fff;font-weight: 500;"  >terms of service</a>.
+                                <div ng-messages="registerForm.tos.$error" md-auto-hide="false">
+                                    <div ng-message="required">
+                                        You must accept the terms of service before you can proceed.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <div  layout="column">
+                                <md-button  class="btn-block btn-risk-submit" type="submit">Submit</md-button>
+                            </div>
+
+                            <p class="help-register">
+                            Have an account already? <a style="color:#fff;padding: 6px 7px;font-weight:bold;" ng-tap="show_login()" ui-turn-off="IsShowRegister" ui-turn-on="IsShowLogin">Login now!</a>
+                            </p>
+                        </div>
+                    </form>
+                </md-content>
+                <div class="keyboard" style="height:{{keyboard_height}}px;"></div>
+            </div> 
+        </div>
+    </div>
+    </div>
+    <!-- </div> -->
+</div>

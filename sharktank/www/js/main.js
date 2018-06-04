@@ -1,0 +1,325 @@
+var BASE_URL = 'http://ninety.widdleman.com/';
+// var BASE_URL = 'http://local.ninety.com/';
+var APP_ID = 'raw';
+// var APP_ID = 'raw';
+var APP_SECRET = '6789';
+var SHOW_GLOBAL = true;
+var _CONS = {
+    total_project:0,
+    total_question:0
+};
+var APP ;
+var isDeviceReady = false;
+
+function onDeviceReady(){
+    isDeviceReady = true;
+    try{
+        if(device.platform == 'iOS'){
+            if(window.StatusBar) StatusBar.hide();
+        }
+        screen.orientation.lock('portrait').then(function success() {
+            console.log("Successfully locked the orientation");
+        }, function error(errMsg) {
+            alert("Error locking the orientation :: " + errMsg);
+        });
+        // device = device || JSON.parse(window.localStorage.getItem("device")) || {};
+        if(device.platform == 'Android'){
+            if(window.cordova && window.cordova.plugins.Keyboard) {
+                window.cordova.plugins.Keyboard.disableScroll(false);
+                // window.cordova.plugins.Keyboard.hideKeyboardAccessoryBar(false);
+            }
+        }
+    }catch(e){
+        alert("onDeviceReady"+e.message)
+    }
+    
+}
+//function onLoad() {
+    document.addEventListener("deviceready", onDeviceReady, false);
+    //var domElement = document.body;
+    //angular.bootstrap(domElement, ["MobileAngularUiExamples"]);
+    APP = angular
+        .module('MobileAngularUiExamples', [
+            'ngRoute',
+            // 'ngAnimate',
+            'mobile-angular-ui',
+            'ngCordova',
+            'loader',
+            'vesparny.fancyModal',
+            // 'ng-iscroll',
+            // 'ngSlimScroll',
+            // 'ngScrollbars',
+            // touch/drag feature: this is from 'mobile-angular-ui.gestures.js'.
+            // This is intended to provide a flexible, integrated and and
+            // easy to use alternative to other 3rd party libs like hammer.js, with the
+            // final pourpose to integrate gestures into default ui interactions like
+            // opening sidebars, turning switches on/off ..
+            'mobile-angular-ui.gestures',
+            // 'ngTouch',
+            'ngTap',
+            'chart.js',
+            'ngMaterial','ngMessages',
+            'ngSanitize'
+        ]);
+    APP.run(function(
+        $transform,$rootScope, $location, $routeParams, $window, 
+        $timeout, $mdToast,$cordovaDevice,
+        API
+        ) {
+            
+            try{
+
+
+                window.$transform = $transform;
+                $rootScope.$on('$routeChangeSuccess', function(event, current, previous) {
+                    
+                    
+                })
+            } catch (e){
+                alert('E124'+e.message)
+            }
+            $rootScope.goBack = function(backNum){
+                backNum = +(backNum || 1);
+                $window.history.go(-backNum);
+            }
+            var leave_time;
+            document.addEventListener("resume", function(){
+                if(device.platform != 'browser'){
+                    if(new Date().getTime() - leave_time > 60 * 3 * 1000){
+                        window.location.reload();
+                    }
+                }
+                
+            }, false);
+            document.addEventListener("pause", function(){
+                if(device.platform != 'browser'){
+                    window.location.reload();
+                    leave_time = new Date().getTime()
+                }
+                
+            }, false);
+            document.addEventListener("deviceready",function(){
+                //onDeviceReady()
+                if(typeof device == 'object'){
+                    // Save to localstore
+                    window.localStorage.setItem("device", JSON.stringify(device));
+                }else{
+                    device = JSON.parse(window.localStorage.getItem("device")) || {};
+                }
+                if(device.platform == 'iOS'){
+                    if(window.StatusBar) StatusBar.hide();
+                }
+                try{
+                    _CONS.DIR = '/';
+                    _CONS.PLATFORM = device.platform;
+                    if(device.platform == 'iOS'){
+                        _CONS.DIR = cordova.file.dataDirectory;
+                        // window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir){ 
+                        //     dir.getDirectory("myFolder", {create: true}); 
+                        // });
+                    }else if(device.platform == 'Android'){
+                        _CONS.DIR = cordova.file.externalRootDirectory;
+                        // window.resolveLocalFileSystemURL(cordova.file.externalRootDirectory, function(dir){ 
+                        //     dir.getDirectory(APP_ID, {create: true}); 
+                        // });
+                        // CONS.DIR = cordova.file.externalDataDirectory || cordova.file.dataDirectory;
+                    }
+
+                    var exportDirectory = "";
+                    var subdir = APP_ID + '90';
+                    _CONS.STORAGE_DIR
+                    // What directory should we place this in?
+                    if (cordova.file.documentsDirectory !== null) {
+                        // iOS, OSX
+                        exportDirectory = cordova.file.documentsDirectory;
+                    } else if (cordova.file.sharedDirectory !== null) {
+                        // BB10
+                        exportDirectory = cordova.file.sharedDirectory;
+                    } else if (cordova.file.externalRootDirectory !== null) {
+                        // Android, BB10
+                        exportDirectory = cordova.file.externalRootDirectory;
+                    } else {
+                        // iOS, Android, BlackBerry 10, windows
+                        exportDirectory = cordova.file.DataDirectory;
+                    }
+                    function failFun(){
+                        alert('Cant create new directory')
+                    }
+                    window.resolveLocalFileSystemURL(exportDirectory, function (directoryEntry) {
+                        console.log("Got directoryEntry. Attempting to open / create subdirectory:" + subdir);
+                        directoryEntry.getDirectory(subdir, {create: true}, function (subdirEntry) {
+                            _CONS.STORAGE_DIR = subdir;
+                            _CONS.DIR += (subdir + '/')
+                        }, failFun);
+                    }, failFun);
+                    navigator.splashscreen.hide();
+                }catch(e){
+                    alert('Device ready:'+e.message)
+                }
+                $rootScope._CONS = _CONS;
+                $rootScope.device = device;
+                $rootScope.cordova = cordova;
+                // API.get_device_info();
+                if(device.platform == 'Android'){
+                    try{
+                        // if(window.cordova && window.cordova.plugins.Keyboard) {
+                        //     window.cordova.plugins.Keyboard.disableScroll(true);
+                        //         $mdToast.show(
+                        //             $mdToast.simple()
+                        //                 .textContent('Simple Toast!')
+                        //                 .position(  "top right" )
+                        //                 .hideDelay(3000)
+                        //         );
+                        //     window.addEventListener('native.keyboardshow', function(e){
+                        //         $rootScope.keyboard_height = e.keyboardHeight;
+                        //     });
+                        //     window.addEventListener('native.keyboardhide', function(){
+                        //         $timeout(function(){
+                        //             $rootScope.keyboard_height = 0;
+                        //         })
+                        //     });
+                        // }
+                        window.addEventListener('native.keyboardhide', onKeyboardHide, false);
+                        window.addEventListener('native.keyboardshow', onKeyboardShow, false);
+                        var keyboard_timer;
+                        function onKeyboardHide(e) {
+                            console.log('onKeyboardHide');
+                            keyboard_timer = $timeout(function(){
+                                $rootScope.keyboard_height = 0;
+                            }, 200)
+                        }
+
+                        function onKeyboardShow(e) {
+                            $timeout.cancel(keyboard_timer);
+                            console.log('onKeyboardShow');
+                            $rootScope.keyboard_height = e.keyboardHeight;
+                        }
+                    }catch(e){
+                        alert('NativeEvent:'+e.message)
+                    }
+                }
+            }, false);
+          // Get all URL parameter
+            $rootScope.keyboard_height = 0;
+            // $mdToast.show(
+            //         $mdToast.simple()
+            //             .textContent('Notification!')
+            //             .position("top right")
+            //             .hideDelay(3000)
+            //             .theme("success")
+            //     );
+        });
+    APP.config(function(
+        $routeProvider, $locationProvider, $mdGestureProvider, $httpProvider
+            // , ScrollBarsProvider
+        ) {
+            $httpProvider.defaults.useXDomain = true;
+            delete $httpProvider.defaults.headers.common['X-Requested-With'];
+            $mdGestureProvider.skipClickHijack();
+            var h5m = (typeof html5Mode !== 'undefined') ? html5Mode : true;
+            $locationProvider.html5Mode(h5m);
+            $locationProvider.html5Mode({
+                enabled: false,
+                requireBase: false
+            });
+            $routeProvider.when('/profile', {
+                templateUrl: 'template/profile.html',
+                reloadOnSearch: false,
+                controller: 'ProfileController'
+            });
+            $routeProvider.when('/profile/edit', {
+                templateUrl: 'template/profile-edit.html',
+                reloadOnSearch: false,
+                controller: 'ProfileController'
+            });
+            $routeProvider.when('/profile/changepassword', {
+                templateUrl: 'template/profile-changepassword.html',
+                reloadOnSearch: false,
+                controller: 'ProfileController'
+            });
+            $routeProvider.when('/', {
+                templateUrl: 'template/home.html',
+                reloadOnSearch: false,
+                controller: 'MainController'
+            });
+            $routeProvider.when('/project/:projectId', {
+                templateUrl: 'template/project-detail.html',
+                reloadOnSearch: false,
+                controller: 'ProjectController'
+            });
+            $routeProvider.when('/project-list', {
+                templateUrl: 'template/project-list.html',
+                reloadOnSearch: false,
+                controller: 'ProjectListController'
+            });
+            $routeProvider.when('/project/:projectId/cat/:categoryId', {
+                templateUrl: 'template/project-detail.html',
+                reloadOnSearch: false,
+                controller: 'ProjectController'
+            });
+            $routeProvider.when('/project/:projectId/quest/:categoryId', {
+                templateUrl: 'template/questions.html',
+                reloadOnSearch: false,
+                controller: 'QuestionController'
+            });
+            $routeProvider.when('/project/:projectId/chart/:categoryId/:backNum', {
+                templateUrl: 'template/chart.html',
+                reloadOnSearch: false,
+                controller: 'ChartController'
+            });
+            $routeProvider.when('/share/:projectId', {
+                templateUrl: 'template/share.html',
+                reloadOnSearch: false,
+                controller: 'ShareController'
+            });
+            $routeProvider.when('/send/:projectId', {
+                templateUrl: 'template/send.html',
+                reloadOnSearch: false,
+                controller: 'SendController'
+            });
+            $routeProvider.when('/app-info/:id', {
+                templateUrl: 'template/app-info.html',
+                reloadOnSearch: false,
+                controller: 'ContentController'
+            });
+            $routeProvider.when('/app-info/:id/:cate', {
+                templateUrl: 'template/app-info.html',
+                reloadOnSearch: false,
+                controller: 'ContentController'
+            });
+            $routeProvider.when('/content/:id', {
+                templateUrl: 'template/content.html',
+                reloadOnSearch: false,
+                controller: 'ContentController'
+            });
+            $routeProvider.when('/tutorial', {
+                templateUrl: 'template/tutorial.html',
+                reloadOnSearch: false,
+                controller: 'TutorialController'
+            });
+            $routeProvider.when('/tutorial/:cate', {
+                templateUrl: 'template/tutorial.html',
+                reloadOnSearch: false,
+                controller: 'TutorialController'
+            });
+        });
+    APP.factory('Dialog', DialogFactory);
+    APP.factory('StorageService', StorageFactory);;
+    APP.factory('Auth', AuthFactory);
+    APP.factory('API', APIFactory);
+    APP.factory('CategoryService', CategoryFactory);
+    APP.factory('ProjectService', ProjectFactory);
+    APP.factory('QuestionService', QuestionFactory);
+
+    APP.controller('MainController',MainController);
+    APP.controller('ProjectListController',ProjectListController);
+    APP.controller('ProfileController',ProfileController);
+    APP.controller('ChartController', ChartController);
+    APP.controller('ProjectController', ProjectController);
+    APP.controller('QuestionController', QuestionController);
+    APP.controller('SendController', SendController);
+    APP.controller('ShareController', ShareController);
+    APP.controller('ContentController', ContentController);
+    APP.controller('TutorialController', TutorialController);
+    
+//}

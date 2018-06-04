@@ -1,0 +1,177 @@
+<div ui-content-for="navbarTop">
+    <div class="navbar navbar-head navbar-absolute-top black-navbar-head">
+        <div class="navbar-brand navbar-brand-center has-right-navbar-btn">
+            <span >HOME</span>
+        </div>
+        <div class="btn-group pull-left">
+            <div class="btn" ng-click="goBack()">
+                <img class="" src="img/back.png">
+            </div>
+        </div>
+        <div class="btn-group pull-right">
+            <a href="#/tutorial" class="btn">
+                <img class="" src="img/book-black.png">
+            </a>
+            <a href="#/" class="btn">
+                <img class="" src="img/home-black.png">
+            </a>
+        </div>
+    </div>
+</div>
+<div class="scrollable viewer white-bg" ng-class="__path=='/'?'actived':''">
+    <div class="scrollable-content" ui-scroll-bottom="loadMore()" >
+        
+        <div class="accordions" ng-if="listProject && listProject.length>0">
+            <div class="panel-group">
+                <div 
+                    class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">Projects you created</div>
+                        <span class="num">{{listProject.length}}</span>
+                    </div>
+                    <div>
+                        <div class="panel-body">
+                            <div class="list-group text-center">
+                                <div class="risk-list-item list-group">
+                                    
+                                  <div 
+                                    ng-repeat="project in listProject" 
+                                    ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" 
+                                    class="item"
+                                    ng-class="(Ui.active('dropdown' + project.id))?'active':''"
+                                    ng-if="project.mode==2"
+                                    >
+                                        <a 
+                                            ng-href="#/project/{{project.id}}/cat/0"
+                                            class="list-group-item" >
+                                            <span class="process-num">{{project.process}}%</span>
+                                            <div class="item-title">
+                                                {{project.title}}
+                                            </div>
+                                        </a>
+                                        <div class="dropdown">
+                                            <button 
+                                                ui-turn-on='dropdown{{project.id}}' 
+                                                class='btn'>
+                                                <i class="icon-options-vertical"></i>
+                                            </button>
+                                            <ul
+                                            ui-state="dropdown{{project.id}}"
+                                            class="dropdown-menu"
+                                            ui-outer-click="Ui.turnOff('dropdown' + project.id)"
+                                            ui-outer-click-if="Ui.active('dropdown' + project.id)"
+                                            role="menu"
+                                            ui-show="dropdown{{project.id}}"
+                                            ui-turn-off="dropdown{{project.id}}"
+                                            >
+                                                <li>
+                                                    <a ng-tap="show_edit(project)"><span class="icon-note"></span> Edit</a>
+                                                </li>
+                                                <li>
+                                                    <a ng-tap="showListBottomSheet(project,true)"><span class="icon-book-open"></span> Export</a>
+                                                </li>
+                                                <!-- <li class="divider"></li> -->
+                                                <li>
+                                                    <a ng-tap="do_share(project)"><span class="icon-share"></span> Share</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#/send/{{project.id}}"><span class="icon-envelope-letter"></span> Email</a>
+                                                </li>
+                                                <!-- <li class="divider"></li> -->
+                                                <li>
+                                                    <a ng-tap="do_remove(project)"><span class="icon-trash"></span> Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                  </div>
+                                    <div class="no-data" ng-show="!listProject">Loading...</div>
+                                    <div class="no-data" ng-show="listProject && listProject.length==0">No data to display !</div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="accordions" ng-if="listSharedProject && listSharedProject.length>0">
+            <div class="panel-group">
+                <div 
+                    class="panel">
+                    <div class="panel-heading">
+                        <div class="panel-title">Projects shared with you</div>
+                        <span class="num">{{listSharedProject.length}}</span>
+                    </div>
+                    <div>
+                        <div class="panel-body">
+                            <div class="list-group text-center">
+                                <div class="risk-list-item list-group">
+                                    <div class="no-data" ng-show="!listSharedProject">Loading...</div>
+                                    <div class="no-data" ng-show="listSharedProject && listSharedProject.length==0">No data to display !</div>
+                                  <div 
+                                    ng-repeat="project in listSharedProject" 
+                                    ng-animate="{enter: 'animate-enter', leave: 'animate-leave'}" 
+                                    class="item"
+                                    ng-class="(Ui.active('dropdown' + project.id))?'active':''"
+                                    >
+                                        <a 
+                                            ng-href="#/project/{{project.id}}/cat/0"
+                                            class="list-group-item" >
+                                            <span class="process-num">{{project.process}}%</span>
+                                            <div class="item-title">
+                                                {{project.title}}
+                                            </div>
+                                        </a>
+                                        <div class="dropdown">
+                                            <button 
+                                                ui-turn-on='dropdown{{project.id}}' 
+                                                class='btn'>
+                                                <i class="icon-options-vertical"></i>
+                                            </button>
+                                            <ul
+                                            ui-state="dropdown{{project.id}}"
+                                            class="dropdown-menu"
+                                            ui-outer-click="Ui.turnOff('dropdown' + project.id)"
+                                            ui-outer-click-if="Ui.active('dropdown' + project.id)"
+                                            role="menu"
+                                            ui-show="dropdown{{project.id}}"
+                                            ui-turn-off="dropdown{{project.id}}"
+                                            >
+                                                <li ng-if="project.mode==2">
+                                                    <a ng-tap="show_edit(project)"><span class="icon-note"></span> Edit</a>
+                                                </li>
+                                                <li>
+                                                    <a ng-tap="showListBottomSheet(project,true)"><span class="icon-book-open"></span> Export</a>
+                                                </li>
+                                                <!-- <li ng-if="project.mode==2" class="divider"></li> -->
+                                                <li ng-if="project.mode==2">
+                                                    <a ng-tap="do_share(project)"><span class="icon-share"></span> Share</a>
+                                                </li>
+                                                <li>
+                                                    <a href="#/send/{{project.id}}"><span class="icon-envelope-letter"></span> Email</a>
+                                                </li>
+                                                <!-- <li ng-if="project.mode==2" class="divider"></li> -->
+                                                <li ng-if="project.mode==2">
+                                                    <a ng-tap="do_remove(project)"><span class="icon-trash"></span> Delete</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                  </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        
+        
+    </div>
+</div>
+<div ui-content-for="modals">
+  <div ng-include="'template/add-project.html'"></div>
+</div>

@@ -1,0 +1,18 @@
+<div ui-content-for="navbarTop">
+    <div class="navbar navbar-head navbar-absolute-top red-navbar-head">
+        <div class="navbar-brand navbar-brand-center">
+            {{content.title}}
+        </div>
+        <div class="btn-group pull-right">
+            <div class="btn" ng-click="goBack()">
+                <img class="" src="img/close.png">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="scrollable viewer white-bg" ng-class="">
+    <div class="scrollable-content" ng-cloak id="content-scrollable">
+        <div ng-bind-html="content.content" class="ckeditor"></div>
+    </div>
+</div>
