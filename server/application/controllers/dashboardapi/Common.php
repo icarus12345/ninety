@@ -342,17 +342,22 @@ class Common extends DApi_Controller {
                         }
                         if(!empty($sub_typeviewer)){
                             $sub_entrys = $sub_model//->select("{$sub_prefix}id,{$sub_prefix}title")
+                                ->get_by_type($sub_typeviewer);
+                        } else if(!empty($sub_type)){
+                            $sub_entrys = $sub_model//->select("{$sub_prefix}id,{$sub_prefix}title")
                                 ->get_by_type($sub_type);
                         } else {
                             $sub_entrys = $sub_model//->select("{$sub_prefix}id,{$sub_prefix}title")
                                 ->gets();
                         }
                         foreach ($sub_entrys as $skey => $svalue) {
-                            $sub_entrys[$key]->id = $sub_entrys[$key]->{$sub_prefix.'id'};
-                            $sub_entrys[$key]->title = $sub_entrys[$key]->{$sub_prefix.'title'};
+                            $sub_entrys[$skey]->id = $sub_entrys[$skey]->{$sub_prefix.'id'};
+                            $sub_entrys[$skey]->title = $sub_entrys[$skey]->{$sub_prefix.'title'};
                         }
-                        // if($sub_storage == '__trademark'){
-                        //     print_r($sub_entrys);;die;
+                        // if($sub_storage == 'tbl_brand'){
+                        //     print_r($this->db->last_query());
+                        //     print_r($sub_entrys);
+                        //     die;
                         // }
                         if($column['type'] == 'treedropdown'){
                             $sub_entrys = $sub_model
@@ -391,14 +396,17 @@ class Common extends DApi_Controller {
                         }
                         if(!empty($sub_typeviewer)){
                             $sub_entrys = $sub_model//->select("{$sub_prefix}id,{$sub_prefix}title")
+                                ->get_by_type($sub_typeviewer);
+                        } else if(!empty($sub_type)){
+                            $sub_entrys = $sub_model//->select("{$sub_prefix}id,{$sub_prefix}title")
                                 ->get_by_type($sub_type);
                         } else {
                             $sub_entrys = $sub_model//->select("{$sub_prefix}id,{$sub_prefix}title")
                                 ->gets();
                         }
                         foreach ($sub_entrys as $skey => $svalue) {
-                            $sub_entrys[$key]->id = $sub_entrys[$key]->{$sub_prefix.'id'};
-                            $sub_entrys[$key]->title = $sub_entrys[$key]->{$sub_prefix.'title'};
+                            $sub_entrys[$skey]->id = $sub_entrys[$skey]->{$sub_prefix.'id'};
+                            $sub_entrys[$skey]->title = $sub_entrys[$skey]->{$sub_prefix.'title'};
                         }
                         if($sub_storage == '__shop'){
                             // print_r($sub_entrys);;die;

@@ -19,6 +19,7 @@ class Auth extends CI_Controller {
         $this->load->model("api/Account_Model");
         $this->load->model("api/Project_Model");
         $this->load->model("api/Question_Model");
+        $this->load->model("api/Content_Model");
         $this->load->library('CI_Phpmailer');
         $this->form_validation->set_error_delimiters('', '');
         $this->_code = 200;
@@ -150,7 +151,21 @@ class Auth extends CI_Controller {
             ->_display();
             die;
     }
+    function terms(){
+        $terms = $this->Content_Model->get(44);
+        $this->_output['data'] = $terms->content;
+        $this->_output['code'] = 1;
+        $this->_output['text'] = 'ok';
+        $this->_output['message'] = 'Success';
+        $this->display();
+    }
     function device_info(){
+        $this->_output['data'] = $data;
+        $this->_output['code'] = -1;
+        $this->_output['text'] = 'ok';
+        $this->_output['message'] = 'Please update to the newest version of the app to continue';
+        $this->display();
+       
         // $app_id = $this->input->post('app_id');
         // $app_secret = $this->input->post('app_secret');
         $uuid = $this->input->get_post('uuid');
@@ -167,6 +182,7 @@ class Auth extends CI_Controller {
                 if($user){
                     $count_project = $this->Project_Model->count_project($user->id);
                     $count_question = $this->Question_Model->count_questions();
+                    
                     unset($user->password);
                     $data = array(
                         'user_info' => $user,
@@ -189,7 +205,7 @@ class Auth extends CI_Controller {
                     );
                 $this->Client_Model->insert_device($params);
                 $this->_output['code'] = -403;
-                $this->_output['message'] = 'Device does\' exists.';
+                $this->_output['message'] = 'Device doesn\' exists.';
             }
         // }
         }
@@ -266,11 +282,11 @@ class Auth extends CI_Controller {
                     $code = 200;
                     $output['code'] = 1;
                     $output['text'] = 'ok';
-                    $output['message'] = 'Raw90 Registration Complete.';
+                    $output['message'] = 'Registration Complete.';
                     if($client_id=='raw'){
-                    	$output['message'] = 'Raw90 Registration Complete.';
+                    	$output['message'] = 'Registration Complete.';
                     }elseif($client_id=='risk'){
-                    	$output['message'] = 'Risk90 Registration Complete.';
+                    	$output['message'] = 'Registration Complete.';
                     }
                     $output['data'] = $user;
                 } else {
@@ -290,12 +306,12 @@ class Auth extends CI_Controller {
     }
 
     function login(){
-        $code = 200;
-        $output = array(
-            'text' => 'fail',
-            'message' => 'Access Denied.',
-            'code' => -1,
-        );
+        $this->_output['data'] = $data;
+        $this->_output['code'] = -1;
+        $this->_output['text'] = 'ok';
+        $this->_output['message'] = 'Please update to the newest version of the app to continue';
+        $this->display();
+       
         $uuid = $this->input->post('uuid');
         $username = $this->input->post('username');
         $password = $this->input->post('password');
@@ -391,7 +407,7 @@ class Auth extends CI_Controller {
                 $message = $this->load->view('risk/send_code',null,true);
                 $this->ci_phpmailer->send_mail($to,$subject, $message);
             } else {
-                $output['message'] = 'Email does\'t exists.';
+                $output['message'] = 'Email doesn\'t exists.';
             }
         }
         $this->output
@@ -433,10 +449,10 @@ class Auth extends CI_Controller {
                         $output['message'] = 'Fail to reset your password.';
                     }
                 } else {
-                    $output['message'] = 'User does\'t exists.';
+                    $output['message'] = 'User doesn\'t exists.';
                 }
             } else {
-                $output['message'] = 'Reset Password Code does\'t valid.';
+                $output['message'] = 'Reset Password Code doesn\'t valid.';
             }
         }
         $this->output

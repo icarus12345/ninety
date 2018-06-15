@@ -261,6 +261,18 @@ $user = $CI->session->userdata('dasbboard_user');
                     </div>
                 </div>
             </div>
+        <?php elseif ($column['type'] == 'images'): ?>
+            <div class="col-xs-<?php echo $column['col']; ?> half">
+                <div><?php echo $column['title']; ?> :</div>
+                <div class="pre">
+                    <div class="pull-bottom" style="position: relative;">
+                       <div style="margin:auto;width: 120px;height: 120px;">
+                            <div id="see-preview-common-thumb<?php echo $id; ?>" 
+                                style="padding-bottom: 100%;border:1px solid #ccc;background-image:url(<?php echo $value; ?>)" class="cover"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         <?php elseif ($column['type'] == 'multidropdown'): ?>
             <div class="col-xs-<?php echo $column['col']; ?> half">
                 <div class="pull-bottom">

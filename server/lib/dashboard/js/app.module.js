@@ -615,6 +615,7 @@ $(document).ready(function(){
                                 case 'text':
                                 case 'html':
                                 case 'image':
+                                case 'images':
                                     frm.find('[data-box="valid"]').show();
                             }
                             switch(type) {

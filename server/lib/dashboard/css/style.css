@@ -18,6 +18,9 @@ body{
     padding-bottom: 30px;
     min-height: 100vh;
 }
+.clearfix{
+    clear: both;
+}
 .cover{
     background-repeat: no-repeat;
     background-position: center;

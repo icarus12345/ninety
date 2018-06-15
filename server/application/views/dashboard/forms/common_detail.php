@@ -536,6 +536,57 @@ $user = $CI->session->userdata('dasbboard_user');
                     </div>
                 </div>
             </div>
+        <?php elseif ($column['type'] == 'images'): ?>
+            <div class="col-xs-<?php echo $column['col']; ?> half">
+                <div class="pull-bottom" style="position: relative;">
+                    <div style="position: relative;">
+                        <div><?php echo $column['title']; ?> :</div>
+                        <!--
+                        <div class="container pull-top">
+                            <span class="code cursor" 
+                                title="Add new Photo" 
+                                onclick="App.Common.choosePhotos('<?php echo $name; ?>')">
+                                <i class="fa fa-plus"></i>&nbsp;Add Images
+                            </span>
+                            &nbsp;&nbsp;
+                            <span class="code cursor" 
+                                title="Delete all" 
+                                onclick="App.Common.deletePhotos('<?php echo $name; ?>')">
+                                <i class="fa fa-trash-o"></i>&nbsp;Delete all
+                            </span>
+                        </div> 
+                        -->
+                        <?php
+                        $imgs = preg_split('/\n|\r\n?/', $value);
+                        ?>
+                        <ul id="<?php echo $id; ?>" 
+                            data-name="<?php echo $name; ?>"
+                            data-column="<?php echo $name; ?>"
+                            class="sortable ui-sortable image-sortable">
+                            <?php foreach ($imgs as $key => $img): ?>
+                                <?php if (!empty($img)): ?>
+                                    
+                                <li data-cdata="<?php echo $img; ?>">
+                                    <img class="thumb" src="<?php echo $img; ?>">
+                                    <div class="action cursor" onclick="App.Common.deletePhoto(this)">
+                                        <i class="fa fa-trash-o"></i>
+                                    </div>
+                                </li>
+                                <?php endif ?>
+                            <?php endforeach ?>
+                            <li 
+                                onclick="App.Common.choosePhotos('<?php echo $name; ?>')"
+                                class="ui-state-default ui-state-add ui-disabled-sort"
+                                >
+                                <i class="fa fa-plus"></i>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                        
+                        <!--  -->
+                    </div>
+                </div>
+            </div>
         <?php elseif ($column['type'] == 'multidropdown'): ?>
             <div class="col-xs-<?php echo $column['col']; ?> half">
                 <div class="pull-bottom">
