@@ -120,14 +120,14 @@ class PHPMailer {
      * @var string
      * @access protected
      */
-    protected $MIMEBody = '';
+    public $MIMEBody = '';
 
     /**
      * Stores the complete compiled MIME message headers.
      * @var string
      * @access protected
      */
-    protected $MIMEHeader = '';
+    public $MIMEHeader = '';
 
     /**
      * Stores the complete sent MIME message (Body and Headers)
@@ -336,10 +336,10 @@ class PHPMailer {
     /////////////////////////////////////////////////
 
     protected $smtp = NULL;
-    protected $to = array();
-    protected $cc = array();
-    protected $bcc = array();
-    protected $ReplyTo = array();
+    public $to = array();
+    public $cc = array();
+    public $bcc = array();
+    public $ReplyTo = array();
     protected $all_recipients = array();
     protected $attachment = array();
     protected $CustomHeader = array();
