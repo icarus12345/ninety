@@ -51,6 +51,13 @@ class Member extends Api_Controller {
                     'rules'=>'trim|min_length[4]|max_length[20]'
                 ),
         ),
+        'primary' => array(
+                // 'transactionId' => array(
+                //     'field'=>'transactionId',
+                //     'label'=>'Transaction ID',
+                //     'rules'=>'trim|required'
+                //     ),
+        ),
         'login' => array(
                 'username' => array(
                     'field'=>'username',
@@ -73,7 +80,7 @@ class Member extends Api_Controller {
                 'password' => array(
                     'field'=>'password',
                     'label'=>'Password',
-                    'rules'=>'trim|required|min_length[4]|max_length[30]'
+                    'rules'=>'trim|required|min_length[4]|max_length[50]'
                 )
         ),
     );
@@ -163,7 +170,35 @@ class Member extends Api_Controller {
         }
         $this->display();
     }
-
+    function primary(){
+        // $this->form_validation->set_rules($this->rules['primary']);
+        // if ($this->form_validation->run() == FALSE) {
+        //     $this->_output['validation'] = validation_errors_array();
+        //     $this->_output['message'] = validation_errors();
+        //     $this->_output['code'] = -1;
+        //     $this->_output['text'] = 'fail';
+        // } else {
+            if($this->user){
+                if($this->user->trial==1){
+                    $rs = $this->Account_Model->update($this->user->id,array(
+                        'trial' => 0,
+                        ));
+                } else {
+                    $rs = true;
+                }
+                if($rs){
+                    $this->_output['code'] = 1;
+                    $this->_output['text'] = 'ok';
+                    $this->_output['message'] = 'Success';
+                } else {
+                    $this->_output['message'] = 'Fail to unlock. Please contact to admin.';
+                }
+            } else {
+                $this->_output['message'] = 'User does\'t exists.';
+            }
+        // }
+        $this->display();
+    }
     function login(){
         $this->form_validation->set_rules($this->rules['login']);
         if ($this->form_validation->run() == FALSE) {

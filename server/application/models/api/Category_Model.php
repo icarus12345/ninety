@@ -37,6 +37,7 @@ class Category_Model extends API_Model {
                 $entrys[$key]->lower = $data['lower'];
                 $entrys[$key]->medium = $data['medium'];
                 $entrys[$key]->higher = $data['higher'];
+                $entrys[$key]->tutorial = $data['tutorial'];
                 unset($entrys[$key]->data);
         }
         return $entrys;

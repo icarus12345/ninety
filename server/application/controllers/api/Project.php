@@ -16,24 +16,48 @@ class Project extends Api_Controller {
                 'title' => array(
                     'field'=>'title',
                     'label'=>'Project Name',
-                    'rules'=>'trim|required|min_length[2]|max_length[50]'
+                    'rules'=>'trim|required|min_length[2]|max_length[20]|alpha_numeric_spaces',
+                    'errors' => array (
+                        'required' => 'The title must be less than 20 characters long with no unique symbols.',
+                        'trim' => 'The title must be less than 20 characters long with no unique symbols.',
+                        'max_length' => 'The title must be less than 20 characters long with no unique symbols.',
+                        'alpha_numeric_spaces' => 'The title must be less than 20 characters long with no unique symbols.'
+                        )
                     ),
                 'desc' => array(
                     'field'=>'desc',
                     'label'=>'Description',
-                    'rules'=>'trim|max_length[255]'
+                    'rules'=>'trim|max_length[50]|alpha_numeric_spaces',
+                    'errors' => array (
+                        'required' => 'The description can only be 100 characters long and only contain alphanumeric characters and spaces.',
+                        'trim' => 'The description can only be 100 characters long and only contain alphanumeric characters and spaces.',
+                        'max_length' => 'The description can only be 100 characters long and only contain alphanumeric characters and spaces.',
+                        'alpha_numeric_spaces' => 'The description can only be 100 characters long and only contain alphanumeric characters and spaces.'
+                        )
                     ),
         ),
         'update' => array(
                 'title' => array(
                     'field'=>'title',
                     'label'=>'Project Name',
-                    'rules'=>'trim|required|min_length[2]|max_length[50]'
+                    'rules'=>'trim|required|min_length[2]|max_length[20]|alpha_numeric_spaces',
+                    'errors' => array (
+                        'required' => 'The title must be less than 20 characters long with no unique symbols.',
+                        'trim' => 'The title must be less than 20 characters long with no unique symbols.',
+                        'max_length' => 'The title is required and must be less than 20 characters long with no unique symbols.',
+                        'alpha_numeric_spaces' => 'The title is required and must be less than 20 characters long with no unique symbols.'
+                        )
                     ),
                 'desc' => array(
                     'field'=>'desc',
                     'label'=>'Description',
-                    'rules'=>'trim|max_length[255]'
+                    'rules'=>'trim|max_length[50]|alpha_numeric_spaces',
+                    'errors' => array (
+                        'required' => 'The description can only be 100 characters long and only contain alphanumeric characters and spaces.',
+                        'trim' => 'The description can only be 100 characters long and only contain alphanumeric characters and spaces.',
+                        'max_length' => 'The description can only be 100 characters long and only contain alphanumeric characters and spaces.',
+                        'alpha_numeric_spaces' => 'The description can only be 100 characters long and only contain alphanumeric characters and spaces.'
+                        )
                     ),
         ),
         'share' => array(
@@ -187,13 +211,23 @@ class Project extends Api_Controller {
             $project = $this->Project_Model->get($id);
             if($project){
                 $project->alias = convertUrl($project->title);
+                $author = $this->Account_Model->get_by_id($project->uid);
+                
                 $answereds[] = $this->Answer_Model->get_by_uid_pid($uid,$id);
+                
+                $this->db->where('ninety_shared.email !=',$author->email);
                 $this->db->where('ninety_shared.email !=',$this->user->email);
                 $shareds = $this->Share_Model->get_by_pid($id);
                 foreach ($shareds as $key => $value) {
                     $u = $this->Account_Model->get_by_email($value->email);
                     $answereds[] = $this->Answer_Model->get_by_uid_pid($u->id,$id);
                 }
+                // my project
+                if($this->user->id != $project->uid){
+                    $answereds[] = $this->Answer_Model->get_by_uid_pid($author->id,$id);
+                    $shareds[] = $author;
+                }
+                // author project
 
                 if($project->uid == $uid){
                     $project->mode = 2;
@@ -227,13 +261,24 @@ class Project extends Api_Controller {
 
     }
     function export(){
-        $this->load->library('mpdf/mpdf');
+        $this->load->library('mpdf/Mpdf');
         
         $id = $this->input->post('id');
         $project = $this->Project_Model->get($id);
         $uid = $this->user->id;
         if($project){
+            $author = $this->Account_Model->get_by_id($project->uid);
+
+            $this->db->where('ninety_shared.email !=',$author->email);
+            $this->db->where('ninety_shared.email !=',$this->user->email);
             $shareds = $this->Share_Model->get_by_pid($id);
+            
+            // my project
+            if($this->user->id != $project->uid){
+                $shareds[] = $author;
+            }
+            // author project
+
             $items = $this->input->post('items');
             $info = $this->input->post('info');
             $setting = $this->input->post('setting');
@@ -263,13 +308,13 @@ class Project extends Api_Controller {
             // $mpdf->SetHTMLFooter('<div class="footer">{PAGENO}/{nbpg}</div>');
             $mpdf->list_indent_first_level = 0;  // 1 or 0 - whether to indent the first level of a list
             $mpdf->WriteHTML($html);
-            $pdffile = APPPATH . "../pdf/{$file_name}.pdf";
+            $pdffile = APPPATH . "../pdf/{$this->client_id}/{$file_name}.pdf";
             $mpdf->Output($pdffile,'F');
             $this->_output['text'] = 'Success.';
             $this->_output['code'] = 1;
             $this->_output['message'] = 'Export success.';
             $this->_output['data'] = array(
-                'url' => base_url("pdf/{$file_name}.pdf"),
+                'url' => base_url("pdf/{$this->client_id}/{$file_name}.pdf"),
                 'file_name' => "{$file_name}.pdf",
                 );
         } else {
@@ -318,13 +363,13 @@ class Project extends Api_Controller {
                         if($rs){
                             $this->_output['code'] = 1;
                             $this->_output['text'] = 'Success.';
-                            $this->_output['message'] = 'Share success.';
+                            $this->_output['message'] = 'The project has been successfully shared. If you don’t see our e-mail in your inbox please check your spam/junk box.';
                             $shareds = $this->Share_Model->get_by_pid($pid);
                             $this->_output['data'] = $shareds;
                             // $output['data'] = $rs;
                             $to = $email;
-                            $subject = "I want to share project \"{$project->title}\" with you!";
-                            $message = $this->load->view('risk/share_mail_body',null,true);
+                            $subject = "I want to share the project '{$project->title}' with you";
+                            $message = $this->load->view("{$this->client_id}/share_mail_body",null,true);
                             $this->ci_phpmailer->send_mail($to,$subject, $message);
                         } else {
                             $this->_output['text'] = 'fail';
@@ -364,11 +409,11 @@ class Project extends Api_Controller {
                 if($this->db->trans_status() === FALSE){
                     $this->db->trans_rollback();
                     $this->_output['text'] = 'fail';
-                    $this->_output['message'] = 'Cant share.';
+                    $this->_output['message'] = 'Cant unshare.';
                 } else {
                     $this->_output['code'] = 1;
                     $this->_output['text'] = 'Success.';
-                    $this->_output['message'] = 'Share success.';
+                    $this->_output['message'] = 'You have successfully unshared your project.';
                     $shareds = $this->Share_Model->get_by_pid($pid);
                     $this->_output['data'] = $shareds;
                     $this->db->trans_commit();
@@ -396,7 +441,7 @@ class Project extends Api_Controller {
             } else {
                 $this->_output['code'] = 1;
                 $this->_output['text'] = 'Success.';
-                $this->_output['message'] = 'Deleted prject success.';
+                $this->_output['message'] = 'Project successfully deleted';
                 $this->db->trans_commit();
             }
         }else{
@@ -425,12 +470,12 @@ class Project extends Api_Controller {
                 
                 $this->_output['code'] = 1;
                 $this->_output['text'] = 'Success.';
-                $this->_output['message'] = 'Send success.';
+                $this->_output['message'] = 'Project successfully sent. If you don’t see our e-mail in your inbox please check your spam/junk box.';
                 // $output['data'] = $rs;
                 $to = $email;
-                $subject = "Report project \"{$project->title}\" !";;
-                $message = $this->load->view('risk/send_mail_body',null,true);
-                $this->ci_phpmailer->AddAttachment(APPPATH . '../' . $pdf);
+                $subject = "Project Report '{$project->title}'";;
+                $message = $this->load->view("{$this->client_id}/send_mail_body",null,true);
+                $this->ci_phpmailer->AddAttachment(APPPATH . '../' . $pdf, 'shark-tank-entrepreneur_'.convertUrl($project->title).'.pdf');
                 $this->ci_phpmailer->send_mail($to,$subject, $message);
                     
             }else{

@@ -19,9 +19,11 @@ class Auth extends CI_Controller {
         $this->load->model("api/Account_Model");
         $this->load->model("api/Project_Model");
         $this->load->model("api/Question_Model");
+        $this->load->model("api/Content_Model");
         $this->load->library('CI_Phpmailer');
         $this->form_validation->set_error_delimiters('', '');
         $this->_code = 200;
+        $this->version = '3.0';
         $this->_output = array(
             'text' => 'fail',
             'message' => 'Bad request.',
@@ -49,8 +51,12 @@ class Auth extends CI_Controller {
                 'username' => array(
                     'field'=>'username',
                     'label'=>'Username',
-                    'rules'=>'trim|required|alpha_numeric|min_length[4]|max_length[50]|is_unique[ninety_account.username]'
-                    ),
+                    'rules'=>'trim|required|alpha_numeric|min_length[4]|max_length[50]|is_unique[ninety_account.username]',
+                    'errors' => array (
+                        'is_unique'=>'This username was registered already. Please use another username.'
+                    )
+
+                ),
                 'email' => array(
                     'field'=>'email',
                     'label'=>'Email',
@@ -58,7 +64,8 @@ class Auth extends CI_Controller {
                     'errors' => array (
                         'required' => 'Wrong e-mail. Try again',
                         'trim' => 'Wrong e-mail. Try again',
-                        'valid_email' => 'Wrong e-mail. Try again'
+                        'valid_email' => 'Wrong e-mail. Try again',
+                        'is_unique'=>'This email has already been used to register. Please use another email.'
                     )
                 ),
                 'first_name' => array(
@@ -98,9 +105,9 @@ class Auth extends CI_Controller {
                     'label'=>'Email',
                     'rules'=>'trim|valid_email|required',
                     'errors' => array (
-                        'required' => 'Wrong e-mail. Try again',
-                        'trim' => 'Wrong e-mail. Try again',
-                        'valid_email' => 'Wrong e-mail. Try again'
+                        'required' => 'Oops. Enter an e-mail address.',
+                        'trim' => 'Oops. Enter an e-mail address.',
+                        'valid_email' => 'Oops. Enter an e-mail address.'
                     )
                 ),
         ),
@@ -150,6 +157,14 @@ class Auth extends CI_Controller {
             ->_display();
             die;
     }
+    function terms(){
+        $terms = $this->Content_Model->get(44);
+        $this->_output['data'] = $terms->content;
+        $this->_output['code'] = 1;
+        $this->_output['text'] = 'ok';
+        $this->_output['message'] = 'Success';
+        $this->display();
+    }
     function device_info(){
         // $app_id = $this->input->post('app_id');
         // $app_secret = $this->input->post('app_secret');
@@ -167,11 +182,12 @@ class Auth extends CI_Controller {
                 if($user){
                     $count_project = $this->Project_Model->count_project($user->id);
                     $count_question = $this->Question_Model->count_questions();
+                    
                     unset($user->password);
                     $data = array(
                         'user_info' => $user,
                         'total_project'=>$count_project,
-                        'total_question'=>$count_question,
+                        'total_question'=>$count_question
                         );
                     $this->_output['data'] = $data;
                     $this->_output['code'] = 1;
@@ -189,10 +205,15 @@ class Auth extends CI_Controller {
                     );
                 $this->Client_Model->insert_device($params);
                 $this->_output['code'] = -403;
-                $this->_output['message'] = 'Device does\' exists.';
+                $this->_output['message'] = 'Device doesn\' exists.';
             }
         // }
         }
+        $this->_output['version'] = $this->version;
+        $this->_output['force'] = 1;
+        $this->_output['APP_CONF']['ios_product_id'] = '2018070400';
+        $this->_output['APP_CONF']['consumable'] = 1;
+        $this->_output['APP_CONF']['debug'] = 0;
         $this->display();
     }
 
@@ -253,6 +274,7 @@ class Auth extends CI_Controller {
                     'password' => user_hash_password($password),
                     'first_name' => $first,
                     'last_name' => $last,
+                    'trial' => 0,
                     'data'=>serialize(array(
                         'sex' => $sex,
                         'iam' => $iam,
@@ -266,11 +288,11 @@ class Auth extends CI_Controller {
                     $code = 200;
                     $output['code'] = 1;
                     $output['text'] = 'ok';
-                    $output['message'] = 'Raw90 Registration Complete.';
+                    $output['message'] = 'Registration Complete.';
                     if($client_id=='raw'){
-                    	$output['message'] = 'Raw90 Registration Complete.';
+                    	$output['message'] = 'Registration Complete.';
                     }elseif($client_id=='risk'){
-                    	$output['message'] = 'Risk90 Registration Complete.';
+                    	$output['message'] = 'Registration Complete.';
                     }
                     $output['data'] = $user;
                 } else {
@@ -288,7 +310,76 @@ class Auth extends CI_Controller {
             ->set_status_header($code)
             ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
     }
-
+    function fb_login(){
+        $code = 200;
+        $output = array(
+            'text' => 'fail',
+            'message' => 'Access Denied.',
+            'code' => -1,
+        );
+        $uuid = $this->input->post('uuid');
+        $email = $this->input->post('email');
+        $username = $this->input->post('username');
+        $password = 'fb';
+        $first = $this->input->post('name');
+       
+                
+        $code = 200;
+        $user = $this->Account_Model->get_by_username($username);
+        if(!$user){
+            $user = $this->Account_Model->get_by_email($email);
+        }
+        if(!$user){
+            // register
+            $params = array(
+                'username' => $username,
+                'email' => $email,
+                'password' => user_hash_password($password),
+                'first_name' => $first,
+                'trial' => 0,
+                'data'=>serialize(array(
+                    ))
+                );
+            $rs = $this->Account_Model->create($params);
+            if($rs){
+                $user = $this->Account_Model->get_by_username($username);
+            }
+        }
+        if($user){
+                if($user->status=='true'){
+                    unset($user->password);
+                    // $output['code'] = 1;
+                    // $output['text'] = 'Success.';
+                    $output['code'] = 1;
+                    $output['text'] = 'ok';
+                    $output['message'] = 'Success';
+                    $count_project = $this->Project_Model->count_project($user->id);
+                    $count_question = $this->Question_Model->count_questions();
+                    unset($user->password);
+                    $output['data'] = array(
+                        'user_info' => $user,
+                        'total_project'=>$count_project,
+                        'total_question'=>$count_question,
+                        );
+                    $this->Account_Model->update($user->id,array(
+                        'last_login' => date('Y-m-d H:i:s')
+                        ));
+                    $this->Client_Model->update_device($uuid,array(
+                        'uid' => $user->id
+                        ));
+                } else {
+                    $output['message'] = 'Your account have been deleted.';
+                }
+            
+        } else {
+            $output['message'] = 'Incorrect username. Please try again. If you forget your username, you can email us at info@mielab.com.au for support.';
+        }
+        
+        $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($code)
+            ->set_output(json_encode($output,JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    }
     function login(){
         $code = 200;
         $output = array(
@@ -345,7 +436,7 @@ class Auth extends CI_Controller {
                             
                         }
                     } else {
-                        $output['message'] = 'Incorrect user. Please try again';
+                        $output['message'] = 'Incorrect username. Please try again. If you forget your username, you can email us at info@mielab.com.au for support.';
                     }
                 
             // } else {
@@ -391,7 +482,7 @@ class Auth extends CI_Controller {
                 $message = $this->load->view('risk/send_code',null,true);
                 $this->ci_phpmailer->send_mail($to,$subject, $message);
             } else {
-                $output['message'] = 'Email does\'t exists.';
+                $output['message'] = 'This email address isn\'t your registered email.';
             }
         }
         $this->output
@@ -433,10 +524,10 @@ class Auth extends CI_Controller {
                         $output['message'] = 'Fail to reset your password.';
                     }
                 } else {
-                    $output['message'] = 'User does\'t exists.';
+                    $output['message'] = 'User doesn\'t exists.';
                 }
             } else {
-                $output['message'] = 'Reset Password Code does\'t valid.';
+                $output['message'] = 'Reset Password Code doesn\'t valid.';
             }
         }
         $this->output

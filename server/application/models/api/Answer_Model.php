@@ -28,7 +28,7 @@ class Answer_Model extends CI_Model {
         $query=$this->db
             ->select('ninety_answer.uid,ninety_answer.pid,ninety_answer.qid,ninety_answer.ans')
             ->from('ninety_answer')
-            ->join('ninety_question','ninety_answer.qid = ninety_question.id','left')
+            ->join('ninety_question','ninety_answer.qid = ninety_question.id')
             ->where("uid", $uid)
             ->where("pid", $pid)
             ->where("status", 'true')

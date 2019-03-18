@@ -54,7 +54,7 @@ function DialogFactory($mdDialog, $fancyModal, $cordovaDialogs){
                 .textContent(message)
                 .ariaLabel('Alert Dialog')
                 .ok('OK')
-        );
+        ).then(callback || function(){})
     }
     this.warning = function(message,callback){
         $mdDialog.show(
@@ -65,7 +65,7 @@ function DialogFactory($mdDialog, $fancyModal, $cordovaDialogs){
                 .textContent(message)
                 .ariaLabel('Alert Dialog')
                 .ok('OK')
-        )
+        ).then(callback || function(){})
     }
     this.error = function(message,callback){
         $mdDialog.show(
@@ -76,7 +76,7 @@ function DialogFactory($mdDialog, $fancyModal, $cordovaDialogs){
                 .textContent(message)
                 .ariaLabel('Alert Dialog')
                 .ok('OK')
-        )
+        ).then(callback || function(){})
     }
     this.confirm = function(opt){
         $mdDialog.show(
