@@ -241,3 +241,40 @@ legend{
 .table{margin-bottom: 0}
 .table thead tr th{padding: 4px 10px;line-height: 18px;}
 .table tbody tr td{padding: 4px 10px;line-height: 18px;}
+
+.sortable.image-sortable { list-style-type: none; margin: 0; padding: 0; width: 100%;float: left;padding: 4px}
+.sortable.image-sortable li.ui-state-highlight,
+.sortable.image-sortable li { 
+    border: 0;
+    margin: 4px; padding: 1px; float: left; width: 96px; height: 96px; 
+    text-align: center; position: relative;
+    box-shadow: 0px 0px 3px #ddd;
+    -moz-box-shadow: 0px 0px 3px #ddd;
+    -o-box-shadow: 0px 0px 3px #ddd;
+    -webkit-box-shadow: 0px 0px 3px #ddd;
+    cursor: move;
+    background: #fff;
+}
+.sortable.image-sortable li img.thumb{position: absolute;margin: auto; display: block;top:0;left: 0;bottom: 0;right: 0;max-height: 100%;max-width: 100%;}
+.sortable.image-sortable li .action{
+    position: absolute;top: 50%;left: 50%;margin: -20px 0 0 -20px;
+    text-align: center;background: rgba(168, 0, 0, 0.59);color: #CFCDCE;
+    border: 0px solid #B80404;width: 40px;height: 40px;line-height: 40px;
+    border-radius: 50%;-moz-border-radius: 50%;-o-border-radius: 50%;
+    display:none;
+    padding: 0;
+    color: #fff;
+    cursor: pointer;
+}
+.sortable.image-sortable li:hover .action{display:block}
+.sortable.image-sortable li.ui-state-add .fa{
+  position: absolute;width: 32px;height: 32px;
+  left: 50%;top: 50%;margin: -16px 0 0 -16px;
+  text-align: center;line-height: 32px;
+  font-size: 20px;
+}
+.sortable.image-sortable li.ui-state-add{
+  border-radius: 10px;
+  border: 1px dashed #ccc;
+  cursor: pointer;
+}

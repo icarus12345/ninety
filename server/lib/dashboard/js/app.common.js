@@ -534,6 +534,40 @@ $(document).ready(function(){
         var Grids = {};
         var seedialog;
         return {
+            choosePhotos: function(name){
+                App.KCFinder.openKCFinderMulti(function(files){
+                    files.map(function(file){
+                        $([
+                        '<li data-cdata="'+file+'">',
+                            '<img class="thumb" src="' + file + '">',
+                            '<div class="action cursor" onclick="App.Common.deletePhoto(this)">',
+                                '<i class="fa fa-trash-o"></i>',
+                            '</div>',
+                        '</li>',
+                        ].join('')).insertBefore($('.image-sortable[data-name="' + name + '"]>.ui-state-add'))
+                    });
+                    // var frm = $('#entry-detail-frm');
+                    // var str = $('.image-sortable[data-name="' + name + '"]>li>img').get().map(function(){
+                        // return $(this).attr('src')
+                    // })
+                    // console.log(str.join('/r/n'));
+                    // frm.find('select[name="'+name+'"]').val(str.join('/r/n'));
+                });
+            },
+            deletePhoto: function(elm){
+                // var frm = $('#entry-detail-frm');
+                $(elm).parent('li').remove()
+                // var str = $('.image-sortable[data-name="' + name + '"]>li>img').get().map(function(){
+                        // return $(this).attr('src')
+                    // })
+                    // console.log(str.join('/r/n'));
+                    // frm.find('select[name="'+name+'"]').val(str.join('/r/n'));
+            },
+            deletePhotos: function(name){
+                $('.image-sortable[data-name="' + name + '"]').html();
+                // var frm = $('#entry-detail-frm');
+                // frm.find('select[name="'+name+'"]').val('');
+            },
             onFolowChange: function(from,to){
                 var frm = $('#entry-detail-frm');
                 var fromElm = frm.find('select[name="'+from+'"]');
@@ -633,6 +667,7 @@ $(document).ready(function(){
                     }
                     $(this).sortable({
                         placeholder: "placeholder",
+                        items: "li:not(.ui-disabled-sort)",
                         start: function(e, ui){
                             console.log(ui)
                             ui.placeholder.addClass(ui.item.attr('class'))
@@ -709,20 +744,42 @@ $(document).ready(function(){
                 
                 frm.find('.sortable').each(function(){
                     var column = $(this).data('column');
-                    var subData = $(this).find('>li').get().map(function(li){
-                        return $(li).data('cdata');
-                    })
+                    var subData;
+                    // if($(this).hasClass('image-sortable')){
+                        subData = $(this).find('>li').get().map(function(li){
+                            return $(li).data('cdata');
+                        })
+                    // }else{
+                        // subData = $(this).find('>li>img').get().map(function(img){
+                            // return $(img).data('src');
+                        // })
+                    // }
                     var __ = 'data';
                     var columns = App.Common.settings[App.Common.sid].data.columns
                     for(var i =0;i<columns.length;i++){
                         if(columns[i].name == column){
-                            if(+columns[i].biz==1){
+                            if(columns[i].columndata == ""){
+                                if(columns[i].type == 'images'){
+                                    data[column] = subData.join('\r\n')
+                                } else {
+                                    data[column] = JSON.stringify(subData);
+                                }
+                            } else if(columns[i].columndata == "0"){
+                                __ = 'data';
+                                if(!data[__]) data[__] = {}
+                                data[__][column] = subData;
+                            } else if(columns[i].columndata == "1"){
                                 __ = 'longdata';
+                                if(!data[__]) data[__] = {}
+                                data[__][column] = subData;
+                            } else if(+columns[i].biz==1){
+                                __ = 'longdata';
+                                if(!data[__]) data[__] = {}
+                                data[__][column] = subData;
                             }
                         }
                     }
-                    if(!data[__]) data[__] = {}
-                    data[__][column] = subData;
+                    
                 })
                 if(!id && !JSON.parse(App.Common.settings[App.Common.sid].data.add)){
                     toastr.warning('Access denied','Warning');

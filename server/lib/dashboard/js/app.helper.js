@@ -205,44 +205,72 @@ App.KCFinder.openKCFinderByPath = function (path, element) {
 }
 
 App.KCFinder.openKCFinderMulti = function (callback) {
-    window.KCFinder = {
-        callBackMultiple: function(files) {
-            window.KCFinder = null;
-            callback(files);
-            $('#kc-finder-popup .kc-finder-content').html('');
-            $('#kc-finder-popup').hide();
+    if ($("#kc-finder-dialog").length === 0) {
+        $('body').append('<div id="kc-finder-dialog"><div style="padding-bottom:64.42%"></div></div>');
+    }
+    new App.Dialog({
+        'message' : $('#kc-finder-dialog'),
+        'title': '<h4>KCFinder <small>Image browser</small></h4>',
+        'dialogClass':'',
+        'width':'720px',
+        'type':'notice',
+        // 'hideclose':true,
+        'closeOnEscape':false
+    }).open();
+    try {
+        window.KCFinder = {
+            callBackMultiple: function(files) {
+                window.KCFinder = null;
+                callback(files);
+                $('#kc-finder-dialog>div').html('');
+                $('#kc-finder-dialog').dialog('close')
+            }
+        };
+        if($('#kc-finder-dialog').length==0){
+            window.open(App.BaseUrl + 'lib/kcfinder/browse.php?lang=en', 'kcfinder_textbox',
+                'status=0, toolbar=0, location=0, menubar=0, directories=0, resizable=1, scrollbars=0, width=700, height=500'
+            );
+        }else{
+            $('#kc-finder-dialog>div').html('<iframe name="kcfinder_iframe" src="'+App.BaseUrl + 'lib/kcfinder/browse.php?lang=en'+'" style="width:100%;height:100%;position:absolute;top:0;left:0;border:0;margin:0;padding:0"/>')
         }
-    };
-    
-    if($('#kc-finder-popup').length==0){
-        window.open(App.BaseUrl + 'lib/kcfinder/browse.php?lang=en',
-            'kcfinder_multiple', 'status=0, toolbar=0, location=0, menubar=0, ' +
-            'directories=0, resizable=1, scrollbars=0, width=800, height=600'
-        );
-    }else{
-        $('#kc-finder-popup .kc-finder-content').html('<iframe name="kcfinder_iframe" src="'+App.BaseUrl + 'lib/kcfinder/browse.php?lang=en" style="width:100%;height:100%;position:absolute;top:0;left:0;border:0;margin:0;padding:0"/>')
-        $('#kc-finder-popup').show();
+    } catch (e) {
+        toastr.error(e.message,'Error');
     }
 }
 
 App.KCFinder.openKCFinderMultiByPath = function (path, callback) {
-    window.KCFinder = {
-        callBackMultiple: function(files) {
-            window.KCFinder = null;
-            callback(files);
-            $('#kc-finder-popup .kc-finder-content').html('');
-            $('#kc-finder-popup').hide();
-        }
-    };
     
-    if($('#kc-finder-popup').length==0){
-        window.open(App.BaseUrl + 'lib/kcfinder/browse.php?lang=en&' + path,
-            'kcfinder_multiple', 'status=0, toolbar=0, location=0, menubar=0, ' +
-            'directories=0, resizable=1, scrollbars=0, width=800, height=600'
-        );
-    }else{
-        $('#kc-finder-popup .kc-finder-content').html('<iframe name="kcfinder_iframe" src="'+App.BaseUrl + 'lib/kcfinder/browse.php?lang=en&' + path +'" style="width:100%;height:100%;position:absolute;top:0;left:0;border:0;margin:0;padding:0"/>')
-        $('#kc-finder-popup').show();
+
+    if ($("#kc-finder-dialog").length === 0) {
+        $('body').append('<div id="kc-finder-dialog"><div style="padding-bottom:64.42%"></div></div>');
+    }
+    new App.Dialog({
+        'message' : $('#kc-finder-dialog'),
+        'title': '<h4>KCFinder <small>Image browser</small></h4>',
+        'dialogClass':'',
+        'width':'720px',
+        'type':'notice',
+        // 'hideclose':true,
+        'closeOnEscape':false
+    }).open();
+    try {
+        window.KCFinder = {
+            callBackMultiple: function(files) {
+                window.KCFinder = null;
+                callback(files);
+                $('#kc-finder-dialog>div').html('');
+                $('#kc-finder-dialog').dialog('close')
+            }
+        };
+        if($('#kc-finder-dialog').length==0){
+            window.open(App.BaseUrl + 'lib/kcfinder/browse.php?lang=en', 'kcfinder_textbox',
+                'status=0, toolbar=0, location=0, menubar=0, directories=0, resizable=1, scrollbars=0, width=700, height=500'
+            );
+        }else{
+            $('#kc-finder-dialog>div').html('<iframe name="kcfinder_iframe" src="'+App.BaseUrl + 'lib/kcfinder/browse.php?lang=en&' + path +'" style="width:100%;height:100%;position:absolute;top:0;left:0;border:0;margin:0;padding:0"/>')
+        }
+    } catch (e) {
+        toastr.error(e.message,'Error');
     }
 }
 App.KCFinder.BrowseServer = function (elementid) {

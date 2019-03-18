@@ -78,6 +78,7 @@
                             <option value="text">Text</option>
                             <option value="html">HTML</option>
                             <option value="image">Image</option>
+                            <option value="images">Images</option>
                             <option value="radio">Radio</option>
 
                             <option value="checkbox">Checkbox</option>
