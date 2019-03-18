@@ -81,7 +81,7 @@ function DialogFactory($mdDialog, $fancyModal, $cordovaDialogs){
     this.confirm = function(opt){
         $mdDialog.show(
             $mdDialog.confirm()
-            .title(opt.title || 'Confirm ?')
+            .title(opt.title || 'Confirm?')
             .textContent(opt.message || '')
             .ariaLabel('Confirm')
             // .targetEvent(ev)

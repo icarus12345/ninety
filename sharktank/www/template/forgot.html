@@ -1,0 +1,71 @@
+<div ui-content-for="navbar">
+    <div class="navbar navbar-app navbar-absolute-top" >
+        <div class="navbar-brand navbar-brand-center">Forgot passowrd</div>
+        <div class="btn-group pull-left">
+          <div ng-tap="goBack()" class="btn ico-back">
+          </div>
+        </div>
+    </div>
+</div>
+<div class="scrollable" >
+  <div class="scrollable-content">
+    <div class="authentication-form sendcode-page" ng-if="auth_forgot.step==1">
+        <div class="title">Reset password</div>
+        <p>
+          Please enter your email bellow to receive your password reset intructions
+        </p>
+        <form name="forgotFrm" ng-submit="doSendCode(forgotFrm.$valid)" novalidate autocomplete="off">
+          <div class="form-control mb-3" 
+            ng-class="{ 
+            }" >
+            <input 
+              type="email" 
+              name="email" 
+              class="form-input" 
+              ng-model="auth_forgot.email"
+              required
+              autocomplete="off" 
+              >
+            <label>Email</label>
+          </div>
+          
+          <button class="btn btn-default btn-circle btn-block mb-4" type="submit">Send reset code</button>
+        </form>
+    </div>
+    <div class="authentication-form reset-page" ng-if="auth_forgot.step==2">
+        <div class="title">Reset password</div>
+        <p>
+          Please enter the reset code in your email and your new password
+        </p>
+        <form name="resetFrm" ng-submit="doResetPassword(resetFrm.$valid)" novalidate autocomplete="off">
+          <div class="form-control mb-1" 
+            ng-class="{ 
+            }" >
+            <input 
+              type="text" 
+              name="code" 
+              class="form-input" 
+              ng-model="auth_forgot.code"
+              required
+              autocomplete="off" 
+              >
+            <label>Reset code</label>
+          </div><div class="form-control mb-3" 
+            ng-class="{ 
+            }" >
+            <input 
+              type="password" 
+              name="password" 
+              class="form-input" 
+              ng-model="auth_forgot.password"
+              required
+              autocomplete="off" 
+              >
+            <label>New password</label>
+          </div>
+          
+          <button class="btn btn-default btn-circle btn-block mb-4" type="submit">Submit</button>
+        </form>
+    </div>
+  </div>
+</div>

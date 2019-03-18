@@ -1,74 +1,73 @@
-<div class="modal modal-overlay auto-modal auth-bg" ui-if='modalAddProject' ui-state='modalAddProject'>
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">Edit Project</div>
-                <div class="btn-group pull-left">
-                    <div class="btn" ui-turn-off="modalAddProject">
-                        <img class="" src="img/back.png">
-                    </div>
-                </div>
-                <div class="btn-group pull-right">
-                    <a href="#/app-info/42" class="btn" ui-turn-off="modalAddProject">
-                        <img class="" src="img/book-black.png">
-                    </a>
-                    <a class="btn" ui-turn-off="modalAddProject">
-                        <img class="" src="img/home-black.png">
-                    </a>
-                </div>
-            </div>
-            <div class="modal-body">
-            <div class="scrollable">
-                <div class="scrollable-content">
-                    <!-- <div ng-scrollbars style="width:100%;height:100%"> -->
-                        <div class="-aligner" > 
-                            <div class="-aligner-item"> 
-                                <div style="height:40px"></div>
-                                <md-content layout-padding>
-                                    <form name="updateProjectFrm" id="updateProjectFrm" ng-submit="onUpdateProject()" autocomplete="off">
-                                        <md-input-container class="md-block">
-                                            <label>Title</label>
-                                            <input 
-                                                md-maxlength="20" 
-                                                required md-no-asterisk 
-                                                name="title" 
-                                                ng-model="editProjectInfo.title">
-                                            <div ng-messages="updateProjectFrm.title.$error">
-                                                <div ng-message="required">This is required.</div>
-                                                <div ng-message="md-maxlength">The title must be less than 50 characters long.</div>
-                                            </div>
-                                        </md-input-container>
-                                        <md-input-container class="md-block">
-                                          <label>Description</label>
-                                          <textarea 
-                                            name="desc" 
-                                            ng-model="editProjectInfo.desc" 
-                                            md-maxlength="100" rows="2" 
-                                            md-select-on-focus></textarea>
-                                        </md-input-container>
-                                        <div layout="row">
-                                            <md-input-container flex="50">
-                                                <md-button 
-                                                    md-no-ink 
-                                                    class="btn-block btn-circle md-btn-default"  
-                                                    type="button"
-                                                    ui-turn-off="modalAddProject"
-                                                    ng-tap="onCancelUpdate()"
-                                                    >Cancel</md-button>
-                                            </md-input-container>
-
-                                            <md-input-container flex="50">
-                                                <md-button class="btn-block btn-circle md-btn-danger" type="submit">{{editProjectInfo.id?'Update':'Create'}}</md-button>
-                                            </md-input-container>
-                                        </div>
-                                    </form>
-                                </md-content>
-                                <div class="keyboard" style="height:{{keyboard_height}}px"></div>
-                            </div>
-                        </div>
-                    <!-- </div> -->
-                </div>
-            </div>
+<div ui-content-for="navbar">
+    <div class="navbar navbar-app navbar-absolute-top" >
+        <div class="navbar-brand navbar-brand-center">{{project_info?'Edit':'Add'}} project</div>
+        <div class="btn-group pull-left">
+          <div ng-tap="goBack()" class="btn ico-back">
+          </div>
         </div>
     </div>
+</div>
+<div class="scrollable add-project-page">
+  <div class="scrollable-content">
+    <div class="authentication-form project-form">
+        <div class="title sf-bold">{{project_info?'Edit your project':'Your new project'}}</div>
+        <form name="projectFrm" ng-submit="doCreateProject(projectFrm.$valid)" novalidate autocomplete="off">
+          <div class="form-control mb-1"
+            ng-class="{ 
+            }"
+            >
+            <select 
+                type="input" 
+                name="category" 
+                class="form-input" 
+                ng-model="form_data.category_id"
+                required
+                autocomplete="off" 
+                >
+              <option value="1">App</option>
+              <option value="2">Software</option>
+              <option value="3">Hardware</option>
+              <option value="4">Product</option>
+              <option value="5">Service</option>
+              <option value="6">Other</option>
+            </select>
+            <label>Category</label>
+            <span class="">{{cateories[form_data.category_id]}}</span>
+          </div>
+          <div class="form-control mb-1" 
+            ng-class="{ 
+            }" >
+            <input 
+              type="text" 
+              name="title" 
+              class="form-input" 
+              ng-model="form_data.title"
+              required
+              autocomplete="off" 
+              ng-maxlength="20"
+              >
+            <label>Title</label>
+            <span class="count">{{form_data.title.length}}/20</span>
+          </div>
+          <div class="form-control mb-1" 
+            ng-class="{ 
+            }" >
+            <textarea
+              type="input" 
+              name="desc" 
+              class="form-input" 
+              ng-model="form_data.desc"
+              required
+              autocomplete="off"
+              autogrow
+              max-lines="2"
+              ng-maxlength="100"
+              ></textarea>
+            <label>Description</label>
+            <span class="count">{{form_data.desc.length}}/100</span>
+          </div>
+          <button class="btn btn-default btn-circle btn-block" type="submit">Finish</button>
+        </form>
+    </div>
+  </div>
 </div>

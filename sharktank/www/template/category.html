@@ -1,0 +1,95 @@
+<div ui-content-for="navbar">
+    <div class="navbar navbar-app navbar-absolute-top" ng-class="{'hidden':finishCategory}">
+        <div class="navbar-brand navbar-brand-center" ng-if="!cid">{{project.title}}</div>
+        <div class="navbar-brand navbar-brand-center" ng-if="cid">{{activeCategory.parent.title}}</div>
+        <div class="btn-group pull-left">
+            <a class="btn ico-info" ng-tap="goToTutorial(activeCategory.id)">
+            </a>
+        </div>
+        <div class="btn-group pull-right" ng-if="activeCategory.items">
+            <a class="btn ico-chart" ng-tap="goToChart(project.id,activeCategory.id)">
+            </a>
+        </div>
+        <div class="btn-group pull-right" ng-if="activeCategory.questions">
+            <a class="btn ico-undo" ng-tap="goBack()">
+            </a>
+        </div>
+    </div>
+    <div class="navbar navbar-app navbar-absolute-top" ng-class="{'hidden':!finishCategory}">
+        <div class="navbar-brand navbar-brand-center">{{finishCategory.parent.title}}</div>
+        <div class="btn-group pull-left">
+            <a class="btn ico-info" ng-tap-href="#/project/{{project.id}}/info">
+            </a>
+        </div>
+        <div class="btn-group pull-right">
+            <a class="btn ico-undo" ng-tap="confirmFinish()">
+            </a>
+        </div>
+    </div>
+</div>
+<div class="wrap-container" ng-if="!finishCategory">
+    <h2 class="project-title sf-heavy">{{activeCategory.title}}</h2>
+    <div class="category-list" ng-if="activeCategory.items" length="{{activeCategory.items.length}}">
+        <div ng-repeat="(i,item) in activeCategory.items" class="item" ng-tap="onClickItem(item)">
+            <div>
+                <span class="aligner sf-bold" style="{{item.title=='Sustainable Competitive Adv.'?'max-width: 48vmin':''}}">
+                    <span>{{item.title}}</span>
+                </span>
+                <div class="bar-dot">
+                    <svg style="width:100%;height:100%;" viewBox="0 0 380 150" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <linearGradient id="grad-{{item.id}}" x1="0%" y1="0%" x2="100%" y2="0%">
+                              <stop offset="0%" style="stop-color:#673AB7;stop-opacity:1"></stop>
+                              <stop ng-attr-offset="{{item.process*100}}%" style="stop-color:#673AB7;stop-opacity:1"></stop>
+                              <stop ng-attr-offset="{{item.process*100}}%" style="stop-color:#ccc;stop-opacity:1"></stop>
+                              <stop offset="100%" style="stop-color:#ccc;stop-opacity:1"></stop>
+                            </linearGradient>
+                        </defs>
+                        <path stroke="red" stroke-width="0" fill="url(#grad-{{item.id}})" d="M 5 30 A 25 25 0 0 1 55 30 L 55 120 A 25 25 0 0 1 5 120 z M 85 30 A 25 25 0 0 1 135 30 L 135 120 A 25 25 0 0 1 85 120 z M 165 30 A 25 25 0 0 1 215 30 L 215 120 A 25 25 0 0 1 165 120 z M 245 30 A 25 25 0 0 1 295 30 L 295 120 A 25 25 0 0 1 245 120 z M 325 30 A 25 25 0 0 1 375 30 L 375 120 A 25 25 0 0 1 325 120 z"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="question-list" ng-if="activeCategory.questions">
+        <ol class="carousel-indicators">
+              <li ng-repeat="(i,item) in activeCategory.questions" ng-class="{'active': selectedItemIndex==i}"></li>
+          </ol>
+        <div class="carousel question-carousel"  on-carousel-change="onSlideChanged(from, to)" activeindex="{{selectedItemIndex}}">
+            <div class="carousel-inner">
+                <div ng-repeat="(i,item) in activeCategory.questions" class="carousel-item" >
+                    <div>
+                        <div class="question-title sf-bold aligner-center fittext" min="1" max="5.5">
+                            <div>{{ item.title }}</div>
+                        </div>
+                        <div class="question-content sf-semibold fittext" min="1" max="4"><div>{{ item.question }}</div></div>
+                        <div class="question-anser" ng-repeat="(qi,q) in item.answers" ng-class="{'active':item.answered[0]==qi}">
+                            <button class="carousel-btn" on-touched="onAnswer(q,qi)" >
+                                <span class="aligner-center"><span>{{q.title}}</span></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button
+        ng-class="{
+        'back-btn ico-back-circle':activeCategory.items,
+        'finish-btn ico-save-circle':activeCategory.questions,
+        }" ng-tap="goBack()"></button>
+</div>
+<div class="wrap-container" ng-if="finishCategory">
+    <h2 class="project-title sf-heavy">{{finishCategory.title}}</h2>
+    <div class="quiz-finish">
+        <div class="">
+            <h3 class="sf-bold">Congratulations!</h3>
+            <div class="finish-bg {{finishbg}}"></div>
+            <p class="sf-light">
+                You have just finished the last question of {{finishCategory.title}}.<br/>
+                Tap the finish button to go back to the category list.
+            </p>
+        </div>
+    </div>
+    <button class="finish-btn ico-finish-circle" ng-tap="confirmFinish()"></button> 
+</div>

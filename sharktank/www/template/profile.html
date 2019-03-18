@@ -1,35 +1,48 @@
-<div ui-content-for="navbarTop">
-    <div class="navbar navbar-head navbar-absolute-top black-navbar-head">
-        <div class="navbar-brand navbar-brand-center">
-            <span>YOUR ACCOUNT</span>
-        </div>
+<div ui-content-for="navbar">
+    <div class="navbar navbar-app navbar-absolute-top">
+        <div class="navbar-brand navbar-brand-center">Account</div>
         <div class="btn-group pull-left">
-            <a class="btn" href="#/">
-                <img class="" src="img/back.png">
+            <a class="btn ico-back-gray" ng-tap="goBack()">
+            </a>
+        </div>
+        <div class="btn-group pull-right">
+            <a class="btn ico-info-default" ng-tap-href="#/info/48">
             </a>
         </div>
     </div>
 </div>
-<div class="scrollable viewer white-bg" ng-class="__path=='/'?'actived':''">
-    <div class="scrollable-content profile-info">
-        <div>
-            <h4>Welcome</h4>
-            <h1>{{user_info.username}}</h1>
-            <hr/>
-            <span>Email</span>
-            <p>{{user_info.email}}</p>
-            <hr/>
-            <span>I am</span>
-            <p>{{user_info.data.iam}}</p>
-            <hr/>
-            <a href="#/profile/edit" class="profile-btn">Edit Profile</a>
-            <a href="#/profile/changepassword" class="profile-btn">Change Password</a>
+<div class="scrollable gray-bg share-page">
+    <div class="scrollable-content padding-100">
+        <div class="-white-bg ">
+            <h2 class="page-title sf-bold">Hello {{user_info.username}}</h2>
+            <div class="share-form mt-4">
+                <form name="shareFrm" ng-submit="doShare(shareFrm.$valid)" novalidate autocomplete="off">
+                  
+                  <div class="form-control mb-2" >
+                    <div class="form-input">{{user_info.email}}</div>
+                    <label>your email</label>
+                  </div>
+                  <div class="form-control mb-2" >
+                    <div class="form-input">{{user_info.data.iam}}</div>
+                    <label>you are</label>
+                  </div>
+                  <div class="form-control mb-2" >
+                    <div class="form-input">{{user_info.since | date  : 'longDate'}}</div>
+                    <label>member since</label>
+                  </div>
+                  <div class="actions">
+                    <div>
+                      <a class="edit-action" ng-tap-href="#/profile/update"></a>
+                    </div>
+                    <div>
+                      <a class="password-action" ng-tap-href="#/profile/update-password"></a>
+                    </div>
+                    <div>
+                      <span class="logout-action" ng-tap="doLogout()"></span>
+                    </div>
+                  </div>
+                </form>
+            </div>
         </div>
-        <!-- <a class="logout-btn" ng-tap="doLogout()">Log out</a> -->
-    </div>
-</div>
-<div ui-content-for="navbarBottom">
-    <div class="navbar navbar-foot navbar-absolute-bottom">
-        <a class="logout-btn" ng-tap="doLogout()">Log out</a>
     </div>
 </div>

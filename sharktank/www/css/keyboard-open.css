@@ -1,0 +1,47 @@
+.keyboard-open .add-project-page {
+    height: 112vmin;
+}
+.keyboard-open .add-project-page .authentication-form .title{
+    line-height: 16vmin;
+    line-height: 16vmin;
+}
+.keyboard-open .login-page {
+    height: 117vmin;
+}
+.keyboard-open .login-page .authentication-form .title{
+    line-height: 16vmin;
+    line-height: 16vmin;
+}
+.keyboard-open .register-page {
+    height: 140vmin;
+}
+.keyboard-open .register-page .authentication-form .title{
+    line-height: 16vmin;
+    line-height: 16vmin;
+}
+.add-project-page .authentication-form .title,
+.login-page .authentication-form .title,
+.register-page .authentication-form .title,
+.add-project-page,
+.auth-page,
+.login-page,
+.register-page{
+    color:#fff;
+    /*transition: all 0.5s;*/
+}
+.keyboard-open,
+.keyboard-open .app,
+.keyboard-open .app-body,
+.keyboard-open .app-content,
+.keyboard-open .scrollable,
+.keyboard-open ng-view{
+    position: fixed;
+    top:0;
+}
+
+.keyboard-open .app-content,
+.keyboard-open .scrollable,
+.keyboard-open ng-view
+{
+    top: 16vmin;
+}

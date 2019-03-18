@@ -1,0 +1,96 @@
+
+
+.ngdialog-body{
+  font-size: calc((45 / 1080) * 100vw);
+  font-size: -webkit-calc((45 / 1080) * 100vw);
+  line-height: calc((60 / 1080) * 100vw);
+  line-height: -webkit-calc((60 / 1080) * 100vw);
+  padding: calc((70 / 1080) * 100vw) 0;
+  padding: -webkit-calc((70 / 1080) * 100vw) 0;
+  max-height: calc(100vh - 60vmin);
+  max-height: -webkit-calc(100vh - 60vmin);
+}
+.ngdialog-body-scroll{
+    max-height: calc(100vh - 72vmin);
+    max-height: -webkit-calc(100vh - 72vmin);
+    overflow: auto;
+    min-height: calc(100vh - 72vmin);
+    min-height: -webkit-calc(100vh - 72vmin);
+}
+.word-wrap{
+  white-space: pre-wrap;       /* css-3 */
+ white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+ white-space: -pre-wrap;      /* Opera 4-6 */
+ white-space: -o-pre-wrap;    /* Opera 7 */
+ word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+.ngdialog-header{
+  font-size: -webkit-calc((70 / 1080) * 100vw);
+  font-size: calc((70 / 1080) * 100vw);
+  line-height: calc((70 / 1080) * 100vw);
+  line-height: -webkit-calc((70 / 1080) * 100vw);
+  text-align: center;
+  font-weight: bold;
+  color: #000;
+}
+.ngdialog-header:after{
+  content: '';
+  display: block;
+  width: calc((70 / 1080) * 100vw);;
+  width: -webkit-calc((70 / 1080) * 100vw);;
+  height: calc((20 / 1080) * 100vw);;
+  height: -webkit-calc((20 / 1080) * 100vw);;
+  background: #3d39c6;
+  margin: auto;
+  margin-top: calc((70 / 1080) * 100vw);
+  margin-top: -webkit-calc((70 / 1080) * 100vw);
+}
+.ngdialog-close{display: none}
+.ngdialog.ngdialog-theme-default .ngdialog-content {
+  -webkit-animation: ngdialog-flyin .5s;
+  animation: ngdialog-flyin .5s;
+  background: #f0f0f0;
+  border-radius: 9vmin;
+  color: #444;
+  max-width: 100%;
+  position: absolute;
+  width: calc(100vw * (1080 - 65 * 2) / 1080);
+  width: -webkit-calc(100vw * (1080 - 65 * 2) / 1080);
+  left: calc(65 / 1080 * 100vw);
+  left: -webkit-calc(65 / 1080 * 100vw);
+  padding: calc(100vw * (100 / 1080));
+  padding: -webkit-calc(100vw * (100 / 1080));
+      top: 50%;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+}
+.ngdialog-foot{
+  text-align: center;
+}
+.ngdialog-foot button{
+  line-height: calc(100vw * (130 / 1080));
+  line-height: -webkit-calc(100vw * (130 / 1080));
+  border-radius: calc(100vw * (65 / 1080));
+  border-radius: -webkit-calc(100vw * (65 / 1080));
+  /*padding: 0 calc(100vw * (88 / 1080));*/
+  /*padding: 0 -webkit-calc(100vw * (88 / 1080));*/
+  padding: 0;
+  font-size: calc((45 / 1080) * 100vw);
+  font-size: -webkit-calc((45 / 1080) * 100vw);
+  border:0;
+  margin: 0 10px;
+  text-align: center;
+  width: calc(50% - 22px);
+  -webkit-width: calc(50% - 22px);
+}
+.ngdialog-foot button.ngdialog-button-secondary{
+  background-image: linear-gradient(to bottom, #c4c4c4, #989898);
+  box-shadow: 0 calc(100vw * (10 / 1080)) calc(100vw * (20 / 1080)) #c4c4c4; 
+  box-shadow: 0 -webkit-calc(100vw * (10 / 1080)) -webkit-calc(100vw * (20 / 1080)) #c4c4c4; 
+  color:#fff;
+}
+.ngdialog-foot button.ngdialog-button-primary{
+  color:#fff;
+  background-image: linear-gradient(to bottom, #5be1f3, #2196F3);
+  background-image: -webkit-linear-gradient(to bottom, #5be1f3, #2196F3);
+}

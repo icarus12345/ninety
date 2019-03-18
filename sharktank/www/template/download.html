@@ -1,0 +1,28 @@
+<div ui-content-for="navbar">
+    <div class="navbar navbar-app navbar-absolute-top">
+        <div class="navbar-brand navbar-brand-center">Export project</div>
+        <div class="btn-group pull-left">
+            <a class="btn ico-back-gray" ng-tap="goBack()">
+            </a>
+        </div>
+    </div>
+</div>
+<div class="scrollable gray-bg share-page">
+    <div class="scrollable-content padding-100">
+        <div class="-white-bg ">
+            <h2 class="page-title">{{project.title}}</h2>
+            <div class="share-form">
+                <p class="mt-2">Export and download<br/>this project with:</p>
+                <form name="shareFrm" ng-submit="export_and_open_pdf(shareFrm.$valid)" novalidate autocomplete="off">
+                  
+                  <div class="buttons-radios">
+                    <div class="mt-2" ng-class="{'active':export_option.all_comment}" ng-tap="toggle('all_comment')">All comments</div>
+                    <div ng-class="{'active':export_option.all_user}" ng-tap="toggle('all_user')">All users</div>
+                  </div>
+                  
+                  <button class="btn btn-primary btn-circle btn-block" type="submit">Export</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

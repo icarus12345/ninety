@@ -1,157 +1,112 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <!--
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
-        <meta http-equiv="Content-Security-Policy" content="default-src *; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data:"/>
-        <meta name="format-detection" content="telephone=no"/>
-        <meta name="msapplication-tap-highlight" content="no"/>
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width"/>
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: http://ninety.widdleman.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: http://sharktankentrepreneur.net https://www.google-analytics.com h'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, viewport-fit=cover">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, viewport-fit=cover">
+        <meta name="apple-mobile-web-app-status-bar-style" content="yes" />
+        <link rel="stylesheet" href="dist/css/mobile-angular-ui-base.css" />
+        
+        <link rel="stylesheet" href="js/ng-dialog/css/ngDialog.css" />
+        <link rel="stylesheet" href="js/ng-dialog/css/ngDialog-theme-default.css" />
+        <link rel="stylesheet" href="js/owl/owl.carousel.css" />
 
-        <link rel="stylesheet" href="mobile-angular/css/mobile-angular-ui-base.min.css" />
-        <link rel="stylesheet" href="mobile-angular/css/mobile-angular-ui-desktop.min.css" />
-        <link rel="stylesheet" href="angular-1.5.6/angular-material.min.css">
-        <link rel="stylesheet" href="angular-1.5.6/angular-fancy-modal/angular-fancy-modal.css" />
-        <!-- <link rel="stylesheet" href="angular-1.5.6/slim-scroll/ng-slim-scroll.css" /> -->
-        <!-- <link rel="stylesheet" href="angular-1.5.6/m-custom-scrollbar/jquery.mCustomScrollbar.min.css" type="text/css"/> -->
+        <link rel="stylesheet" href="css/fonts.css" />
         <link rel="stylesheet" href="css/index.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/profile.css" />
+        <link rel="stylesheet" href="css/keyboard-open.css" />
+        <link rel="stylesheet" href="css/icon.css" />
+        <link rel="stylesheet" href="css/loading.css" />
+        <title></title>
 
-        <title>Shark Tank Entrepreneur</title>
-        <!-- <script src="angular-1.5.6/m-custom-scrollbar/jquery.min.js"></script> -->
-        <script type="text/javascript" src="angular-1.5.6/angular.min.js"></script>
-        <script type="text/javascript" src="angular-1.5.6/angular-route.min.js"></script>
-        <script type="text/javascript" src="angular-1.5.6/angular-animate.min.js"></script>
-        <script type="text/javascript" src="angular-1.5.6/angular-aria.min.js"></script>
-        <script type="text/javascript" src="angular-1.5.6/angular-messages.min.js"></script>
-        <script type="text/javascript" src="angular-1.5.6/angular-material.min.js"></script>
-        <script type="text/javascript" src="angular-1.5.6/ng-cordova/ng-cordova.min.js"></script>
         <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="mobile-angular/js/mobile-angular-ui.min.js"></script>
-        <script type="text/javascript" src="mobile-angular/js/mobile-angular-ui.gestures.min.js"></script>
-        <script type="text/javascript" src="angular-1.5.6/chart/dist/Chart.js"></script>
-        <script type="text/javascript" src="angular-1.5.6/angular-chart/dist/angular-chart.min.js"></script>
-        <script type="text/javascript" src="angular-1.5.6/angular-fancy-modal/angular-fancy-modal.js"></script>
-        <!-- <script src="angular-1.5.6/slim-scroll/ng-slim-scroll.js"></script> -->
-        <!-- <script src="angular-1.5.6/m-custom-scrollbar/jquery.mCustomScrollbar.concat.min.js"></script> -->
-        <!-- <script src="angular-1.5.6/m-custom-scrollbar/scrollbars.min.js"></script> -->
-        <!-- <script src="angular-1.5.6/iscroll.js"></script> -->
-        <!-- <script src="angular-1.5.6/ng-iscroll.js"></script> -->
-        <!-- <script src="js/ngTouch.js"></script> -->
-        <script type="text/javascript" src="angular-1.5.6/angular-sanitize.min.js"></script>
-        <script type="text/javascript" src="mobile-angular/js/ngTap.js"></script>
-        <script type="text/javascript" src="mobile-angular/js/loader.js"></script>
 
-        <script type="text/javascript" src="factory/api-factory.js"></script>
-        <script type="text/javascript" src="factory/auth-factory.js"></script>
-        <script type="text/javascript" src="factory/storage-factory.js"></script>
-        <script type="text/javascript" src="factory/category-factory.js"></script>
-        <script type="text/javascript" src="factory/project-factory.js"></script>
-        <script type="text/javascript" src="factory/question-factory.js"></script>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/owl/owl.carousel.min.js"></script>
+        <script src="dist/js/angular.min.js"></script>
+        <!-- <script src="dist/js/jquery.min.js"></script> -->
+        <!-- <script src="dist/js/angular.js"></script> -->
+        <script src="dist/js/angular-route.min.js"></script>
+        <script src="dist/js/ng-cordova.min.js"></script>
 
-        <script type="text/javascript" src="controller/main-controller.js"></script>
-        <script type="text/javascript" src="controller/project-controller.js"></script>
-        <script type="text/javascript" src="controller/profile-controller.js"></script>
-        <script type="text/javascript" src="controller/question-controller.js"></script>
-        <script type="text/javascript" src="controller/chart-controller.js"></script>
-        <script type="text/javascript" src="controller/share-controller.js"></script>
-        <script type="text/javascript" src="controller/send-controller.js"></script>
-        <script type="text/javascript" src="controller/content-controller.js"></script>
+        <script src="dist/js/mobile-angular-ui.min.js"></script>
+        <script src="dist/js/mobile-angular-ui.gestures.min.js"></script>
+        <script src="dist/js/angular-sanitize.js"></script>
+        <script src="dist/js/angularjs-autogrow.js"></script>
+        <script src="dist/js/ngTap.js"></script>
 
-        <script type="text/javascript" src="js/main.js"></script>
+        <script src="js/ng-dialog/js/ngDialog.min.js"></script>
+        <script type="text/javascript" src="js/chart/dist/Chart.js"></script>
+        <script type="text/javascript" src="js/angular-chart/dist/angular-chart.min.js"></script>
 
+        <script type="text/javascript" src="data/category.js"></script>
+        <script type="text/javascript" src="data/question.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
+        <script type="text/javascript" src="js/router.js"></script>
+        <script type="text/javascript" src="factory/helper.factory.js"></script>
+        <script type="text/javascript" src="factory/api.factory.js"></script>
+        <script type="text/javascript" src="factory/category.factory.js"></script>
+        <script type="text/javascript" src="factory/app.directive.js"></script>
+        <script type="text/javascript" src="controller/add-project.controller.js"></script>
+        <script type="text/javascript" src="controller/main.controller.js"></script>
+        <script type="text/javascript" src="controller/auth.controller.js"></script>
+        <script type="text/javascript" src="controller/project.controller.js"></script>
+        <script type="text/javascript" src="controller/chart.controller.js"></script>
+        <script type="text/javascript" src="controller/share.controller.js"></script>
+        <script type="text/javascript" src="controller/content.controller.js"></script>
+        <script type="text/javascript" src="controller/profile.controller.js"></script>
+        <script type="text/javascript" src="controller/download.controller.js"></script>
+        <script type="text/javascript" src="controller/render.controller.js"></script>
+        
     </head>
     <body
         ng-app="MobileAngularUiExamples"
-        ng-controller="MainController"
+        ng-controller="AuthController"
         ui-prevent-touchmove-defaults
-        
+        style="background-color: #006ee6"
+        class="bg"
+        ng-class="{'keyboard-open':isKeyboardShow}"
         >
-        <!-- <canvas data-loader></canvas> -->
-        <!-- Sidebars -->
-        
-
-        <!-- <div ng-include="'template/sidebarRight.html'" class="sidebar sidebar-right"></div> -->
-        <div ui-yield-to="slidebar"></div>
-        <div class="app"
-             >
-
-            <!-- Navbars -->
-            <div ui-yield-to="navbarTop"></div>
-            
-
+        <div class="app {{current_bg}}" style="opacity: 0;">
+            <div ui-yield-to="navbar"></div>
             <!-- App Body -->
-            <div class="app-body" ng-class="{'loading': loading}">
-                
-                <div class="app-content" ng-class="loading?'loading-blur':''">
-                    <div 
-                        class="page-animation page-actived"><ng-view></ng-view></div>
-                    
-
+              <div class="app-body " ng-class="{'loading': pageLoading || loading}">
+                <div class="app-content-loading">
+                  <i class="fa fa-spinner fa-spin loading-spinner"></i>
+                </div>
+                <div class="app-content">
+                  <ng-view></ng-view>
                 </div>
             </div>
-
-            <div ui-yield-to="navbarBottom"></div>
         </div>
-        <!-- ~ .app -->
-        <div ui-yield-to="modals"></div>
-        <div ng-include="'template/login.html'"></div>
-        <div ng-include="'template/register.html'"></div>
-        <div ng-include="'template/terms.html'"></div>
-
-        <div ng-show="loading" class="app-content-loading">
-            <div class="loading-container">
-                <span class="loading"></span>
-                <div class="loading-text" ng-show="loading_text">{{loading_text}}</div>
+        <div id="intro" ng-if="!skip">
+            <div id="owl-intro" class="owl-carousel owl-theme cover">
+                <div class="item intro-01">
+                    <div><span>Over 100 questions from key categories that underpin venture success</span></div>
+                </div>
+                <div class="item intro-02">
+                    <div><span>Get asked the hard questions that no one else asks</span></div>
+                </div>
+                <div class="item intro-03">
+                    <div><span>Compare your responses with those of your team members</span></div>
+                </div>
+                <div class="item intro-04">
+                    <div><span>Detailed feedback on the strengths and weaknesses of your venture</span></div>
+                </div>
             </div>
-            <div class="bubbles b0"></div>
-            <div class="bubbles b1"></div>
-            <div class="bubbles b2"></div>
-            <div class="bubbles b4"></div>
-            <div class="bubbles b5"></div>
-            <div class="bubbles b6"></div>
-            <div class="bubbles b7"></div>
-            <div class="bubbles b8"></div>
+            <div class="intro-form">
+                <a class="btn btn-default btn-circle btn-block" ng-tap="doSkip('#/login')">Login</a>
+                <div class="or">or</div>
+                <a class="btn btn-outline btn-circle btn-block" ng-tap="doSkip('#/register')">Create new account</a>
+            </div>
+            <div class="skip" ng-tap="doSkip()">SKIP</div>
         </div>
-        
+        <div id="debug"></div>
+        <style type="text/css">
+            
+        </style>
     </body>
 </html>

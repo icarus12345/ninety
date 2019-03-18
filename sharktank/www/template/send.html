@@ -1,58 +1,40 @@
-<div ui-content-for="navbarTop">
-    <div class="navbar navbar-head navbar-absolute-top black-navbar-head">
-        <div class="navbar-brand navbar-brand-center has-right-navbar-btn">
-            <span ng-show="category_info.level == 0">{{projectData.title}}</span>
-        </div>
+<div ui-content-for="navbar">
+    <div class="navbar navbar-app navbar-absolute-top">
+        <div class="navbar-brand navbar-brand-center">Share project</div>
         <div class="btn-group pull-left">
-            <div class="btn" ng-click="goBack()">
-                <img class="" src="img/back.png">
-            </div>
-        </div>
-        <div class="btn-group pull-right">
-            <a href="#/tutorial" class="btn">
-                <img class="" src="img/book-black.png">
-            </a>
-            <a href="#/" class="btn">
-                <img class="" src="img/home-black.png">
+            <a class="btn ico-back-gray" ng-tap="goBack()">
             </a>
         </div>
     </div>
 </div>
-
-<div class="scrollable viewer white-bg" ng-class="">
-    <div class="scrollable-content" ng-cloak>
-        <md-content layout-padding>
-            <div class="h3-tit">SEND YOUR PROJECT</div>
-            <form name="sendForm" id="sendForm" ng-submit="doSend()" autocomplete="off">
-                <md-input-container class="md-block gray-input">
-                    <label>Email</label>
+<div class="scrollable gray-bg share-page">
+    <div class="scrollable-content padding-100">
+        <div class="-white-bg ">
+            <h2 class="page-title sf-heavy">Send it with<br/>the world</h2>
+            <div class="share-form">
+                <p>Enter email bellow</p>
+                <form name="shareFrm" ng-submit="doSend(shareFrm.$valid)" novalidate autocomplete="off">
+                  
+                  <div class="form-control mb-1" 
+                    ng-class="{ 
+                    }" >
                     <input 
-                        required md-no-asterisk 
-                        name="email" type="text" 
-                        minlength="10" 
-                        maxlength="100" 
-                        ng-pattern="/^.+@.+\..+$/" 
-                        ng-model="send_info.email">
-                    <div ng-messages="sendForm.email.$error" role="alert" 
-                        >
-                        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']" >
-                                Your email must be between 10 and 100 characters long and look like an e-mail address.
-                        </div>
-                    </div>
-                </md-input-container>
-
-                
-                
-
-                <div  layout="column">
-                    <md-button 
-                        
-                        class="btn-circle md-btn-danger" 
-                        type="submit"><span class="icon-paper-plane"></span> SEND</md-button>
-                    
-                </div>
-            </form>
-        </md-content>
-        
+                      type="email" 
+                      name="title" 
+                      class="form-input" 
+                      ng-model="send_info.email"
+                      required
+                      autocomplete="off" 
+                      ng-maxlength="100"
+                      >
+                    <label>Email</label>
+                    <!-- <span class="count">{{form_data.title.length}}/50</span> -->
+                  </div>
+                  
+                  
+                  <button class="btn btn-primary btn-circle btn-block" type="submit">Finish</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,44 +1,23 @@
-<div ui-content-for="navbarTop">
-    <div class="navbar navbar-head navbar-absolute-top black-navbar-head">
-        <div class="navbar-brand navbar-brand-center">
-            {{projectData.title}}
-        </div>
+<div ui-content-for="navbar">
+    <div class="navbar navbar-app navbar-absolute-top">
+        <div class="navbar-brand navbar-brand-center" ng-if="!cid">{{project.title}}</div>
+        <div class="navbar-brand navbar-brand-center" ng-if="cid">{{activeCategory.title}}</div>
         <div class="btn-group pull-left">
-            <div class="btn" ng-click="goBack()">
-                <img class="" src="img/back.png">
-            </div>
+            <a class="btn ico-info-gray" ng-tap-href="#/tutorial/{{activeCategory.id}}">
+            </a>
         </div>
         <div class="btn-group pull-right">
-            <a href="#/tutorial" class="btn">
-                <img class="" src="img/book-black.png">
+            <a class="btn ico-close-gray" ng-tap="goBack()">
             </a>
-            <a href="#/" class="btn">
-                <img class="" src="img/home-black.png">
-            </a>
-        </div>
-        <div class="second-navbar-top">
-            <div class="head-title">
-                {{category_info.title||projectData.title}}
-                <span ng-tap="goBack()" class="close-icon head-icon"></span>
-            </div>
         </div>
     </div>
 </div>
-
-<div class="scrollable viewer" ng-class="">
-    <div class="scrollable-content">
-        <div class="head-title" style="opacity:0">
-            {{category_info.title||projectData.title}}
-            <span ng-tap="goBack()" class="close-icon head-icon"></span>
-        </div>
-        <div class="list-group ">
-            <!--
-            <div class="list-group-item text-justify project-desc">
-                <p >{{category_info.desc||projectData.desc}}</p>
-            </div>
-            -->
+<div class="scrollable gray-bg">
+    <div class="scrollable-content padding-20">
+        <div class="white-bg min-box-height">
+            <h2 class="project-title">{{finishCategory.title}}</h2>
             <div class="graph-box">
-                <div ng-show="category_info.items" class="chart-title over-all">OVERALL</div>
+                <div ng-show="activeCategory.items" class="chart-title over-all sf-heavy">OVERALL</div>
                 
                 <div class="risk-chart">
                     <canvas 
@@ -46,29 +25,29 @@
                         responsive="false"
                         width="320"
                         height="320"
-                        chart-series="category_info.chart_info.legends"
-                        chart-options="category_info.chart_info.options" 
-                        chart-colors="category_info.chart_info.colors"
+                        chart-series="chart_info.legends"
+                        chart-options="chart_info.options" 
+                        chart-colors="chart_info.colors"
                         chart-lineTension="0"
                         chart-legend="true"
                         chart-fill="false"
-                        chart-data="category_info.chart_info.data" 
-                        chart-labels="category_info.chart_info.labels"
-                        chart-dataset-override="category_info.chart_info.dataset_override"
+                        chart-data="chart_info.data" 
+                        chart-labels="chart_info.labels"
+                        chart-dataset-override="chart_info.dataset_override"
                         >
                     </canvas>
                 </div>
                 <div class="chart-legend">
-                    <div class="legend" ng-repeat="(i,serie) in category_info.chart_info.legends" ng-tap="category_info.toggle_serie(i)">
-                        <span style="background-color:{{category_info.chart_info.colors[i]}}"></span>{{series[i] || serie}}
+                    <div class="legend sf-bold" ng-repeat="(i,serie) in chart_info.legends" ng-tap="activeCategory.toggle_serie(i)">
+                        <span style="background-color:{{chart_info.colors[i]}}"></span>{{series[i] || serie}}
                     </div>
                 </div>
                 <div class="chart-info">
-                    <div ng-repeat="(i,item) in category_info.items"
+                    <div ng-repeat="(i,item) in activeCategory.items"
                         class="open"
                         >
                         <div class="chart-item-head" 
-                            ng-tap="toggle_comment(category_info,i)"
+                            ng-tap="toggle_comment(activeCategory,i)"
                             >
                             <span class="num">{{i+1}}</span> {{item.title}}
                         </div>
@@ -77,11 +56,11 @@
                             <p class="word-wrap">{{item.comment}}</p>
                         </div>
                     </div>
-                    <div ng-repeat="(no,item) in category_info.questions"
+                    <div ng-repeat="(no,item) in activeCategory.questions"
                         class="open"
                         >
                         <div class="chart-item-head" 
-                            ng-tap="toggle_comment(category_info,no)"
+                            ng-tap="toggle_comment(activeCategory,no)"
                             >
                             <span class="num">{{no+1}}</span> 
                             {{item.title}}
@@ -89,13 +68,13 @@
 
                         
                         <div ng-class="item.comment_class">
-                            <p class="word-wrap">{{item.comment}}</p>
+                            <p class="-word-wrap sf-light">{{item.comment}}</p>
                         </div>
                     </div> 
                 </div>
             </div>
-            <div class="graph-box" ng-repeat="(i,foo) in category_info.items">
-                <div class="chart-title">{{foo.title}}</div>
+            <div class="graph-box" ng-repeat="(i,foo) in activeCategory.items">
+                <div class="chart-title sf-heavy">{{foo.title}}</div>
                 <div class="risk-chart">
                     <canvas 
                         class="chart chart-radar"
@@ -114,7 +93,7 @@
                         >
                     </canvas>
                 </div>
-                <div class="chart-legend">
+                <div class="chart-legend sf-bold">
                     <div class="legend" ng-repeat="(i,serie) in foo.chart_info.legends" ng-tap="foo.toggle_serie(i)">
                         <span style="background-color:{{foo.chart_info.colors[i]}}"></span>{{series[i] || serie}}
                     </div>
@@ -131,7 +110,7 @@
                         </div>
 
                         <div ng-class="item.comment_class">
-                            <p class="word-wrap">{{item.comment}}</p>
+                            <p class="word-wrap sf-light">{{item.comment}}</p>
                         </div>
                     </div>
                     <div ng-repeat="(no,item) in foo.questions"
@@ -146,12 +125,11 @@
 
                         
                         <div ng-class="item.comment_class">
-                            <p class="word-wrap">{{item.comment}}</p>
+                            <p class="-word-wrap sf-light">{{item.comment}}</p>
                         </div>
                     </div> 
                 </div>
             </div>
-
         </div>
     </div>
 </div>

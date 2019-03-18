@@ -1,0 +1,92 @@
+<div ui-content-for="navbar">
+    <div class="navbar navbar-app navbar-absolute-top" >
+        <div class="navbar-brand navbar-brand-center">{{project.title}}</div>
+        <div class="btn-group pull-left">
+          <a class="btn ico-info" ng-tap-href="#/tutorial">
+          </a>
+        </div>
+        <div class="btn-group pull-right" >
+          <a class="btn ico-chart" ng-tap="goToChart(project.id,'')">
+          </a>
+        </div>
+    </div>
+</div>
+<div class="scrollable">
+  <div class="scrollable-content">
+    <div class="project-home">
+        <div class="item opp">
+            <a ng-tap-href="#/project/{{project.id}}/{{activeCategory.items[3].id}}" class="ico-cat1" ng-class="{'success':activeCategory.items[3].process>=1}">
+                <div class="bar bar1">
+                    <svg  style="width:100%;height:100%" viewBox="0 0 780 150" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                        <linearGradient id="grad-oppo" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" style="stop-color:#00b09b;stop-opacity:1" />
+                          <stop ng-attr-offset="{{(activeCategory.items[3].process || 0)*100}}%" style="stop-color:#96c93d;stop-opacity:1" />
+                          <stop ng-attr-offset="{{(activeCategory.items[3].process || 0)*100}}%" style="stop-color:#ccc;stop-opacity:1" />
+                          <stop offset="100%" style="stop-color:#ccc;stop-opacity:1" />
+                        </linearGradient>
+                      </defs>
+                        <path stroke="red" stroke-width="0" fill="url(#grad-oppo)"  d="M 5 30 A 25 25 0 0 1 55 30 L 55 120 A 25 25 0 0 1 5 120 z M 85 30 A 25 25 0 0 1 135 30 L 135 120 A 25 25 0 0 1 85 120 z M 165 30 A 25 25 0 0 1 215 30 L 215 120 A 25 25 0 0 1 165 120 z M 245 30 A 25 25 0 0 1 295 30 L 295 120 A 25 25 0 0 1 245 120 z M 325 30 A 25 25 0 0 1 375 30 L 375 120 A 25 25 0 0 1 325 120 z M 405 30 A 25 25 0 0 1 455 30 L 455 120 A 25 25 0 0 1 405 120 z M 485 30 A 25 25 0 0 1 535 30 L 535 120 A 25 25 0 0 1 485 120 z M 565 30 A 25 25 0 0 1 615 30 L 615 120 A 25 25 0 0 1 565 120 z M 645 30 A 25 25 0 0 1 695 30 L 695 120 A 25 25 0 0 1 645 120 z M 725 30 A 25 25 0 0 1 775 30 L 775 120 A 25 25 0 0 1 725 120 z"></path>
+                    </svg> 
+                </div>
+            </a>
+            <span>Opportunity</span>
+        </div>
+        <div class="item team">
+            <a ng-tap-href="#/project/{{project.id}}/{{activeCategory.items[0].id}}" class="ico-cat2" ng-class="{'success':activeCategory.items[0].process>=1}">
+                <div class="bar bar2">
+                    <svg  style="width:100%;height:100%" viewBox="0 0 780 150" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                        <linearGradient id="grad-team" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" style="stop-color:#12c2e9;stop-opacity:1" />
+                          <stop ng-attr-offset="{{(activeCategory.items[0].process || 0)*100}}%" style="stop-color:#f64f59;stop-opacity:1" />
+                          <stop ng-attr-offset="{{(activeCategory.items[0].process || 0)*100}}%" style="stop-color:#ccc;stop-opacity:1" />
+                          <stop offset="100%" style="stop-color:#ccc;stop-opacity:1" />
+                        </linearGradient>
+                      </defs>
+                        <path stroke="red" stroke-width="0" fill="url(#grad-team)"  d="M 5 30 A 25 25 0 0 1 55 30 L 55 120 A 25 25 0 0 1 5 120 z M 85 30 A 25 25 0 0 1 135 30 L 135 120 A 25 25 0 0 1 85 120 z M 165 30 A 25 25 0 0 1 215 30 L 215 120 A 25 25 0 0 1 165 120 z M 245 30 A 25 25 0 0 1 295 30 L 295 120 A 25 25 0 0 1 245 120 z M 325 30 A 25 25 0 0 1 375 30 L 375 120 A 25 25 0 0 1 325 120 z M 405 30 A 25 25 0 0 1 455 30 L 455 120 A 25 25 0 0 1 405 120 z M 485 30 A 25 25 0 0 1 535 30 L 535 120 A 25 25 0 0 1 485 120 z M 565 30 A 25 25 0 0 1 615 30 L 615 120 A 25 25 0 0 1 565 120 z M 645 30 A 25 25 0 0 1 695 30 L 695 120 A 25 25 0 0 1 645 120 z M 725 30 A 25 25 0 0 1 775 30 L 775 120 A 25 25 0 0 1 725 120 z"></path>
+                    </svg>
+                </div>
+            </a>
+            <span>Team</span>
+        </div>
+        <div class="item resource">
+            <a ng-tap-href="#/project/{{project.id}}/{{activeCategory.items[1].id}}" class="ico-cat3" ng-class="{'success':activeCategory.items[1].process>=1}">
+                <div class="bar bar3">
+                    <svg  style="width:100%;height:100%" viewBox="0 0 780 150" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                        <linearGradient id="grad-resource" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" style="stop-color:#f49c18;stop-opacity:1" />
+                          <stop ng-attr-offset="{{(activeCategory.items[1].process || 0)*100}}%" style="stop-color:#f64f59;stop-opacity:1" />
+                          <stop ng-attr-offset="{{(activeCategory.items[1].process || 0)*100}}%" style="stop-color:#ccc;stop-opacity:1" />
+                          <stop offset="100%" style="stop-color:#ccc;stop-opacity:1" />
+                        </linearGradient>
+                      </defs>
+                        <path stroke="red" stroke-width="0" fill="url(#grad-resource)"  d="M 5 30 A 25 25 0 0 1 55 30 L 55 120 A 25 25 0 0 1 5 120 z M 85 30 A 25 25 0 0 1 135 30 L 135 120 A 25 25 0 0 1 85 120 z M 165 30 A 25 25 0 0 1 215 30 L 215 120 A 25 25 0 0 1 165 120 z M 245 30 A 25 25 0 0 1 295 30 L 295 120 A 25 25 0 0 1 245 120 z M 325 30 A 25 25 0 0 1 375 30 L 375 120 A 25 25 0 0 1 325 120 z M 405 30 A 25 25 0 0 1 455 30 L 455 120 A 25 25 0 0 1 405 120 z M 485 30 A 25 25 0 0 1 535 30 L 535 120 A 25 25 0 0 1 485 120 z M 565 30 A 25 25 0 0 1 615 30 L 615 120 A 25 25 0 0 1 565 120 z M 645 30 A 25 25 0 0 1 695 30 L 695 120 A 25 25 0 0 1 645 120 z M 725 30 A 25 25 0 0 1 775 30 L 775 120 A 25 25 0 0 1 725 120 z"></path>
+                    </svg>
+                </div>
+            </a>
+            <span>Resource</span>
+        </div>
+        <div class="item enviroment">
+            <a ng-tap-href="#/project/{{project.id}}/{{activeCategory.items[2].id}}" class="ico-cat4" ng-class="{'success':activeCategory.items[2].process>=1}">
+                <div class="bar bar4">
+                    <svg  style="width:100%;height:100%" viewBox="0 0 780 150" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                        <linearGradient id="grad-envi" x1="0%" y1="0%" x2="100%" y2="0%">
+                          <stop offset="0%" style="stop-color:#8527e2;stop-opacity:1" />
+                          <stop ng-attr-offset="{{(activeCategory.items[2].process || 0)*100}}%" style="stop-color:#5306e0;stop-opacity:1" />
+                          <stop ng-attr-offset="{{(activeCategory.items[2].process || 0)*100}}%" style="stop-color:#ccc;stop-opacity:1" />
+                          <stop offset="100%" style="stop-color:#ccc;stop-opacity:1" />
+                        </linearGradient>
+                      </defs>
+                        <path stroke="red" stroke-width="0" fill="url(#grad-envi)"  d="M 5 30 A 25 25 0 0 1 55 30 L 55 120 A 25 25 0 0 1 5 120 z M 85 30 A 25 25 0 0 1 135 30 L 135 120 A 25 25 0 0 1 85 120 z M 165 30 A 25 25 0 0 1 215 30 L 215 120 A 25 25 0 0 1 165 120 z M 245 30 A 25 25 0 0 1 295 30 L 295 120 A 25 25 0 0 1 245 120 z M 325 30 A 25 25 0 0 1 375 30 L 375 120 A 25 25 0 0 1 325 120 z M 405 30 A 25 25 0 0 1 455 30 L 455 120 A 25 25 0 0 1 405 120 z M 485 30 A 25 25 0 0 1 535 30 L 535 120 A 25 25 0 0 1 485 120 z M 565 30 A 25 25 0 0 1 615 30 L 615 120 A 25 25 0 0 1 565 120 z M 645 30 A 25 25 0 0 1 695 30 L 695 120 A 25 25 0 0 1 645 120 z M 725 30 A 25 25 0 0 1 775 30 L 775 120 A 25 25 0 0 1 725 120 z"></path>
+                    </svg>
+                </div>
+            </a>
+            <span>Enviroment</span>
+        </div>
+    </div>
+    <btn class="back-btn ico-back-circle" ng-tap="goBack()"></btn>
+  </div>
+</div>

@@ -1,59 +1,13 @@
 
-
-<!-- <div class="scrollable viewer risk-bg" ng-class="__path=='/'?'actived':''"> -->
-    <!-- <div class="scrollable-content" ui-scroll-bottom="loadMore()" > -->
-        <div class="add-project-box hide-required">
-            <md-content layout-padding>
-                <form name="addProjectFrm" id="addProjectFrm" ng-submit="onCreateProject()" autocomplete="off">
-                    <md-input-container class="md-block hide-char-counter">
-                        <label>New project name</label>
-                        <input 
-                            name="title" 
-                            required
-                            minlength="2" 
-                            md-maxlength="20" 
-                            ng-model="addProjectInfo.title">
-                        <div ng-messages="addProjectInfo.title.$error">
-                            <div ng-message="required">This is required.</div>
-                            <div ng-message="md-minlength">Project title must be greater than 2 characters short.</div>
-                            <div ng-message="md-maxlength">Project title must be less than 20 characters long.</div>
-                            <div ng-message-exp="['minlength', 'maxlength', 'pattern']">
-                                Project title must be between 2 and 20 characters long and don't have space and special characters.
-                            </div>
-                        </div>
-                    </md-input-container>
-                    <md-input-container class="md-block hide-char-counter">
-                        <label>Description</label>
-                        <textarea 
-                            name="desc" 
-                            ng-model="addProjectInfo.desc" 
-                            required
-                            minlength="2" 
-                            md-maxlength="100"
-                            rows="2" 
-                            md-select-on-focus></textarea>
-                        <div ng-messages="addProjectInfo.desc.$error">
-                            <div ng-message="required">This is required.</div>
-                            <div ng-message="md-minlength">Project description must be greater than 2 characters short.</div>
-                            <div ng-message="md-maxlength">Project description must be less than 100 characters long.</div>
-                            <div ng-message-exp="['minlength', 'maxlength', 'pattern']">
-                                Project description must be between 2 and 100 characters long and don't have space and special characters.
-                            </div>
-                        </div>
-                    </md-input-container>
-                    <div  layout="column">
-                        <md-button  class="btn-block btn-add-project" type="submit"></md-button>
-                    </div>
-                    
-                </form>
-            </md-content>
-        </div>
-            <a href="#/app-info/45" class="app-info-ico"></a>
-            <a href="#/profile" class="my-account-ico"></a>
-            <div class="app-logo"></div>{{total_project}}
-            <a href="#/project-list" class="green-action-btn" ng-if="total_project>0">
-                Your Projects
-                <span class="num">{{total_project}}</span>
-            </a>
-    <!-- </div> -->
-<!-- </div> -->
+<div class="scrollable auth-page">
+  <div class="scrollable-content">
+    <div class="logo"></div>
+    <div class="authentication-form">
+    	<div class="auth-title"></div>
+        <a class="btn btn-default btn-circle btn-block" ng-tap-href="#/login">Login</a>
+        <div class="or">or</div>
+        <a class="btn btn-outline btn-circle btn-block" ng-tap-href="#/register">Create new account</a>
+    </div>
+    <div class="copyright txt-muted">Made by MIELAB</div>
+  </div>
+</div>

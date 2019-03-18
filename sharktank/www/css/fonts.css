@@ -1,0 +1,56 @@
+@font-face {
+  font-family: 'sf-ui-display-black';
+  src: url('../fonts/sf-ui-display-black.otf') format('truetype');
+}
+@font-face {
+  font-family: 'sf-ui-display-bold';
+  src: url('../fonts/sf-ui-display-bold.otf') format('truetype');
+}
+@font-face {
+  font-family: 'sf-ui-display-heavy';
+  src: url('../fonts/sf-ui-display-heavy.otf') format('truetype');
+}
+@font-face {
+  font-family: 'sf-ui-display-light';
+  src: url('../fonts/sf-ui-display-light.otf') format('truetype');
+}
+@font-face {
+  font-family: 'sf-ui-display-medium';
+  src: url('../fonts/sf-ui-display-medium.otf') format('truetype');
+}
+@font-face {
+  font-family: 'sf-ui-display-semibold';
+  src: url('../fonts/sf-ui-display-semibold.otf') format('truetype');
+}
+@font-face {
+  font-family: 'sf-ui-display-thin';
+  src: url('../fonts/sf-ui-display-thin.otf') format('truetype');
+}
+@font-face {
+  font-family: 'sf-ui-display-ultralight';
+  src: url('../fonts/sf-ui-display-ultralight.otf') format('truetype');
+}
+.sf-black{
+  font-family: 'sf-ui-display-black';
+}
+.sf-bold{
+  font-family: 'sf-ui-display-bold';
+}
+.sf-heavy{
+  font-family: 'sf-ui-display-heavy';
+}
+.sf-light{
+  font-family: 'sf-ui-display-light';
+}
+.sf-medium{
+  font-family: 'sf-ui-display-medium';
+}
+.sf-semibold{
+  font-family: 'sf-ui-display-semibold';
+}
+.sf-thin{
+  font-family: 'sf-ui-display-thin';
+}
+.sf-ultralight{
+  font-family: 'sf-ui-display-ultralight';
+}

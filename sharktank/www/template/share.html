@@ -1,77 +1,54 @@
-<div ui-content-for="navbarTop">
-    <div class="navbar navbar-head navbar-absolute-top black-navbar-head">
-        <div class="navbar-brand navbar-brand-center has-right-navbar-btn">
-            <span>{{projectData.title}}</span>
-        </div>
+<div ui-content-for="navbar">
+    <div class="navbar navbar-app navbar-absolute-top">
+        <div class="navbar-brand navbar-brand-center">Share project</div>
         <div class="btn-group pull-left">
-            <div class="btn" ng-click="goBack()">
-                <img class="" src="img/back.png">
-            </div>
-        </div>
-        <div class="btn-group pull-right">
-            <a href="#/tutorial" class="btn">
-                <img class="" src="img/book-black.png">
-            </a>
-            <a href="#/" class="btn">
-                <img class="" src="img/home-black.png">
+            <a class="btn ico-back-gray" ng-tap="goBack()">
             </a>
         </div>
     </div>
 </div>
-
-<div class="scrollable viewer white-bg" ng-class="">
-    <div class="scrollable-content" ng-cloak>
-        <md-content layout-padding>
-            <div class="h3-tit">SHARE YOUR PROJECT</div>
-            <form name="shareForm" id="shareForm" ng-submit="doShare()" autocomplete="off">
-                <md-input-container class="md-block gray-input">
-                    <label>Email</label>
+<div class="scrollable gray-bg share-page">
+    <div class="scrollable-content padding-100">
+        <div class="-white-bg ">
+            <h2 class="page-title sf-heavy">Share with friends</h2>
+            <div class="share-form">
+                <p>Enter email bellow</p>
+                <form name="shareFrm" ng-submit="doShare(shareFrm.$valid)" novalidate autocomplete="off">
+                  
+                  <div class="form-control mb-1" 
+                    ng-class="{ 
+                    }" >
                     <input 
-                        required md-no-asterisk 
-                        name="email" type="email" 
-                        minlength="10" 
-                        maxlength="100" 
-                        ng-pattern="/^.+@.+\..+$/" 
-                        ng-model="share_info.email">
-                    <div ng-messages="shareForm.email.$error" role="alert" 
-                        >
-                        <div ng-message-exp="['required', 'minlength', 'maxlength', 'pattern']" >
-                                Your email must be between 10 and 100 characters long and look like an e-mail address.
-                        </div>
+                      type="email" 
+                      name="title" 
+                      class="form-input" 
+                      ng-model="form_data.email"
+                      required
+                      autocomplete="off" 
+                      ng-maxlength="100"
+                      >
+                    <label>Email</label>
+                    <!-- <span class="count">{{form_data.title.length}}/50</span> -->
+                  </div>
+                  <p>Select how you would like your friends to engage with the project</p>
+                  <div class="action-view-edit">
+                    <div class="view" ng-class="{'active':form_data.mode==0}">
+                      <div ng-tap="form_data.mode = 0">
+                        
+                        <span>view</span>
+                      </div>
                     </div>
-                </md-input-container>
-                <div style="max-width:200px;margin:auto">
-                    <md-radio-group ng-model="share_info.mode">
-                        <div layout="row">
-                            <div flex="50">
-                                <md-radio-button  value="0" class="md-danger">View</md-radio-button>
-                            </div>
-                            <div flex="50">
-                                <md-radio-button  value="1" class="md-danger">Edit</md-radio-button>
-                            </div>
-                        </div>
-                    </md-radio-group>
-                </div>
-                <div  layout="column">
-                    <md-button  
-                        class=" btn-circle md-btn-danger" 
-                        type="submit"><span class="icon-share"></span> Share</md-button>
-                    
-                </div>
-            </form>
-        </md-content>
-        <md-list flex class="shared-list" style="padding:0">
-            
-            <md-list-item  ng-repeat="foo in shareds">
-                <md-icon ng-click="doUnShare(foo)"> <i class="icon-close"></i></md-icon>
-                <p><span>{{ foo.email }}</span></p>
-                <md-button  
-                    class="md-secondary" 
-                    aria-label="Unsshared"
-                    >
-                    <span class="mode-{{foo.mode==1?'edit':'readonly'}}">{{foo.mode==1?'Edit':'View'}}</span>
-                </md-button >
-            </md-list-item>
-        </md-list>
+                    <div class="edit" ng-class="{'active':form_data.mode==1}">
+                      <div ng-tap="form_data.mode = 1">
+                        <span>edit</span>
+                        
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <button class="btn btn-primary btn-circle btn-block" type="submit">Finish</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

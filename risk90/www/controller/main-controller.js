@@ -19,7 +19,7 @@ function MainController(
     $scope.doLogout = function(){
         Dialog.confirm({
             title:'',
-            message: 'Do you want logout?',
+            message: 'Do you want log out?',
             oktext:'Logout',
             ok: function(){
                 API.Logout(function(){

@@ -1,0 +1,155 @@
+.ico-user{
+    background: url(../img/user.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+.ico-plus{
+    background: url(../img/add.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+.ico-undo{
+    background: url(../img/undo.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+.ico-back{
+    background: url(../img/back.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+
+.ico-back-gray{
+    background: url(../img/back-gray.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+
+.ico-close-gray{
+    background: url(../img/close-gray.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+
+
+.ico-download{
+    background: url(../img/download.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+.ico-edit{
+    background: url(../img/edit.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+.ico-share{
+    background: url(../img/ico-share.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+.ico-delete{
+    background: url(../img/delete.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+.ico-email{
+    background: url(../img/email.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+.logo-menu{
+    background: url(../img/logo-menu.png) no-repeat center !important;
+    background-size: calc(100vmin * (190/1080)) auto !important;
+}
+.ico-info-default{
+    background: url(../img/info-gray.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+.ico-info{
+    background: url(../img/info.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+.ico-info-gray{
+    background: url(../img/info-default.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+.ico-chart{
+    background: url(../img/chart.png) no-repeat center !important;
+    background-size: 100% auto !important;
+}
+.ico-back-circle{
+    background: url(../img/back-btn.png) no-repeat center !important;
+    background-size: 16vmin auto !important;
+}
+
+.ico-save-circle{
+    background: url(../img/save.png) no-repeat center !important;
+    background-size: 16vmin auto !important;
+}
+.ico-finish-circle{
+    background: url(../img/finish.png) no-repeat center !important;
+    background-size: 16vmin auto !important;
+}
+
+.ico-cat1{
+    background: url(../img/cat1.png) no-repeat top center !important;
+    background-size: 100% auto !important;
+}
+.ico-cat2{
+    background: url(../img/cat2.png) no-repeat top center !important;
+    background-size: 100% auto !important;
+}
+.ico-cat3{
+    background: url(../img/cat3.png) no-repeat top center !important;
+    background-size: 100% auto !important;
+}
+.ico-cat4{
+    background: url(../img/cat4.png) no-repeat top center !important;
+    background-size: 100% auto !important;
+}
+.ico-cat1.success{
+    background: url(../img/cat1-suc.png) no-repeat top center !important;
+    background-size: 100% auto !important;
+}
+.ico-cat2.success{
+    background: url(../img/cat2-suc.png) no-repeat top center !important;
+    background-size: 100% auto !important;
+}
+.ico-cat3.success{
+    background: url(../img/cat3-suc.png) no-repeat top center !important;
+    background-size: 100% auto !important;
+}
+.ico-cat4.success{
+    background: url(../img/cat4-suc.png) no-repeat top center !important;
+    background-size: 100% auto !important;
+}
+.quiz-finish .finish-bg{
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.fireward-team{
+    background-image: url(../img/team-finish.png)
+}
+.fireward-res{
+    background-image: url(../img/res-finish.png)
+}
+.fireward-envi{
+    background-image: url(../img/envi-finish.png)
+}
+.fireward-opp{
+    background-image: url(../img/opp-finish.png)
+}
+.reward-team{
+    background-image: url(../img/team-done.png)
+}
+.reward-res{
+    background-image: url(../img/res-done.png)
+}
+.reward-envi{
+    background-image: url(../img/envi-done.png)
+}
+.reward-opp{
+    background-image: url(../img/opp-done.png)
+}
+.actions .edit-action{
+    background: url(../img/edit-gray.png) no-repeat top center #fff !important;
+    background-size: 100% auto !important;
+}
+.actions .password-action{
+    background: url(../img/key-gray.png) no-repeat top center #fff !important;
+    background-size: 100% auto !important;
+}
+.actions .logout-action{
+    background: url(../img/logout.png) no-repeat top center #fff !important;
+    background-size: 100% auto !important;
+}

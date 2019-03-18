@@ -1,0 +1,40 @@
+<div ui-content-for="navbar">
+    <div class="navbar navbar-app navbar-absolute-top">
+        <div class="navbar-brand navbar-brand-center">Edit profile</div>
+        <div class="btn-group pull-left">
+            <a class="btn ico-back-gray" ng-tap="goBack()">
+            </a>
+        </div>
+    </div>
+</div>
+<div class="scrollable gray-bg share-page">
+    <div class="scrollable-content padding-100">
+        <div class="-white-bg ">
+            <h2 class="page-title sf-bold">Hello {{user_info.username}}</h2>
+            <div class="share-form mt-4">
+                <form name="profileFrm" ng-submit="doUpdateProfile(profileFrm.$valid)" novalidate autocomplete="off">
+                  
+                  <div class="form-control mb-4" >
+                    <select 
+                        type="input" 
+                        name="category" 
+                        class="form-input" 
+                        ng-model="profile_form_data.iam"
+                        required
+                        autocomplete="off" 
+                        >
+                      <option value="an entrepreneur">an entrepreneur</option>
+                      <option value="a start-up">a start-up</option>
+                      <option value="an angel investor">an angel investor</option>
+                      <option value="a venture capitalist">a venture capitalist</option>
+                      <option value="other">Other</option>
+                    </select>
+                    <label>I am</label>
+                    <span class="">{{profile_form_data.iam}}</span>
+                  </div>
+                  <button class="btn btn-primary btn-circle btn-block" type="submit">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="ngdialog-header">{{title}}</div>
+<div class="ngdialog-body text-center word-wrap" ng-bind-html="message"></div>
+ <div class="ngdialog-foot">
+     <button type="button" class="ngdialog-button ngdialog-button-secondary" ng-tap="closeThisDialog(0)">{{canceltext}}</button>
+     <button type="button" class="ngdialog-button ngdialog-button-primary" ng-tap="confirm(1)">{{oktext}}</button>
+</div>
